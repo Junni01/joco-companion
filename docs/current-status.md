@@ -2,7 +2,7 @@
 
 ## Baseline
 
-The working app exists as code. Before this handoff the checkout held 33 commits ending at `0c56a2a2f41e68c0cf67733931932177d5dea516` (Update Site source). Preserve that history. The last verified suite had 125 passing tests; rerun `npm test` for the current result.
+The working app exists as code. Before this handoff the checkout held 33 commits ending at `0c56a2a2f41e68c0cf67733931932177d5dea516` (Update Site source). Preserve that history. The narrative milestone verification has 145 passing tests; rerun `npm test` for the current result.
 
 This is a shared-device India companion to the physical game. Players manage money, families, votes, ships, Army pieces and officeholders. Reported officer rout counts support the chronicle without identifying family members.
 
@@ -28,15 +28,19 @@ Regions lost this turn remain visible; recapture does not erase losses and anoth
 
 Separate debug entry, storage, checkpoints and legal map/deck editing; normal action and event resolvers are shared. See debug-mode.md for every control. The latest fix addresses the empty debug panel under URL rewriting: entry documents carry explicit workspace markers, debug-entry inserts the panel before loading shared app code, and storage detection honors the marker even at `/`. Preserve those tests.
 
-## Narrative design, not implementation
+## Narrative first playable slice
 
-The 22 October detailed narrative review is preserved in `docs/narrative/John_Company_Narrative_Mode_Review.docx`. It distinguishes agreements, proposals and open matters. Persistent rulers/advisers/succession are not implemented; isolated flavour snippets do not constitute narrative mode.
+The 22 October detailed narrative review is preserved in `docs/narrative/John_Company_Narrative_Mode_Review.docx`. It distinguishes agreements, proposals and open matters. The approved first playable slice is now implemented locally: new-game activation in all four scenarios, a persistent fictional cast with compact families, core traits/moods/relationships, structured incidents, major-event reactions, shared silhouettes, dossiers/roster, thematic chapters, printable history, independent narrative RNG and unified Undo/Redo. See `docs/narrative/first-playable-milestone.md` for the precise scope. Random deaths, natural succession, weighted replacements and advanced arcs remain deferred as approved.
 
 Agreed direction includes a chronicler plus ruler and adviser reactions, potentially several lines per incident. Fictional Company advisers are distinct from player officeholders and appointed regional rulers. Historical local alliances act independently. Deposed surviving rulers remain as claimants; statuses include exile, prison, missing and dead. Record alliance-versus-conquest origins for independence reactions. Historical regional treasure is selected once, tied to the first Company conquest loot token. Narrative must never alter game rules; eventual narrative choices belong in save/Undo and use separate randomness.
 
 French patronage/client rulers, foreign leadership replacement, titles, detailed statistics, probabilities and exact roster/dialogue decisions require the review's proposed/open distinctions. Examples are not automatic implementation instructions. Finish rules first.
 
 The accumulated `dist/design-specification.md` includes earlier descriptions, including single-scenario scope and old administration/atomic-action wording. Read it alongside current code/tests and this document to avoid reintroducing superseded behavior. The TypeScript state contract is also an older proposal.
+
+## Narrative verification
+
+All 145 automated tests pass, including complete real event-stack campaigns through final scoring in all four scenarios with narrative-on/off mechanical equivalence. New regressions cover legacy saves, preview cancellation, exact Undo/Redo and reload, capital subject release, repeated allegiance, failed rebellion, foreign targets/routs, Tax wording, living/dead conditions, debug clock staging, export escaping and large-save pruning. Isolated headless Chrome over HTTP verified regular/debug entries, all scenario starts, cancelled setup, full deployment, Undo/Redo/reload, quiet display, profile/roster filtering, snapshots and unchanged regular storage across debug navigation. Desktop and 390px mobile screenshots were inspected; no horizontal page overflow was found. No GitHub push or hosting deployment was performed.
 
 ## Transfer and deployment
 

@@ -1,3 +1,4 @@
+import {incidentRecorder} from './incidents.js';
 import {scenarioFor,finalTurn} from './scenarios.js';
 import {TILES,reserveTile,pendingEvent,finishTile,exposedRegion} from './event-stack.js';
 import {governorTaxCount,generalTaxUsed,taxBlockReason} from './administration.js';
@@ -58,6 +59,7 @@ export function resolveAction(s,d){
  if(s.eventStack?.pending&&!['event','stack-draw'].includes(d.type))throw Error('Resolve the revealed stack event before taking another game action.');
  if(s.eventStack?.pending&&d.type==='event'&&!d.stackTile)throw Error('Resolve the revealed stack tile before running a manual test.');
  const n=clone(s),instructions=[],cascaded=new Set(),losses=[],officerRouts=[],scenes=[],elephantMoves=[];
+ const journal=incidentRecorder(s,n,d);
  const phase=phaseFor(s);
  if(parliamentFinished(s)&&['law','famine','france','dilemma'].includes(d.type))throw Error('Parliament is finished. Undo Finish Parliament before recording another parliamentary outcome.');
  if(phase&&['unrest','tax','govern','envoy'].includes(d.type))throw Error('Company Operations has ended for this turn.');
@@ -71,9 +73,9 @@ export function resolveAction(s,d){
  if(!['end-game','rename'].includes(d.type))for(const id of IDS)if(n.regions[id].empireCapital===undefined)n.regions[id].empireCapital=IDS.some(k=>n.regions[k].overlord===id);
  const say=t=>instructions.push(t),name=id=>REGIONS[id].name;
  if(d.revivedByOldIdeas){assert(['law','famine','france','dilemma'].includes(d.type),'Old Ideas must resolve the recovered law or dilemma.');say('Old Ideas Made New: resolve the card selected from the physical discard pile. Cards drawn this turn are not yet discarded.');}
- const addUnrest=(id,amount)=>{if(!amount)return;assert(n.regions[id].control==='company','Unrest belongs in Company regions.');n.regions[id].unrest+=amount;say(`Add ${amount} unrest to ${name(id)} (now ${n.regions[id].unrest}).`);};
- function open(oid){const id=ORDER_OWNER[oid];if(!n.regions[id].orders[oid]){n.regions[id].orders[oid]=true;say(`Open ${orderLabel(oid)}; remove its closed-order marker.`);}}
- function close(oid){const id=ORDER_OWNER[oid];if(n.regions[id].orders[oid]){n.regions[id].orders[oid]=false;say(`Close ${orderLabel(oid)}. Return any writer there to its owner; flip any filled-order token.`);}}
+ const addUnrest=(id,amount)=>{if(!amount)return;assert(n.regions[id].control==='company','Unrest belongs in Company regions.');journal.add('unrest',{region:id,amount,cause:d.type,reason:d.reason||null});n.regions[id].unrest+=amount;say(`Add ${amount} unrest to ${name(id)} (now ${n.regions[id].unrest}).`);};
+ function open(oid){const id=ORDER_OWNER[oid];if(!n.regions[id].orders[oid]){journal.add('order-opened',{region:id,order:oid});n.regions[id].orders[oid]=true;say(`Open ${orderLabel(oid)}; remove its closed-order marker.`);}}
+ function close(oid){const id=ORDER_OWNER[oid];if(n.regions[id].orders[oid]){journal.add('order-closed',{region:id,order:oid});n.regions[id].orders[oid]=false;say(`Close ${orderLabel(oid)}. Return any writer there to its owner; flip any filled-order token.`);}}
  const northern=id=>[...REGIONS[id].orders].sort((a,b)=>a[2]-b[2]).find(([o])=>n.regions[id].orders[o])?.[0];
  function cascade(id){
   if(cascaded.has(id))return;cascaded.add(id);say(`${name(id)} Cascades along its trade routes.`);
@@ -85,8 +87,8 @@ export function resolveAction(s,d){
  }
  function closeAll(id){const available=REGIONS[id].orders.filter(([o])=>n.regions[id].orders[o]);if(!available.length)cascade(id);else available.forEach(([o])=>close(o));}
  function turmoil(id){const oid=northern(id);if(oid)close(oid);else cascade(id);}
- function clearUnrest(id){if(n.regions[id].unrest){say(`Remove all ${n.regions[id].unrest} unrest from ${name(id)}.`);n.regions[id].unrest=0;}}
- function release(id){n.regions[id].empireCapital=false;const children=IDS.filter(k=>n.regions[k].overlord===id);children.forEach(k=>{n.regions[k].overlord=null;say(`Remove ${name(k)}’s allegiance flag: it becomes sovereign after ${name(id)}’s empire breaks.`);});}
+ function clearUnrest(id){if(n.regions[id].unrest){journal.add('unrest-cleared',{region:id,amount:n.regions[id].unrest});say(`Remove all ${n.regions[id].unrest} unrest from ${name(id)}.`);n.regions[id].unrest=0;}}
+ function release(id){n.regions[id].empireCapital=false;const children=IDS.filter(k=>n.regions[k].overlord===id);children.forEach(k=>{journal.add('release',{region:k,capital:id});n.regions[k].overlord=null;say(`Remove ${name(k)}’s allegiance flag: it becomes sovereign after ${name(id)}’s empire breaks.`);});}
  const empireStrength=id=>{const capital=n.regions[id].overlord||id;return IDS.filter(k=>k===capital||n.regions[k].overlord===capital).reduce((v,k)=>v+n.regions[k].strength,0);};
  function strengthen(id,amount){const r=n.regions[id];r.strength=Math.max(0,r.strength+amount);say(`${name(id)}: set tower to ${r.strength} level${r.strength===1?'':'s'}.`);}
  function setElephant(position){
@@ -106,7 +108,7 @@ export function resolveAction(s,d){
   const removed=d.officerRouts?.[id];
   if(removed===undefined)throw new NeedsInput({type:'officer-rout',region:id,presidency,instructions:[...instructions],elephantMoves:clone(elephantMoves)});
   assert(integer(removed,0,1000),'Officer rout removals must be a whole number between 0 and 1000.');
-  officerRouts.push({region:id,presidency,removed});
+  officerRouts.push({region:id,presidency,removed});journal.add('company-loss',{region:id,presidency,removed});
   say(`Officer rout · ${name(id)} · Army of ${name(presidency)}: ${removed} officer${removed===1?'':'s'} removed (reported from the table).`);
   if(!n.laws.governorGeneral)say(`Return the Governor of ${name(id)} card to unused offices, its officeholder and fatigue to supply, and remove its overlay.`);
   say(`Remove any unfinished Company ship; return ${name(id)}’s control token to the region loot-side facedown. Lower Company Standing by ${count} spaces for this turn’s ${count}${count===1?'st':count===2?'nd':count===3?'rd':'th'} region loss.`);
@@ -117,6 +119,7 @@ export function resolveAction(s,d){
   const multiplier=n.laws.sepoyRecruitment?2:1,unrest=n.regions[id].unrest,strength=Math.max(0,base+multiplier*unrest),answer=d.defenses?.[key];
   if(!integer(answer,0,1000))throw new NeedsInput({type:'defense',key,region:id,presidency:n.regions[id].presidency,base,unrest,multiplier,strength,instructions:[...instructions],elephantMoves:clone(elephantMoves)});
   say(`${name(id)} attack: ${base} base + ${unrest} unrest × ${multiplier} = ${strength}. Exhaust available Army strength ${Math.min(answer,strength)}; ${answer>=strength?'attack repelled':'insufficient defence'}.`);
+  journal.add('battle',{kind:'company-defence',region:id,presidency:n.regions[id].presidency,base,unrest,strength,defence:answer,won:answer>=strength,key});
   if(answer>=strength){clearUnrest(id);say(`The associated Commander, if occupied, takes one trophy for defending ${name(id)}.`);return false;}
   loseRegion(id);return true;
  }
@@ -135,7 +138,7 @@ export function resolveAction(s,d){
   release(id);n.regions[id].overlord=null;const existing=IDS.filter(k=>n.regions[k].empireCapital);
   const hasEmpire=!!n.regions[capital].empireCapital;
   if(!hasEmpire&&existing.length>=3){say('All three empire flag colours are in use: no new empire can be formed.');return false;}
-  n.regions[id].overlord=capital;n.regions[capital].empireCapital=true;say(`Place ${name(capital)}’s flag on ${name(id)}. ${name(capital)} is the empire capital; use an available starred flag if this forms a new empire.`);return true;
+  journal.add('join',{region:id,capital});n.regions[id].overlord=capital;n.regions[capital].empireCapital=true;say(`Place ${name(capital)}’s flag on ${name(id)}. ${name(capital)} is the empire capital; use an available starred flag if this forms a new empire.`);return true;
  }
  function rebellion(id,modifier,key){
   const r=n.regions[id];
@@ -144,7 +147,8 @@ export function resolveAction(s,d){
   }
   assert(r.overlord,'Only a subject or Company region can rebel.');const capital=r.overlord,attack=r.strength+modifier,defense=n.regions[capital].strength,won=attack>defense;
   say(`${name(id)} rebellion: ${r.strength} + ${modifier} = ${attack} against ${name(capital)}’s ${defense}; ${won?'successful':'failed'} (ties fail). Other empire regions do not contribute.`);
-  if(won){r.overlord=null;say(`Remove ${name(id)}’s empire flag: it becomes sovereign.`);closeAll(id);}else strengthen(capital,-1);return won;
+  journal.add('battle',{kind:'rebellion',region:id,capital,attack,defence:defense,won});
+  if(won){journal.add('independence',{region:id,capital});r.overlord=null;say(`Remove ${name(id)}’s empire flag: it becomes sovereign.`);closeAll(id);}else strengthen(capital,-1);return won;
  }
  function crisis(){
   const {from,to}=n.elephant,attacker=n.regions[from];let victoriousCapital=null;
@@ -156,6 +160,7 @@ export function resolveAction(s,d){
     secondary('crisis',to);
    }else{
     const defense=empireStrength(to);won=attack>defense;say(`${name(from)} invasion: ${attack} attack against ${defense} empire defence; ${won?'successful':'failed'} (ties fail).`);
+    journal.add('battle',{kind:'indian-invasion',region:to,attacker:from,attack,defence:defense,won});
     if(won)join(to,from);else strengthen(from,-1);
    }
    if(won)victoriousCapital=from;
@@ -174,7 +179,8 @@ export function resolveAction(s,d){
    const wasCompany=n.regions[id].control==='company',redirect=wasCompany&&n.elephant.from===id&&!n.elephant.to;let won;
    if(wasCompany)attackedCompany=true;
    if(wasCompany)won=companyAttack(id,roll,`foreign:${id}`);else{const defense=empireStrength(id);won=roll>defense;say(`${roll} invasion strength against ${defense} empire defence: ${won?'successful':'failed'} (ties fail).`);}
-   if(won){release(id);const r=n.regions[id];r.overlord=null;r.strength=Math.floor(roll/2);say(`${name(id)} is sovereign. Remove its former allegiance flag and set its tower to ${r.strength}, half the original invasion die rounded down.`);closeAll(id);if(redirect)move(d.topRegion,'circle');}
+   journal.add('battle',{kind:'foreign-invasion',region:id,attack:roll,won,source:d.type==='france'?'france':'foreign'});
+   if(won){release(id);journal.add('foreign-settlement',{region:id});const r=n.regions[id];r.overlord=null;r.strength=Math.floor(roll/2);say(`${name(id)} is sovereign. Remove its former allegiance flag and set its tower to ${r.strength}, half the original invasion die rounded down.`);closeAll(id);if(redirect)move(d.topRegion,'circle');}
   }
   // Rules Library 13.9: finish every Foreign Invasion before one set of extra rebellions.
   if(attackedCompany){say('All Foreign Invasions are resolved. Now resolve one set of additional rebellions in the remaining Company regions with unrest, in Presidency order. Armies do not refresh.');secondary('foreign',null);}
@@ -210,6 +216,7 @@ export function resolveAction(s,d){
   assert(IDS.includes(d.region),'Choose a Company region.');assert(!taxBlockReason(s,d.region),taxBlockReason(s,d.region));
   d={...d,taxMode:s.laws.governorGeneral?'general':'governor'};
   const prior=governorTaxCount(s,d.region),amount=s.laws.governorGeneral?1:prior?1:0;
+  journal.add('tax',{region:d.region,mode:d.taxMode,ordinal:prior+1,unrest:amount});
   title=`${name(d.region)} · ${s.laws.governorGeneral?'Governor General Tax':`Tax ${prior+1} this turn`}`;
   say(`Resolve the successful Tax’s £2 payment on the table${s.laws.governorGeneral?'; do not place it in the Governor General’s own treasury':''}.`);
   if(amount)addUnrest(d.region,1);else say(`First Tax in ${name(d.region)} this turn: add no unrest. Later Taxes in this region add one unrest each.`);
@@ -278,7 +285,7 @@ export function resolveAction(s,d){
  if(d.type==='event'&&phase&&!d.manualTest){n.indiaPhase.completed++;say(`India event ${n.indiaPhase.completed} of ${n.indiaPhase.total} resolved.${n.indiaPhase.completed===n.indiaPhase.total?' All required events are complete; finish the phase when ready.':' Return to the map before drawing the next tile.'}`);}
  if(!instructions.length)say('No tracked board changes are required.');
  if(d.revivedByOldIdeas){title='Old Ideas Made New → '+title;say('After this vote, shuffle all discards, cards drawn this turn and Old Ideas Made New into the physical law deck. Keep any newly passed law with the passed laws.');}
- const report=instructions.join('\n\n'),entry={kind:'action',actionType:d.type,title,report,input:clone(d),regionLosses:losses,officerRouts,scenes,elephantMoves,turn:s.turn,at:new Date().toISOString()};
+ const report=instructions.join('\n\n'),entry={kind:'action',actionType:d.type,title,report,input:clone(d),incident:{...journal.finish(),input:clone(d)},regionLosses:losses,officerRouts,scenes,elephantMoves,turn:s.turn,at:new Date().toISOString()};
  n.history.push(entry);return {state:validate(n),title,report,instructions,scenes,elephantMoves};
 }
 export function scandalOffices(s,card){

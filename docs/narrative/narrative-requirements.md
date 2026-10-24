@@ -1,6 +1,6 @@
 # John Company India Companion — Narrative Mode Requirements
 
-**Status:** Review draft — 24 October 2026. **Implementation has not started.**
+**Status:** Approved incremental baseline — 24 October 2026. **The first playable slice is implemented; advanced requirements remain planned.** See [implemented scope and approved deferrals](first-playable-milestone.md).
 **Scope:** Four supported scenarios: 1710, 1758, 1813, and Long 1710.
 **Authority:** This document consolidates the user's approved decisions from the narrative requirements review. The 22 October `John_Company_Narrative_Mode_Review.docx` retains illustrative dialogue, historical references, and numerical proposals. Read both, plus `AGENTS.md`, `docs/current-status.md`, and current JS/tests, before implementation.
 

@@ -37,7 +37,7 @@ export function debugEditRegion(s,id,patch){
 export function debugEditElephant(s,from,to){const n=clone(s);n.elephant={from,to:to||null};return validateDebugState(n);}
 export function debugPhase(s,boundary){
  check(['operations','events','parliament','refresh'].includes(boundary),'Choose a test phase.');
- const n=clone(s);n.gameEnd=null;n.parliamentFinishedTurn=null;
+ const n=clone(s);n.gameEnd=null;n.parliamentFinishedTurn=null;if(n.narrative)n.narrative.lastAgedTurn=n.turn;
  n.indiaPhase=boundary==='operations'?null:{turn:n.turn,face:4,total:4,completed:boundary==='events'?0:4,status:boundary==='events'?'events':'complete'};
  if(boundary==='refresh')n.parliamentFinishedTurn=n.turn;
  return validateDebugState(n);

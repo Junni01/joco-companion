@@ -1,5 +1,9 @@
 # John Company India companion — current implementation
 
+## Narrative milestone update — 24 October 2026
+
+The first playable narrative slice is available for new campaigns in all four scenarios. It includes persistent fictional rulers, compact families and advisers, core traits/moods/relationships, structured incidents, saved scenes, shared silhouettes, dossiers/roster, thematic chapters, printable history and unified Undo/Redo. Earlier future-work statements below refer to the pre-narrative baseline. Weighted fates, random death, natural succession and advanced arcs remain deferred. Read `docs/narrative/first-playable-milestone.md` for current scope and `docs/narrative/narrative-requirements.md` for the wider approved design. Rules functionality and physical reporting remain unchanged.
+
 ## Scope
 An unofficial local-save companion to the physical John Company Second Edition board. The 1710 campaign tracks eight regions, orders, towers, empires, Company Presidencies, unrest, loot-token availability, relevant laws, China office creation and the Elephant. The app owns the event stack; players retain Army inventories, writers, money, ships, votes and officeholders. No player identities are stored.
 

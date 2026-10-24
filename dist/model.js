@@ -1,3 +1,6 @@
+import {encodeFrames} from './save-frames.js';
+import {validateNarrative} from './narrative.js';
+import {incidentRecorder} from './incidents.js';
 import {validateEventStack} from './event-stack.js';
 import {validateActionProgress} from './action-progress.js';
 import {phaseFor,STORM_FACES} from './india-phase.js';
@@ -36,6 +39,8 @@ export function initialState(scenario='1710'){
 }
 const assert=(v,msg)=>{if(!v)throw Error(msg)};
 export function validate(s){
+ validateNarrative(s);
+ assert(s.incidentSequence===undefined||(Number.isSafeInteger(s.incidentSequence)&&s.incidentSequence>=0),'Invalid incident sequence.');
  assert(s&&s.schemaVersion===1&&Object.hasOwn(SCENARIOS,s.scenario),'This file is not a supported campaign.');
  assert(typeof s.campaignName==='string'&&s.campaignName.length<=80,'Campaign name must be at most 80 characters.');
  const c=SCENARIOS[s.scenario];assert(Number.isInteger(s.turn)&&s.turn>=c.start&&s.turn<=Math.max(c.end,s.scenario==='1710'?6:0),'Turn is outside this scenario’s range.'); // Accept legacy turn-6 1710 saves; do not alter their board or history.
@@ -69,14 +74,14 @@ export function correctRegion(s,id,patch){
 export function controlLabel(s,id){const r=s.regions[id];return r.control==='company'?`Company · ${REGIONS[r.presidency].name}`:r.overlord?`${REGIONS[r.overlord].name} subject`:(r.empireCapital||IDS.some(k=>s.regions[k].overlord===id))?'Empire capital':'Sovereign';}
 export function summary(s){const owned=IDS.filter(id=>s.regions[id].control==='company');return {company:owned.length,unrest:owned.reduce((a,id)=>a+s.regions[id].unrest,0),opium:owned.reduce((a,id)=>a+REGIONS[id].opium,0),closed:IDS.reduce((a,id)=>a+Object.values(s.regions[id].orders).filter(v=>!v).length,0)};}
 export function record(s,next,title){validate(next);next.history=[...s.history,{kind:'correction',title,turn:next.turn,at:new Date().toISOString()}];return next;}
-export function encode(state,undo=[],progress=null,undoProgress=[]){
+export function encode(state,undo=[],progress=null,undoProgress=[],redo=[]){
+ validate(state);validateRedo(redo);
  const start=Math.max(0,undo.length-20),kept=undo.slice(start),keptProgress=kept.map((s,i)=>validateActionProgress(s,undoProgress[start+i]||null));
- const base={format:'john-company-india',version:1,state,undo:kept,progress:validateActionProgress(state,progress),undoProgress:keptProgress};
- let text=JSON.stringify(base,null,2);
- while(new TextEncoder().encode(text).length>=6000000&&kept.length){kept.shift();keptProgress.shift();text=JSON.stringify(base,null,2);}
- assert(new TextEncoder().encode(text).length<6000000,'Campaign is too large to save. Export a readable chronicle before starting another campaign.');return text;
+ const base={format:'john-company-india',version:1,state,undo:kept,progress:validateActionProgress(state,progress),undoProgress:keptProgress,...(redo.length?{redo:clone(redo)}:{})};
+ return encodeFrames(base);
 }
-export function decode(text){assert(new TextEncoder().encode(text).length<6000000,'Save file is too large.');const v=JSON.parse(text);assert(v.format==='john-company-india'&&v.version===1,'Unrecognised save format.');validate(v.state);assert(Array.isArray(v.undo)&&v.undo.length<=20,'Invalid undo history.');v.undo.forEach(validate);const up=v.undoProgress??v.undo.map(()=>null);assert(Array.isArray(up)&&up.length===v.undo.length,'Invalid undo resolution history.');up.forEach((p,i)=>validateActionProgress(v.undo[i],p));return {state:clone(v.state),undo:clone(v.undo),progress:clone(validateActionProgress(v.state,v.progress)),undoProgress:clone(up)};}
+function validateRedo(frames){assert(Array.isArray(frames)&&frames.length<=20,'Invalid redo history.');for(const f of frames){assert(f&&typeof f==='object','Invalid redo frame.');validate(f.state);validateActionProgress(f.state,f.progress);}}
+export function decode(text){assert(new TextEncoder().encode(text).length<6000000,'Save file is too large.');const v=JSON.parse(text);assert(v.format==='john-company-india'&&v.version===1,'Unrecognised save format.');validate(v.state);assert(Array.isArray(v.undo)&&v.undo.length<=20,'Invalid undo history.');v.undo.forEach(validate);const up=v.undoProgress??v.undo.map(()=>null);assert(Array.isArray(up)&&up.length===v.undo.length,'Invalid undo resolution history.');up.forEach((p,i)=>validateActionProgress(v.undo[i],p));validateRedo(v.redo??[]);return {state:clone(v.state),undo:clone(v.undo),progress:clone(validateActionProgress(v.state,v.progress)),undoProgress:clone(up),redo:clone(v.redo??[])};}
 
 export function legalTargets(s,army){
  return IDS.filter(id=>!deploymentBlockReason(s,army,id));
@@ -114,6 +119,7 @@ export function resolveDeployment(s,d){
  assert(['success','failure','catastrophe'].includes(d.outcome),'Report the final check outcome.');
  assert(Number.isInteger(d.losses)&&d.losses>=0&&d.losses<=d.officers,'Officer losses must be between zero and officers committed.');
  const n=clone(s),r=n.regions[d.target],name=REGIONS[d.target].name,instructions=[],elephantMoves=[];
+ const journal=incidentRecorder(s,n,{...d,type:'deploy'});journal.add('deployment',{region:d.target,army:d.army,outcome:d.outcome,officers:d.officers,regiments:d.regiments,losses:d.losses,alliances:d.alliances});
  instructions.push(`Exhaust ${d.regiments} regiments, ${d.officers} officers and ${d.alliances.length} local alliances. Return ${d.losses} lost officers to their players’ supplies. Never remove regiments for this loss check.`);
  if(d.outcome==='catastrophe')instructions.push('First return half the Commander’s trophies, rounded up, to supply. Return the Commander to their player’s supply. Flip the office card into Vacant Offices and return its fatigue. This office takes no further actions this turn.');
  if(d.outcome==='success'){
@@ -121,17 +127,19 @@ export function resolveDeployment(s,d){
   instructions.push(s.laws.treasureReform?`Add £${loot} loot to the Company Balance (Treasure Reform).`:`Distribute £${loot} loot: Commander £1 plus £1 per own surviving officer, then clockwise £1 per surviving officer. Pay the bank £1 per regiment and alliance. Repeat while cash remains; stop when it runs out.`);
   instructions.push(`Take ${r.strength} trophies; remove the target’s tower and dome. Open all its orders and remove all its unrest.`);
   const subjects=IDS.filter(id=>n.regions[id].overlord===d.target);
-  if(subjects.length){instructions.push(`Remove matching flags: ${subjects.map(id=>REGIONS[id].name).join(', ')} become sovereign.`);subjects.forEach(id=>n.regions[id].overlord=null);}
+  if(subjects.length){instructions.push(`Remove matching flags: ${subjects.map(id=>REGIONS[id].name).join(', ')} become sovereign.`);subjects.forEach(id=>{journal.add('release',{region:id,capital:d.target});n.regions[id].overlord=null;});}
   if(r.overlord)instructions.push(`Remove ${name}’s empire flag.`);
   if(r.control!=='company'){
+   journal.add('company-conquest',{region:d.target,army:d.army,lootConsumed:r.lootAvailable});
    instructions.push(`Move ${name}’s loot/control token, region side faceup, above the ${REGIONS[d.army].name} President.${s.laws.governorGeneral?' Governor General is active: do not create a Governor office.':' Place its Governor overlay and put its Governor card in Vacant Offices.'}`);
    r.control='company';r.presidency=d.army;r.lootAvailable=false;
   }
+  if(s.regions[d.target].control==='company')journal.add('intervention',{region:d.target,army:d.army});
   r.empireCapital=false;r.overlord=null;r.strength=0;r.unrest=0;Object.keys(r.orders).forEach(id=>r.orders[id]=true);
   if(n.elephant.from===d.target&&n.elephant.to){const before=clone(n.elephant);n.elephant.to=null;const instruction=`Move the Elephant wholly inside ${name}.`;elephantMoves.push({before,after:clone(n.elephant),instructionIndex:instructions.length,instruction});instructions.push(instruction);}
  }else instructions.push('Region control, orders, unrest and Elephant position stay as they were.');
  const title=`Army of ${REGIONS[d.army].name} → ${name}: ${d.outcome==='catastrophe'?'catastrophic failure':d.outcome}; ${d.losses} officer losses.`;
  const report=`${check.dice} dice after ${check.defense} defence. Committed: ${d.regiments} regiments, ${d.officers} officers; alliances: ${d.alliances.map(id=>ALLIANCES.find(a=>a.id===id).name).join(', ')||'none'}.\n\n${instructions.join('\n\n')}`;
- n.history.push({kind:'deploy',army:d.army,outcome:d.outcome,title,report,elephantMoves,turn:s.turn,at:new Date().toISOString()});
+ n.history.push({kind:'deploy',army:d.army,outcome:d.outcome,title,report,input:clone(d),incident:journal.finish(),elephantMoves,turn:s.turn,at:new Date().toISOString()});
  return {state:validate(n),title,report,instructions,check,elephantMoves};
 }

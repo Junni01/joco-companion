@@ -25,10 +25,10 @@ Open `http://localhost:4173/` for regular play or `http://localhost:4173/debug.h
 - Four scenarios, turn progression, Deploy, Special Envoy, Governor and Governor General actions.
 - Persistent randomized twenty-tile event stack, exposed-region display and staged event resolution including foreign invasions, rebellions, rout reporting and Elephant movement.
 - Relevant Parliament laws/dilemmas, blackmail actions, China-office/opium reminders, cumulative region-loss instructions and end-game chronicle completion.
-- Autosave, Undo, snapshots, JSON import/export and readable chronicle export.
+- Autosave, Undo/Redo, snapshots, JSON import/export and readable chronicle export.
 - Separate debug board/deck editor, law/office controls and checkpoints using the same rules as regular play.
 
-Persistent rulers, advisers, succession and full narrative mode are planned. Finish and verify rules functionality before adding that layer. Players still handle families, money, votes, ships, Army inventories and actual China trade outcomes on the physical table.
+The first playable narrative slice is available from Saved games → New game → Narrative mode On. It adds persistent fictional rulers/families/advisers, saved scenes, a roster, turn chapters and printable history. Random deaths, natural succession and advanced political arcs remain deferred. See [milestone scope](docs/narrative/first-playable-milestone.md). Players still handle families, money, votes, ships, Army inventories and actual China trade outcomes on the physical table.
 
 ## Handoff documentation
 
