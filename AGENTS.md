@@ -23,7 +23,7 @@ Dependency-free static browser ES modules. `dist/` is source and deployment root
 - Foreign invasion resolves all primary attacks before one secondary unrest rebellion sequence. Avoid duplicate regional checks per event and do not refresh physical Army pieces between battles.
 - New invasion tower strength is half the raw invasion d6 rounded down, excluding unrest/Sepoy modifiers.
 - Preserve scenario-specific starts, turn ranges and office activation. Standing is not a tracked balance: derive losses and show cumulative penalty instructions.
-- Preserve old saves, Undo, snapshots, history and pending progress through migrations/defaults.
+- During Milestone 2 **development-only persistence** applies: no migration of old development saves or cross-version save compatibility. Preserve **current-schema** autosave, snapshots, JSON import/export, Undo/Redo, history and protected rolls/reveals/instruction progress. Incompatible old saves may be rejected with a clear explanation; never silently overwrite the old copy. See `docs/narrative/milestone-2-political-memory.md` and `docs/narrative/milestone-2-codex-handoff.md`. Restore a stable migration policy only after explicit future approval.
 - Regular/debug storage is separate; regular imports reject debug saves. Copying into debug leaves regular storage untouched.
 - Hosting may rewrite debug URLs to `/`. Honor `document.documentElement.dataset.workspaceMode`, not just pathname. Preserve explicit-path precedence for cross-workspace copying and debug initialization regression tests.
 - Preserve all twenty event tiles, exposed region and saved rolls across draw/discard operations.
