@@ -64,6 +64,7 @@ function governance(ctx,region,rejections){
  const base={regionId:region,region:name(region)},endState={region,control:end.control};
  const facts=[conquest,armed,tax,admin];
  if(!ctx.current(conquest)){
+  if(conquest.h.turn>=turn)return [];
   rejections.push({templateId:'CH08-01',region,reason:'Earlier-turn conquest cannot be retold as a new conquest this turn; use explicitly dated factual context.'});
   return [thread('CH08-FACT-ADMIN-CONTINUED',{...base,contextTurn:conquest.h.turn},60,[sentence('ordered-governance','Earlier conquest; this-turn Tax and failed administration; Company control at close.',facts)],endState)];
  }
@@ -109,7 +110,7 @@ function commerce(ctx,region,rejections){
   }else rejections.push({templateId:'CH08-02',region,orderId,reason:'No complete current-turn disruption → restoration → disruption → restoration episode for this specific opportunity; earlier context must not be retold as new.'});
   if(last.kind==='restoration'&&available&&ctx.current(last)){
    const earlier=events.filter(e=>e.order<last.order&&e.kind==='disruption').at(-1),records=[...(earlier?.proof||[]),...last.proof];
-   const id=!earlier?'CH08-FACT-RESTORED':ctx.current(earlier)?'CH08-FACT-TRADE-OPEN':'CH08-FACT-TRADE-CONTINUED';
+   const id=!earlier?'CH08-FACT-RESTORED':ctx.current(earlier)?'CH08-FACT-TRADE-OPEN':earlier.h.turn<ctx.turn?'CH08-FACT-TRADE-CONTINUED':'CH08-FACT-RESTORED';
    choices.push(thread(id,{...base,...(earlier?{contextTurn:earlier.h.turn}:{})},40,[sentence('commercial-ending','This turn restored a specific commercial opportunity; it was available at the close.',records)],endState));
   }else if(last.kind==='disruption'&&!available&&ctx.current(last)){
    const restored=events.filter(e=>e.kind==='restoration'&&ctx.current(e)&&e.order<last.order).at(-1);
@@ -132,10 +133,37 @@ function rebellion(ctx,region,rejections){
  return [thread('CH08-04-FACTUAL',{regionId:region,region:name(region),person,characterId:affected.ownerId},120,[sentence('actual-failed-rebellion','An actual rebellion against Company rule failed this turn and Company authority survived to the close.',[battle]),sentence('owned-unresolved-grievance','This directly affected character retains a sourced conquest grievance.',[battle],[affected.id,grievance.id])],{region,control:end.control})];
 }
 
+function finalGrievance(ctx,region,rejections){
+ const {state,turn}=ctx,boundary=state.history.at(-1);
+ if(boundary?.actionType!=='end-game'||!state.gameEnd)return [];
+ const reject=reason=>{rejections.push({templateId:'CH08-FINAL-GRIEVANCE',region,reason});return [];};
+ const conquests=ctx.records.filter(r=>r.fact.type==='company-conquest'&&r.fact.region===region&&r.h.turn<turn);
+ if(!conquests.length)return reject('No committed conquest in an earlier turn; scenario control and current-turn conquest cannot support a lasting personal grievance.');
+ if(state.regions[region].control!=='company')return reject('The Company does not hold this region at the actual game-end boundary.');
+ for(const conquest of conquests.toReversed()){
+  const memory=ctx.memories.find(m=>m.category==='company-conquest'&&m.region===region&&m.createdIncident===conquest.h.incident.id&&m.origin==='direct'&&m.perspective==='local'&&m.evidence.some(ref=>equal(ref,conquest.ref)));
+  const owner=memory&&state.narrative.characters[memory.ownerId];
+  const identity=owner&&owner.role==='ruler'&&owner.region===region&&owner.condition==='alive'&&owner.memoryIds.includes(memory.id)&&ctx.lines.find(l=>l.h===conquest.h&&l.line.speakerId===owner.id);
+  if(!identity)continue; // The seat's own direct local memory and saved words establish identity at the loss.
+  const causes=ctx.causes(owner.id),origin=causes.find(c=>c.incidentId===conquest.h.incident.id&&c.memoryIds.includes(memory.id)&&c.deltas.hostility>0);
+  const posture=politicalPosture(state,owner,region,boundary.incident.id);
+  // Current assessments have prose, not a structured resolved/unresolved predicate. Do not guess its meaning.
+  if(!origin||memory.emotionalImportance<=0||memory.currentAssessment||posture.kind!=='hostile'||!posture.grievance||posture.scores.hostility<=0)continue;
+  const reasons=causes.map(c=>({ownerId:owner.id,target:'institution:company',causeId:c.id}));
+  const supporting=ctx.records.filter(r=>posture.evidence.some(ref=>equal(ref,r.ref)));
+  return [thread('CH08-FINAL-GRIEVANCE',{regionId:region,region:name(region),person:identity.line.speaker,characterId:owner.id},130,[
+   sentence('earlier-personal-loss','This named ruler held the relevant seat at an earlier-turn conquest, established by his own direct local memory and saved words.',[conquest],[memory.id],[{ownerId:owner.id,target:'institution:company',causeId:origin.id}],[identity.line.id]),
+   sentence('unresolved-at-ending','An active conquest grievance and sourced current hostile posture survive at game end; no unsupported current reassessment is interpreted.',supporting,[memory.id],reasons),
+   sentence('final-possession','The Company controls this region at the committed game-end boundary.',[conquest])
+  ],{region,control:'company'})];
+ }
+ return reject('Missing the original ruler’s own identity-at-loss evidence, active sourced conquest grievance or supported current hostile interpretation; a successor, cooled grievance or unsupported reassessment cannot supply it.');
+}
+
 export function inspectChapterCandidates(state,turn,closureId=state.history.at(-1)?.incident?.id){
  const view=chapterView(state,closureId),ctx=context(view,turn),rejections=[],candidates=[];
  for(const region of Object.keys(view.regions)){
-  candidates.push(...governance(ctx,region,rejections),...commerce(ctx,region,rejections),...rebellion(ctx,region,rejections));
+  candidates.push(...governance(ctx,region,rejections),...commerce(ctx,region,rejections),...rebellion(ctx,region,rejections),...finalGrievance(ctx,region,rejections));
   const conquest=ctx.records.filter(r=>ctx.current(r)&&r.fact.region===region&&r.fact.type==='company-conquest').at(-1);
   const loss=ctx.records.filter(r=>ctx.current(r)&&r.fact.region===region&&r.fact.type==='company-loss').at(-1);
   if(conquest&&view.regions[region].control==='company'&&ctx.noLossSince(conquest,region))candidates.push(thread('CH08-FACT-CONTROL',{regionId:region,region:name(region)},55,[sentence('current-conquest','Company conquest occurred this turn and control was retained.',[conquest])],{region,control:'company'}));
@@ -151,7 +179,7 @@ export function inspectChapterCandidates(state,turn,closureId=state.history.at(-
 }
 export function composeChapter(state,turn,ending=false,closureId=state.history.at(-1)?.incident?.id){
  const {view,candidates}=inspectChapterCandidates(state,turn,closureId),threads=[];let paragraphs=0;
- for(const c of candidates){if(threads.length>=CHAPTER_POLICY.maxThreads||paragraphs+c.paragraphs>CHAPTER_POLICY.maxParagraphs||threads.some(t=>t.parameters.regionId===c.parameters.regionId))continue;threads.push(c);paragraphs+=c.paragraphs;}
+ for(const c of candidates){if(threads.length>=CHAPTER_POLICY.maxThreads||paragraphs+c.paragraphs>CHAPTER_POLICY.maxParagraphs||threads.some(t=>t.parameters.regionId===c.parameters.regionId)||(c.templateId==='CH08-FINAL-GRIEVANCE'&&threads.some(t=>t.templateId===c.templateId)))continue;threads.push(c);paragraphs+=c.paragraphs;}
  for(const t of threads)t.clauses=t.clauses.map(c=>({...c,endStateRef:{incidentId:closureId,...t.endState}}));
  const evidence=unique(threads.flatMap(t=>t.evidence)),memoryIds=unique(threads.flatMap(t=>t.memoryIds)),lineIds=unique(threads.flatMap(t=>t.lineIds)),reasonRefs=unique(threads.flatMap(t=>t.reasonRefs));
  const incidents=unique([...evidence.map(r=>r.incidentId),...memoryIds.map(id=>view.narrative.memories[id].createdIncident),...lineIds.map(id=>view.history.find(h=>h.narrative?.lines.some(l=>l.id===id)).incident.id),...reasonRefs.map(ref=>view.narrative.characters[ref.ownerId].relations[ref.target].causes.find(c=>c.id===ref.causeId).incidentId)]);

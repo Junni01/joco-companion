@@ -78,8 +78,8 @@ test('renewed disruption after restoration rejects the available-at-close claim'
  s=commit(s,{type:'next-turn'});assert(!chapter(s).threads.some(t=>t.templateId==='CH08-02'));assert(chapter(s).threads.some(t=>t.templateId==='CH08-FACT-TRADE-RECLOSED'));
 });
 
-test('an earlier-turn conquest is dated explicitly instead of being narrated as new',()=>{
- const c=governance.state.narrative.chapters[1];assert.equal(c.threads[0].templateId,'CH08-FACT-ADMIN-CONTINUED');assert(c.text.includes('in turn 1'));assert(c.text.includes('This turn'));assert(c.evidence.some(r=>r.incidentId===first.history[0].incident.id));
+test('an earlier-turn conquest uses approved past context instead of being narrated as new',()=>{
+ const c=governance.state.narrative.chapters[1];assert.equal(c.threads[0].templateId,'CH08-FACT-ADMIN-CONTINUED');assert(c.text.includes('had already taken'));assert(!c.text.includes('turn 1'));assert(c.evidence.some(r=>r.incidentId===first.history[0].incident.id));
 });
 
 test('full protector and hopeful-rebellion references remain rejected when their personal prerequisites are absent',()=>{
