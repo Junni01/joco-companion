@@ -1,5 +1,7 @@
 # First playable narrative milestone
 
+Historical M1 implementation record. The later M2 development-only persistence policy supersedes this document's old-save compatibility descriptions; see `milestone-2-implementation.md`.
+
 Implemented locally on 24 October 2026 after approval of the incremental plan. This document describes the first slice, not completion of every narrative requirement.
 
 ## Start and play

@@ -1,5 +1,9 @@
 # John Company India companion — current implementation
 
+## Milestone 2 update — 24 October 2026
+
+The first-release political-memory slice adds supported personal memories, separate historical/emotional importance, relationship causes, exact saved statements and contextual callbacks, plus dossier evidence and personal journals. The experimental save wrapper/narrative format is version 2; only current-version persistence is supported, with old development files rejected without conversion or automatic replacement. Current Undo/Redo, snapshots and protected rolls/reveals remain supported. Read `docs/narrative/milestone-2-implementation.md` for scope, verification, trial policy and the pending joint narrative-quality gate. Earlier compatibility and future-work descriptions below reflect previous milestones.
+
 ## Narrative milestone update — 24 October 2026
 
 The first playable narrative slice is available for new campaigns in all four scenarios. It includes persistent fictional rulers, compact families and advisers, core traits/moods/relationships, structured incidents, saved scenes, shared silhouettes, dossiers/roster, thematic chapters, printable history and unified Undo/Redo. Earlier future-work statements below refer to the pre-narrative baseline. Weighted fates, random death, natural succession and advanced arcs remain deferred. Read `docs/narrative/first-playable-milestone.md` for current scope and `docs/narrative/narrative-requirements.md` for the wider approved design. Rules functionality and physical reporting remain unchanged.

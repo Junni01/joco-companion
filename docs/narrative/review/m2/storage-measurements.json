@@ -1,0 +1,70 @@
+{
+  "policy": "m2-trial-1",
+  "saveVersion": 2,
+  "fixtures": [
+    {
+      "name": "story-1710",
+      "scenario": "1710",
+      "jsonBytes": 96403,
+      "incidents": 5,
+      "memories": 13,
+      "statements": 1,
+      "callbacks": 2
+    },
+    {
+      "name": "story-1758",
+      "scenario": "1758",
+      "jsonBytes": 96056,
+      "incidents": 5,
+      "memories": 13,
+      "statements": 1,
+      "callbacks": 2
+    },
+    {
+      "name": "story-1813",
+      "scenario": "1813",
+      "jsonBytes": 131643,
+      "incidents": 5,
+      "memories": 25,
+      "statements": 1,
+      "callbacks": 2
+    },
+    {
+      "name": "story-1710-long",
+      "scenario": "1710-long",
+      "jsonBytes": 96438,
+      "incidents": 5,
+      "memories": 13,
+      "statements": 1,
+      "callbacks": 2
+    },
+    {
+      "name": "capital-and-rebellion",
+      "scenario": "1710-long",
+      "jsonBytes": 91488,
+      "incidents": 3,
+      "memories": 15,
+      "statements": 0,
+      "callbacks": 1
+    },
+    {
+      "name": "setbacks-and-routs",
+      "scenario": "1813",
+      "jsonBytes": 82446,
+      "incidents": 2,
+      "memories": 12,
+      "statements": 0,
+      "callbacks": 0
+    }
+  ],
+  "stress": {
+    "taxReports": 120,
+    "retainedIncidents": 121,
+    "memories": 243,
+    "currentCampaignBytes": 1513662,
+    "withReversibleFramesBytes": 5762405,
+    "undoFramesRetained": 3,
+    "redoFramesRetained": 0,
+    "encodingMilliseconds": 653
+  }
+}

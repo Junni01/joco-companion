@@ -32,7 +32,7 @@ Test buttons open the existing Deploy, Special Envoy, Governor, Governor General
 
 Laws & offices toggles every law flag already present in the save model, plus China-office creation. Envoy to China implies an existing China office. Governor General replaces the regional Governors and Director of Trade; enable its law before testing Govern. Table-only law flags remain table-only. Dilemmas are event effects, not permanent toggles: test Passed/Failed through Parliament. No new office-vacancy or troop-inventory model is introduced.
 
-Phase & turn stages Operations, Events, Parliament or Refresh at a supported scenario turn, preserving map and history. It explicitly skips prior physical phases. Clear turn reports / limits removes the current turn's reports, including Tax counts, Govern success, catastrophes and region-loss counts, while keeping the board. This is an optional setup edit, not normal gameplay.
+Phase & turn stages Operations, Events, Parliament or Refresh at a supported scenario turn, preserving map and history. It explicitly skips prior physical phases. Clear turn reports / limits is blocked when it would delete current-version incidents referenced by narrative evidence; the error lists the blocking memories, statements, relationship causes, saved lines, journals or chapters. Undo/Redo, checkpoint restoration and whole-campaign reset remain available. For unreferenced history it removes the current turn's reports, including Tax counts, Govern success, catastrophes and region-loss counts, while keeping the board. This is an optional setup edit, not normal gameplay.
 
 ## Repeatable tests
 

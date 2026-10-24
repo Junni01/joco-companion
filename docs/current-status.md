@@ -2,7 +2,7 @@
 
 ## Baseline
 
-The working app exists as code. Before this handoff the checkout held 33 commits ending at `0c56a2a2f41e68c0cf67733931932177d5dea516` (Update Site source). Preserve that history. The narrative milestone verification has 145 passing tests; rerun `npm test` for the current result.
+The working app exists as code. Before this handoff the checkout held 33 commits ending at `0c56a2a2f41e68c0cf67733931932177d5dea516` (Update Site source). Preserve that history. The current M2 verification has 171 passing tests; rerun `npm test` for the current result.
 
 This is a shared-device India companion to the physical game. Players manage money, families, votes, ships, Army pieces and officeholders. Reported officer rout counts support the chronicle without identifying family members.
 
@@ -38,9 +38,17 @@ French patronage/client rulers, foreign leadership replacement, titles, detailed
 
 The accumulated `dist/design-specification.md` includes earlier descriptions, including single-scenario scope and old administration/atomic-action wording. Read it alongside current code/tests and this document to avoid reintroducing superseded behavior. The TypeScript state contract is also an older proposal.
 
-## Narrative verification
+## Milestone 1 verification (historical)
 
 All 145 automated tests pass, including complete real event-stack campaigns through final scoring in all four scenarios with narrative-on/off mechanical equivalence. New regressions cover legacy saves, preview cancellation, exact Undo/Redo and reload, capital subject release, repeated allegiance, failed rebellion, foreign targets/routs, Tax wording, living/dead conditions, debug clock staging, export escaping and large-save pruning. Isolated headless Chrome over HTTP verified regular/debug entries, all scenario starts, cancelled setup, full deployment, Undo/Redo/reload, quiet display, profile/roster filtering, snapshots and unchanged regular storage across debug navigation. Desktop and 390px mobile screenshots were inspected; no horizontal page overflow was found. No GitHub push or hosting deployment was performed.
+
+## Milestone 2 implementation — 24 October 2026
+
+The first-release political-memory slice is implemented locally in reviewable commits `a001f48`, `68ea84a` and `37ebc71`, followed by the verification/report package. It delivers conquest → memory/grievance → related Tax or intervention → contextual dialogue → inspectable evidence, plus the mandatory political/military and administration families. Memories retain separate historical significance and current emotional importance; current assessments preserve originals. Relationship causes distinguish institutions from people; statements and callbacks retain exact words and source IDs.
+
+`npm test`: 171 passed, 0 failed. Four-scenario full event-stack/end-game and narrative-on/off mechanical regressions pass. Isolated Chrome checks covered the normal story loop, protected persistence, snapshots, Undo/Redo, regular/debug isolation, deletion blockers, unsupported-save preservation and explicit reset recovery at desktop/tablet/mobile widths. Current JSON wrapper/narrative version is 2: no old-save migration or backfill.
+
+Six seeded synthetic chronicles and current-version JSON files are in `docs/narrative/review/m2/`; regenerate with `node scripts/export-m2-review.mjs`. See `docs/narrative/milestone-2-implementation.md` for AC mapping, trial tuning, measurements and reproduction. The 120-Tax stress case retains 121 incidents/243 memories within the 6 MB cap by pruning reversible frames. Joint human narrative-quality review (AC-M2-10) remains pending. No GitHub push, PR or hosting deployment was performed.
 
 ## Transfer and deployment
 

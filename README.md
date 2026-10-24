@@ -41,6 +41,12 @@ The first playable narrative slice is available from Saved games â†’ New game â†
 
 The accumulated design specification contains some earlier descriptions. Current JavaScript and tests determine implemented behavior and save format; `docs/state-model.ts` is an older proposed contract.
 
+## Milestone 2 political memory
+
+New narrative campaigns now retain personal memories, directional relationship causes and contextual callbacks to supported incidents or exact saved statements. Character profiles expose defining memories, current concerns, source evidence and a complete personal memory journal. See [implementation and verification](docs/narrative/milestone-2-implementation.md) and [synthetic chronicles for joint review](docs/narrative/review/m2/README.md).
+
+This experimental build uses development save version 2. It preserves current-version autosave, snapshots, JSON import/export, Undo/Redo and protected rolls/reveals, but does not migrate older development saves. Unsupported stored data is left untouched until an explicit replacement. Narrative-quality acceptance still requires joint review.
+
 ## Saves and hosting
 
 Campaigns live in browser storage, separately for regular and debug play. Source transfer does not move them: export JSON in the app and import it in the destination browser.

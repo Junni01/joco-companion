@@ -1,0 +1,20 @@
+{
+  "checks": [
+    "normal touch controls: conquest, personal memory, grievance and Tax callback; preview is inert",
+    "intervention, partial reconciliation, saved assurance, exact quote and Undo/Redo across reload",
+    "dossier evidence, quiet/full, snapshot/export and 390px mobile layout",
+    "1024x768 tablet dossier and map layout",
+    "revealed tile/roll progress survives reload and metadata rename/Undo/Redo",
+    "all four scenario starts",
+    "regular/debug isolation, named deletion blockers and unrestricted atomic Undo/Redo",
+    "incompatible save and protected bytes left unchanged, with clear rejection",
+    "explicit new-campaign URL reset clears the unsupported-save gate"
+  ],
+  "errors": [],
+  "browser": "156.0.8078.47",
+  "viewportChecks": [
+    "1440x1000",
+    "1024x768",
+    "390x844"
+  ]
+}

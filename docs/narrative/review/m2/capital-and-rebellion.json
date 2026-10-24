@@ -1,0 +1,2985 @@
+{
+  "format": "john-company-india",
+  "version": 2,
+  "state": {
+    "schemaVersion": 1,
+    "scenario": "1710-long",
+    "campaignName": "M2 review · capital-and-rebellion",
+    "turn": 1,
+    "gameEnd": null,
+    "indiaPhase": null,
+    "parliamentFinishedTurn": null,
+    "eventStack": {
+      "version": 1,
+      "draw": [
+        "madras-windfall",
+        "madras-peace",
+        "delhi-turmoil",
+        "hyderabad-leader",
+        "punjab-leader",
+        "hyderabad-windfall",
+        "bombay-crisis",
+        "bombay-leader",
+        "punjab-turmoil",
+        "punjab-crisis",
+        "maratha-turmoil",
+        "bengal-leader",
+        "madras-shuffle",
+        "mysore-peace",
+        "bombay-turmoil",
+        "mysore-crisis",
+        "bengal-crisis",
+        "maratha-foreign",
+        "maratha-crisis",
+        "delhi-crisis"
+      ],
+      "discard": [],
+      "pending": null
+    },
+    "chinaOffice": false,
+    "laws": {
+      "royalProtection": true,
+      "governorGeneral": false,
+      "envoyChina": false,
+      "zamindarTaxes": false,
+      "treasureReform": false,
+      "sepoyRecruitment": false,
+      "calicoActs": false,
+      "militaryOversight": false,
+      "deregulation": false
+    },
+    "elephant": {
+      "from": "bombay",
+      "to": "maratha"
+    },
+    "regions": {
+      "punjab": {
+        "control": "indian",
+        "presidency": null,
+        "overlord": null,
+        "empireCapital": false,
+        "strength": 0,
+        "unrest": 0,
+        "lootAvailable": true,
+        "orders": {
+          "p7": false
+        }
+      },
+      "delhi": {
+        "control": "indian",
+        "presidency": null,
+        "overlord": null,
+        "empireCapital": false,
+        "strength": 1,
+        "unrest": 0,
+        "lootAvailable": true,
+        "orders": {
+          "d5n": false,
+          "d3": false,
+          "d5e": false
+        }
+      },
+      "bengal": {
+        "control": "indian",
+        "presidency": null,
+        "overlord": null,
+        "empireCapital": false,
+        "strength": 1,
+        "unrest": 0,
+        "lootAvailable": true,
+        "orders": {
+          "be5": true,
+          "be6": true
+        }
+      },
+      "bombay": {
+        "control": "indian",
+        "presidency": null,
+        "overlord": null,
+        "empireCapital": true,
+        "strength": 4,
+        "unrest": 0,
+        "lootAvailable": true,
+        "orders": {
+          "bo3n": true,
+          "bo3s": false,
+          "bo4": true
+        }
+      },
+      "maratha": {
+        "control": "indian",
+        "presidency": null,
+        "overlord": null,
+        "empireCapital": false,
+        "strength": 2,
+        "unrest": 0,
+        "lootAvailable": true,
+        "orders": {
+          "ma4": true,
+          "ma3": false,
+          "ma2": true
+        }
+      },
+      "hyderabad": {
+        "control": "indian",
+        "presidency": null,
+        "overlord": null,
+        "empireCapital": false,
+        "strength": 1,
+        "unrest": 0,
+        "lootAvailable": true,
+        "orders": {
+          "h7": false
+        }
+      },
+      "mysore": {
+        "control": "indian",
+        "presidency": null,
+        "overlord": null,
+        "empireCapital": false,
+        "strength": 1,
+        "unrest": 0,
+        "lootAvailable": true,
+        "orders": {
+          "my3": true,
+          "my6": true
+        }
+      },
+      "madras": {
+        "control": "indian",
+        "presidency": null,
+        "overlord": null,
+        "empireCapital": false,
+        "strength": 1,
+        "unrest": 0,
+        "lootAvailable": true,
+        "orders": {
+          "md5": true,
+          "md4": false
+        }
+      }
+    },
+    "history": [
+      {
+        "kind": "action",
+        "actionType": "event",
+        "title": "Manual event test · Crisis",
+        "report": "Bombay invasion: 5 attack against 3 empire defence; successful (ties fail).\n\nRemove Punjab’s allegiance flag: it becomes sovereign after Delhi’s empire breaks.\n\nRemove Maratha’s allegiance flag: it becomes sovereign after Delhi’s empire breaks.\n\nPlace Bombay’s flag on Delhi. Bombay is the empire capital; use an available starred flag if this forms a new empire.\n\nMove the Elephant from Bombay facing Maratha.\n\nManual test: the digital event stack and phase event count are unchanged. Use Undo to reverse this test’s board effects.",
+        "input": {
+          "type": "event",
+          "event": "crisis",
+          "manualTest": true,
+          "topRegion": "delhi",
+          "shape": "circle",
+          "redirectShape": "circle",
+          "modifier": 0
+        },
+        "incident": {
+          "version": 1,
+          "id": "incident-1",
+          "type": "event",
+          "input": {
+            "type": "event",
+            "event": "crisis",
+            "manualTest": true,
+            "topRegion": "delhi",
+            "shape": "circle",
+            "redirectShape": "circle",
+            "modifier": 0
+          },
+          "turn": 1,
+          "scenario": "1710-long",
+          "provenance": "manual-test",
+          "changes": [
+            {
+              "region": "punjab",
+              "before": {
+                "control": "indian",
+                "presidency": null,
+                "overlord": "delhi",
+                "empireCapital": false,
+                "strength": 0,
+                "unrest": 0,
+                "lootAvailable": true,
+                "orders": {
+                  "p7": false
+                }
+              },
+              "after": {
+                "control": "indian",
+                "presidency": null,
+                "overlord": null,
+                "empireCapital": false,
+                "strength": 0,
+                "unrest": 0,
+                "lootAvailable": true,
+                "orders": {
+                  "p7": false
+                }
+              }
+            },
+            {
+              "region": "delhi",
+              "before": {
+                "control": "indian",
+                "presidency": null,
+                "overlord": null,
+                "empireCapital": true,
+                "strength": 1,
+                "unrest": 0,
+                "lootAvailable": true,
+                "orders": {
+                  "d5n": true,
+                  "d3": false,
+                  "d5e": false
+                }
+              },
+              "after": {
+                "control": "indian",
+                "presidency": null,
+                "overlord": "bombay",
+                "empireCapital": false,
+                "strength": 1,
+                "unrest": 0,
+                "lootAvailable": true,
+                "orders": {
+                  "d5n": true,
+                  "d3": false,
+                  "d5e": false
+                }
+              }
+            },
+            {
+              "region": "bombay",
+              "before": {
+                "control": "indian",
+                "presidency": null,
+                "overlord": null,
+                "empireCapital": false,
+                "strength": 5,
+                "unrest": 0,
+                "lootAvailable": true,
+                "orders": {
+                  "bo3n": true,
+                  "bo3s": false,
+                  "bo4": true
+                }
+              },
+              "after": {
+                "control": "indian",
+                "presidency": null,
+                "overlord": null,
+                "empireCapital": true,
+                "strength": 5,
+                "unrest": 0,
+                "lootAvailable": true,
+                "orders": {
+                  "bo3n": true,
+                  "bo3s": false,
+                  "bo4": true
+                }
+              }
+            },
+            {
+              "region": "maratha",
+              "before": {
+                "control": "indian",
+                "presidency": null,
+                "overlord": "delhi",
+                "empireCapital": false,
+                "strength": 2,
+                "unrest": 0,
+                "lootAvailable": true,
+                "orders": {
+                  "ma4": true,
+                  "ma3": false,
+                  "ma2": true
+                }
+              },
+              "after": {
+                "control": "indian",
+                "presidency": null,
+                "overlord": null,
+                "empireCapital": false,
+                "strength": 2,
+                "unrest": 0,
+                "lootAvailable": true,
+                "orders": {
+                  "ma4": true,
+                  "ma3": false,
+                  "ma2": true
+                }
+              }
+            }
+          ],
+          "facts": [
+            {
+              "factId": "fact-0",
+              "type": "battle",
+              "kind": "indian-invasion",
+              "region": "delhi",
+              "attacker": "bombay",
+              "attack": 5,
+              "defence": 3,
+              "won": true
+            },
+            {
+              "factId": "fact-1",
+              "type": "release",
+              "region": "punjab",
+              "capital": "delhi"
+            },
+            {
+              "factId": "fact-2",
+              "type": "release",
+              "region": "maratha",
+              "capital": "delhi"
+            },
+            {
+              "factId": "fact-3",
+              "type": "join",
+              "region": "delhi",
+              "capital": "bombay"
+            }
+          ],
+          "elephant": {
+            "before": {
+              "from": "bombay",
+              "to": "delhi"
+            },
+            "after": {
+              "from": "bombay",
+              "to": "maratha"
+            }
+          },
+          "laws": {
+            "before": {
+              "royalProtection": true,
+              "governorGeneral": false,
+              "envoyChina": false,
+              "zamindarTaxes": false,
+              "treasureReform": false,
+              "sepoyRecruitment": false,
+              "calicoActs": false,
+              "militaryOversight": false,
+              "deregulation": false
+            },
+            "after": {
+              "royalProtection": true,
+              "governorGeneral": false,
+              "envoyChina": false,
+              "zamindarTaxes": false,
+              "treasureReform": false,
+              "sepoyRecruitment": false,
+              "calicoActs": false,
+              "militaryOversight": false,
+              "deregulation": false
+            }
+          }
+        },
+        "regionLosses": [],
+        "officerRouts": [],
+        "scenes": [],
+        "elephantMoves": [
+          {
+            "before": {
+              "from": "bombay",
+              "to": "delhi"
+            },
+            "after": {
+              "from": "bombay",
+              "to": "maratha"
+            },
+            "instructionIndex": 4,
+            "instruction": "Move the Elephant from Bombay facing Maratha."
+          }
+        ],
+        "turn": 1,
+        "at": "2026-10-24T12:00:00.000Z",
+        "narrative": {
+          "id": "incident-1",
+          "turn": 1,
+          "lines": [
+            {
+              "id": "incident-1:line-0",
+              "templateId": "chronicler-event-v1",
+              "text": "Bombay won the attack on Delhi. Punjab became sovereign after Delhi lost its empire. Maratha became sovereign after Delhi lost its empire. Delhi became subordinate to Bombay following the attack.",
+              "speakerId": "chronicler",
+              "speaker": "Chronicler",
+              "role": "Anonymous narrator",
+              "emotion": "neutral",
+              "incidentId": "incident-1",
+              "evidence": [
+                {
+                  "incidentId": "incident-1",
+                  "factKey": "fact-0"
+                },
+                {
+                  "incidentId": "incident-1",
+                  "factKey": "fact-1"
+                },
+                {
+                  "incidentId": "incident-1",
+                  "factKey": "fact-2"
+                },
+                {
+                  "incidentId": "incident-1",
+                  "factKey": "fact-3"
+                }
+              ],
+              "callbackMemoryIds": [],
+              "callbackStatementIds": [],
+              "provenance": "Authored fictional dialogue"
+            },
+            {
+              "id": "incident-1:line-1",
+              "templateId": "m2-sovereign-released",
+              "text": "Our empire no longer holds Punjab. Earlier authority does not describe our present position.",
+              "speakerId": "ruler-delhi",
+              "speaker": "Rashid of Delhi",
+              "role": "subordinate ruler",
+              "emotion": "watchful",
+              "incidentId": "incident-1",
+              "evidence": [
+                {
+                  "incidentId": "incident-1",
+                  "factKey": "fact-1"
+                }
+              ],
+              "callbackMemoryIds": [],
+              "callbackStatementIds": [],
+              "provenance": "Authored fictional dialogue",
+              "phraseFamily": "sovereign-released",
+              "cooldownOverride": null
+            },
+            {
+              "id": "incident-1:line-2",
+              "templateId": "m2-sovereign-subordination",
+              "text": "The allegiance of Delhi has changed. Our court must now deal with the authority the result gives us.",
+              "speakerId": "ruler-bombay",
+              "speaker": "Madhav of Bombay",
+              "role": "sovereign ruler",
+              "emotion": "watchful",
+              "incidentId": "incident-1",
+              "evidence": [
+                {
+                  "incidentId": "incident-1",
+                  "factKey": "fact-3"
+                }
+              ],
+              "callbackMemoryIds": [],
+              "callbackStatementIds": [],
+              "provenance": "Authored fictional dialogue",
+              "phraseFamily": "sovereign-subordination",
+              "cooldownOverride": null
+            },
+            {
+              "id": "incident-1:line-3",
+              "templateId": "ruler-freed-unknown-1",
+              "text": "The capital has fallen. Punjab will now conduct its own affairs.",
+              "speakerId": "ruler-punjab",
+              "speaker": "Rahim of Punjab",
+              "role": "sovereign ruler",
+              "emotion": "neutral",
+              "incidentId": "incident-1",
+              "evidence": [
+                {
+                  "incidentId": "incident-1",
+                  "factKey": "fact-1"
+                }
+              ],
+              "callbackMemoryIds": [],
+              "callbackStatementIds": [],
+              "provenance": "Authored fictional dialogue",
+              "phraseFamily": "ruler-freed-unknown-1",
+              "cooldownOverride": null
+            },
+            {
+              "id": "incident-1:line-4",
+              "templateId": "ruler-freed-unknown-1",
+              "text": "The capital has fallen. Maratha will now conduct its own affairs.",
+              "speakerId": "ruler-maratha",
+              "speaker": "Gopal of Maratha",
+              "role": "sovereign ruler",
+              "emotion": "neutral",
+              "incidentId": "incident-1",
+              "evidence": [
+                {
+                  "incidentId": "incident-1",
+                  "factKey": "fact-2"
+                }
+              ],
+              "callbackMemoryIds": [],
+              "callbackStatementIds": [],
+              "provenance": "Authored fictional dialogue",
+              "phraseFamily": "ruler-freed-unknown-1",
+              "cooldownOverride": null
+            }
+          ],
+          "coverage": "specific",
+          "provenance": "manual-test"
+        }
+      },
+      {
+        "kind": "action",
+        "actionType": "event",
+        "title": "Manual event test · Leader",
+        "report": "Delhi rebellion: 1 + -3 = -2 against Bombay’s 5; failed (ties fail). Other empire regions do not contribute.\n\nBombay: set tower to 4 levels.\n\nManual test: the digital event stack and phase event count are unchanged. Use Undo to reverse this test’s board effects.",
+        "input": {
+          "type": "event",
+          "event": "leader",
+          "manualTest": true,
+          "topRegion": "delhi",
+          "shape": "circle",
+          "redirectShape": "circle",
+          "modifier": -3
+        },
+        "incident": {
+          "version": 1,
+          "id": "incident-2",
+          "type": "event",
+          "input": {
+            "type": "event",
+            "event": "leader",
+            "manualTest": true,
+            "topRegion": "delhi",
+            "shape": "circle",
+            "redirectShape": "circle",
+            "modifier": -3
+          },
+          "turn": 1,
+          "scenario": "1710-long",
+          "provenance": "manual-test",
+          "changes": [
+            {
+              "region": "bombay",
+              "before": {
+                "control": "indian",
+                "presidency": null,
+                "overlord": null,
+                "empireCapital": true,
+                "strength": 5,
+                "unrest": 0,
+                "lootAvailable": true,
+                "orders": {
+                  "bo3n": true,
+                  "bo3s": false,
+                  "bo4": true
+                }
+              },
+              "after": {
+                "control": "indian",
+                "presidency": null,
+                "overlord": null,
+                "empireCapital": true,
+                "strength": 4,
+                "unrest": 0,
+                "lootAvailable": true,
+                "orders": {
+                  "bo3n": true,
+                  "bo3s": false,
+                  "bo4": true
+                }
+              }
+            }
+          ],
+          "facts": [
+            {
+              "factId": "fact-0",
+              "type": "battle",
+              "kind": "rebellion",
+              "region": "delhi",
+              "capital": "bombay",
+              "attack": -2,
+              "defence": 5,
+              "won": false
+            }
+          ],
+          "elephant": {
+            "before": {
+              "from": "bombay",
+              "to": "maratha"
+            },
+            "after": {
+              "from": "bombay",
+              "to": "maratha"
+            }
+          },
+          "laws": {
+            "before": {
+              "royalProtection": true,
+              "governorGeneral": false,
+              "envoyChina": false,
+              "zamindarTaxes": false,
+              "treasureReform": false,
+              "sepoyRecruitment": false,
+              "calicoActs": false,
+              "militaryOversight": false,
+              "deregulation": false
+            },
+            "after": {
+              "royalProtection": true,
+              "governorGeneral": false,
+              "envoyChina": false,
+              "zamindarTaxes": false,
+              "treasureReform": false,
+              "sepoyRecruitment": false,
+              "calicoActs": false,
+              "militaryOversight": false,
+              "deregulation": false
+            }
+          }
+        },
+        "regionLosses": [],
+        "officerRouts": [],
+        "scenes": [],
+        "elephantMoves": [],
+        "turn": 1,
+        "at": "2026-10-24T12:00:00.000Z",
+        "narrative": {
+          "id": "incident-2",
+          "turn": 1,
+          "lines": [
+            {
+              "id": "incident-2:line-0",
+              "templateId": "chronicler-event-v1",
+              "text": "The rebellion in Delhi failed.",
+              "speakerId": "chronicler",
+              "speaker": "Chronicler",
+              "role": "Anonymous narrator",
+              "emotion": "neutral",
+              "incidentId": "incident-2",
+              "evidence": [
+                {
+                  "incidentId": "incident-2",
+                  "factKey": "fact-0"
+                }
+              ],
+              "callbackMemoryIds": [],
+              "callbackStatementIds": [],
+              "provenance": "Authored fictional dialogue"
+            },
+            {
+              "id": "incident-2:line-1",
+              "templateId": "m2-sovereign-rebellion-failed",
+              "text": "The rebellion in Delhi has failed. I shall not mistake that outcome for an end to the dispute.",
+              "speakerId": "ruler-bombay",
+              "speaker": "Madhav of Bombay",
+              "role": "sovereign ruler",
+              "emotion": "watchful",
+              "incidentId": "incident-2",
+              "evidence": [
+                {
+                  "incidentId": "incident-2",
+                  "factKey": "fact-0"
+                }
+              ],
+              "callbackMemoryIds": [],
+              "callbackStatementIds": [],
+              "provenance": "Authored fictional dialogue",
+              "phraseFamily": "sovereign-rebellion-failed",
+              "cooldownOverride": null
+            },
+            {
+              "id": "incident-2:line-2",
+              "templateId": "ruler-rebellion-fail-1",
+              "text": "The rebellion has failed. The political position in Delhi remains unchanged.",
+              "speakerId": "ruler-delhi",
+              "speaker": "Rashid of Delhi",
+              "role": "subordinate ruler",
+              "emotion": "worried",
+              "incidentId": "incident-2",
+              "evidence": [
+                {
+                  "incidentId": "incident-2",
+                  "factKey": "fact-0"
+                }
+              ],
+              "callbackMemoryIds": [],
+              "callbackStatementIds": [],
+              "provenance": "Authored fictional dialogue",
+              "phraseFamily": "ruler-rebellion-fail-1",
+              "cooldownOverride": null
+            }
+          ],
+          "coverage": "specific",
+          "provenance": "manual-test"
+        }
+      },
+      {
+        "kind": "action",
+        "actionType": "event",
+        "title": "Manual event test · Leader",
+        "report": "Delhi rebellion: 1 + 10 = 11 against Bombay’s 4; successful (ties fail). Other empire regions do not contribute.\n\nRemove Delhi’s empire flag: it becomes sovereign.\n\nClose Delhi £5 (northern). Return any writer there to its owner; flip any filled-order token.\n\nManual test: the digital event stack and phase event count are unchanged. Use Undo to reverse this test’s board effects.",
+        "input": {
+          "type": "event",
+          "event": "leader",
+          "manualTest": true,
+          "topRegion": "delhi",
+          "shape": "circle",
+          "redirectShape": "circle",
+          "modifier": 10
+        },
+        "incident": {
+          "version": 1,
+          "id": "incident-3",
+          "type": "event",
+          "input": {
+            "type": "event",
+            "event": "leader",
+            "manualTest": true,
+            "topRegion": "delhi",
+            "shape": "circle",
+            "redirectShape": "circle",
+            "modifier": 10
+          },
+          "turn": 1,
+          "scenario": "1710-long",
+          "provenance": "manual-test",
+          "changes": [
+            {
+              "region": "delhi",
+              "before": {
+                "control": "indian",
+                "presidency": null,
+                "overlord": "bombay",
+                "empireCapital": false,
+                "strength": 1,
+                "unrest": 0,
+                "lootAvailable": true,
+                "orders": {
+                  "d5n": true,
+                  "d3": false,
+                  "d5e": false
+                }
+              },
+              "after": {
+                "control": "indian",
+                "presidency": null,
+                "overlord": null,
+                "empireCapital": false,
+                "strength": 1,
+                "unrest": 0,
+                "lootAvailable": true,
+                "orders": {
+                  "d5n": false,
+                  "d3": false,
+                  "d5e": false
+                }
+              }
+            }
+          ],
+          "facts": [
+            {
+              "factId": "fact-0",
+              "type": "battle",
+              "kind": "rebellion",
+              "region": "delhi",
+              "capital": "bombay",
+              "attack": 11,
+              "defence": 4,
+              "won": true
+            },
+            {
+              "factId": "fact-1",
+              "type": "independence",
+              "region": "delhi",
+              "capital": "bombay"
+            },
+            {
+              "factId": "fact-2",
+              "type": "order-closed",
+              "region": "delhi",
+              "order": "d5n"
+            }
+          ],
+          "elephant": {
+            "before": {
+              "from": "bombay",
+              "to": "maratha"
+            },
+            "after": {
+              "from": "bombay",
+              "to": "maratha"
+            }
+          },
+          "laws": {
+            "before": {
+              "royalProtection": true,
+              "governorGeneral": false,
+              "envoyChina": false,
+              "zamindarTaxes": false,
+              "treasureReform": false,
+              "sepoyRecruitment": false,
+              "calicoActs": false,
+              "militaryOversight": false,
+              "deregulation": false
+            },
+            "after": {
+              "royalProtection": true,
+              "governorGeneral": false,
+              "envoyChina": false,
+              "zamindarTaxes": false,
+              "treasureReform": false,
+              "sepoyRecruitment": false,
+              "calicoActs": false,
+              "militaryOversight": false,
+              "deregulation": false
+            }
+          }
+        },
+        "regionLosses": [],
+        "officerRouts": [],
+        "scenes": [],
+        "elephantMoves": [],
+        "turn": 1,
+        "at": "2026-10-24T12:00:00.000Z",
+        "narrative": {
+          "id": "incident-3",
+          "turn": 1,
+          "lines": [
+            {
+              "id": "incident-3:line-0",
+              "templateId": "chronicler-event-v1",
+              "text": "The rebellion in Delhi succeeded.",
+              "speakerId": "chronicler",
+              "speaker": "Chronicler",
+              "role": "Anonymous narrator",
+              "emotion": "neutral",
+              "incidentId": "incident-3",
+              "evidence": [
+                {
+                  "incidentId": "incident-3",
+                  "factKey": "fact-0"
+                },
+                {
+                  "incidentId": "incident-3",
+                  "factKey": "fact-1"
+                },
+                {
+                  "incidentId": "incident-3",
+                  "factKey": "fact-2"
+                }
+              ],
+              "callbackMemoryIds": [],
+              "callbackStatementIds": [],
+              "provenance": "Authored fictional dialogue"
+            },
+            {
+              "id": "incident-3:line-1",
+              "templateId": "m2-callback-rebellion-failed-rebellion-won",
+              "text": "The earlier rebellion in Delhi failed. This time the region is independent.",
+              "speakerId": "ruler-delhi",
+              "speaker": "Rashid of Delhi",
+              "role": "sovereign ruler",
+              "emotion": "reflective",
+              "incidentId": "incident-3",
+              "evidence": [
+                {
+                  "incidentId": "incident-3",
+                  "factKey": "fact-0"
+                }
+              ],
+              "callbackMemoryIds": [
+                "memory:incident-2:fact-0:ruler-delhi:rebellion-failed"
+              ],
+              "callbackStatementIds": [],
+              "provenance": "Authored fictional dialogue",
+              "phraseFamily": "memory-rebellion-failed-rebellion-won",
+              "cooldownOverride": null
+            },
+            {
+              "id": "incident-3:line-2",
+              "templateId": "m2-sovereign-rebellion-won",
+              "text": "The rebellion in Delhi has succeeded. We cannot write its independence out of the record.",
+              "speakerId": "ruler-bombay",
+              "speaker": "Madhav of Bombay",
+              "role": "sovereign ruler",
+              "emotion": "worried",
+              "incidentId": "incident-3",
+              "evidence": [
+                {
+                  "incidentId": "incident-3",
+                  "factKey": "fact-0"
+                }
+              ],
+              "callbackMemoryIds": [],
+              "callbackStatementIds": [],
+              "provenance": "Authored fictional dialogue",
+              "phraseFamily": "sovereign-rebellion-won",
+              "cooldownOverride": null
+            }
+          ],
+          "coverage": "specific",
+          "provenance": "manual-test"
+        }
+      }
+    ],
+    "narrative": {
+      "version": 2,
+      "enabled": true,
+      "intensity": "standard",
+      "rng": 1277269741,
+      "nextIncident": 4,
+      "characters": {
+        "ruler-punjab": {
+          "id": "ruler-punjab",
+          "name": "Rahim of Punjab",
+          "aliases": [],
+          "region": "punjab",
+          "age": 42,
+          "dynasty": "House of Rahim of Punjab",
+          "role": "ruler",
+          "condition": "alive",
+          "position": "sovereign ruler",
+          "mood": "neutral",
+          "traits": {
+            "ambition": 32,
+            "pride": 47,
+            "caution": 57,
+            "ruthlessness": 31,
+            "loyalty": 49,
+            "vindictiveness": 72
+          },
+          "family": [
+            {
+              "id": "heir-punjab",
+              "tie": "younger sibling"
+            }
+          ],
+          "claims": [
+            "punjab"
+          ],
+          "relations": {},
+          "incidents": [
+            "incident-1"
+          ],
+          "background": "A small circle of relatives debates policy before the court assembles.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [
+            "memory:incident-1:fact-1:ruler-punjab:released"
+          ],
+          "confidence": 56,
+          "voice": {
+            "formality": 1,
+            "directness": 1,
+            "restraint": 1,
+            "humour": 0
+          },
+          "pacing": {
+            "relevant": 1,
+            "lastAppearance": 1,
+            "lastCallbackAt": -10,
+            "templates": [
+              {
+                "id": "ruler-freed-unknown-1",
+                "at": 1
+              }
+            ],
+            "phrases": [
+              {
+                "family": "ruler-freed-unknown-1",
+                "at": 1
+              }
+            ],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [
+              "incident-1"
+            ],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "heir-punjab": {
+          "id": "heir-punjab",
+          "name": "Farid of Punjab",
+          "aliases": [],
+          "region": "punjab",
+          "age": 34,
+          "dynasty": "House of Rahim of Punjab",
+          "role": "heir",
+          "condition": "alive",
+          "position": "family member",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 69,
+            "pride": 41,
+            "caution": 69,
+            "ruthlessness": 58,
+            "loyalty": 62,
+            "vindictiveness": 56
+          },
+          "family": [
+            {
+              "id": "ruler-punjab",
+              "tie": "older sibling"
+            }
+          ],
+          "claims": [],
+          "relations": {},
+          "incidents": [
+            "incident-1"
+          ],
+          "background": "A younger sibling within this fictional household; no earlier campaign events are asserted.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [
+            "memory:incident-1:fact-1:heir-punjab:released"
+          ],
+          "confidence": 50,
+          "voice": {
+            "formality": 3,
+            "directness": 1,
+            "restraint": 2,
+            "humour": 2
+          },
+          "pacing": {
+            "relevant": 1,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "ruler-delhi": {
+          "id": "ruler-delhi",
+          "name": "Rashid of Delhi",
+          "aliases": [],
+          "region": "delhi",
+          "age": 44,
+          "dynasty": "House of Rashid of Delhi",
+          "role": "ruler",
+          "condition": "alive",
+          "position": "sovereign ruler",
+          "mood": "reflective",
+          "traits": {
+            "ambition": 49,
+            "pride": 80,
+            "caution": 53,
+            "ruthlessness": 45,
+            "loyalty": 63,
+            "vindictiveness": 52
+          },
+          "family": [
+            {
+              "id": "heir-delhi",
+              "tie": "younger sibling"
+            }
+          ],
+          "claims": [
+            "delhi"
+          ],
+          "relations": {
+            "character:ruler-bombay": {
+              "hostility": 29,
+              "respect": 8,
+              "gratitude": 0,
+              "mistrust": 0,
+              "loyalty": 0,
+              "familiarity": 9,
+              "origins": [
+                "incident-1",
+                "incident-2",
+                "incident-3"
+              ],
+              "target": {
+                "kind": "character",
+                "id": "ruler-bombay"
+              },
+              "causes": [
+                {
+                  "id": "cause:incident-1:ruler-delhi:character:ruler-bombay:memory:incident-1:fact-3:ruler-delhi:subordination",
+                  "incidentId": "incident-1",
+                  "memoryIds": [
+                    "memory:incident-1:fact-3:ruler-delhi:subordination"
+                  ],
+                  "statementIds": [],
+                  "deltas": {
+                    "hostility": 19,
+                    "respect": 4,
+                    "familiarity": 3
+                  },
+                  "reason": "subordination in Delhi; this is Rashid of Delhi's assessment, not a claim about hidden orders."
+                },
+                {
+                  "id": "cause:incident-2:ruler-delhi:character:ruler-bombay:memory:incident-2:fact-0:ruler-delhi:rebellion-failed",
+                  "incidentId": "incident-2",
+                  "memoryIds": [
+                    "memory:incident-2:fact-0:ruler-delhi:rebellion-failed"
+                  ],
+                  "statementIds": [],
+                  "deltas": {
+                    "hostility": 10,
+                    "familiarity": 3
+                  },
+                  "reason": "rebellion failed in Delhi; this is Rashid of Delhi's assessment, not a claim about hidden orders."
+                },
+                {
+                  "id": "cause:incident-3:ruler-delhi:character:ruler-bombay:memory:incident-3:fact-0:ruler-delhi:rebellion-won",
+                  "incidentId": "incident-3",
+                  "memoryIds": [
+                    "memory:incident-3:fact-0:ruler-delhi:rebellion-won"
+                  ],
+                  "statementIds": [],
+                  "deltas": {
+                    "respect": 4,
+                    "familiarity": 3
+                  },
+                  "reason": "rebellion won in Delhi; this is Rashid of Delhi's assessment, not a claim about hidden orders."
+                }
+              ]
+            }
+          },
+          "incidents": [
+            "incident-1",
+            "incident-2",
+            "incident-3"
+          ],
+          "background": "The court prizes ceremony; its ruler prefers a concise petition.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [
+            "memory:incident-1:fact-1:ruler-delhi:released",
+            "memory:incident-1:fact-2:ruler-delhi:released",
+            "memory:incident-1:fact-3:ruler-delhi:subordination",
+            "memory:incident-2:fact-0:ruler-delhi:rebellion-failed",
+            "memory:incident-3:fact-0:ruler-delhi:rebellion-won"
+          ],
+          "confidence": 32,
+          "voice": {
+            "formality": 1,
+            "directness": 3,
+            "restraint": 1,
+            "humour": 1
+          },
+          "pacing": {
+            "relevant": 3,
+            "lastAppearance": 3,
+            "lastCallbackAt": 3,
+            "templates": [
+              {
+                "id": "m2-sovereign-released",
+                "at": 1
+              },
+              {
+                "id": "ruler-rebellion-fail-1",
+                "at": 2
+              },
+              {
+                "id": "m2-callback-rebellion-failed-rebellion-won",
+                "at": 3
+              }
+            ],
+            "phrases": [
+              {
+                "family": "sovereign-released",
+                "at": 1
+              },
+              {
+                "family": "ruler-rebellion-fail-1",
+                "at": 2
+              },
+              {
+                "family": "memory-rebellion-failed-rebellion-won",
+                "at": 3
+              }
+            ],
+            "callbacks": {
+              "memory:incident-2:fact-0:ruler-delhi:rebellion-failed": {
+                "at": 3,
+                "cooldown": 3,
+                "incidentId": "incident-3"
+              }
+            }
+          },
+          "development": {
+            "strongExperiences": [
+              "incident-1",
+              "incident-2",
+              "incident-3"
+            ],
+            "changes": [
+              {
+                "trait": "caution",
+                "delta": -1,
+                "turn": 1,
+                "incidentIds": [
+                  "incident-1",
+                  "incident-2",
+                  "incident-3"
+                ]
+              }
+            ],
+            "lastChangedTurn": 1
+          }
+        },
+        "heir-delhi": {
+          "id": "heir-delhi",
+          "name": "Hamid of Delhi",
+          "aliases": [],
+          "region": "delhi",
+          "age": 36,
+          "dynasty": "House of Rashid of Delhi",
+          "role": "heir",
+          "condition": "alive",
+          "position": "family member",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 37,
+            "pride": 40,
+            "caution": 61,
+            "ruthlessness": 28,
+            "loyalty": 70,
+            "vindictiveness": 52
+          },
+          "family": [
+            {
+              "id": "ruler-delhi",
+              "tie": "older sibling"
+            }
+          ],
+          "claims": [],
+          "relations": {},
+          "incidents": [
+            "incident-1",
+            "incident-2",
+            "incident-3"
+          ],
+          "background": "A younger sibling within this fictional household; no earlier campaign events are asserted.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [
+            "memory:incident-1:fact-3:heir-delhi:subordination",
+            "memory:incident-2:fact-0:heir-delhi:rebellion-failed",
+            "memory:incident-3:fact-0:heir-delhi:rebellion-won"
+          ],
+          "confidence": 50,
+          "voice": {
+            "formality": 2,
+            "directness": 2,
+            "restraint": 3,
+            "humour": 0
+          },
+          "pacing": {
+            "relevant": 3,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "ruler-bengal": {
+          "id": "ruler-bengal",
+          "name": "Nasir of Bengal",
+          "aliases": [],
+          "region": "bengal",
+          "age": 35,
+          "dynasty": "House of Nasir of Bengal",
+          "role": "ruler",
+          "condition": "alive",
+          "position": "sovereign ruler",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 38,
+            "pride": 71,
+            "caution": 56,
+            "ruthlessness": 22,
+            "loyalty": 70,
+            "vindictiveness": 72
+          },
+          "family": [
+            {
+              "id": "heir-bengal",
+              "tie": "younger sibling"
+            }
+          ],
+          "claims": [
+            "bengal"
+          ],
+          "relations": {},
+          "incidents": [],
+          "background": "The court prizes ceremony; its ruler prefers a concise petition.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 3,
+            "directness": 2,
+            "restraint": 3,
+            "humour": 1
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "heir-bengal": {
+          "id": "heir-bengal",
+          "name": "Latif of Bengal",
+          "aliases": [],
+          "region": "bengal",
+          "age": 27,
+          "dynasty": "House of Nasir of Bengal",
+          "role": "heir",
+          "condition": "alive",
+          "position": "family member",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 60,
+            "pride": 42,
+            "caution": 30,
+            "ruthlessness": 54,
+            "loyalty": 65,
+            "vindictiveness": 61
+          },
+          "family": [
+            {
+              "id": "ruler-bengal",
+              "tie": "older sibling"
+            }
+          ],
+          "claims": [],
+          "relations": {},
+          "incidents": [],
+          "background": "A younger sibling within this fictional household; no earlier campaign events are asserted.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 1,
+            "directness": 3,
+            "restraint": 2,
+            "humour": 2
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "ruler-bombay": {
+          "id": "ruler-bombay",
+          "name": "Madhav of Bombay",
+          "aliases": [],
+          "region": "bombay",
+          "age": 52,
+          "dynasty": "House of Madhav of Bombay",
+          "role": "ruler",
+          "condition": "alive",
+          "position": "sovereign ruler",
+          "mood": "worried",
+          "traits": {
+            "ambition": 49,
+            "pride": 43,
+            "caution": 43,
+            "ruthlessness": 52,
+            "loyalty": 29,
+            "vindictiveness": 48
+          },
+          "family": [
+            {
+              "id": "heir-bombay",
+              "tie": "younger sibling"
+            }
+          ],
+          "claims": [
+            "bombay"
+          ],
+          "relations": {
+            "character:ruler-delhi": {
+              "hostility": 6,
+              "respect": 8,
+              "gratitude": 0,
+              "mistrust": 0,
+              "loyalty": 0,
+              "familiarity": 9,
+              "origins": [
+                "incident-1",
+                "incident-2",
+                "incident-3"
+              ],
+              "target": {
+                "kind": "character",
+                "id": "ruler-delhi"
+              },
+              "causes": [
+                {
+                  "id": "cause:incident-1:ruler-bombay:character:ruler-delhi:memory:incident-1:fact-3:ruler-bombay:subordination",
+                  "incidentId": "incident-1",
+                  "memoryIds": [
+                    "memory:incident-1:fact-3:ruler-bombay:subordination"
+                  ],
+                  "statementIds": [],
+                  "deltas": {
+                    "respect": 4,
+                    "familiarity": 3
+                  },
+                  "reason": "subordination in Delhi; this is Madhav of Bombay's assessment, not a claim about hidden orders."
+                },
+                {
+                  "id": "cause:incident-2:ruler-bombay:character:ruler-delhi:memory:incident-2:fact-0:ruler-bombay:rebellion-failed",
+                  "incidentId": "incident-2",
+                  "memoryIds": [
+                    "memory:incident-2:fact-0:ruler-bombay:rebellion-failed"
+                  ],
+                  "statementIds": [],
+                  "deltas": {
+                    "hostility": 6,
+                    "familiarity": 3
+                  },
+                  "reason": "rebellion failed in Delhi; this is Madhav of Bombay's assessment, not a claim about hidden orders."
+                },
+                {
+                  "id": "cause:incident-3:ruler-bombay:character:ruler-delhi:memory:incident-3:fact-0:ruler-bombay:rebellion-won",
+                  "incidentId": "incident-3",
+                  "memoryIds": [
+                    "memory:incident-3:fact-0:ruler-bombay:rebellion-won"
+                  ],
+                  "statementIds": [],
+                  "deltas": {
+                    "respect": 4,
+                    "familiarity": 3
+                  },
+                  "reason": "rebellion won in Delhi; this is Madhav of Bombay's assessment, not a claim about hidden orders."
+                }
+              ]
+            }
+          },
+          "incidents": [
+            "incident-1",
+            "incident-2",
+            "incident-3"
+          ],
+          "background": "The ruler cultivates a reputation for careful listening.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [
+            "memory:incident-1:fact-3:ruler-bombay:subordination",
+            "memory:incident-2:fact-0:ruler-bombay:rebellion-failed",
+            "memory:incident-3:fact-0:ruler-bombay:rebellion-won"
+          ],
+          "confidence": 56,
+          "voice": {
+            "formality": 1,
+            "directness": 1,
+            "restraint": 2,
+            "humour": 0
+          },
+          "pacing": {
+            "relevant": 3,
+            "lastAppearance": 3,
+            "lastCallbackAt": -10,
+            "templates": [
+              {
+                "id": "m2-sovereign-subordination",
+                "at": 1
+              },
+              {
+                "id": "m2-sovereign-rebellion-failed",
+                "at": 2
+              },
+              {
+                "id": "m2-sovereign-rebellion-won",
+                "at": 3
+              }
+            ],
+            "phrases": [
+              {
+                "family": "sovereign-subordination",
+                "at": 1
+              },
+              {
+                "family": "sovereign-rebellion-failed",
+                "at": 2
+              },
+              {
+                "family": "sovereign-rebellion-won",
+                "at": 3
+              }
+            ],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [
+              "incident-1",
+              "incident-2",
+              "incident-3"
+            ],
+            "changes": [
+              {
+                "trait": "caution",
+                "delta": 1,
+                "turn": 1,
+                "incidentIds": [
+                  "incident-1",
+                  "incident-2",
+                  "incident-3"
+                ]
+              }
+            ],
+            "lastChangedTurn": 1
+          }
+        },
+        "heir-bombay": {
+          "id": "heir-bombay",
+          "name": "Keshav of Bombay",
+          "aliases": [],
+          "region": "bombay",
+          "age": 44,
+          "dynasty": "House of Madhav of Bombay",
+          "role": "heir",
+          "condition": "alive",
+          "position": "family member",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 49,
+            "pride": 30,
+            "caution": 76,
+            "ruthlessness": 71,
+            "loyalty": 28,
+            "vindictiveness": 31
+          },
+          "family": [
+            {
+              "id": "ruler-bombay",
+              "tie": "older sibling"
+            }
+          ],
+          "claims": [],
+          "relations": {},
+          "incidents": [],
+          "background": "A younger sibling within this fictional household; no earlier campaign events are asserted.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 1,
+            "directness": 3,
+            "restraint": 3,
+            "humour": 2
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "ruler-maratha": {
+          "id": "ruler-maratha",
+          "name": "Gopal of Maratha",
+          "aliases": [],
+          "region": "maratha",
+          "age": 49,
+          "dynasty": "House of Gopal of Maratha",
+          "role": "ruler",
+          "condition": "alive",
+          "position": "sovereign ruler",
+          "mood": "neutral",
+          "traits": {
+            "ambition": 78,
+            "pride": 35,
+            "caution": 61,
+            "ruthlessness": 24,
+            "loyalty": 54,
+            "vindictiveness": 40
+          },
+          "family": [
+            {
+              "id": "heir-maratha",
+              "tie": "younger sibling"
+            }
+          ],
+          "claims": [
+            "maratha"
+          ],
+          "relations": {},
+          "incidents": [
+            "incident-1"
+          ],
+          "background": "The household keeps an extensive archive and argues over its precedents.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [
+            "memory:incident-1:fact-2:ruler-maratha:released"
+          ],
+          "confidence": 56,
+          "voice": {
+            "formality": 3,
+            "directness": 3,
+            "restraint": 3,
+            "humour": 1
+          },
+          "pacing": {
+            "relevant": 1,
+            "lastAppearance": 1,
+            "lastCallbackAt": -10,
+            "templates": [
+              {
+                "id": "ruler-freed-unknown-1",
+                "at": 1
+              }
+            ],
+            "phrases": [
+              {
+                "family": "ruler-freed-unknown-1",
+                "at": 1
+              }
+            ],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [
+              "incident-1"
+            ],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "heir-maratha": {
+          "id": "heir-maratha",
+          "name": "Vishwanath of Maratha",
+          "aliases": [],
+          "region": "maratha",
+          "age": 41,
+          "dynasty": "House of Gopal of Maratha",
+          "role": "heir",
+          "condition": "alive",
+          "position": "family member",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 60,
+            "pride": 33,
+            "caution": 49,
+            "ruthlessness": 65,
+            "loyalty": 30,
+            "vindictiveness": 26
+          },
+          "family": [
+            {
+              "id": "ruler-maratha",
+              "tie": "older sibling"
+            }
+          ],
+          "claims": [],
+          "relations": {},
+          "incidents": [
+            "incident-1"
+          ],
+          "background": "A younger sibling within this fictional household; no earlier campaign events are asserted.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [
+            "memory:incident-1:fact-2:heir-maratha:released"
+          ],
+          "confidence": 50,
+          "voice": {
+            "formality": 3,
+            "directness": 3,
+            "restraint": 2,
+            "humour": 0
+          },
+          "pacing": {
+            "relevant": 1,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "ruler-hyderabad": {
+          "id": "ruler-hyderabad",
+          "name": "Rafi of Hyderabad",
+          "aliases": [],
+          "region": "hyderabad",
+          "age": 35,
+          "dynasty": "House of Rafi of Hyderabad",
+          "role": "ruler",
+          "condition": "alive",
+          "position": "sovereign ruler",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 36,
+            "pride": 60,
+            "caution": 30,
+            "ruthlessness": 58,
+            "loyalty": 71,
+            "vindictiveness": 71
+          },
+          "family": [
+            {
+              "id": "heir-hyderabad",
+              "tie": "younger sibling"
+            }
+          ],
+          "claims": [
+            "hyderabad"
+          ],
+          "relations": {},
+          "incidents": [],
+          "background": "The court prizes ceremony; its ruler prefers a concise petition.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 2,
+            "directness": 3,
+            "restraint": 2,
+            "humour": 2
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "heir-hyderabad": {
+          "id": "heir-hyderabad",
+          "name": "Qasim of Hyderabad",
+          "aliases": [],
+          "region": "hyderabad",
+          "age": 27,
+          "dynasty": "House of Rafi of Hyderabad",
+          "role": "heir",
+          "condition": "alive",
+          "position": "family member",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 31,
+            "pride": 57,
+            "caution": 34,
+            "ruthlessness": 65,
+            "loyalty": 62,
+            "vindictiveness": 40
+          },
+          "family": [
+            {
+              "id": "ruler-hyderabad",
+              "tie": "older sibling"
+            }
+          ],
+          "claims": [],
+          "relations": {},
+          "incidents": [],
+          "background": "A younger sibling within this fictional household; no earlier campaign events are asserted.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 2,
+            "directness": 1,
+            "restraint": 2,
+            "humour": 0
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "ruler-mysore": {
+          "id": "ruler-mysore",
+          "name": "Krishna of Mysore",
+          "aliases": [],
+          "region": "mysore",
+          "age": 53,
+          "dynasty": "House of Krishna of Mysore",
+          "role": "ruler",
+          "condition": "alive",
+          "position": "sovereign ruler",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 32,
+            "pride": 40,
+            "caution": 69,
+            "ruthlessness": 60,
+            "loyalty": 63,
+            "vindictiveness": 70
+          },
+          "family": [
+            {
+              "id": "heir-mysore",
+              "tie": "younger sibling"
+            }
+          ],
+          "claims": [
+            "mysore"
+          ],
+          "relations": {},
+          "incidents": [],
+          "background": "The household keeps an extensive archive and argues over its precedents.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 3,
+            "directness": 3,
+            "restraint": 2,
+            "humour": 0
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "heir-mysore": {
+          "id": "heir-mysore",
+          "name": "Deva of Mysore",
+          "aliases": [],
+          "region": "mysore",
+          "age": 45,
+          "dynasty": "House of Krishna of Mysore",
+          "role": "heir",
+          "condition": "alive",
+          "position": "family member",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 33,
+            "pride": 78,
+            "caution": 70,
+            "ruthlessness": 38,
+            "loyalty": 76,
+            "vindictiveness": 20
+          },
+          "family": [
+            {
+              "id": "ruler-mysore",
+              "tie": "older sibling"
+            }
+          ],
+          "claims": [],
+          "relations": {},
+          "incidents": [],
+          "background": "A younger sibling within this fictional household; no earlier campaign events are asserted.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 3,
+            "directness": 2,
+            "restraint": 3,
+            "humour": 0
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "ruler-madras": {
+          "id": "ruler-madras",
+          "name": "Abdul of Madras",
+          "aliases": [],
+          "region": "madras",
+          "age": 49,
+          "dynasty": "House of Abdul of Madras",
+          "role": "ruler",
+          "condition": "alive",
+          "position": "sovereign ruler",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 71,
+            "pride": 23,
+            "caution": 39,
+            "ruthlessness": 31,
+            "loyalty": 80,
+            "vindictiveness": 22
+          },
+          "family": [
+            {
+              "id": "heir-madras",
+              "tie": "younger sibling"
+            }
+          ],
+          "claims": [
+            "madras"
+          ],
+          "relations": {},
+          "incidents": [],
+          "background": "A small circle of relatives debates policy before the court assembles.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 2,
+            "directness": 3,
+            "restraint": 3,
+            "humour": 1
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "heir-madras": {
+          "id": "heir-madras",
+          "name": "Anwar of Madras",
+          "aliases": [],
+          "region": "madras",
+          "age": 41,
+          "dynasty": "House of Abdul of Madras",
+          "role": "heir",
+          "condition": "alive",
+          "position": "family member",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 46,
+            "pride": 64,
+            "caution": 20,
+            "ruthlessness": 35,
+            "loyalty": 67,
+            "vindictiveness": 43
+          },
+          "family": [
+            {
+              "id": "ruler-madras",
+              "tie": "older sibling"
+            }
+          ],
+          "claims": [],
+          "relations": {},
+          "incidents": [],
+          "background": "A younger sibling within this fictional household; no earlier campaign events are asserted.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 2,
+            "directness": 3,
+            "restraint": 3,
+            "humour": 2
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "secretary-bombay": {
+          "id": "secretary-bombay",
+          "name": "Edward Avery",
+          "aliases": [],
+          "region": "bombay",
+          "age": 36,
+          "dynasty": "Company institution",
+          "role": "secretary",
+          "condition": "alive",
+          "position": "Presidency secretary of Bombay",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 33,
+            "pride": 41,
+            "caution": 55,
+            "ruthlessness": 77,
+            "loyalty": 76,
+            "vindictiveness": 73
+          },
+          "family": [],
+          "claims": [],
+          "relations": {},
+          "incidents": [],
+          "background": "A fictional institutional adviser, distinct from every player officeholder.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 3,
+            "directness": 2,
+            "restraint": 3,
+            "humour": 0
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "secretary-madras": {
+          "id": "secretary-madras",
+          "name": "Henry Reed",
+          "aliases": [],
+          "region": "madras",
+          "age": 46,
+          "dynasty": "Company institution",
+          "role": "secretary",
+          "condition": "alive",
+          "position": "Presidency secretary of Madras",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 32,
+            "pride": 47,
+            "caution": 46,
+            "ruthlessness": 65,
+            "loyalty": 58,
+            "vindictiveness": 48
+          },
+          "family": [],
+          "claims": [],
+          "relations": {},
+          "incidents": [],
+          "background": "A fictional institutional adviser, distinct from every player officeholder.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 1,
+            "directness": 1,
+            "restraint": 1,
+            "humour": 2
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "secretary-bengal": {
+          "id": "secretary-bengal",
+          "name": "Edward Mercer",
+          "aliases": [],
+          "region": "bengal",
+          "age": 49,
+          "dynasty": "Company institution",
+          "role": "secretary",
+          "condition": "alive",
+          "position": "Presidency secretary of Bengal",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 70,
+            "pride": 29,
+            "caution": 21,
+            "ruthlessness": 60,
+            "loyalty": 64,
+            "vindictiveness": 35
+          },
+          "family": [],
+          "claims": [],
+          "relations": {},
+          "incidents": [],
+          "background": "A fictional institutional adviser, distinct from every player officeholder.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 3,
+            "directness": 3,
+            "restraint": 1,
+            "humour": 1
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "army-bombay": {
+          "id": "army-bombay",
+          "name": "Thomas Finch",
+          "aliases": [],
+          "region": "bombay",
+          "age": 37,
+          "dynasty": "Company institution",
+          "role": "army",
+          "condition": "alive",
+          "position": "Army adjutant of Bombay",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 35,
+            "pride": 59,
+            "caution": 46,
+            "ruthlessness": 31,
+            "loyalty": 23,
+            "vindictiveness": 22
+          },
+          "family": [],
+          "claims": [],
+          "relations": {},
+          "incidents": [],
+          "background": "A fictional institutional adviser, distinct from every player officeholder.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 3,
+            "directness": 3,
+            "restraint": 1,
+            "humour": 1
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "army-madras": {
+          "id": "army-madras",
+          "name": "Edward Hale",
+          "aliases": [],
+          "region": "madras",
+          "age": 34,
+          "dynasty": "Company institution",
+          "role": "army",
+          "condition": "alive",
+          "position": "Army adjutant of Madras",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 47,
+            "pride": 41,
+            "caution": 33,
+            "ruthlessness": 48,
+            "loyalty": 68,
+            "vindictiveness": 51
+          },
+          "family": [],
+          "claims": [],
+          "relations": {},
+          "incidents": [],
+          "background": "A fictional institutional adviser, distinct from every player officeholder.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 1,
+            "directness": 2,
+            "restraint": 3,
+            "humour": 2
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "army-bengal": {
+          "id": "army-bengal",
+          "name": "Henry Mercer",
+          "aliases": [],
+          "region": "bengal",
+          "age": 33,
+          "dynasty": "Company institution",
+          "role": "army",
+          "condition": "alive",
+          "position": "Army adjutant of Bengal",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 26,
+            "pride": 60,
+            "caution": 57,
+            "ruthlessness": 47,
+            "loyalty": 45,
+            "vindictiveness": 21
+          },
+          "family": [],
+          "claims": [],
+          "relations": {},
+          "incidents": [],
+          "background": "A fictional institutional adviser, distinct from every player officeholder.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 3,
+            "directness": 2,
+            "restraint": 2,
+            "humour": 0
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "secretary-general": {
+          "id": "secretary-general",
+          "name": "Arthur Pembroke",
+          "aliases": [],
+          "region": "bengal",
+          "age": 49,
+          "dynasty": "Company institution",
+          "role": "secretary",
+          "condition": "alive",
+          "position": "Governor General secretary",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 70,
+            "pride": 29,
+            "caution": 21,
+            "ruthlessness": 60,
+            "loyalty": 64,
+            "vindictiveness": 35
+          },
+          "family": [],
+          "claims": [],
+          "relations": {},
+          "incidents": [],
+          "background": "A fictional institutional adviser, distinct from every player officeholder.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 2,
+            "directness": 2,
+            "restraint": 2,
+            "humour": 1
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        }
+      },
+      "seats": {
+        "punjab": "ruler-punjab",
+        "delhi": "ruler-delhi",
+        "bengal": "ruler-bengal",
+        "bombay": "ruler-bombay",
+        "maratha": "ruler-maratha",
+        "hyderabad": "ruler-hyderabad",
+        "mysore": "ruler-mysore",
+        "madras": "ruler-madras"
+      },
+      "allegiances": [
+        {
+          "id": "setup-punjab",
+          "subject": "punjab",
+          "capital": "delhi",
+          "subjectRuler": "ruler-punjab",
+          "capitalRuler": "ruler-delhi",
+          "start": 1,
+          "origin": "unknown",
+          "promises": [],
+          "end": {
+            "incident": "incident-1",
+            "turn": 1,
+            "reason": "release"
+          },
+          "provenance": "Scenario setup"
+        },
+        {
+          "id": "setup-maratha",
+          "subject": "maratha",
+          "capital": "delhi",
+          "subjectRuler": "ruler-maratha",
+          "capitalRuler": "ruler-delhi",
+          "start": 1,
+          "origin": "unknown",
+          "promises": [],
+          "end": {
+            "incident": "incident-1",
+            "turn": 1,
+            "reason": "release"
+          },
+          "provenance": "Scenario setup"
+        },
+        {
+          "id": "incident-1-2",
+          "subject": "delhi",
+          "capital": "bombay",
+          "subjectRuler": "ruler-delhi",
+          "capitalRuler": "ruler-bombay",
+          "start": 1,
+          "origin": "battle",
+          "promises": [],
+          "end": {
+            "incident": "incident-3",
+            "turn": 1,
+            "reason": "independence"
+          },
+          "provenance": "Campaign incident",
+          "incident": "incident-1"
+        }
+      ],
+      "chapters": [],
+      "lastIncident": "incident-3",
+      "lastAgedTurn": 1,
+      "policyVersion": "m2-trial-1",
+      "memories": {
+        "memory:incident-1:fact-1:ruler-punjab:released": {
+          "id": "memory:incident-1:fact-1:ruler-punjab:released",
+          "ownerId": "ruler-punjab",
+          "category": "released",
+          "region": "punjab",
+          "relatedCharacterIds": [
+            "ruler-delhi"
+          ],
+          "origin": "direct",
+          "evidence": [
+            {
+              "incidentId": "incident-1",
+              "factKey": "fact-1"
+            }
+          ],
+          "statementIds": [],
+          "createdTurn": 1,
+          "createdIncident": "incident-1",
+          "sequence": 1,
+          "historicalSignificance": 75,
+          "emotionalImportance": 60,
+          "emotion": "relief",
+          "perspective": "local",
+          "interpretation": {
+            "version": 1,
+            "kind": "opinion",
+            "text": "I consider the recorded end of Punjab's subordination a defining political change."
+          },
+          "updates": [],
+          "capital": null
+        },
+        "memory:incident-1:fact-1:ruler-delhi:released": {
+          "id": "memory:incident-1:fact-1:ruler-delhi:released",
+          "ownerId": "ruler-delhi",
+          "category": "released",
+          "region": "punjab",
+          "relatedCharacterIds": [
+            "ruler-punjab"
+          ],
+          "origin": "direct",
+          "evidence": [
+            {
+              "incidentId": "incident-1",
+              "factKey": "fact-1"
+            }
+          ],
+          "statementIds": [],
+          "createdTurn": 1,
+          "createdIncident": "incident-1",
+          "sequence": 1,
+          "historicalSignificance": 80,
+          "emotionalImportance": 70,
+          "emotion": "humiliation",
+          "perspective": "sovereign",
+          "interpretation": {
+            "version": 1,
+            "kind": "opinion",
+            "text": "I regard the release of Punjab as a loss of our empire's authority."
+          },
+          "updates": [],
+          "capital": null
+        },
+        "memory:incident-1:fact-1:heir-punjab:released": {
+          "id": "memory:incident-1:fact-1:heir-punjab:released",
+          "ownerId": "heir-punjab",
+          "category": "released",
+          "region": "punjab",
+          "relatedCharacterIds": [
+            "ruler-punjab"
+          ],
+          "origin": "indirect",
+          "evidence": [
+            {
+              "incidentId": "incident-1",
+              "factKey": "fact-1"
+            }
+          ],
+          "statementIds": [],
+          "createdTurn": 1,
+          "createdIncident": "incident-1",
+          "sequence": 1,
+          "historicalSignificance": 26,
+          "emotionalImportance": 21,
+          "emotion": "relief",
+          "perspective": "local",
+          "interpretation": {
+            "version": 1,
+            "kind": "opinion",
+            "text": "I consider the recorded end of Punjab's subordination a defining political change."
+          },
+          "updates": [],
+          "capital": null
+        },
+        "memory:incident-1:fact-2:ruler-maratha:released": {
+          "id": "memory:incident-1:fact-2:ruler-maratha:released",
+          "ownerId": "ruler-maratha",
+          "category": "released",
+          "region": "maratha",
+          "relatedCharacterIds": [
+            "ruler-delhi"
+          ],
+          "origin": "direct",
+          "evidence": [
+            {
+              "incidentId": "incident-1",
+              "factKey": "fact-2"
+            }
+          ],
+          "statementIds": [],
+          "createdTurn": 1,
+          "createdIncident": "incident-1",
+          "sequence": 1,
+          "historicalSignificance": 75,
+          "emotionalImportance": 60,
+          "emotion": "relief",
+          "perspective": "local",
+          "interpretation": {
+            "version": 1,
+            "kind": "opinion",
+            "text": "I consider the recorded end of Maratha's subordination a defining political change."
+          },
+          "updates": [],
+          "capital": null
+        },
+        "memory:incident-1:fact-2:ruler-delhi:released": {
+          "id": "memory:incident-1:fact-2:ruler-delhi:released",
+          "ownerId": "ruler-delhi",
+          "category": "released",
+          "region": "maratha",
+          "relatedCharacterIds": [
+            "ruler-maratha"
+          ],
+          "origin": "direct",
+          "evidence": [
+            {
+              "incidentId": "incident-1",
+              "factKey": "fact-2"
+            }
+          ],
+          "statementIds": [],
+          "createdTurn": 1,
+          "createdIncident": "incident-1",
+          "sequence": 1,
+          "historicalSignificance": 80,
+          "emotionalImportance": 70,
+          "emotion": "humiliation",
+          "perspective": "sovereign",
+          "interpretation": {
+            "version": 1,
+            "kind": "opinion",
+            "text": "I regard the release of Maratha as a loss of our empire's authority."
+          },
+          "updates": [],
+          "capital": null
+        },
+        "memory:incident-1:fact-2:heir-maratha:released": {
+          "id": "memory:incident-1:fact-2:heir-maratha:released",
+          "ownerId": "heir-maratha",
+          "category": "released",
+          "region": "maratha",
+          "relatedCharacterIds": [
+            "ruler-maratha"
+          ],
+          "origin": "indirect",
+          "evidence": [
+            {
+              "incidentId": "incident-1",
+              "factKey": "fact-2"
+            }
+          ],
+          "statementIds": [],
+          "createdTurn": 1,
+          "createdIncident": "incident-1",
+          "sequence": 1,
+          "historicalSignificance": 26,
+          "emotionalImportance": 21,
+          "emotion": "relief",
+          "perspective": "local",
+          "interpretation": {
+            "version": 1,
+            "kind": "opinion",
+            "text": "I consider the recorded end of Maratha's subordination a defining political change."
+          },
+          "updates": [],
+          "capital": null
+        },
+        "memory:incident-1:fact-3:ruler-delhi:subordination": {
+          "id": "memory:incident-1:fact-3:ruler-delhi:subordination",
+          "ownerId": "ruler-delhi",
+          "category": "subordination",
+          "region": "delhi",
+          "relatedCharacterIds": [
+            "ruler-bombay"
+          ],
+          "origin": "direct",
+          "evidence": [
+            {
+              "incidentId": "incident-1",
+              "factKey": "fact-3"
+            }
+          ],
+          "statementIds": [],
+          "createdTurn": 1,
+          "createdIncident": "incident-1",
+          "sequence": 1,
+          "historicalSignificance": 70,
+          "emotionalImportance": 100,
+          "emotion": "resentment",
+          "perspective": "local",
+          "interpretation": {
+            "version": 1,
+            "kind": "opinion",
+            "text": "I consider the recorded subordination in Delhi personally significant."
+          },
+          "updates": [
+            {
+              "incidentId": "incident-2",
+              "evidence": [
+                {
+                  "incidentId": "incident-2",
+                  "factKey": "fact-0"
+                }
+              ],
+              "delta": 20,
+              "kind": "reinforced"
+            },
+            {
+              "incidentId": "incident-3",
+              "evidence": [
+                {
+                  "incidentId": "incident-3",
+                  "factKey": "fact-0"
+                }
+              ],
+              "delta": 15,
+              "kind": "reinforced"
+            }
+          ],
+          "capital": "bombay"
+        },
+        "memory:incident-1:fact-3:ruler-bombay:subordination": {
+          "id": "memory:incident-1:fact-3:ruler-bombay:subordination",
+          "ownerId": "ruler-bombay",
+          "category": "subordination",
+          "region": "delhi",
+          "relatedCharacterIds": [
+            "ruler-delhi"
+          ],
+          "origin": "direct",
+          "evidence": [
+            {
+              "incidentId": "incident-1",
+              "factKey": "fact-3"
+            }
+          ],
+          "statementIds": [],
+          "createdTurn": 1,
+          "createdIncident": "incident-1",
+          "sequence": 1,
+          "historicalSignificance": 80,
+          "emotionalImportance": 100,
+          "emotion": "pride",
+          "perspective": "sovereign",
+          "interpretation": {
+            "version": 1,
+            "kind": "opinion",
+            "text": "I regard the new allegiance of Delhi as a gain in our political authority."
+          },
+          "updates": [
+            {
+              "incidentId": "incident-2",
+              "evidence": [
+                {
+                  "incidentId": "incident-2",
+                  "factKey": "fact-0"
+                }
+              ],
+              "delta": 20,
+              "kind": "reinforced"
+            },
+            {
+              "incidentId": "incident-3",
+              "evidence": [
+                {
+                  "incidentId": "incident-3",
+                  "factKey": "fact-0"
+                }
+              ],
+              "delta": 15,
+              "kind": "reinforced"
+            }
+          ],
+          "capital": "bombay"
+        },
+        "memory:incident-1:fact-3:heir-delhi:subordination": {
+          "id": "memory:incident-1:fact-3:heir-delhi:subordination",
+          "ownerId": "heir-delhi",
+          "category": "subordination",
+          "region": "delhi",
+          "relatedCharacterIds": [
+            "ruler-delhi"
+          ],
+          "origin": "indirect",
+          "evidence": [
+            {
+              "incidentId": "incident-1",
+              "factKey": "fact-3"
+            }
+          ],
+          "statementIds": [],
+          "createdTurn": 1,
+          "createdIncident": "incident-1",
+          "sequence": 1,
+          "historicalSignificance": 25,
+          "emotionalImportance": 63,
+          "emotion": "resentment",
+          "perspective": "local",
+          "interpretation": {
+            "version": 1,
+            "kind": "opinion",
+            "text": "I consider the recorded subordination in Delhi relevant to this household or institution."
+          },
+          "updates": [
+            {
+              "incidentId": "incident-2",
+              "evidence": [
+                {
+                  "incidentId": "incident-2",
+                  "factKey": "fact-0"
+                }
+              ],
+              "delta": 20,
+              "kind": "reinforced"
+            },
+            {
+              "incidentId": "incident-3",
+              "evidence": [
+                {
+                  "incidentId": "incident-3",
+                  "factKey": "fact-0"
+                }
+              ],
+              "delta": 20,
+              "kind": "reinforced"
+            }
+          ],
+          "capital": "bombay"
+        },
+        "memory:incident-2:fact-0:ruler-delhi:rebellion-failed": {
+          "id": "memory:incident-2:fact-0:ruler-delhi:rebellion-failed",
+          "ownerId": "ruler-delhi",
+          "category": "rebellion-failed",
+          "region": "delhi",
+          "relatedCharacterIds": [
+            "ruler-bombay"
+          ],
+          "origin": "direct",
+          "evidence": [
+            {
+              "incidentId": "incident-2",
+              "factKey": "fact-0"
+            }
+          ],
+          "statementIds": [],
+          "createdTurn": 1,
+          "createdIncident": "incident-2",
+          "sequence": 2,
+          "historicalSignificance": 65,
+          "emotionalImportance": 65,
+          "emotion": "humiliation",
+          "perspective": "local",
+          "interpretation": {
+            "version": 1,
+            "kind": "opinion",
+            "text": "I regard the failed rebellion in Delhi as a setback, not proof of anyone's private motives."
+          },
+          "updates": [],
+          "capital": null
+        },
+        "memory:incident-2:fact-0:ruler-bombay:rebellion-failed": {
+          "id": "memory:incident-2:fact-0:ruler-bombay:rebellion-failed",
+          "ownerId": "ruler-bombay",
+          "category": "rebellion-failed",
+          "region": "delhi",
+          "relatedCharacterIds": [
+            "ruler-delhi"
+          ],
+          "origin": "direct",
+          "evidence": [
+            {
+              "incidentId": "incident-2",
+              "factKey": "fact-0"
+            }
+          ],
+          "statementIds": [],
+          "createdTurn": 1,
+          "createdIncident": "incident-2",
+          "sequence": 2,
+          "historicalSignificance": 60,
+          "emotionalImportance": 45,
+          "emotion": "pride",
+          "perspective": "sovereign",
+          "interpretation": {
+            "version": 1,
+            "kind": "opinion",
+            "text": "I take some reassurance from the failed rebellion in Delhi, without assuming the dispute has ended."
+          },
+          "updates": [],
+          "capital": null
+        },
+        "memory:incident-2:fact-0:heir-delhi:rebellion-failed": {
+          "id": "memory:incident-2:fact-0:heir-delhi:rebellion-failed",
+          "ownerId": "heir-delhi",
+          "category": "rebellion-failed",
+          "region": "delhi",
+          "relatedCharacterIds": [
+            "ruler-delhi"
+          ],
+          "origin": "indirect",
+          "evidence": [
+            {
+              "incidentId": "incident-2",
+              "factKey": "fact-0"
+            }
+          ],
+          "statementIds": [],
+          "createdTurn": 1,
+          "createdIncident": "incident-2",
+          "sequence": 2,
+          "historicalSignificance": 23,
+          "emotionalImportance": 23,
+          "emotion": "humiliation",
+          "perspective": "local",
+          "interpretation": {
+            "version": 1,
+            "kind": "opinion",
+            "text": "I regard the failed rebellion in Delhi as a setback, not proof of anyone's private motives."
+          },
+          "updates": [],
+          "capital": null
+        },
+        "memory:incident-3:fact-0:ruler-delhi:rebellion-won": {
+          "id": "memory:incident-3:fact-0:ruler-delhi:rebellion-won",
+          "ownerId": "ruler-delhi",
+          "category": "rebellion-won",
+          "region": "delhi",
+          "relatedCharacterIds": [
+            "ruler-bombay"
+          ],
+          "origin": "direct",
+          "evidence": [
+            {
+              "incidentId": "incident-3",
+              "factKey": "fact-0"
+            }
+          ],
+          "statementIds": [],
+          "createdTurn": 1,
+          "createdIncident": "incident-3",
+          "sequence": 3,
+          "historicalSignificance": 85,
+          "emotionalImportance": 75,
+          "emotion": "pride",
+          "perspective": "local",
+          "interpretation": {
+            "version": 1,
+            "kind": "opinion",
+            "text": "I consider the recorded rebellion won in Delhi personally significant."
+          },
+          "updates": [],
+          "capital": null
+        },
+        "memory:incident-3:fact-0:ruler-bombay:rebellion-won": {
+          "id": "memory:incident-3:fact-0:ruler-bombay:rebellion-won",
+          "ownerId": "ruler-bombay",
+          "category": "rebellion-won",
+          "region": "delhi",
+          "relatedCharacterIds": [
+            "ruler-delhi"
+          ],
+          "origin": "direct",
+          "evidence": [
+            {
+              "incidentId": "incident-3",
+              "factKey": "fact-0"
+            }
+          ],
+          "statementIds": [],
+          "createdTurn": 1,
+          "createdIncident": "incident-3",
+          "sequence": 3,
+          "historicalSignificance": 75,
+          "emotionalImportance": 70,
+          "emotion": "humiliation",
+          "perspective": "sovereign",
+          "interpretation": {
+            "version": 1,
+            "kind": "opinion",
+            "text": "I regard Delhi's successful rebellion as a loss of our authority."
+          },
+          "updates": [],
+          "capital": null
+        },
+        "memory:incident-3:fact-0:heir-delhi:rebellion-won": {
+          "id": "memory:incident-3:fact-0:heir-delhi:rebellion-won",
+          "ownerId": "heir-delhi",
+          "category": "rebellion-won",
+          "region": "delhi",
+          "relatedCharacterIds": [
+            "ruler-delhi"
+          ],
+          "origin": "indirect",
+          "evidence": [
+            {
+              "incidentId": "incident-3",
+              "factKey": "fact-0"
+            }
+          ],
+          "statementIds": [],
+          "createdTurn": 1,
+          "createdIncident": "incident-3",
+          "sequence": 3,
+          "historicalSignificance": 30,
+          "emotionalImportance": 26,
+          "emotion": "pride",
+          "perspective": "local",
+          "interpretation": {
+            "version": 1,
+            "kind": "opinion",
+            "text": "I consider the recorded rebellion won in Delhi relevant to this household or institution."
+          },
+          "updates": [],
+          "capital": null
+        }
+      },
+      "statements": {},
+      "arcs": []
+    },
+    "incidentSequence": 3
+  },
+  "progress": null,
+  "undo": [],
+  "undoProgress": []
+}
