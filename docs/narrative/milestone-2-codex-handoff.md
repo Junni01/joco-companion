@@ -37,8 +37,22 @@ The long-term requirements for safe stable-version upgrades remain deferred rath
 
 This does **not** relax gameplay/narrative equivalence, saved-word determinism, undo branch integrity, dialogue fact checking, input validation or escaped UI output.
 
+## Decisions resolved after the revised implementation plan (24 October 2026)
+
+The user has approved the remaining technical choices:
+
+1. **M2-26 — Debug deletion:** Block deleting any individual current-version incident that is referenced by memories, saved statements, relationship causes, scene callbacks or future arcs. Show the blocking references. **Ordinary Undo/Redo and whole-campaign reset remain allowed.** Cascade deletion and detached archival evidence are deferred alternatives.
+2. **M2-27A — Memory significance:** Persist separate 0–100 historical significance and current emotional importance; retain emotional direction independently. Original memory evidence never disappears due to fading.
+3. **M2-27B — Relationships:** Moderate event-dependent changes with cumulative reinforcement, diminishing returns and separate person/institution targets.
+4. **M2-27C — Personality:** Core traits rarely change, typically ±1–2 from accumulated strong experiences; mood/confidence may respond faster.
+5. **M2-27D — Dialogue:** Normal repeated-memory cooldown approximately 2–3 relevant incidents, with contextual major-event overrides. Also track template/phrase and speaker repetition separately.
+6. **M2-27E — Numeric values:** The ranges in `milestone-2-political-memory.md` are **approved trial defaults, not fixed balance constants**. They may be tuned based on representative campaign output while retaining the agreed behaviour. Memory fading is explicitly **context-sensitive**: ongoing unresolved grievances should not decay blindly.
+7. **Direct memory meaning:** Directly affected by the recorded consequence, **not** necessarily physically present or an eyewitness.
+
+**No further design approval is required for these specific items.** Codex should integrate them into the technical plan. The overall implementation remains gated on a **separate explicit user authorisation**.
+
 ## Communication to Codex
 
-> The user approved **development-only persistence**. Please revise your implementation plan to remove old-save migration, old Undo/Redo-frame migration, old fingerprint rebasing and historical backfill. Keep current-schema autosave, snapshots, JSON import/export, Undo/Redo and protected roll/reveal progress. An incompatible older save may be rejected with a clear message and left untouched. Replace the migration-first phase with the earliest useful narrative vertical slice. Maintain current-version validation, evidence integrity and gameplay equivalence. **Do not edit application code until separate implementation approval.**
+> The user approved **development-only persistence** and the final M2-26/M2-27A–E decisions. Please revise your implementation plan to remove old-save migration, old Undo/Redo-frame migration, old fingerprint rebasing and historical backfill. Keep current-schema autosave, snapshots, JSON import/export, Undo/Redo and protected roll/reveal progress. An incompatible older save may be rejected with a clear message and left untouched. Replace the migration-first phase with the earliest useful narrative vertical slice. Maintain current-version validation, evidence integrity and gameplay equivalence. **Do not edit application code until separate implementation approval.**
 
 Approval of the technical plan and authorization to implement are separate decisions.
