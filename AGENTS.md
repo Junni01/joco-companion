@@ -14,7 +14,7 @@ Dependency-free static browser ES modules. `dist/` is source and deployment root
 - Closing an untouched dialog forgets it. Preserve resumable progress after a reveal, roll or consequence that must survive reload. Never reroll saved results.
 - Every Elephant movement has a separate instruction page. Show the newly exposed stack region after an event.
 - The **first playable narrative slice is implemented**, but full narrative mode is still incremental. Do not expand it during unrelated functional changes. Narrative cannot change board rules or consume rules randomness.
-- For narrative work read `docs/narrative/narrative-requirements.md` (approved NR decisions), `docs/narrative/first-playable-milestone.md` (implemented scope), and `docs/narrative/implementation-review-2026-10-24.md` (review findings and proposed work). Review suggestions are **not** automatic authorization to implement deferred features. Preserve the alternatives in the requirements ledger.
+- For narrative work read `docs/narrative/narrative-requirements.md` (approved NR decisions), `docs/narrative/first-playable-milestone.md` (implemented scope), `docs/narrative/milestone-2-political-memory.md` (approved M2 design and first-release boundaries), and `docs/narrative/implementation-review-2026-10-24.md` (review findings). Review suggestions and an approved specification are **not** automatic authorization to implement. Preserve deferred alternatives in the decision ledgers.
 
 ## Rules and persistence
 
