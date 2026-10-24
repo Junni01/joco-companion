@@ -264,8 +264,56 @@ Prototype order is open; A is the most direct test of the game's distinctive pre
 14. How much of the procedural narrative needs handcrafted content versus flexible templates?
 15. Which of the proposed prototypes should be built first?
 
-## 18. Status and next step
+## 18. Technical direction and architecture — agreed starting approach
 
-**This is an idea incubator, not a scheduled development project.** No standalone mechanics, final setting scope, name, UI or implementation have been approved. The current John Company companion's narrative implementation remains a separate priority.
+**Decision:** Build the initial standalone game using web technologies, but **not** as an unstructured collection of plain HTML/JavaScript files. Use a separate repository and a modular application architecture. The game remains a future project; this is a technology direction, not an implementation start.
+
+### Proposed stack
+
+| Layer | Initial approach | Possible later extension |
+| --- | --- | --- |
+| Simulation and game rules | TypeScript library independent of rendering | Web Workers for expensive simulation, profiling-driven optimisation |
+| User interface | React + TypeScript for council, dispatches, dossiers, reports and event scenes | Refined strategy-game UI and accessibility |
+| Political map | SVG with interactive region geometry | PixiJS/WebGL if animated map effects or large-scale rendering warrant it |
+| Narrative engine | Separate TypeScript module consuming committed game incidents and feeding character state back into simulation | Larger authored catalogue and more sophisticated procedural selection |
+| Persistence | Local campaign saves, versioned schema, JSON import/export | IndexedDB or other local database if save complexity demands it |
+| Distribution | Browser first | Desktop packaging later without a simulation rewrite |
+| Tests | Deterministic unit/integration tests and simulation batch tests | Balance simulations, performance and long-campaign regression |
+
+No live service or online AI is required for the initial game. Avoid a backend until a concrete need—such as multiplayer, cloud sync or server-run campaigns—justifies it. Desktop distribution can be assessed independently of the rendering stack.
+
+### Separation of responsibilities
+
+The **headless simulation** owns economy, diplomatic state, character decision policies, governance, military outcomes, time and random seeds. It exposes commands and serialisable results, never imports UI components or browser document APIs.
+
+The **narrative engine** consumes committed factual incidents, maintains personal/institutional memory, chooses contextually eligible dialogue and produces chronicle material. Unlike the current board-game companion, character memories and relationships can legitimately influence *future autonomous simulation decisions*; narration still cannot retroactively rewrite committed facts.
+
+The **React presentation layer** displays reports, political information, maps and decisions, and dispatches player commands. It does not implement independent versions of economy or diplomacy rules. SVG is sufficient at first; animations and GPU effects are optional.
+
+The **persistence layer** versions saves, restores complete simulation/narrative state and deterministic random outcomes, and supports debugging or replay. Prevent changing history merely by reopening a scene or report.
+
+### Performance and scalability
+
+The initial scope is dozens or hundreds of meaningful characters and a moderate number of political/economic entities. This is a design target, **not** a measured performance claim. Profile before adopting a game engine or introducing worker threads. Avoid per-frame simulation; the world can advance in discrete turns or stages.
+
+Crucially, support a command-line or automated test harness that runs the simulation **without the UI**. One desired capability is to simulate 100 fifty-year campaigns with autonomous Governors and independent Indian rulers, then report bankruptcy, trade profitability, state stability and territorial expansion. Such batch tests will expose runaway feedback loops and dominant strategies well before visual polish.
+
+### When to reconsider technology
+
+React/SVG is the preferred baseline for a primarily map-and-interface-driven political game. Reconsider a specialist rendering layer (PixiJS or Phaser) if animated armies, ships, visual effects and interactive 2D scenes become central. Reconsider a full engine such as Godot if the project evolves toward continuous animation, detailed tactical play or a heavily scene-driven presentation. A technology switch should follow a tested feature need, not an assumption that HTML cannot support a strategy game.
+
+### Architectural acceptance criteria
+
+1. A deterministic, seeded simulation run completes without a browser or graphical interface.
+2. UI controls issue commands to shared simulation rules; they do not duplicate or bypass those rules.
+3. Character decisions can be inspected with explanations of mandates, incentives, knowledge and relationship factors.
+4. Narrative output is grounded in committed events, while memories affect only later decisions.
+5. Saving and reloading reproduces identical world, character and narrative state.
+6. SVG map rendering and React dossiers remain replaceable without rewriting the simulation.
+7. Run long-campaign batch tests to measure balance and performance before investing heavily in graphics.
+
+## 19. Status and next step
+
+**This is an idea incubator, not a scheduled development project.** The web/TypeScript/React/SVG starting architecture has been agreed as a direction; no standalone mechanics, final setting scope, name, complete UI or implementation have been approved. The current John Company companion's narrative implementation remains a separate priority.
 
 When returning to this concept, first choose the player role and test **attention + delegation + imperfect reports** with a deliberately small cast. Preserve alternatives, playtest the core tension, and expand only if the basic experience is engaging.
