@@ -12,6 +12,8 @@ export const POLICY={
 };
 // Trial selection thresholds for the first approved dialogue integration. No mechanical effects.
 export const APPROVED_POLICY={highTrait:60,professionalCaution:50,bitterHostility:20,humour:1,restraint:2,formality:2,definingSignificance:75,callbackWeight:100,importanceDivisor:10};
+// Collection 07 narrative-only trial thresholds.
+export const POLISH_POLICY={activeGrievance:40,hostilityMinimum:20,alignmentMinimum:30,alignmentMargin:15,beneficialCauses:2,selectionBonus:120,routineUnrest:1};
 export const SOVEREIGN_PROFILES={
  subordination:{significance:80,importance:65,emotion:'pride',hostility:0,respect:4},
  'rebellion-failed':{significance:60,importance:45,emotion:'pride',hostility:5},

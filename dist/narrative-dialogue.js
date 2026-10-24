@@ -17,6 +17,8 @@ const variants=[
 function allowedCallback(c,key,major){if(!major&&c.pacing.relevant-c.pacing.lastCallbackAt<POLICY.globalCallbackCooldown)return false;const last=c.pacing.callbacks[key];return !last||c.pacing.relevant-last.at>=last.cooldown||major;}
 function memoryCallback(before,state,c,ctx){
  const n=state.narrative;
+ // Collection 07 replaces data-narration callbacks; silence remains valid during cooldowns.
+ if(['tax','tax-repeat','administration'].includes(ctx.category))return null;
  const memories=Object.values(before.narrative.memories).filter(m=>m.ownerId===c.id&&m.region===ctx.region&&m.origin!=='statement').sort((a,b)=>
   (b.category==='company-conquest'?POLICY.conquestRecallBonus:0)+(b.historicalSignificance+b.emotionalImportance)/2-((a.category==='company-conquest'?POLICY.conquestRecallBonus:0)+(a.historicalSignificance+a.emotionalImportance)/2));
  for(const old of memories){
@@ -47,7 +49,8 @@ function primary(c,ctx,role,n){
   if(lines[ctx.category])return {templateId:'m2-sovereign-'+ctx.category,family:'sovereign-'+ctx.category,text:lines[ctx.category],emotion:ctx.category==='rebellion-won'?'worried':'watchful'};
  }
  if(role==='secretary'&&ctx.category==='intervention'&&(ctx.context.clearedUnrest||ctx.context.reopenedOrders))return {templateId:ctx.context.clearedUnrest?'m2-assurance-unrest':'m2-assurance-orders',family:'assurance',text:ctx.context.clearedUnrest?`The unrest in ${name(ctx.region)} has been cleared. I hope the improvement lasts.`:`The closed orders in ${name(ctx.region)} have reopened. I hope the improvement lasts.`,emotion:'relieved',statementType:'assurance'};
- const eligible=[...TEMPLATES,...variants].filter(t=>t.trigger===ctx.trigger&&t.role===role&&t.requires.every(r=>ctx.context[r])&&(!t.trait||c.traits[t.trait]>=POLICY.requiredTraitMinimum));
+ const retired=new Set(['secretary-tax-1','secretary-admin-1','army-loss-1','army-deploy-failure-1','ruler-deploy-failure-1','ruler-tax-first-1','ruler-tax-repeat-1','ruler-tax-general-1','ruler-defence-1',...variants.map(t=>t.id)]);
+ const eligible=[...TEMPLATES,...variants].filter(t=>!retired.has(t.id)&&t.trigger===ctx.trigger&&t.role===role&&t.requires.every(r=>ctx.context[r])&&(!t.trait||c.traits[t.trait]>=POLICY.requiredTraitMinimum));
  const fresh=eligible.filter(t=>!c.pacing.templates.some(p=>p.id===t.id&&c.pacing.relevant-p.at<POLICY.templateCooldown));
  if(!fresh.length)return null;
  const ranked=fresh.map(t=>({t,weight:POLICY.templateBaseWeight+t.requires.length*POLICY.conditionWeight+(variants.includes(t)?0:POLICY.originalCatalogBonus)+(t.trait?Math.round(c.traits[t.trait]/POLICY.traitWeightDivisor):0)+(t.tone==='formal'?c.voice.formality:t.tone==='dry'?c.voice.humour:t.tone==='proud'?c.voice.directness:c.voice.restraint)})).sort((a,b)=>b.weight-a.weight);
@@ -82,7 +85,7 @@ export function renderPoliticalDialogue(before,state,entry,scene,contexts,add){
   const callbacks=[...(chosen.callbackMemoryIds||[]),...(chosen.callbackStatementIds||[])];
   const overrides=callbacks.filter(key=>c.pacing.callbacks[key]&&c.pacing.relevant-c.pacing.callbacks[key].at<c.pacing.callbacks[key].cooldown);
   const line=add(chosen.templateId,chosen.text,c.id,chosen.emotion);
-  Object.assign(line,{evidence:chosen.evidence||ctx.evidence,callbackMemoryIds:chosen.callbackMemoryIds||[],callbackStatementIds:chosen.callbackStatementIds||[],phraseFamily:chosen.family,cooldownOverride:overrides.length?'new-major-political-outcome':null});
+  Object.assign(line,{evidence:chosen.evidence||ctx.evidence,callbackMemoryIds:chosen.callbackMemoryIds||[],callbackStatementIds:chosen.callbackStatementIds||[],phraseFamily:chosen.family,selectionEvidence:chosen.selectionEvidence||[],cooldownOverride:overrides.length?'new-major-political-outcome':null});
   for(const key of callbacks)c.pacing.callbacks[key]={at:c.pacing.relevant,cooldown:POLICY.memoryCooldown,incidentId:entry.incident.id};
   if(callbacks.length){c.pacing.lastCallbackAt=c.pacing.relevant;callbackCount++;}
   c.pacing.templates.push({id:chosen.templateId,at:c.pacing.relevant});c.pacing.templates=c.pacing.templates.slice(-POLICY.recentBuffer);

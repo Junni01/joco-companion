@@ -1,7 +1,11 @@
+import {POLISH_DIALOGUE} from './narrative-polish-content.js';
+import {politicalPosture} from './narrative-posture.js';
+import {POLISH_POLICY as PP} from './narrative-policy.js';
 import {APPROVED_DIALOGUE} from './narrative-approved-content.js';
 import {POLICY,APPROVED_POLICY as AP,narrativeRandom} from './narrative-policy.js';
 
-export const approvedById=new Map(APPROVED_DIALOGUE.map(e=>[e.id,e]));
+const ALL_DIALOGUE=[...APPROVED_DIALOGUE,...POLISH_DIALOGUE];
+export const approvedById=new Map(ALL_DIALOGUE.map(e=>[e.id,e]));
 function boardAt(state,entry,region,after=false){
  const own=entry.incident.changes.find(c=>c.region===region);if(own)return after?own.after:own.before;
  const order=state.history.findIndex(h=>h.incident?.id===entry.incident.id);
@@ -29,8 +33,12 @@ export function approvedContext(state,entry,region,perspective){
  const independent=has('independence')||(has('company-loss')&&change?.after.control==='indian'&&!change.after.overlord);
  const conquest=has('company-conquest');
  const failure=has('deployment',f=>f.outcome==='failure'),catastrophe=has('deployment',f=>f.outcome==='catastrophe');
+ const prior=state.history.slice(0,state.history.indexOf(entry));
+ const previousTax=prior.some(h=>h.incident?.facts.some(f=>f.region===region&&(f.type==='tax'||(f.type==='unrest'&&f.reason==='tax'))));
  const companyBefore=boardAt(state,entry,region).control==='company';
- return {region,perspective,conquest,tax,unrest,admin,failure,catastrophe,companyBefore,
+ return {region,perspective,conquest,tax,unrest,admin,failure,catastrophe,companyBefore,previousTax,
+  defended:has('battle',f=>f.kind==='company-defence'&&f.won),companyLoss:has('company-loss'),
+  routineAdmin:admin&&facts.filter(f=>f.type==='unrest').every(f=>f.amount<=PP.routineUnrest)&&entry.incident.changes.length===1&&entry.incident.input.outcome!=='catastrophe',
   armedConquest:conquest&&has('deployment',f=>f.outcome==='success'),
   failedAttack:(failure||catastrophe)&&has('deployment')&&!companyBefore,
   rebellionWon:rebellionWon&&independent,rebellionFailed:!!rebellion&&!rebellionWon,
@@ -39,8 +47,30 @@ export function approvedContext(state,entry,region,perspective){
   evidence:entry.incident.facts.flatMap((f,i)=>f.region===region?[{incidentId:entry.incident.id,factKey:'fact-'+i}]:[])};
 }
 
+const polishRules={
+ 'FB07-TAX-SEC-01':{role:'secretary',event:f=>f.tax,voice:c=>c.voice.formality>=AP.formality||dry(c)},
+ 'FB07-TAX-RUL-01':{role:'ruler',event:f=>f.tax&&!f.previousTax,voice:c=>proud(c)||pragmatic(c)},
+ 'FB07-TAX-RUL-02':{role:'ruler',event:f=>f.tax&&f.previousTax,voice:c=>proud(c)||dry(c)||bitter(c)},
+ 'FB07-TAX-RUL-03':{role:'ruler',event:f=>f.tax&&f.previousTax,voice:c=>cautious(c)||c.mood==='worried',trait:'caution'},
+ 'FB07-ADM-RUL-01':{role:'ruler',event:f=>f.admin,voice:c=>proud(c)||dry(c)||bitter(c),memory:'company-conquest'},
+ 'FB07-ADM-SEC-01':{role:'secretary',event:f=>f.admin,voice:c=>c.voice.formality>=AP.formality&&proud(c)},
+ 'FB07-ADM-SEC-02':{role:'secretary',event:f=>f.admin,voice:c=>c.voice.formality>=AP.formality||cautious(c)},
+ 'FB07-MIL-RUL-01':{role:'ruler',event:f=>f.failure&&f.failedAttack,voice:c=>proud(c)||dry(c),trait:'pride'},
+ 'FB07-MIL-ARM-01':{role:'army',event:f=>f.failure&&f.failedAttack,voice:professional,trait:'caution'},
+ 'FB07-MIL-ARM-02':{role:'army',event:f=>f.failure&&f.failedAttack,voice:career,trait:'ambition'},
+ 'FB07-DEF-RUL-01':{role:'ruler',event:f=>f.defended,posture:'hostile'},
+ 'FB07-DEF-RUL-02':{role:'ruler',event:f=>f.companyRebellionSuppressed,voice:c=>cautious(c)||pragmatic(c),notAligned:true,defeat:true,trait:'caution'},
+ 'FB07-DEF-RUL-03':{role:'ruler',event:f=>f.defended,posture:'aligned'},
+ 'FB07-LOSS-ARM-01':{role:'army',event:f=>f.companyLoss,voice:professional,trait:'caution'},
+ 'FB07-LOSS-ARM-02':{role:'army',event:f=>f.companyLoss,voice:career,trait:'ambition'},
+ 'FB07-LOSS-ARM-03':{role:'army',event:f=>f.companyLoss,voice:proud,expectation:true,trait:'pride'},
+ 'FB07-REB-RUL-01':{role:'ruler',event:f=>f.companyRebellionSuppressed,posture:'hostile',defeat:true,trait:'vindictiveness'},
+ 'FB07-REB-RUL-02':{role:'ruler',event:f=>f.rebellionFailed,voice:cautious,notCompanyAligned:true,defeat:true,trait:'caution'},
+ 'FB07-CH-ADM-01':{role:'chronicler',event:f=>f.routineAdmin}
+};
 // Current facts first. The voice functions are gates, not excuses to invent prerequisites.
 const rules={
+ ...polishRules,
  'CH-C01':{role:'chronicler',event:f=>f.conquest},
  'CH-C03':{role:'chronicler',event:f=>f.armedConquest},
  'CH-C04':{role:'chronicler',event:f=>f.conquest},
@@ -92,6 +122,20 @@ function priorConquest(state,entry,c,region){
 }
 function factualEligibility(state,entry,c,role,f,e,r,memoryId=null,historical=false){
  if(r.role!==role||!r.event(f)||f.perspective==='sovereign')return null;
+ const cut=state.history.indexOf(entry),prior=state.history.slice(0,cut);
+ const posture=c&&(r.posture||r.notAligned||(r.notCompanyAligned&&f.companyRebellionSuppressed))?politicalPosture(state,c,f.region,entry.incident.id):null;
+ if(r.posture&&posture.kind!==r.posture)return null;
+ if(r.notAligned&&posture.kind==='aligned')return null;
+ if(r.notCompanyAligned&&f.companyRebellionSuppressed&&posture.kind==='aligned')return null;
+ let support=posture?.evidence||[],defeatMemory=null;
+ if(r.defeat){
+  const defeats=Object.values(state.narrative.memories).filter(m=>m.ownerId===c.id&&m.region===f.region&&m.origin==='direct'&&m.perspective!=='sovereign'&&prior.some(h=>h.incident?.id===m.createdIncident)&&(['company-conquest','subordination','rebellion-failed'].includes(m.category)||(m.category==='company-defence'&&m.emotion==='resentment'&&approvedContext(state,prior.find(h=>h.incident?.id===m.createdIncident),f.region).companyRebellionSuppressed)));
+  defeatMemory=memoryId?defeats.find(m=>m.id===memoryId):defeats.at(-1);if(!defeatMemory)return null;
+ }
+ if(r.expectation){
+  const earlier=prior.findLast(h=>h.narrative?.lines.some(l=>l.speakerId===c.id&&['AC-C03','AD-M04-07'].includes(l.templateId))&&h.incident.facts.some(fact=>fact.type==='company-conquest'&&fact.region===f.region));
+  if(!earlier)return null;support=earlier.incident.facts.flatMap((fact,i)=>fact.region===f.region?[{incidentId:earlier.incident.id,factKey:'fact-'+i}]:[]);
+ }
  if(role!=='chronicler'){
   if(!historical&&c.condition!=='alive')return null;
   if(role==='ruler'&&state.narrative.seats[f.region]!==c.id)return null;
@@ -104,13 +148,13 @@ function factualEligibility(state,entry,c,role,f,e,r,memoryId=null,historical=fa
  if(r.salient&&!Object.values(state.narrative.memories).some(m=>m.ownerId===c.id&&m.category==='company-conquest'&&m.createdIncident===entry.incident.id&&m.historicalSignificance>=AP.definingSignificance))return null;
  if(r.grievance&&!Object.values(state.narrative.memories).some(m=>m.region===f.region&&state.history.findIndex(h=>h.incident?.id===m.createdIncident)<state.history.findIndex(h=>h.incident?.id===entry.incident.id)&&['company-conquest','subordination','tax-repeat'].includes(m.category)))return null;
  const memories=r.memory?priorConquest(state,entry,c,f.region):[];
- const memory=memoryId?memories.find(m=>m.id===memoryId):memories[0];
+ const memory=defeatMemory||(memoryId?memories.find(m=>m.id===memoryId):memories[0]);
  if(r.memory&&!memory)return null;
- return {entry:e,memory};
+ return {entry:e,memory,support};
 }
 export function approvedCandidates(state,entry,c,ctx,role){
  const f=approvedContext(state,entry,ctx.region,ctx.perspective);
- return APPROVED_DIALOGUE.flatMap(e=>{
+ return ALL_DIALOGUE.flatMap(e=>{
   const r=rules[e.id],candidate=factualEligibility(state,entry,c,role,f,e,r);
   if(!candidate||(r.voice&&!r.voice(c)))return [];
   if(!c&&state.history.filter(h=>h.incident?.facts.some(f=>f.region===ctx.region)).slice(-POLICY.templateCooldown-1,-1).some(h=>h.narrative?.lines.some(l=>l.templateId===e.id)))return [];
@@ -118,14 +162,14 @@ export function approvedCandidates(state,entry,c,ctx,role){
   if(candidate.memory){const pacing=c.pacing,key=candidate.memory.id,last=pacing.callbacks[key];
    if(!ctx.major&&(pacing.relevant-pacing.lastCallbackAt<POLICY.globalCallbackCooldown||(last&&pacing.relevant-last.at<last.cooldown)))return [];
   }
-  return [{...candidate,evidence:f.evidence,weight:(r.memory?AP.callbackWeight:0)+(r.trait?c.traits[r.trait]:0)+(candidate.memory?Math.round(candidate.memory.emotionalImportance/AP.importanceDivisor):0)}];
+  return [{...candidate,evidence:f.evidence,weight:(e.id.startsWith('FB07-')?PP.selectionBonus:0)+(r.memory?AP.callbackWeight:0)+(r.trait?c.traits[r.trait]:0)+(candidate.memory?Math.round(candidate.memory.emotionalImportance/AP.importanceDivisor):0)}];
  });
 }
 export function selectApprovedDialogue(state,entry,c,ctx,role){
  const candidates=approvedCandidates(state,entry,c,ctx,role).sort((a,b)=>b.weight-a.weight);
  if(!candidates.length)return null;
  const best=candidates.filter(x=>x.weight===candidates[0].weight),chosen=best[narrativeRandom(state.narrative,best.length)],e=chosen.entry;
- return {templateId:e.id,text:e.text,emotion:e.emotion,family:e.id,evidence:chosen.evidence,callbackMemoryIds:chosen.memory?[chosen.memory.id]:[],callbackStatementIds:[]};
+ return {templateId:e.id,text:e.text,emotion:e.emotion,family:e.id,evidence:chosen.evidence,callbackMemoryIds:chosen.memory?[chosen.memory.id]:[],callbackStatementIds:[],selectionEvidence:chosen.support};
 }
 // Validate selected words and factual support on import. Do not reselect using later traits.
 export function validateApprovedLine(state,entry,line){
@@ -136,5 +180,6 @@ export function validateApprovedLine(state,entry,line){
  const c=state.narrative.characters[line.speakerId],f=approvedContext(state,entry,regions[0]);
  if(JSON.stringify(line.evidence)!==JSON.stringify(f.evidence))throw Error('Invalid narrative: approved dialogue current evidence');
  const valid=factualEligibility(state,entry,c,role,f,e,rules[e.id],line.callbackMemoryIds[0],true);
+ if(e.id.startsWith('FB07-')&&JSON.stringify(line.selectionEvidence||[])!==JSON.stringify(valid?.support||[]))throw Error('Invalid narrative: political selection evidence');
  if(!valid||JSON.stringify(line.callbackMemoryIds)!==JSON.stringify(valid.memory?[valid.memory.id]:[]))throw Error('Invalid narrative: approved dialogue prerequisites');
 }

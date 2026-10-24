@@ -69,6 +69,7 @@ export function validatePoliticalMemory(state){
   check(Array.isArray(l.callbackMemoryIds)&&Array.isArray(l.callbackStatementIds),'callback fields');
   for(const id of l.callbackMemoryIds){const m=n.memories[id];check(m&&m.ownerId===l.speakerId&&index.incidents.get(m.createdIncident).order<order,'dangling, future or unknown memory callback');}
   for(const id of l.callbackStatementIds){const s=n.statements[id];check(s&&index.incidents.get(s.incidentId).order<order&&(s.speakerId===l.speakerId||s.audienceIds.includes(l.speakerId)),'dangling, future or unknown quotation');check(l.text.includes(s.text),'quotation must preserve exact saved wording');}
+  if(l.selectionEvidence)refs(l.selectionEvidence,order);
   validateApprovedLine(state,h,l);
   if(l.replyToLineId){const reply=index.lines.get(l.replyToLineId);check(reply&&reply.order===order&&lineIds.has(l.replyToLineId)&&n.statements[l.replyToStatementId]?.lineId===l.replyToLineId,'reply must follow an actual saved line');}
  }

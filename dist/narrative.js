@@ -120,7 +120,7 @@ export function commitNarrative(before,result){
  const politicalContexts=processPoliticalMemories(before,state,entry,reactions);
  if(entry.actionType==='next-turn'){
   const c=chapter(state,n,before.turn);if(n.lastAgedTurn<state.turn){for(const person of Object.values(n.characters))if(person.condition!=='dead')person.age+=3;n.lastAgedTurn=state.turn;}
-  summary.push(c.text,'The narrative clock advances three years. Natural succession is deferred in this release.');
+  summary.push(c.text);
  }else if(entry.actionType==='end-game'){summary.push(chapter(state,n,state.turn,true).text,'The campaign has ended. No further years are added.');}
  if(!summary.length){scene.coverage='summary';summary.push(entry.title+'.');for(const change of incident.changes){summary.push(`${name(change.region)}: ${change.after.strength} tower levels, ${change.after.unrest} unrest; ${Object.values(change.after.orders).filter(v=>!v).length} closed orders.`);}}
  const chroniclerLine=add('chronicler-'+incident.type+'-v1',summary.join(' '));chroniclerLine.evidence=incident.facts.map((f,i)=>({incidentId:id,factKey:'fact-'+i}));

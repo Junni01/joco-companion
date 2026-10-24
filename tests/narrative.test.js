@@ -150,10 +150,10 @@ test('long campaign saves prune reversible frames before current narrative or pr
 
 test('first ordinary Tax differs from repeated Tax, while first Governor General Tax never invents a repeat',()=>{
  let s=enabled(correctRegion(initialState(),'bombay',{control:'company',presidency:'bombay',lootAvailable:false}));
- s=apply(s,{type:'tax',region:'bombay'});assert(s.history.at(-1).narrative.lines.some(l=>['ruler-tax-first-1','RU-T02-01'].includes(l.templateId)));
- s=apply(s,{type:'tax',region:'bombay'});assert(s.history.at(-1).incident.facts.some(f=>f.type==='tax'&&f.ordinal===2));assert(s.history.at(-1).narrative.lines.some(l=>['ruler-tax-repeat-1','RU-R03-01','RU-R03-02'].includes(l.templateId)||l.callbackMemoryIds.some(id=>['tax','tax-repeat'].includes(s.narrative.memories[id].category))));
+ s=apply(s,{type:'tax',region:'bombay'});assert(s.history.at(-1).narrative.lines.some(l=>['ruler-tax-first-1','RU-T02-01','FB07-TAX-RUL-01'].includes(l.templateId)));
+ s=apply(s,{type:'tax',region:'bombay'});assert(s.history.at(-1).incident.facts.some(f=>f.type==='tax'&&f.ordinal===2));assert(s.history.at(-1).narrative.lines.some(l=>['ruler-tax-repeat-1','RU-R03-01','RU-R03-02','FB07-TAX-RUL-02','FB07-TAX-RUL-03'].includes(l.templateId)||l.callbackMemoryIds.some(id=>['tax','tax-repeat'].includes(s.narrative.memories[id].category))));
  const general=apply(enabled(initialState('1813')),{type:'tax',region:'bombay'});
- assert(general.history.at(-1).narrative.lines.some(l=>['ruler-tax-general-1','RU-T02-01','RU-R03-01','RU-R03-02'].includes(l.templateId)));
+ assert(general.history.at(-1).narrative.lines.some(l=>['ruler-tax-general-1','RU-T02-01','RU-R03-01','RU-R03-02','FB07-TAX-RUL-01'].includes(l.templateId)));
  assert(!general.history.at(-1).narrative.lines.some(l=>l.templateId==='ruler-tax-repeat-1'));
 });
 

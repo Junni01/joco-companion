@@ -1,3 +1,4 @@
+import {politicalPosture} from './narrative-posture.js';
 import {POLITICAL_VERSION,POLICY,MEMORY_PROFILES,SOVEREIGN_PROFILES,DIMENSIONS,clamp,narrativeRandom} from './narrative-policy.js';
 import {factRef} from './narrative-evidence.js';
 const regionName=r=>r.charAt(0).toUpperCase()+r.slice(1);
@@ -28,7 +29,7 @@ export function contextForReaction(before,state,entry,reaction){
 }
 function interpretation(category,region,origin,c,perspective){
  const place=regionName(region),direct=origin==='direct';
- const body=perspective==='sovereign'&&category==='rebellion-won'?`I regard ${place}'s successful rebellion as a loss of our authority.`:
+ const body=category==='company-defence'?(c.relations['institution:company']?.hostility>0?`I regard the Company's successful defence in ${place} with caution; its continued control does not settle our grievances.`:`The Company held ${place}. That outcome alone does not decide my political allegiance.`):perspective==='sovereign'&&category==='rebellion-won'?`I regard ${place}'s successful rebellion as a loss of our authority.`:
  perspective==='sovereign'&&category==='rebellion-failed'?`I take some reassurance from the failed rebellion in ${place}, without assuming the dispute has ended.`:
  perspective==='sovereign'&&category==='subordination'?`I regard the new allegiance of ${place} as a gain in our political authority.`:
  perspective==='sovereign'&&category==='released'?`I regard the release of ${place} as a loss of our empire's authority.`:
@@ -68,6 +69,10 @@ function addMemory(n,state,entry,c,ctx,origin,relatedIds=[],target=null){
  let profile=MEMORY_PROFILES[ctx.category];if(!profile)return null;
  if(ctx.perspective==='sovereign')profile={...profile,...SOVEREIGN_PROFILES[ctx.category]};
  const perspective=ctx.perspective||(['deployment-failed','deployment-catastrophe'].includes(ctx.category)&&c.role==='ruler'&&state.regions[ctx.region].control==='indian'?'defender':'local');
+ if(ctx.category==='company-defence'&&c.role==='ruler'){
+  const posture=politicalPosture(state,c,ctx.region,entry.incident.id);
+  if(posture.kind!=='aligned')profile={...profile,emotion:posture.kind==='hostile'?'resentment':'uncertainty',gratitude:0};
+ }
  if(perspective==='defender')profile={...profile,emotion:'relief',importance:POLICY.defenderImportance};
  const factor=origin==='direct'?1:c.role==='heir'?POLICY.heirAwarenessFactor:POLICY.institutionAwarenessFactor;
  const m={id,ownerId:c.id,category:ctx.category,region:ctx.region,relatedCharacterIds:relatedIds,origin,evidence:ctx.evidence,statementIds:[],createdTurn:entry.turn,createdIncident:entry.incident.id,sequence:state.incidentSequence,historicalSignificance:Math.round(profile.significance*factor),emotionalImportance:Math.round(profile.importance*factor),emotion:profile.emotion,perspective,interpretation:interpretation(ctx.category,ctx.region,origin,c,perspective),updates:[],capital:ctx.context.capital?ctx.context.capital.toLowerCase():null};
