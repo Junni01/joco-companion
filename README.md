@@ -61,7 +61,7 @@ Commercial reactions now use 20 exact approved entries, actual disruption/restor
 
 ## Collection 08B thematic chapters
 
-End-of-turn chapters now select one or two evidence-backed threads instead of enumerating action labels. Exact conditional passages, narrower factual variants, saved source inspection and quiet turns preserve the separate full chronology. See the [implementation and writing audit](docs/narrative/collection08b-implementation.md) and [multi-turn chapter review](docs/narrative/review/collection08b/README.md). Narrative-quality acceptance remains with the user and ChatGPT.
+End-of-turn chapters now select one or two evidence-backed threads instead of enumerating action labels. Exact conditional passages, narrower factual variants, saved source inspection and quiet turns preserve the separate full chronology. See the [implementation and writing audit](docs/narrative/collection08b-implementation.md) and [multi-turn chapter review](docs/narrative/review/collection08b/README.md). Narrative-quality acceptance remains with the user and ChatGPT. The [approved fallback polish and guarded final coda](docs/narrative/collection08b-fallback-polish-implementation.md) have a [new multi-turn review package](docs/narrative/review/collection08b-polish/README.md).
 
 ## Saves and hosting
 

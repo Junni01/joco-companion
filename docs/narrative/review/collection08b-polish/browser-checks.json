@@ -1,0 +1,17 @@
+{
+  "checks": [
+    "normal New Turn controls commit one evidence-backed chapter without rerolling or a personal-conversation interruption",
+    "desktop/tablet chapter text and optional clause/source evidence are readable without horizontal overflow",
+    "persisted Undo/Redo restores exact chapter words, parameters, evidence and RNG",
+    "actual End game confirmation and persisted Undo/Redo save the exact eligible coda without RNG draws",
+    "final coda preserves the original ruler identity and optional personal/end-state proof at tablet width",
+    "approved fallback prose renders at desktop/tablet sizes and a cooled personal grievance correctly leaves a quiet final page",
+    "HTML chronicle includes saved thematic chapters and evidence without runtime scripts"
+  ],
+  "errors": [],
+  "browser": "156.0.8078.47",
+  "viewportChecks": [
+    "1440x1000",
+    "1024x768"
+  ]
+}
