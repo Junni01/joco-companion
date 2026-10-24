@@ -2,7 +2,7 @@ import {evidenceIndex,resolveFact} from './narrative-evidence.js';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const label=r=>r?r.charAt(0).toUpperCase()+r.slice(1):'';
 const origin={direct:'Directly affected · does not imply eyewitness attendance',indirect:'Indirect political or institutional awareness',statement:'Recorded fictional statement',inherited:'Inherited account'};
-function factText(f){
+export function factText(f){
  const r=label(f.region);
  if(f.type==='company-conquest')return `The Company took control of ${r}${f.lootConsumed?'; the regional loot token was consumed':''}.`;
  if(f.type==='company-loss')return `The Company lost ${r}. The reported rout removed ${f.removed} officers; this does not establish death.`;

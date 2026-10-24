@@ -1,3 +1,4 @@
+import {composeChapter} from './narrative-chapters.js';
 import {initializePoliticalMemory,processPoliticalMemories} from './narrative-memory.js';
 import {renderPoliticalDialogue} from './narrative-dialogue.js';
 import {tradeContexts} from './narrative-trade.js';
@@ -66,11 +67,7 @@ function allegiance(n,f,id,turn){
  return active;
 }
 function chapter(state,n,turn,ending=false){
- const entries=state.history.filter(h=>h.turn===turn&&h.narrative&&h.actionType!=='next-turn'&&h.actionType!=='end-game');
- const groups={territory:[],administration:[],other:[]};
- for(const h of entries){const facts=h.incident?.facts||[];const key=facts.some(f=>['battle','company-conquest','release','join','independence'].includes(f.type))?'territory':['tax','unrest','govern'].includes(h.actionType)?'administration':'other';groups[key].push(h);}
- const parts=Object.entries(groups).filter(([,hs])=>hs.length).map(([key,hs])=>`${key==='territory'?'Changing authority':key==='administration'?'Administration and its replies':'Other recorded developments'}: ${hs.map(h=>h.title).join('; ')}.`);
- const c={turn,title:ending?'The closing account':'Turn '+turn+' closes',text:parts.join('\n\n')||'No narrative incidents were recorded in this turn.',incidents:entries.map(h=>h.narrative.id),ending};n.chapters.push(c);return c;
+ const c=composeChapter(state,turn,ending);n.chapters.push(c);return c;
 }
 // Called exactly at the application commit boundary; previews remain pure gameplay.
 export function commitNarrative(before,result){
@@ -123,7 +120,7 @@ export function commitNarrative(before,result){
  if(!summary.length&&commerce.length)for(const ctx of commerce)summary.push(`${name(ctx.region)}: ${ctx.category==='trade-diplomacy'?'diplomacy restored a commercial opportunity':ctx.category==='trade-military'?'military intervention restored commercial access':'a commercial opportunity was disrupted'}.`);
  if(entry.actionType==='next-turn'){
   const c=chapter(state,n,before.turn);if(n.lastAgedTurn<state.turn){for(const person of Object.values(n.characters))if(person.condition!=='dead')person.age+=3;n.lastAgedTurn=state.turn;}
-  summary.push(c.text);
+  summary.push(c.text||`Turn ${before.turn} closes.`);
  }else if(entry.actionType==='end-game'){summary.push(chapter(state,n,state.turn,true).text,'The campaign has ended. No further years are added.');}
  if(!summary.length){scene.coverage='summary';summary.push(entry.title+'.');for(const change of incident.changes){summary.push(`${name(change.region)}: ${change.after.strength} tower levels, ${change.after.unrest} unrest; ${Object.values(change.after.orders).filter(v=>!v).length} disrupted commercial opportunities.`);}}
  const chroniclerLine=add('chronicler-'+incident.type+'-v1',summary.join(' '));chroniclerLine.evidence=incident.facts.map((f,i)=>({incidentId:id,factKey:'fact-'+i}));

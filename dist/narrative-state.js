@@ -1,3 +1,4 @@
+import {validateChapters} from './narrative-chapters.js';
 import {validateApprovedLine} from './narrative-approved.js';
 import {tradeContexts,validateTradeLine} from './narrative-trade.js';
 import {POLITICAL_VERSION,DIMENSIONS,POLICY} from './narrative-policy.js';
@@ -67,6 +68,7 @@ export function validatePoliticalMemory(state){
   const source=index.lines.get(s.lineId);check(s.id===id&&source&&s.incidentId===source.entry.incident.id&&s.text===source.line.text&&s.speakerId===source.line.speakerId&&source.line.statementId===id,'exact saved statement');
   check(['assurance','gratitude','threat','insult','promise'].includes(s.type)&&s.audienceIds.every(id=>n.characters[id]),'statement type/audience');refs(s.evidence,source.order);
  }
+ validateChapters(state);
  const lineIds=new Set();
  for(const chapter of n.chapters)check(chapter.incidents.every(id=>ids.has(id)),'chapter source');
  for(const [order,h] of state.history.entries())for(const l of h.narrative?.lines||[]){

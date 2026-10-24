@@ -90,7 +90,7 @@ test('multi-turn fixtures use real stack phases, correct age progression, callba
  for(const f of [ordinary,cautious,evolving]){
   assert.equal(f.state.turn,5);assert.equal(f.state.narrative.chapters.length,5);assert.equal(f.state.narrative.characters[target].age,f.states[0].narrative.characters[target].age+12);
   assert.equal(f.inputs.filter(d=>d.type==='stack-draw').length,5);assert.equal(f.inputs.filter(d=>d.type==='phase-finish').length,5);
-  assert(f.state.narrative.chapters.every(c=>c.incidents.length>0&&c.text.length>0));assert(f.state.narrative.chapters.some(c=>c.text.includes('Administration')));
+  assert(f.state.narrative.chapters.every(c=>c.status==='quiet'?c.text==='':c.incidents.length>0&&c.text.length>0));assert(f.state.narrative.chapters.some(c=>c.text.includes('Company')));
   assert(f.state.history.some(h=>h.turn>=3&&h.narrative?.lines.some(l=>l.callbackMemoryIds.length)));
  }
  const first=ordinary.state.history.filter(h=>h.incident.facts.some(f=>f.kind==='company-defence'&&f.key==='leader'));

@@ -15,7 +15,7 @@ export function incidentReferences(state,id){
  for(const h of state.history)for(const l of h.narrative?.lines||[])if([...(l.evidence||[]),...(l.selectionEvidence||[])].some(r=>r.incidentId===id)||(l.callbackMemoryIds||[]).some(mid=>n.memories[mid]?.evidence.some(r=>r.incidentId===id))||(l.callbackStatementIds||[]).some(sid=>n.statements[sid]?.incidentId===id))found.push(`Saved line ${l.id}`);
  for(const c of Object.values(n.characters))for(const change of c.development?.changes||[])if(change.incidentIds.includes(id))found.push(`Trait change for ${c.name}`);
  for(const c of Object.values(n.characters))if(c.incidents.includes(id))found.push(`Personal incident journal (${c.name})`);
- for(const chapter of n.chapters)if(chapter.incidents.includes(id))found.push(`Chapter ${chapter.title}`);
+ for(const chapter of n.chapters)if(chapter.incidents.includes(id)||chapter.closureIncidentId===id)found.push(`Chapter ${chapter.title}`);
  for(const arc of n.arcs||[])if((arc.incidentIds||[]).includes(id))found.push(`Arc ${arc.id}`);
  return [...new Set(found)];
 }
