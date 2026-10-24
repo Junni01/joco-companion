@@ -1,0 +1,50 @@
+# John Company India Companion
+
+An unofficial touch-friendly companion to the physical John Company Second Edition game. Source modules live in `dist/`; there are no build dependencies. **Do not delete `dist/` as generated output.**
+
+- `dist/model.js`: board catalogue, initial state, invariant checks and save serialisation.
+- `dist/app.js`: map UI, action dialogs, history, autosave, snapshots and import/export.
+- `docs/state-model.ts`: typed state contract and future deployment report.
+- `dist/design-specification.md`: current implementation scope and consolidated narrative decisions.
+- `tests/model.test.js`: meaningful state/persistence tests. Run `npm test` or `node --test tests/*.test.js`.
+
+## Run locally
+
+Requires a modern browser and Node.js for tests. There is no dependency installation or build step.
+
+```sh
+npm test
+python3 -m http.server 4173 --directory dist
+```
+
+Open `http://localhost:4173/` for regular play or `http://localhost:4173/debug.html` for the isolated debug workspace. Use HTTP rather than opening the HTML file directly.
+
+## Current functionality
+
+- Vector India map with orders, trade routes, towers, unrest, Company control, empires and legal Elephant positions.
+- Four scenarios, turn progression, Deploy, Special Envoy, Governor and Governor General actions.
+- Persistent randomized twenty-tile event stack, exposed-region display and staged event resolution including foreign invasions, rebellions, rout reporting and Elephant movement.
+- Relevant Parliament laws/dilemmas, blackmail actions, China-office/opium reminders, cumulative region-loss instructions and end-game chronicle completion.
+- Autosave, Undo, snapshots, JSON import/export and readable chronicle export.
+- Separate debug board/deck editor, law/office controls and checkpoints using the same rules as regular play.
+
+Persistent rulers, advisers, succession and full narrative mode are planned. Finish and verify rules functionality before adding that layer. Players still handle families, money, votes, ships, Army inventories and actual China trade outcomes on the physical table.
+
+## Handoff documentation
+
+- [AGENTS.md](AGENTS.md): instructions for future coding agents.
+- [Current status](docs/current-status.md): decisions, implementation boundaries and transfer notes.
+- [Debug guide](docs/debug-mode.md): setup editing and test flows.
+- [Rules audit](docs/buried-giant-rules-audit.md): publisher rules comparison and corrections.
+- [Official app comparison](docs/official-app-comparison.md): research, not authoritative rules.
+- [Narrative review](docs/narrative/John_Company_Narrative_Mode_Review.docx): detailed agreements, proposals and unresolved matters.
+
+The accumulated design specification contains some earlier descriptions. Current JavaScript and tests determine implemented behavior and save format; `docs/state-model.ts` is an older proposed contract.
+
+## Saves and hosting
+
+Campaigns live in browser storage, separately for regular and debug play. Source transfer does not move them: export JSON in the app and import it in the destination browser.
+
+The existing Sites host serves `dist/` using `.openai/hosting.json`. Pushing to GitHub does not automatically deploy that host. Preserve its project identity and never commit hosting credentials.
+
+Reference assets derived from supplied game materials retain their original owners' rights. This repository does not grant a license to those materials; no project-wide license has been selected. Keep repository visibility appropriate for the included materials.
