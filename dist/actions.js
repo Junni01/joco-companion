@@ -119,7 +119,7 @@ export function resolveAction(s,d){
   const multiplier=n.laws.sepoyRecruitment?2:1,unrest=n.regions[id].unrest,strength=Math.max(0,base+multiplier*unrest),answer=d.defenses?.[key];
   if(!integer(answer,0,1000))throw new NeedsInput({type:'defense',key,region:id,presidency:n.regions[id].presidency,base,unrest,multiplier,strength,instructions:[...instructions],elephantMoves:clone(elephantMoves)});
   say(`${name(id)} attack: ${base} base + ${unrest} unrest × ${multiplier} = ${strength}. Exhaust available Army strength ${Math.min(answer,strength)}; ${answer>=strength?'attack repelled':'insufficient defence'}.`);
-  journal.add('battle',{kind:'company-defence',region:id,presidency:n.regions[id].presidency,base,unrest,strength,defence:answer,won:answer>=strength,key});
+  journal.add('battle',{kind:'company-defence',region:id,presidency:n.regions[id].presidency,base,unrest,strength,defence:answer,won:answer>=strength,key,stage:key.includes(':secondary:')?'secondary':'primary'});
   if(answer>=strength){clearUnrest(id);say(`The associated Commander, if occupied, takes one trophy for defending ${name(id)}.`);return false;}
   loseRegion(id);return true;
  }

@@ -144,7 +144,7 @@ test('long campaign saves prune reversible frames before current narrative or pr
  let s=enabled(initialState('1710-long'));s=commitNarrative(s,resolveDeployment(s,deploy()));
  // A realistic retained history has thousands of entries, each with grounded incident data.
  const template=clone(s.history[0]);
- s.history=Array.from({length:300},(_,i)=>{const h=clone(template);h.incident.id='incident-'+(i+1);h.narrative.id=h.incident.id;h.narrative.lines.forEach(l=>l.incidentId=h.narrative.id);return h;});
+ s.history=Array.from({length:300},(_,i)=>{const h=clone(template);h.incident.id='incident-'+(i+1);h.narrative.id=h.incident.id;h.narrative.lines.forEach((l,j)=>{l.incidentId=h.narrative.id;l.id=h.incident.id+':line-'+j;});return h;});
  s.incidentSequence=300;s.narrative.nextIncident=301;
  const raw=encode(s,Array.from({length:20},()=>s),null,Array(20).fill(null),Array.from({length:20},()=>({state:s,progress:null})));
  assert(Buffer.byteLength(raw)<6000000);const restored=decode(raw);assert.deepEqual(restored.state,s);assert(restored.undo.length<20);assert(restored.redo.length<20);
@@ -153,7 +153,7 @@ test('long campaign saves prune reversible frames before current narrative or pr
 test('first ordinary Tax differs from repeated Tax, while first Governor General Tax never invents a repeat',()=>{
  let s=enabled(correctRegion(initialState(),'bombay',{control:'company',presidency:'bombay',lootAvailable:false}));
  s=apply(s,{type:'tax',region:'bombay'});assert(s.history.at(-1).narrative.lines.some(l=>l.templateId==='ruler-tax-first-1'));
- s=apply(s,{type:'tax',region:'bombay'});assert(s.history.at(-1).narrative.lines.some(l=>l.templateId==='ruler-tax-repeat-1'));
+ s=apply(s,{type:'tax',region:'bombay'});assert(s.history.at(-1).incident.facts.some(f=>f.type==='tax'&&f.ordinal===2));assert(s.history.at(-1).narrative.lines.some(l=>l.templateId==='ruler-tax-repeat-1'||l.callbackMemoryIds.some(id=>['tax','tax-repeat'].includes(s.narrative.memories[id].category))));
  const general=apply(enabled(initialState('1813')),{type:'tax',region:'bombay'});
  assert(general.history.at(-1).narrative.lines.some(l=>l.templateId==='ruler-tax-general-1'));
  assert(!general.history.at(-1).narrative.lines.some(l=>l.templateId==='ruler-tax-repeat-1'));

@@ -1,4 +1,7 @@
-import {NAME_POOLS,TRAITS,TRAIT_LABELS,BACKGROUNDS,TEMPLATES} from './narrative-content.js';
+import {initializePoliticalMemory,processPoliticalMemories} from './narrative-memory.js';
+import {renderPoliticalDialogue} from './narrative-dialogue.js';
+import {validatePoliticalMemory} from './narrative-state.js';
+import {NAME_POOLS,TRAITS,TRAIT_LABELS,BACKGROUNDS} from './narrative-content.js';
 const copy=v=>JSON.parse(JSON.stringify(v));
 const regions=Object.keys(NAME_POOLS),modes=['quiet','standard','full'];
 const name=id=>id.charAt(0).toUpperCase()+id.slice(1);
@@ -26,11 +29,11 @@ export function createNarrative(state,seed=seedValue()){
   n.characters[id]={id,name:fullName,aliases:[],region,age:30+random(n,21),dynasty:'Company institution',role,condition:'alive',position:label+' of '+name(region),mood:'watchful',traits:Object.fromEntries(TRAITS.map(t=>[t,20+random(n,61)])),family:[],claims:[],relations:{},incidents:[],background:'A fictional institutional adviser, distinct from every player officeholder.',provenance:'Fictional pre-campaign background'};
  }
  n.characters['secretary-general']={...copy(n.characters['secretary-bengal']),id:'secretary-general',name:'Arthur Pembroke',region:'bengal',position:'Governor General secretary'};
- return n;
+ return initializePoliticalMemory(n);
 }
 export function validateNarrative(state){
  const n=state.narrative;if(n===undefined||n===null)return;
- ensure(n&&n.version===1&&n.enabled===true&&modes.includes(n.intensity),'unsupported format or display mode');
+ ensure(n&&n.version===2&&n.enabled===true&&modes.includes(n.intensity),'unsupported format or display mode');
  ensure(Number.isInteger(n.rng)&&n.rng>=0&&n.rng<=4294967295&&Number.isInteger(n.nextIncident)&&n.nextIncident>0,'random state or incident sequence');
  ensure(n.characters&&typeof n.characters==='object'&&!Array.isArray(n.characters)&&Object.keys(n.characters).length<=2000,'character catalogue');
  for(const [id,c] of Object.entries(n.characters)){
@@ -47,12 +50,12 @@ export function validateNarrative(state){
  ensure(Array.isArray(n.chapters)&&n.chapters.every(c=>Number.isInteger(c.turn)&&typeof c.title==='string'&&typeof c.text==='string'&&Array.isArray(c.incidents)),'chapters');
  ensure(Number.isInteger(n.lastAgedTurn)&&n.lastAgedTurn<=state.turn,'ageing boundary');
  const ids=new Set();
+ validatePoliticalMemory(state);
  for(const h of state.history){if(!h.narrative)continue;const scene=h.narrative;
   ensure(typeof scene.id==='string'&&!ids.has(scene.id)&&Array.isArray(scene.lines)&&scene.lines.length<=40,'scene identity');ids.add(scene.id);
   for(const l of scene.lines)ensure(l.incidentId===scene.id&&(l.speakerId==='chronicler'||n.characters[l.speakerId])&&typeof l.templateId==='string'&&typeof l.text==='string'&&l.text.length<=5000&&typeof l.emotion==='string','saved scene');
  }
 }
-function relate(n,actor,target,id,hostility){const c=n.characters[actor];if(!c)return;const r=c.relations[target]??={hostility:0,gratitude:0,respect:0,mistrust:0,loyalty:0,familiarity:0,origins:[]};if(!r.origins.includes(id)){r.origins.push(id);r.hostility=Math.min(100,r.hostility+hostility);r.familiarity=Math.min(100,r.familiarity+5);}}
 function allegiance(n,f,id,turn){
  const active=n.allegiances.find(a=>a.subject===f.region&&!a.end);
  if(f.type==='release'||f.type==='independence'||f.type==='company-conquest'||f.type==='foreign-settlement'||f.type==='join'){
@@ -60,11 +63,6 @@ function allegiance(n,f,id,turn){
   if(f.type==='join')n.allegiances.push({id:id+'-'+n.allegiances.length,subject:f.region,capital:f.capital,subjectRuler:n.seats[f.region],capitalRuler:n.seats[f.capital],start:turn,origin:'battle',promises:[],end:null,provenance:'Campaign incident',incident:id});
  }
  return active;
-}
-function choose(n,trigger,role,context,speaker){
- let candidates=TEMPLATES.filter(t=>t.trigger===trigger&&t.role===role&&t.requires.every(p=>context[p])&&(!t.trait||speaker.traits[t.trait]>=60));
- const specific=candidates.filter(t=>t.requires.length>1);if(specific.length)candidates=specific;
- return candidates.length?candidates[random(n,candidates.length)]:null;
 }
 function chapter(state,n,turn,ending=false){
  const entries=state.history.filter(h=>h.turn===turn&&h.narrative&&h.actionType!=='next-turn'&&h.actionType!=='end-game');
@@ -93,11 +91,11 @@ export function commitNarrative(before,result){
  const id=incident.id||'incident-'+n.nextIncident,lines=[],affected=new Set(incident.changes.map(c=>c.region));
  n.nextIncident=Math.max(n.nextIncident+1,(state.incidentSequence||0)+1);
  const scene={id,turn:entry.turn,lines,coverage:'specific',provenance:incident.provenance||'gameplay'};
- const add=(templateId,text,speakerId='chronicler',emotion='neutral')=>lines.push({templateId,text,speakerId,speaker:speakerId==='chronicler'?'Chronicler':n.characters[speakerId].name,role:speakerId==='chronicler'?'Anonymous narrator':n.characters[speakerId].position,emotion,incidentId:id,provenance:'Authored fictional dialogue'});
+ const add=(templateId,text,speakerId='chronicler',emotion='neutral')=>{const line={id:id+':line-'+lines.length,templateId,text,speakerId,speaker:speakerId==='chronicler'?'Chronicler':n.characters[speakerId].name,role:speakerId==='chronicler'?'Anonymous narrator':n.characters[speakerId].position,emotion,incidentId:id,evidence:[],callbackMemoryIds:[],callbackStatementIds:[],provenance:'Authored fictional dialogue'};lines.push(line);return line;};
  const facts=incident.facts||[],summary=[];
  const reactions=[];
  for(const f of facts){if(f.region)affected.add(f.region);const ended=allegiance(n,f,id,entry.turn);
-  if(f.type==='company-conquest'){summary.push(`The Company took control of ${name(f.region)}${f.lootConsumed?'; its one-time regional loot token was consumed':''}.`);reactions.push(['company-conquest',f.region,{conquest:true},f.army]);relate(n,n.seats[f.region],'company',id,15);}
+  if(f.type==='company-conquest'){summary.push(`The Company took control of ${name(f.region)}${f.lootConsumed?'; its one-time regional loot token was consumed':''}.`);reactions.push(['company-conquest',f.region,{conquest:true},f.army]);/* Relationship changes are committed by the political-memory processor. */}
   if(f.type==='company-loss'){summary.push(`The Company lost ${name(f.region)}. The reported officer rout removed ${f.removed}; removal does not establish death.`);reactions.push(['company-loss',f.region,{lost:true},f.presidency]);}
   if(f.type==='battle'){
    if(f.kind==='company-defence'&&f.won){summary.push(`The attack on ${name(f.region)} was repelled.`);reactions.push(['company-defence',f.region,{defended:true},f.presidency]);}
@@ -105,7 +103,7 @@ export function commitNarrative(before,result){
    if(f.kind==='indian-invasion'||f.kind==='foreign-invasion')summary.push(`${f.kind==='indian-invasion'?name(f.attacker):'A foreign force'} ${f.won?'won':'failed in'} the attack on ${name(f.region)}.`);
   }
   if(f.type==='release'){summary.push(`${name(f.region)} became sovereign after ${name(f.capital)} lost its empire.`);reactions.push(['released',f.region,{released:true,battleOrigin:ended?.origin==='battle'}]);}
-  if(f.type==='join'){summary.push(`${name(f.region)} became subordinate to ${name(f.capital)} following the attack.`);reactions.push(['subordination',f.region,{joined:true,capital:name(f.capital)}]);relate(n,n.seats[f.region],n.seats[f.capital],id,15);}
+  if(f.type==='join'){summary.push(`${name(f.region)} became subordinate to ${name(f.capital)} following the attack.`);reactions.push(['subordination',f.region,{joined:true,capital:name(f.capital)}]);/* Political-memory processing records directional causes. */}
   if(f.type==='deployment'&&f.outcome!=='success'){summary.push(`The Company deployment in ${name(f.region)} ended in ${f.outcome==='catastrophe'?'catastrophic failure':'failure'}; ${f.losses} officer losses were reported.`);reactions.push(['deployment-failed',f.region,{failedDeployment:true},f.army]);}
   if(f.type==='intervention'){summary.push(`The Company intervention in ${name(f.region)} opened its orders and cleared unrest.`);reactions.push(['intervention',f.region,{intervention:true},f.army]);}
  }
@@ -115,24 +113,17 @@ export function commitNarrative(before,result){
   for(const region of targets){affected.add(region);const change=incident.changes.find(c=>c.region===region),amount=(change?.after.unrest||0)-(change?.before.unrest||0),tax=entry.actionType==='tax'||input.reason==='tax';
    summary.push(`${name(region)}: ${tax?'Tax':entry.actionType==='govern'?'Governor General '+input.outcome:'unsuccessful administration'} recorded; ${amount} unrest added.`);
    const reportedTax=facts.find(f=>f.type==='tax'&&f.region===region),generalTax=tax&&!!state.laws.governorGeneral;
-   reactions.push([tax?'tax':'administration',region,{tax,generalTax,firstTax:tax&&!generalTax&&reportedTax?.ordinal===1,repeatedTax:tax&&!generalTax&&(reportedTax?.ordinal>1||input.reason==='tax'),administration:!tax},state.regions[region].presidency]);relate(n,n.seats[region],'company',id,tax&&amount===0?0:4);
+   reactions.push([tax?'tax':'administration',region,{tax,generalTax,firstTax:tax&&!generalTax&&reportedTax?.ordinal===1,repeatedTax:tax&&!generalTax&&(reportedTax?.ordinal>1||input.reason==='tax'),administration:!tax},state.regions[region].presidency]);/* Political-memory processing records the Tax assessment. */
   }
  }
+ const politicalContexts=processPoliticalMemories(before,state,entry,reactions);
  if(entry.actionType==='next-turn'){
   const c=chapter(state,n,before.turn);if(n.lastAgedTurn<state.turn){for(const person of Object.values(n.characters))if(person.condition!=='dead')person.age+=3;n.lastAgedTurn=state.turn;}
   summary.push(c.text,'The narrative clock advances three years. Natural succession is deferred in this release.');
  }else if(entry.actionType==='end-game'){summary.push(chapter(state,n,state.turn,true).text,'The campaign has ended. No further years are added.');}
  if(!summary.length){scene.coverage='summary';summary.push(entry.title+'.');for(const change of incident.changes){summary.push(`${name(change.region)}: ${change.after.strength} tower levels, ${change.after.unrest} unrest; ${Object.values(change.after.orders).filter(v=>!v).length} closed orders.`);}}
- add('chronicler-'+incident.type+'-v1',summary.join(' '));
- const used=new Set();
- for(const [trigger,region,context,presidency] of reactions){
-  for(const role of ['ruler',...(['company-conquest','deployment-failed','company-defence','company-loss'].includes(trigger)?['army']:['tax','administration','intervention'].includes(trigger)?['secretary']:[])]){
-   const speakerId=role==='ruler'?n.seats[region]:role==='secretary'&&state.laws.governorGeneral?'secretary-general':role+'-'+(presidency||'bengal');
-   const speaker=n.characters[speakerId];if(!speaker||speaker.condition!=='alive'||used.has(speakerId))continue;
-   const t=choose(n,trigger,role,context,speaker);if(!t)continue;
-   used.add(speakerId);const text=t.text.replace(/\{region\}/g,name(region)).replace(/\{capital\}/g,context.capital||'the capital');add(t.id,text,speakerId,t.emotion);speaker.mood=t.emotion;
-  }
- }
+ const chroniclerLine=add('chronicler-'+incident.type+'-v1',summary.join(' '));chroniclerLine.evidence=incident.facts.map((f,i)=>({incidentId:id,factKey:'fact-'+i}));
+ renderPoliticalDialogue(before,state,entry,scene,politicalContexts,add);
  for(const region of affected){const c=n.characters[n.seats[region]];if(!c.incidents.includes(id))c.incidents.push(id);}
  for(const line of lines){if(line.speakerId!=='chronicler'){const c=n.characters[line.speakerId];if(!c.incidents.includes(id))c.incidents.push(id);}}
  entry.narrative=scene;if(entry.incident)entry.incident.id=id;n.lastIncident=id;return state;

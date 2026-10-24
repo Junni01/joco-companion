@@ -1,4 +1,5 @@
 // Debug setup edits are separate from gameplay. Actual actions use actions.js/model.js unchanged.
+import {assertHistoryDeletionAllowed} from './narrative-evidence.js';
 import {IDS,PRESIDENCIES,LAW_NAMES,clone,initialState,validate,correctRegion,record} from './model.js';
 import {SCENARIOS} from './scenarios.js';
 import {createEventStack,validateEventStack,TILES} from './event-stack.js';
@@ -55,7 +56,7 @@ export function debugMoveTile(s,id,destination,index){
  const draw=s.eventStack.draw.filter(t=>t!==id),discard=s.eventStack.discard.filter(t=>t!==id),pile=destination==='draw'?draw:discard;
  check(Number.isInteger(index)&&index>=0&&index<=pile.length,'Choose a position inside the pile.');pile.splice(index,0,id);return debugDeck(s,draw,discard);
 }
-export function debugResult(s,next,title){validateDebugState(next);return {state:record(next,next,'Debug setup · '+title)};}
+export function debugResult(s,next,title){if(next.narrative){const kept=new Set(next.history.map(h=>h.incident?.id));assertHistoryDeletionAllowed(s,s.history.filter(h=>h.incident&&!kept.has(h.incident.id)).map(h=>h.incident.id));}validateDebugState(next);return {state:record(next,next,'Debug setup · '+title)};}
 export function debugStageEvent(s,tileId,topRegion){
  check(Object.hasOwn(TILES,tileId)&&IDS.includes(topRegion),'Choose an event tile and exposed region.');
  const tiles=[...s.eventStack.draw,...s.eventStack.discard].filter(id=>id!==tileId);

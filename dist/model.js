@@ -77,11 +77,11 @@ export function record(s,next,title){validate(next);next.history=[...s.history,{
 export function encode(state,undo=[],progress=null,undoProgress=[],redo=[]){
  validate(state);validateRedo(redo);
  const start=Math.max(0,undo.length-20),kept=undo.slice(start),keptProgress=kept.map((s,i)=>validateActionProgress(s,undoProgress[start+i]||null));
- const base={format:'john-company-india',version:1,state,undo:kept,progress:validateActionProgress(state,progress),undoProgress:keptProgress,...(redo.length?{redo:clone(redo)}:{})};
+ const base={format:'john-company-india',version:2,state,undo:kept,progress:validateActionProgress(state,progress),undoProgress:keptProgress,...(redo.length?{redo:clone(redo)}:{})};
  return encodeFrames(base);
 }
 function validateRedo(frames){assert(Array.isArray(frames)&&frames.length<=20,'Invalid redo history.');for(const f of frames){assert(f&&typeof f==='object','Invalid redo frame.');validate(f.state);validateActionProgress(f.state,f.progress);}}
-export function decode(text){assert(new TextEncoder().encode(text).length<6000000,'Save file is too large.');const v=JSON.parse(text);assert(v.format==='john-company-india'&&v.version===1,'Unrecognised save format.');validate(v.state);assert(Array.isArray(v.undo)&&v.undo.length<=20,'Invalid undo history.');v.undo.forEach(validate);const up=v.undoProgress??v.undo.map(()=>null);assert(Array.isArray(up)&&up.length===v.undo.length,'Invalid undo resolution history.');up.forEach((p,i)=>validateActionProgress(v.undo[i],p));validateRedo(v.redo??[]);return {state:clone(v.state),undo:clone(v.undo),progress:clone(validateActionProgress(v.state,v.progress)),undoProgress:clone(up),redo:clone(v.redo??[])};}
+export function decode(text){assert(new TextEncoder().encode(text).length<6000000,'Save file is too large.');const v=JSON.parse(text);assert(v.format==='john-company-india'&&v.version===2,'Unsupported development save version. Start a new campaign or import a save from this M2 version. The stored copy has not been changed.');validate(v.state);assert(Array.isArray(v.undo)&&v.undo.length<=20,'Invalid undo history.');v.undo.forEach(validate);const up=v.undoProgress??v.undo.map(()=>null);assert(Array.isArray(up)&&up.length===v.undo.length,'Invalid undo resolution history.');up.forEach((p,i)=>validateActionProgress(v.undo[i],p));validateRedo(v.redo??[]);return {state:clone(v.state),undo:clone(v.undo),progress:clone(validateActionProgress(v.state,v.progress)),undoProgress:clone(up),redo:clone(v.redo??[])};}
 
 export function legalTargets(s,army){
  return IDS.filter(id=>!deploymentBlockReason(s,army,id));
