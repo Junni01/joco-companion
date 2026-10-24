@@ -1,5 +1,5 @@
 import {politicalPosture} from './narrative-posture.js';
-import {POLITICAL_VERSION,POLICY,MEMORY_PROFILES,SOVEREIGN_PROFILES,DIMENSIONS,clamp,narrativeRandom} from './narrative-policy.js';
+import {POLITICAL_VERSION,POLICY,TRADE_POLICY,MEMORY_PROFILES,SOVEREIGN_PROFILES,DIMENSIONS,clamp,narrativeRandom} from './narrative-policy.js';
 import {factRef} from './narrative-evidence.js';
 const regionName=r=>r.charAt(0).toUpperCase()+r.slice(1);
 export function initializePoliticalMemory(n){
@@ -29,6 +29,7 @@ export function contextForReaction(before,state,entry,reaction){
 }
 function interpretation(category,region,origin,c,perspective){
  const place=regionName(region),direct=origin==='direct';
+ if(category.startsWith('trade-'))return {version:1,kind:'supported-observation',text:category==='trade-disruption'||category==='trade-cascade'?`A commercial opportunity in ${place} was disrupted. This does not establish that all regional commerce stopped.`:`Commercial access in ${place} improved. This does not establish a completed sale, payment or political agreement.`};
  const body=category==='company-defence'?(c.relations['institution:company']?.hostility>0?`I regard the Company's successful defence in ${place} with caution; its continued control does not settle our grievances.`:`The Company held ${place}. That outcome alone does not decide my political allegiance.`):perspective==='sovereign'&&category==='rebellion-won'?`I regard ${place}'s successful rebellion as a loss of our authority.`:
  perspective==='sovereign'&&category==='rebellion-failed'?`I take some reassurance from the failed rebellion in ${place}, without assuming the dispute has ended.`:
  perspective==='sovereign'&&category==='subordination'?`I regard the new allegiance of ${place} as a gain in our political authority.`:
@@ -77,9 +78,19 @@ function addMemory(n,state,entry,c,ctx,origin,relatedIds=[],target=null){
  const factor=origin==='direct'?1:c.role==='heir'?POLICY.heirAwarenessFactor:POLICY.institutionAwarenessFactor;
  const m={id,ownerId:c.id,category:ctx.category,region:ctx.region,relatedCharacterIds:relatedIds,origin,evidence:ctx.evidence,statementIds:[],createdTurn:entry.turn,createdIncident:entry.incident.id,sequence:state.incidentSequence,historicalSignificance:Math.round(profile.significance*factor),emotionalImportance:Math.round(profile.importance*factor),emotion:profile.emotion,perspective,interpretation:interpretation(ctx.category,ctx.region,origin,c,perspective),updates:[],capital:ctx.context.capital?ctx.context.capital.toLowerCase():null};
  n.memories[id]=m;c.memoryIds.push(id);
+ if(profile.commerce&&c.role==='secretary'){
+  const previous=c.memoryIds.map(id=>n.memories[id]).filter(m=>m.createdIncident!==entry.incident.id&&m.category.startsWith('trade-'));
+  const priorRestores=new Set(previous.filter(m=>['trade-diplomacy','trade-military'].includes(m.category)).map(m=>m.createdIncident)).size;
+  const disrupted=['trade-disruption','trade-cascade'].includes(ctx.category);
+  const already=Object.values(n.memories).some(other=>other.id!==id&&other.ownerId===c.id&&other.createdIncident===entry.incident.id&&other.category.startsWith('trade-'));
+  if(!already)c.confidence=clamp(c.confidence+(disrupted?-TRADE_POLICY.confidenceLoss:priorRestores?0:TRADE_POLICY.confidenceGain));
+  m.emotion=disrupted?'irritation':priorRestores>=TRADE_POLICY.several?'weariness':priorRestores?'caution':'hope';
+  if(priorRestores)m.currentAssessment={kind:'opinion',text:'Repeated changes to commercial access make me more cautious about its stability.',incidentId:entry.incident.id,evidence:ctx.evidence};
+  c.mood=m.emotion;
+ }
  if(!c.incidents.includes(entry.incident.id))c.incidents.push(entry.incident.id);
  if(origin==='direct'){
-  c.mood=profile.emotion;c.confidence=clamp(c.confidence+(['pride','relief','gratitude'].includes(profile.emotion)?POLICY.confidenceStep:-POLICY.confidenceStep));
+  c.mood=profile.emotion;if(!profile.commerce)c.confidence=clamp(c.confidence+(['pride','relief','gratitude'].includes(profile.emotion)?POLICY.confidenceStep:-POLICY.confidenceStep));
   if(target){const changes={};for(const d of DIMENSIONS)if(profile[d])changes[d]=profile[d];
    if(Object.keys(changes).length){changes.familiarity=POLICY.baseFamiliarity;const weight=c.traits.pride>=POLICY.prideThreshold&&changes.hostility>0?POLICY.prideBonus:0;changes.hostility&&(changes.hostility+=weight+narrativeRandom(n,POLICY.reactionVariation));
     adjustRelationship(n,c.id,target,entry,id,changes,`${ctx.category.replaceAll('-',' ')} in ${regionName(ctx.region)}; this is ${c.name}'s assessment, not a claim about hidden orders.`);
@@ -94,8 +105,8 @@ function addMemory(n,state,entry,c,ctx,origin,relatedIds=[],target=null){
   }
  }return m;
 }
-export function processPoliticalMemories(before,state,entry,reactions){
- const n=state.narrative,contexts=reactions.map(r=>contextForReaction(before,state,entry,r)),involved=new Set(),opponents=[];
+export function processPoliticalMemories(before,state,entry,reactions,commercialContexts=[]){
+ const n=state.narrative,contexts=[...reactions.map(r=>contextForReaction(before,state,entry,r)),...commercialContexts],involved=new Set(),opponents=[];
  for(const ctx of contexts){
   if(!MEMORY_PROFILES[ctx.category]||!ctx.evidence.length)continue;
   const ruler=n.characters[n.seats[ctx.region]],target=ctx.trigger==='subordination'?ctx.context.capital?.toLowerCase():ctx.trigger.startsWith('rebellion-')||ctx.trigger==='released'?before.regions[ctx.region].overlord:null;
@@ -107,14 +118,16 @@ export function processPoliticalMemories(before,state,entry,reactions){
   }
   // Immediate relevant awareness is not omniscience or claimed attendance.
   const adviserRole=['company-conquest','company-loss','company-defence','deployment-failed','deployment-catastrophe'].includes(ctx.category)?'army':['tax','tax-repeat','administration','intervention'].includes(ctx.category)?'secretary':null;
-  ctx.adviserId=adviserRole&&ctx.presidency?(adviserRole==='secretary'&&state.laws.governorGeneral?'secretary-general':`${adviserRole}-${ctx.presidency}`):null;
+  if(!ctx.commerce)ctx.adviserId=adviserRole&&ctx.presidency?(adviserRole==='secretary'&&state.laws.governorGeneral?'secretary-general':`${adviserRole}-${ctx.presidency}`):null;
   const adviser=n.characters[ctx.adviserId];if(adviser&&adviser.condition==='alive'){addMemory(n,state,entry,adviser,ctx,'indirect',[ruler.id]);involved.add(adviser.id);}
+  const officer=ctx.commerce&&n.characters[ctx.officerId];if(officer&&officer.condition==='alive'){addMemory(n,state,entry,officer,ctx,'indirect',[ruler.id]);involved.add(officer.id);}
   if(ctx.major){
    const interested=new Set(ruler.family.map(f=>f.id));
    const formerCapital=before.regions[ctx.region].overlord;if(formerCapital&&formerCapital!==target)interested.add(n.seats[formerCapital]);
    for(const id of interested){const c=n.characters[id];if(c&&c.id!==ruler.id&&c.condition==='alive'){addMemory(n,state,entry,c,ctx,'indirect',[ruler.id]);involved.add(c.id);}}
   }
   for(const old of Object.values(n.memories)){
+   if(ctx.commerce&&!old.category.startsWith('trade-'))continue;
    if(old.createdIncident===entry.incident.id||old.region!==ctx.region||!involved.has(old.ownerId)||old.origin==='statement')continue;
    if(old.updates.some(u=>u.incidentId===entry.incident.id))continue;
    const reconcile=ctx.category==='intervention'&&['company-conquest','tax','tax-repeat','administration'].includes(old.category);

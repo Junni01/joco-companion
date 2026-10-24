@@ -1,0 +1,1036 @@
+{
+  "cases": [
+    {
+      "name": "first disruption",
+      "state": {
+        "schemaVersion": 1,
+        "scenario": "1710",
+        "campaignName": "Early Company",
+        "turn": 1,
+        "gameEnd": null,
+        "indiaPhase": null,
+        "parliamentFinishedTurn": null,
+        "eventStack": null,
+        "chinaOffice": false,
+        "laws": {
+          "royalProtection": true,
+          "governorGeneral": false,
+          "envoyChina": false,
+          "zamindarTaxes": false,
+          "treasureReform": false,
+          "sepoyRecruitment": false,
+          "calicoActs": false,
+          "militaryOversight": false,
+          "deregulation": false
+        },
+        "elephant": {
+          "from": "maratha",
+          "to": "delhi"
+        },
+        "regions": {
+          "punjab": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": "delhi",
+            "empireCapital": false,
+            "strength": 0,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "p7": false
+            }
+          },
+          "delhi": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": null,
+            "empireCapital": true,
+            "strength": 1,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "d5n": true,
+              "d3": false,
+              "d5e": false
+            }
+          },
+          "bengal": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": null,
+            "empireCapital": false,
+            "strength": 1,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "be5": true,
+              "be6": true
+            }
+          },
+          "bombay": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": null,
+            "empireCapital": false,
+            "strength": 1,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "bo3n": true,
+              "bo3s": false,
+              "bo4": true
+            }
+          },
+          "maratha": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": "delhi",
+            "empireCapital": false,
+            "strength": 2,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "ma4": true,
+              "ma3": false,
+              "ma2": true
+            }
+          },
+          "hyderabad": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": null,
+            "empireCapital": false,
+            "strength": 1,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "h7": false
+            }
+          },
+          "mysore": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": null,
+            "empireCapital": false,
+            "strength": 1,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "my3": true,
+              "my6": true
+            }
+          },
+          "madras": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": null,
+            "empireCapital": false,
+            "strength": 1,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "md5": true,
+              "md4": false
+            }
+          }
+        },
+        "history": []
+      },
+      "input": {
+        "type": "event",
+        "event": "turmoil",
+        "manualTest": true,
+        "topRegion": "bombay"
+      },
+      "instructions": [
+        "Close Bombay £3 (northern). Return any writer there to its owner; flip any filled-order token.",
+        "Manual test: the digital event stack and phase event count are unchanged. Use Undo to reverse this test’s board effects."
+      ],
+      "report": "Close Bombay £3 (northern). Return any writer there to its owner; flip any filled-order token.\n\nManual test: the digital event stack and phase event count are unchanged. Use Undo to reverse this test’s board effects.",
+      "regions": {
+        "punjab": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": "delhi",
+          "empireCapital": false,
+          "strength": 0,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "p7": false
+          }
+        },
+        "delhi": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": null,
+          "empireCapital": true,
+          "strength": 1,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "d5n": true,
+            "d3": false,
+            "d5e": false
+          }
+        },
+        "bengal": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": null,
+          "empireCapital": false,
+          "strength": 1,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "be5": true,
+            "be6": true
+          }
+        },
+        "bombay": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": null,
+          "empireCapital": false,
+          "strength": 1,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "bo3n": false,
+            "bo3s": false,
+            "bo4": true
+          }
+        },
+        "maratha": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": "delhi",
+          "empireCapital": false,
+          "strength": 2,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "ma4": true,
+            "ma3": false,
+            "ma2": true
+          }
+        },
+        "hyderabad": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": null,
+          "empireCapital": false,
+          "strength": 1,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "h7": false
+          }
+        },
+        "mysore": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": null,
+          "empireCapital": false,
+          "strength": 1,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "my3": true,
+            "my6": true
+          }
+        },
+        "madras": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": null,
+          "empireCapital": false,
+          "strength": 1,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "md5": true,
+            "md4": false
+          }
+        }
+      }
+    },
+    {
+      "name": "cascade",
+      "state": {
+        "schemaVersion": 1,
+        "scenario": "1710",
+        "campaignName": "Early Company",
+        "turn": 1,
+        "gameEnd": null,
+        "indiaPhase": null,
+        "parliamentFinishedTurn": null,
+        "eventStack": null,
+        "chinaOffice": false,
+        "laws": {
+          "royalProtection": true,
+          "governorGeneral": false,
+          "envoyChina": false,
+          "zamindarTaxes": false,
+          "treasureReform": false,
+          "sepoyRecruitment": false,
+          "calicoActs": false,
+          "militaryOversight": false,
+          "deregulation": false
+        },
+        "elephant": {
+          "from": "maratha",
+          "to": "delhi"
+        },
+        "regions": {
+          "punjab": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": "delhi",
+            "empireCapital": false,
+            "strength": 0,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "p7": false
+            }
+          },
+          "delhi": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": null,
+            "empireCapital": true,
+            "strength": 1,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "d5n": true,
+              "d3": false,
+              "d5e": false
+            }
+          },
+          "bengal": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": null,
+            "empireCapital": false,
+            "strength": 1,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "be5": true,
+              "be6": true
+            }
+          },
+          "bombay": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": null,
+            "empireCapital": false,
+            "strength": 1,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "bo3n": false,
+              "bo3s": false,
+              "bo4": false
+            }
+          },
+          "maratha": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": "delhi",
+            "empireCapital": false,
+            "strength": 2,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "ma4": true,
+              "ma3": false,
+              "ma2": true
+            }
+          },
+          "hyderabad": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": null,
+            "empireCapital": false,
+            "strength": 1,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "h7": false
+            }
+          },
+          "mysore": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": null,
+            "empireCapital": false,
+            "strength": 1,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "my3": true,
+              "my6": true
+            }
+          },
+          "madras": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": null,
+            "empireCapital": false,
+            "strength": 1,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "md5": true,
+              "md4": false
+            }
+          }
+        },
+        "history": []
+      },
+      "input": {
+        "type": "event",
+        "event": "turmoil",
+        "manualTest": true,
+        "topRegion": "bombay"
+      },
+      "instructions": [
+        "Bombay Cascades along its trade routes.",
+        "Punjab Cascades along its trade routes.",
+        "Close Delhi £5 (northern). Return any writer there to its owner; flip any filled-order token.",
+        "Delhi Cascades along its trade routes.",
+        "Close Maratha £4 (northern). Return any writer there to its owner; flip any filled-order token.",
+        "Close Maratha £2 (southern). Return any writer there to its owner; flip any filled-order token.",
+        "Close Mysore £3 (northern). Return any writer there to its owner; flip any filled-order token.",
+        "Manual test: the digital event stack and phase event count are unchanged. Use Undo to reverse this test’s board effects."
+      ],
+      "report": "Bombay Cascades along its trade routes.\n\nPunjab Cascades along its trade routes.\n\nClose Delhi £5 (northern). Return any writer there to its owner; flip any filled-order token.\n\nDelhi Cascades along its trade routes.\n\nClose Maratha £4 (northern). Return any writer there to its owner; flip any filled-order token.\n\nClose Maratha £2 (southern). Return any writer there to its owner; flip any filled-order token.\n\nClose Mysore £3 (northern). Return any writer there to its owner; flip any filled-order token.\n\nManual test: the digital event stack and phase event count are unchanged. Use Undo to reverse this test’s board effects.",
+      "regions": {
+        "punjab": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": "delhi",
+          "empireCapital": false,
+          "strength": 0,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "p7": false
+          }
+        },
+        "delhi": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": null,
+          "empireCapital": true,
+          "strength": 1,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "d5n": false,
+            "d3": false,
+            "d5e": false
+          }
+        },
+        "bengal": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": null,
+          "empireCapital": false,
+          "strength": 1,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "be5": true,
+            "be6": true
+          }
+        },
+        "bombay": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": null,
+          "empireCapital": false,
+          "strength": 1,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "bo3n": false,
+            "bo3s": false,
+            "bo4": false
+          }
+        },
+        "maratha": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": "delhi",
+          "empireCapital": false,
+          "strength": 2,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "ma4": false,
+            "ma3": false,
+            "ma2": false
+          }
+        },
+        "hyderabad": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": null,
+          "empireCapital": false,
+          "strength": 1,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "h7": false
+          }
+        },
+        "mysore": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": null,
+          "empireCapital": false,
+          "strength": 1,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "my3": false,
+            "my6": true
+          }
+        },
+        "madras": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": null,
+          "empireCapital": false,
+          "strength": 1,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "md5": true,
+            "md4": false
+          }
+        }
+      }
+    },
+    {
+      "name": "Special Envoy",
+      "state": {
+        "schemaVersion": 1,
+        "scenario": "1710",
+        "campaignName": "Early Company",
+        "turn": 1,
+        "gameEnd": null,
+        "indiaPhase": null,
+        "parliamentFinishedTurn": null,
+        "eventStack": null,
+        "chinaOffice": false,
+        "laws": {
+          "royalProtection": true,
+          "governorGeneral": false,
+          "envoyChina": false,
+          "zamindarTaxes": false,
+          "treasureReform": false,
+          "sepoyRecruitment": false,
+          "calicoActs": false,
+          "militaryOversight": false,
+          "deregulation": false
+        },
+        "elephant": {
+          "from": "maratha",
+          "to": "delhi"
+        },
+        "regions": {
+          "punjab": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": "delhi",
+            "empireCapital": false,
+            "strength": 0,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "p7": false
+            }
+          },
+          "delhi": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": null,
+            "empireCapital": true,
+            "strength": 1,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "d5n": true,
+              "d3": false,
+              "d5e": false
+            }
+          },
+          "bengal": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": null,
+            "empireCapital": false,
+            "strength": 1,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "be5": true,
+              "be6": true
+            }
+          },
+          "bombay": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": null,
+            "empireCapital": false,
+            "strength": 1,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "bo3n": false,
+              "bo3s": false,
+              "bo4": true
+            }
+          },
+          "maratha": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": "delhi",
+            "empireCapital": false,
+            "strength": 2,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "ma4": true,
+              "ma3": false,
+              "ma2": true
+            }
+          },
+          "hyderabad": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": null,
+            "empireCapital": false,
+            "strength": 1,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "h7": false
+            }
+          },
+          "mysore": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": null,
+            "empireCapital": false,
+            "strength": 1,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "my3": true,
+              "my6": true
+            }
+          },
+          "madras": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": null,
+            "empireCapital": false,
+            "strength": 1,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "md5": true,
+              "md4": false
+            }
+          }
+        },
+        "history": []
+      },
+      "input": {
+        "type": "envoy",
+        "purpose": "order",
+        "outcome": "success",
+        "region": "bombay",
+        "order": "bo3n"
+      },
+      "instructions": [
+        "Open Bombay £3 (northern); remove its closed-order marker."
+      ],
+      "report": "Open Bombay £3 (northern); remove its closed-order marker.",
+      "regions": {
+        "punjab": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": "delhi",
+          "empireCapital": false,
+          "strength": 0,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "p7": false
+          }
+        },
+        "delhi": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": null,
+          "empireCapital": true,
+          "strength": 1,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "d5n": true,
+            "d3": false,
+            "d5e": false
+          }
+        },
+        "bengal": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": null,
+          "empireCapital": false,
+          "strength": 1,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "be5": true,
+            "be6": true
+          }
+        },
+        "bombay": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": null,
+          "empireCapital": false,
+          "strength": 1,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "bo3n": true,
+            "bo3s": false,
+            "bo4": true
+          }
+        },
+        "maratha": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": "delhi",
+          "empireCapital": false,
+          "strength": 2,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "ma4": true,
+            "ma3": false,
+            "ma2": true
+          }
+        },
+        "hyderabad": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": null,
+          "empireCapital": false,
+          "strength": 1,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "h7": false
+          }
+        },
+        "mysore": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": null,
+          "empireCapital": false,
+          "strength": 1,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "my3": true,
+            "my6": true
+          }
+        },
+        "madras": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": null,
+          "empireCapital": false,
+          "strength": 1,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "md5": true,
+            "md4": false
+          }
+        }
+      }
+    },
+    {
+      "name": "military restoration",
+      "state": {
+        "schemaVersion": 1,
+        "scenario": "1710",
+        "campaignName": "Early Company",
+        "turn": 1,
+        "gameEnd": null,
+        "indiaPhase": null,
+        "parliamentFinishedTurn": null,
+        "eventStack": null,
+        "chinaOffice": false,
+        "laws": {
+          "royalProtection": true,
+          "governorGeneral": false,
+          "envoyChina": false,
+          "zamindarTaxes": false,
+          "treasureReform": false,
+          "sepoyRecruitment": false,
+          "calicoActs": false,
+          "militaryOversight": false,
+          "deregulation": false
+        },
+        "elephant": {
+          "from": "maratha",
+          "to": "delhi"
+        },
+        "regions": {
+          "punjab": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": "delhi",
+            "empireCapital": false,
+            "strength": 0,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "p7": false
+            }
+          },
+          "delhi": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": null,
+            "empireCapital": true,
+            "strength": 1,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "d5n": true,
+              "d3": false,
+              "d5e": false
+            }
+          },
+          "bengal": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": null,
+            "empireCapital": false,
+            "strength": 1,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "be5": true,
+              "be6": true
+            }
+          },
+          "bombay": {
+            "control": "company",
+            "presidency": "bombay",
+            "overlord": null,
+            "empireCapital": false,
+            "strength": 0,
+            "unrest": 0,
+            "lootAvailable": false,
+            "orders": {
+              "bo3n": false,
+              "bo3s": false,
+              "bo4": false
+            }
+          },
+          "maratha": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": "delhi",
+            "empireCapital": false,
+            "strength": 2,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "ma4": true,
+              "ma3": false,
+              "ma2": true
+            }
+          },
+          "hyderabad": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": null,
+            "empireCapital": false,
+            "strength": 1,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "h7": false
+            }
+          },
+          "mysore": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": null,
+            "empireCapital": false,
+            "strength": 1,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "my3": true,
+              "my6": true
+            }
+          },
+          "madras": {
+            "control": "indian",
+            "presidency": null,
+            "overlord": null,
+            "empireCapital": false,
+            "strength": 1,
+            "unrest": 0,
+            "lootAvailable": true,
+            "orders": {
+              "md5": true,
+              "md4": false
+            }
+          }
+        },
+        "history": []
+      },
+      "input": {
+        "type": "deploy",
+        "army": "bombay",
+        "target": "bombay",
+        "regiments": 12,
+        "officers": 2,
+        "alliances": [],
+        "outcome": "success",
+        "losses": 0
+      },
+      "instructions": [
+        "Exhaust 12 regiments, 2 officers and 0 local alliances. Return 0 lost officers to their players’ supplies. Never remove regiments for this loss check.",
+        "Distribute £3 loot: Commander £1 plus £1 per own surviving officer, then clockwise £1 per surviving officer. Pay the bank £1 per regiment and alliance. Repeat while cash remains; stop when it runs out.",
+        "Take 0 trophies; remove the target’s tower and dome. Open all its orders and remove all its unrest."
+      ],
+      "report": "14 dice after 0 defence. Committed: 12 regiments, 2 officers; alliances: none.\n\nExhaust 12 regiments, 2 officers and 0 local alliances. Return 0 lost officers to their players’ supplies. Never remove regiments for this loss check.\n\nDistribute £3 loot: Commander £1 plus £1 per own surviving officer, then clockwise £1 per surviving officer. Pay the bank £1 per regiment and alliance. Repeat while cash remains; stop when it runs out.\n\nTake 0 trophies; remove the target’s tower and dome. Open all its orders and remove all its unrest.",
+      "regions": {
+        "punjab": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": "delhi",
+          "empireCapital": false,
+          "strength": 0,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "p7": false
+          }
+        },
+        "delhi": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": null,
+          "empireCapital": true,
+          "strength": 1,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "d5n": true,
+            "d3": false,
+            "d5e": false
+          }
+        },
+        "bengal": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": null,
+          "empireCapital": false,
+          "strength": 1,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "be5": true,
+            "be6": true
+          }
+        },
+        "bombay": {
+          "control": "company",
+          "presidency": "bombay",
+          "overlord": null,
+          "empireCapital": false,
+          "strength": 0,
+          "unrest": 0,
+          "lootAvailable": false,
+          "orders": {
+            "bo3n": true,
+            "bo3s": true,
+            "bo4": true
+          }
+        },
+        "maratha": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": "delhi",
+          "empireCapital": false,
+          "strength": 2,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "ma4": true,
+            "ma3": false,
+            "ma2": true
+          }
+        },
+        "hyderabad": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": null,
+          "empireCapital": false,
+          "strength": 1,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "h7": false
+          }
+        },
+        "mysore": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": null,
+          "empireCapital": false,
+          "strength": 1,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "my3": true,
+            "my6": true
+          }
+        },
+        "madras": {
+          "control": "indian",
+          "presidency": null,
+          "overlord": null,
+          "empireCapital": false,
+          "strength": 1,
+          "unrest": 0,
+          "lootAvailable": true,
+          "orders": {
+            "md5": true,
+            "md4": false
+          }
+        }
+      }
+    }
+  ],
+  "chapter": "function chapter(state,n,turn,ending=false){\r\n const entries=state.history.filter(h=>h.turn===turn&&h.narrative&&h.actionType!=='next-turn'&&h.actionType!=='end-game');\r\n const groups={territory:[],administration:[],other:[]};\r\n for(const h of entries){const facts=h.incident?.facts||[];const key=facts.some(f=>['battle','company-conquest','release','join','independence'].includes(f.type))?'territory':['tax','unrest','govern'].includes(h.actionType)?'administration':'other';groups[key].push(h);}\r\n const parts=Object.entries(groups).filter(([,hs])=>hs.length).map(([key,hs])=>`${key==='territory'?'Changing authority':key==='administration'?'Administration and its replies':'Other recorded developments'}: ${hs.map(h=>h.title).join('; ')}.`);\r\n const c={turn,title:ending?'The closing account':'Turn '+turn+' closes',text:parts.join('\\n\\n')||'No narrative incidents were recorded in this turn.',incidents:entries.map(h=>h.narrative.id),ending};n.chapters.push(c);return c;\r\n}\r\n"
+}

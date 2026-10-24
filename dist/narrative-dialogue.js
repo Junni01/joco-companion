@@ -1,4 +1,5 @@
 import {selectApprovedDialogue} from './narrative-approved.js';
+import {selectTradeDialogue} from './narrative-trade.js';
 import {TEMPLATES} from './narrative-content.js';
 import {POLICY,MEMORY_PROFILES,narrativeRandom} from './narrative-policy.js';
 import {adjustRelationship} from './narrative-memory.js';
@@ -37,7 +38,9 @@ function memoryCallback(before,state,c,ctx){
 }
 function quoteCallback(before,state,c,ctx){
  if(!ctx.context.addedUnrest||!['tax','tax-repeat','administration'].includes(ctx.category))return null;
- const candidates=Object.values(before.narrative.statements).filter(s=>s.type==='assurance'&&s.region===ctx.region&&(s.speakerId===c.id||s.audienceIds.includes(c.id))).reverse();
+ // Commercial hopes have their own experience-aware callbacks, not a new unrest refrain.
+ const commercial=new Set(before.history.flatMap(h=>(h.narrative?.lines||[]).filter(l=>l.tradeKind&&l.statementId).map(l=>l.statementId)));
+ const candidates=Object.values(before.narrative.statements).filter(s=>s.type==='assurance'&&!commercial.has(s.id)&&s.region===ctx.region&&(s.speakerId===c.id||s.audienceIds.includes(c.id))).reverse();
  for(const s of candidates){if(!allowedCallback(c,s.id,ctx.major))continue;
   const speaker=state.narrative.characters[s.speakerId];
   return {templateId:'m2-quote-assurance',family:'quote-assurance',text:`“${s.text}” ${s.speakerId===c.id?'I was hopeful about the earlier improvement':`${speaker.name} was hopeful about the earlier improvement`}. The new unrest in ${name(ctx.region)} calls for a fresh assessment.`,emotion:'worried',callbackMemoryIds:[],callbackStatementIds:[s.id]};
@@ -48,7 +51,11 @@ function primary(c,ctx,role,n){
   const lines={'subordination':`The allegiance of ${name(ctx.region)} has changed. Our court must now deal with the authority the result gives us.`,'rebellion-won':`The rebellion in ${name(ctx.region)} has succeeded. We cannot write its independence out of the record.`, 'rebellion-failed':`The rebellion in ${name(ctx.region)} has failed. I shall not mistake that outcome for an end to the dispute.`, 'released':`Our empire no longer holds ${name(ctx.region)}. Earlier authority does not describe our present position.`};
   if(lines[ctx.category])return {templateId:'m2-sovereign-'+ctx.category,family:'sovereign-'+ctx.category,text:lines[ctx.category],emotion:ctx.category==='rebellion-won'?'worried':'watchful'};
  }
- if(role==='secretary'&&ctx.category==='intervention'&&(ctx.context.clearedUnrest||ctx.context.reopenedOrders))return {templateId:ctx.context.clearedUnrest?'m2-assurance-unrest':'m2-assurance-orders',family:'assurance',text:ctx.context.clearedUnrest?`The unrest in ${name(ctx.region)} has been cleared. I hope the improvement lasts.`:`The closed orders in ${name(ctx.region)} have reopened. I hope the improvement lasts.`,emotion:'relieved',statementType:'assurance'};
+ if(role==='secretary'&&ctx.category==='intervention'&&ctx.context.clearedUnrest){
+  // A first personal hope can be remembered; frequent events must not replay it.
+  if(Object.values(n.statements).some(s=>s.speakerId===c.id&&s.type==='assurance'))return null;
+  return {templateId:'m2-assurance-unrest',family:'assurance',text:`The unrest in ${name(ctx.region)} has been cleared. I hope the improvement lasts.`,emotion:'relieved',statementType:'assurance'};
+ }
  const retired=new Set(['secretary-tax-1','secretary-admin-1','army-loss-1','army-deploy-failure-1','ruler-deploy-failure-1','ruler-tax-first-1','ruler-tax-repeat-1','ruler-tax-general-1','ruler-defence-1',...variants.map(t=>t.id)]);
  const eligible=[...TEMPLATES,...variants].filter(t=>!retired.has(t.id)&&t.trigger===ctx.trigger&&t.role===role&&t.requires.every(r=>ctx.context[r])&&(!t.trait||c.traits[t.trait]>=POLICY.requiredTraitMinimum));
  const fresh=eligible.filter(t=>!c.pacing.templates.some(p=>p.id===t.id&&c.pacing.relevant-p.at<POLICY.templateCooldown));
@@ -66,32 +73,35 @@ function statementMemory(n,state,entry,s,ownerId){
 export function renderPoliticalDialogue(before,state,entry,scene,contexts,add){
  const n=state.narrative,candidates=[],used=new Set(),assurances=new Map();
  // A single authored observation replaces the summary only for a single-region context.
- if(contexts.length===1){const chosen=selectApprovedDialogue(state,entry,null,contexts[0],'chronicler');if(chosen)Object.assign(scene.lines[0],chosen);}
+ if(contexts.length===1){const ctx=contexts[0],chosen=ctx.commerce?selectTradeDialogue(state,entry,null,ctx,'chronicler'):selectApprovedDialogue(state,entry,null,ctx,'chronicler');if(chosen)Object.assign(scene.lines[0],chosen);}
+ else if(contexts.length&&contexts.every(c=>c.commerce)){const ctx=contexts.find(c=>c.category==='trade-cascade');const chosen=ctx&&selectTradeDialogue(state,entry,null,ctx,'chronicler');if(chosen)Object.assign(scene.lines[0],chosen);}
  for(const ctx of contexts){
   const ruler=n.characters[ctx.rulerId||n.seats[ctx.region]];
   const connection=Math.max(0,...ruler.memoryIds.map(id=>n.memories[id]).filter(m=>m.region===ctx.region).map(m=>m.historicalSignificance));
   candidates.push({c:ruler,role:'ruler',ctx,priority:POLICY.rulerPriority+(ctx.major?POLICY.majorPriority:0)+connection});
   const adviser=n.characters[ctx.adviserId];
   if(adviser)candidates.push({c:adviser,role:adviser.role,ctx,priority:ctx.category==='intervention'?POLICY.exchangePriority:POLICY.adviserPriority});
+  const officer=ctx.commerce&&n.characters[ctx.officerId];if(officer)candidates.push({c:officer,role:'army',ctx,priority:POLICY.adviserPriority});
  }
  const priority=x=>x.priority-(x.c.pacing.relevant-x.c.pacing.lastAppearance<=POLICY.speakerCooldown?POLICY.appearancePenalty:0);
  candidates.sort((a,b)=>priority(b)-priority(a));let callbackCount=0;
  for(const {c,role,ctx} of candidates){
   if(c.condition!=='alive'||used.has(c.id)||!ctx.evidence.length)continue;
-  const quotation=ctx.perspective!=='sovereign'&&(callbackCount===0||ctx.major)?quoteCallback(before,state,c,ctx):null;
-  const authored=quotation?null:selectApprovedDialogue(state,entry,c,ctx,role);
-  let chosen=quotation||authored||(ctx.perspective!=='sovereign'&&(callbackCount===0||ctx.major)?(quoteCallback(before,state,c,ctx)||(role==='ruler'?memoryCallback(before,state,c,ctx):null)):null)||primary(c,ctx,role,n);
+  const quotation=!ctx.commerce&&ctx.perspective!=='sovereign'&&(callbackCount===0||ctx.major)?quoteCallback(before,state,c,ctx):null;
+  const authored=quotation?null:ctx.commerce?selectTradeDialogue(state,entry,c,ctx,role):selectApprovedDialogue(state,entry,c,ctx,role);
+  let chosen=ctx.commerce?authored:quotation||authored||(ctx.perspective!=='sovereign'&&(callbackCount===0||ctx.major)?(role==='ruler'?memoryCallback(before,state,c,ctx):null):null)||primary(c,ctx,role,n);
   if(!chosen)continue;
   const callbacks=[...(chosen.callbackMemoryIds||[]),...(chosen.callbackStatementIds||[])];
   const overrides=callbacks.filter(key=>c.pacing.callbacks[key]&&c.pacing.relevant-c.pacing.callbacks[key].at<c.pacing.callbacks[key].cooldown);
   const line=add(chosen.templateId,chosen.text,c.id,chosen.emotion);
   Object.assign(line,{evidence:chosen.evidence||ctx.evidence,callbackMemoryIds:chosen.callbackMemoryIds||[],callbackStatementIds:chosen.callbackStatementIds||[],phraseFamily:chosen.family,selectionEvidence:chosen.selectionEvidence||[],cooldownOverride:overrides.length?'new-major-political-outcome':null});
+  if(ctx.commerce)Object.assign(line,{tradeRegion:chosen.tradeRegion,tradeKind:chosen.tradeKind,experienceLineIds:chosen.experienceLineIds||[]});
   for(const key of callbacks)c.pacing.callbacks[key]={at:c.pacing.relevant,cooldown:POLICY.memoryCooldown,incidentId:entry.incident.id};
   if(callbacks.length){c.pacing.lastCallbackAt=c.pacing.relevant;callbackCount++;}
   c.pacing.templates.push({id:chosen.templateId,at:c.pacing.relevant});c.pacing.templates=c.pacing.templates.slice(-POLICY.recentBuffer);
   c.pacing.phrases.push({family:chosen.family,at:c.pacing.relevant});c.pacing.phrases=c.pacing.phrases.slice(-POLICY.recentBuffer);c.pacing.lastAppearance=c.pacing.relevant;c.mood=chosen.emotion;
   if(chosen.statementType){
-   const audience=n.characters[n.seats[ctx.region]],s={id:`statement:${line.id}`,speakerId:c.id,audienceIds:audience.condition==='alive'?[audience.id]:[],incidentId:entry.incident.id,lineId:line.id,region:ctx.region,type:chosen.statementType,text:line.text,evidence:ctx.evidence};
+   const audience=n.characters[n.seats[ctx.region]],s={id:`statement:${line.id}`,speakerId:c.id,audienceIds:chosen.audienceIds||(audience.condition==='alive'?[audience.id]:[]),incidentId:entry.incident.id,lineId:line.id,region:ctx.region,type:chosen.statementType,text:line.text,evidence:ctx.evidence};
    n.statements[s.id]=s;line.statementId=s.id;statementMemory(n,state,entry,s,c.id);s.audienceIds.forEach(id=>statementMemory(n,state,entry,s,id));assurances.set(ctx.region,s);
   }
   const assurance=assurances.get(ctx.region);

@@ -75,14 +75,14 @@ export function resolveAction(s,d){
  if(d.revivedByOldIdeas){assert(['law','famine','france','dilemma'].includes(d.type),'Old Ideas must resolve the recovered law or dilemma.');say('Old Ideas Made New: resolve the card selected from the physical discard pile. Cards drawn this turn are not yet discarded.');}
  const addUnrest=(id,amount)=>{if(!amount)return;assert(n.regions[id].control==='company','Unrest belongs in Company regions.');journal.add('unrest',{region:id,amount,cause:d.type,reason:d.reason||null});n.regions[id].unrest+=amount;say(`Add ${amount} unrest to ${name(id)} (now ${n.regions[id].unrest}).`);};
  function open(oid){const id=ORDER_OWNER[oid];if(!n.regions[id].orders[oid]){journal.add('order-opened',{region:id,order:oid});n.regions[id].orders[oid]=true;say(`Open ${orderLabel(oid)}; remove its closed-order marker.`);}}
- function close(oid){const id=ORDER_OWNER[oid];if(n.regions[id].orders[oid]){journal.add('order-closed',{region:id,order:oid});n.regions[id].orders[oid]=false;say(`Close ${orderLabel(oid)}. Return any writer there to its owner; flip any filled-order token.`);}}
+ function close(oid,cascadeFrom=null){const id=ORDER_OWNER[oid];if(n.regions[id].orders[oid]){journal.add('order-closed',{region:id,order:oid,...(cascadeFrom?{cascadeFrom}:{})});n.regions[id].orders[oid]=false;say(`Close ${orderLabel(oid)}. Return any writer there to its owner; flip any filled-order token.`);}}
  const northern=id=>[...REGIONS[id].orders].sort((a,b)=>a[2]-b[2]).find(([o])=>n.regions[id].orders[o])?.[0];
  function cascade(id){
-  if(cascaded.has(id))return;cascaded.add(id);say(`${name(id)} Cascades along its trade routes.`);
+  if(cascaded.has(id))return;cascaded.add(id);journal.add('trade-cascade',{region:id});say(`${name(id)} Cascades along its trade routes.`);
   const reached=new Set();
   for(const [a,b] of TRADE_ROUTES){let oid;if(ORDER_OWNER[a]===id&&ORDER_OWNER[b]!==id)oid=b;else if(ORDER_OWNER[b]===id&&ORDER_OWNER[a]!==id)oid=a;else continue;
    if(reached.has(oid))continue;reached.add(oid);
-   const other=ORDER_OWNER[oid];if(n.regions[other].orders[oid])close(oid);else{const next=northern(other);if(next)close(next);else cascade(other);}
+   const other=ORDER_OWNER[oid];if(n.regions[other].orders[oid])close(oid,id);else{const next=northern(other);if(next)close(next,id);else cascade(other);}
   }
  }
  function closeAll(id){const available=REGIONS[id].orders.filter(([o])=>n.regions[id].orders[o]);if(!available.length)cascade(id);else available.forEach(([o])=>close(o));}

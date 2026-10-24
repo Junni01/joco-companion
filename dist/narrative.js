@@ -1,5 +1,6 @@
 import {initializePoliticalMemory,processPoliticalMemories} from './narrative-memory.js';
 import {renderPoliticalDialogue} from './narrative-dialogue.js';
+import {tradeContexts} from './narrative-trade.js';
 import {validatePoliticalMemory} from './narrative-state.js';
 import {NAME_POOLS,TRAITS,TRAIT_LABELS,BACKGROUNDS} from './narrative-content.js';
 const copy=v=>JSON.parse(JSON.stringify(v));
@@ -105,7 +106,7 @@ export function commitNarrative(before,result){
   if(f.type==='release'){summary.push(`${name(f.region)} became sovereign after ${name(f.capital)} lost its empire.`);reactions.push(['released',f.region,{released:true,battleOrigin:ended?.origin==='battle'}]);}
   if(f.type==='join'){summary.push(`${name(f.region)} became subordinate to ${name(f.capital)} following the attack.`);reactions.push(['subordination',f.region,{joined:true,capital:name(f.capital)}]);/* Political-memory processing records directional causes. */}
   if(f.type==='deployment'&&f.outcome!=='success'){summary.push(`The Company deployment in ${name(f.region)} ended in ${f.outcome==='catastrophe'?'catastrophic failure':'failure'}; ${f.losses} officer ${f.losses===1?'loss was':'losses were'} reported.`);reactions.push(['deployment-failed',f.region,{failedDeployment:true},f.army]);}
-  if(f.type==='intervention'){const change=incident.changes.find(c=>c.region===f.region),effects=[];if(change?.before.unrest>0&&change.after.unrest===0)effects.push('cleared its unrest');if(change&&Object.keys(change.before.orders).some(o=>!change.before.orders[o]&&change.after.orders[o]))effects.push('reopened closed orders');summary.push(`The Company intervention in ${name(f.region)} ${effects.join(' and ')}.`);reactions.push(['intervention',f.region,{intervention:true},f.army]);}
+  if(f.type==='intervention'){const change=incident.changes.find(c=>c.region===f.region),effects=[];if(change?.before.unrest>0&&change.after.unrest===0)effects.push('cleared its unrest');if(change&&Object.keys(change.before.orders).some(o=>!change.before.orders[o]&&change.after.orders[o]))effects.push('restored commercial access');summary.push(`The Company intervention in ${name(f.region)} ${effects.join(' and ')}.`);reactions.push(['intervention',f.region,{intervention:true},f.army]);}
  }
  for(const change of incident.changes){const c=n.characters[n.seats[change.region]];c.position=position(change.after);}
  if(['tax','unrest','govern'].includes(entry.actionType)){
@@ -117,14 +118,16 @@ export function commitNarrative(before,result){
   }
  }
  if(entry.actionType==='tax'&&facts.some(f=>f.type==='tax'&&f.mode==='governor'&&f.ordinal>1))summary.push('A familiar demand has acquired a fresh entry.');
- const politicalContexts=processPoliticalMemories(before,state,entry,reactions);
+ const commerce=tradeContexts(state,entry);
+ const politicalContexts=processPoliticalMemories(before,state,entry,reactions,commerce);
+ if(!summary.length&&commerce.length)for(const ctx of commerce)summary.push(`${name(ctx.region)}: ${ctx.category==='trade-diplomacy'?'diplomacy restored a commercial opportunity':ctx.category==='trade-military'?'military intervention restored commercial access':'a commercial opportunity was disrupted'}.`);
  if(entry.actionType==='next-turn'){
   const c=chapter(state,n,before.turn);if(n.lastAgedTurn<state.turn){for(const person of Object.values(n.characters))if(person.condition!=='dead')person.age+=3;n.lastAgedTurn=state.turn;}
   summary.push(c.text);
  }else if(entry.actionType==='end-game'){summary.push(chapter(state,n,state.turn,true).text,'The campaign has ended. No further years are added.');}
- if(!summary.length){scene.coverage='summary';summary.push(entry.title+'.');for(const change of incident.changes){summary.push(`${name(change.region)}: ${change.after.strength} tower levels, ${change.after.unrest} unrest; ${Object.values(change.after.orders).filter(v=>!v).length} closed orders.`);}}
+ if(!summary.length){scene.coverage='summary';summary.push(entry.title+'.');for(const change of incident.changes){summary.push(`${name(change.region)}: ${change.after.strength} tower levels, ${change.after.unrest} unrest; ${Object.values(change.after.orders).filter(v=>!v).length} disrupted commercial opportunities.`);}}
  const chroniclerLine=add('chronicler-'+incident.type+'-v1',summary.join(' '));chroniclerLine.evidence=incident.facts.map((f,i)=>({incidentId:id,factKey:'fact-'+i}));
- renderPoliticalDialogue(before,state,entry,scene,politicalContexts,add);
+ renderPoliticalDialogue(before,state,entry,scene,politicalContexts.filter(ctx=>ctx.category!=='intervention'||!commerce.some(c=>c.region===ctx.region&&c.category==='trade-military')),add);
  for(const region of affected){const c=n.characters[n.seats[region]];if(!c.incidents.includes(id))c.incidents.push(id);}
  for(const line of lines){if(line.speakerId!=='chronicler'){const c=n.characters[line.speakerId];if(!c.incidents.includes(id))c.incidents.push(id);}}
  entry.narrative=scene;if(entry.incident)entry.incident.id=id;n.lastIncident=id;return state;

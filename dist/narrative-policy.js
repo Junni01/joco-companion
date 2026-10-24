@@ -1,5 +1,7 @@
 // M2-26/27 approved experimental defaults. These affect fiction only.
 export const POLITICAL_VERSION=2;
+// Collection 08A narrative-only experience, confidence and selection defaults.
+export const TRADE_POLICY={highTrait:60,humour:1,formality:2,restraint:2,optimisticLimit:2,several:3,repeatedDisruptions:2,beneficial:2,confident:50,experiencePriority:100,localPriority:20,confidenceLoss:2,confidenceGain:1};
 export const POLICY={
  id:'m2-trial-1',reinforce:12,reopen:20,reconcile:15,fade:2,memoryCooldown:3,globalCallbackCooldown:2,templateCooldown:3,speakerCooldown:1,
  traitEvery:3,traitTurnCap:2,traitDoubleChance:4,confidenceInitial:50,confidenceStep:6,voiceLevels:3,
@@ -21,6 +23,10 @@ export const SOVEREIGN_PROFILES={
  'rebellion-won':{significance:75,importance:70,emotion:'humiliation'}
 };
 export const MEMORY_PROFILES={
+ 'trade-disruption':{significance:25,importance:25,emotion:'concern',commerce:true},
+ 'trade-cascade':{significance:40,importance:35,emotion:'concern',commerce:true},
+ 'trade-diplomacy':{significance:30,importance:25,emotion:'hope',commerce:true},
+ 'trade-military':{significance:30,importance:25,emotion:'caution',commerce:true},
  'company-conquest':{significance:85,importance:80,emotion:'resentment',hostility:20,mistrust:6,strong:true},
  'company-loss':{significance:75,importance:65,emotion:'uncertainty',strong:true},
  'company-defence':{significance:60,importance:45,emotion:'relief',gratitude:10},

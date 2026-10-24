@@ -1,4 +1,5 @@
 import {validateApprovedLine} from './narrative-approved.js';
+import {tradeContexts,validateTradeLine} from './narrative-trade.js';
 import {POLITICAL_VERSION,DIMENSIONS,POLICY} from './narrative-policy.js';
 import {evidenceIndex,resolveFact} from './narrative-evidence.js';
 const check=(ok,message)=>{if(!ok)throw Error('Invalid narrative evidence: '+message);};
@@ -6,6 +7,9 @@ const score=n=>Number.isInteger(n)&&n>=0&&n<=100;
 const record=o=>o&&typeof o==='object'&&!Array.isArray(o);
 const text=s=>typeof s==='string'&&s.length<=5000;
 function matches(category,f){
+ if(category==='trade-disruption'||category==='trade-cascade')return f.type==='order-closed';
+ if(category==='trade-diplomacy')return f.type==='order-opened';
+ if(category==='trade-military')return f.type==='intervention';
  if(category==='statement')return true;
  if(category==='company-conquest'||category==='company-loss'||category==='intervention')return f.type===category;
  if(category==='subordination')return f.type==='join';
@@ -53,6 +57,7 @@ export function validatePoliticalMemory(state){
   check(['direct','indirect','statement','inherited'].includes(m.origin)&&state.regions[m.region]&&Array.isArray(m.relatedCharacterIds)&&m.relatedCharacterIds.every(id=>n.characters[id]),'memory provenance');
   check(score(m.historicalSignificance)&&score(m.emotionalImportance)&&text(m.emotion)&&m.interpretation?.version===1&&['opinion','suspicion','supported-observation'].includes(m.interpretation.kind)&&text(m.interpretation.text),'memory interpretation/scores');
   refs(m.evidence,created.order);check(m.evidence.length>0&&m.evidence.some(r=>matches(m.category,resolveFact(index,r).fact)),'memory category factual predicate');
+  if(m.category.startsWith('trade-'))check(tradeContexts(state,created.entry).some(c=>c.region===m.region&&c.category===m.category&&JSON.stringify(c.evidence)===JSON.stringify(m.evidence)),'commercial memory actual outcome');
   check(m.evidence.every(r=>resolveFact(index,r).fact.region===m.region),'memory region factual predicate');
   check(Array.isArray(m.statementIds)&&m.statementIds.every(id=>n.statements[id]),'memory statement source');
   for(const update of m.updates){const source=index.incidents.get(update.incidentId);check(source&&source.order>=created.order&&Number.isInteger(update.delta)&&text(update.kind),'memory update source');refs(update.evidence,source.order);}
@@ -71,6 +76,8 @@ export function validatePoliticalMemory(state){
   for(const id of l.callbackStatementIds){const s=n.statements[id];check(s&&index.incidents.get(s.incidentId).order<order&&(s.speakerId===l.speakerId||s.audienceIds.includes(l.speakerId)),'dangling, future or unknown quotation');check(l.text.includes(s.text),'quotation must preserve exact saved wording');}
   if(l.selectionEvidence)refs(l.selectionEvidence,order);
   validateApprovedLine(state,h,l);
+  validateTradeLine(state,h,l);
+  for(const id of l.experienceLineIds||[]){const source=index.lines.get(id);check(source&&source.order<order&&source.line.speakerId===l.speakerId,'commercial experience must belong to the actual earlier speaker');}
   if(l.replyToLineId){const reply=index.lines.get(l.replyToLineId);check(reply&&reply.order===order&&lineIds.has(l.replyToLineId)&&n.statements[l.replyToStatementId]?.lineId===l.replyToLineId,'reply must follow an actual saved line');}
  }
 }
