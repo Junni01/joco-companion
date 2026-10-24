@@ -19,7 +19,7 @@ Non-negotiable:
 4. Narratives are authored, local/offline, fact-guarded and saved verbatim. No live LLM or external portrait dependency. The shared silhouette remains sufficient; no mandatory ageing portrait sets.
 5. Gameplay instructions, Elephant movement pages and event-stack recap retain UI priority. Scenes remain optional/expandable on the shared physical-play device.
 6. All narrative changes are part of one saved transaction with game state and protected action progress. Preview, rendering, import/export and reopening must not resample narrative results.
-7. Existing narrative-enabled saves and legacy narrative-disabled saves must remain readable. Activation remains new-campaign-only.
+7. **Development-only persistence (approved 24 October 2026):** No backward-compatibility guarantee across development schema versions and no M1→M2 save migration. Keep current-version autosave, import/export, snapshots, Undo/Redo and protected in-progress roll/reveal state. Incompatible old saves may be rejected clearly without overwriting the stored copy. Activation remains new-campaign-only.
 
 ## Approved decision ledger
 
@@ -126,7 +126,22 @@ These remain **approved design direction**, not abandoned:
 - Broad historical catalogues, titles, treasures and emotional portrait sets.
 - AI-generated dialogue or a gameplay-changing standalone game.
 
-Any preparatory schema hooks must be backward-compatible and not silently activate deferred generation.
+Any preparatory schema hooks must be consistent within the **current development schema** and must not silently activate deferred generation. Compatibility with prior development save schemas is not required.
+
+## Development-only persistence policy (24 October 2026 approval)
+
+**This section explicitly overrides earlier milestone references to backward compatibility, including NR-053 and prior review-plan migration proposals, only for the experimental Milestone 2 implementation.** The underlying long-term intention to introduce a stable campaign format is **deferred**, not discarded.
+
+- **Do not implement migration** from M1 narrative version 1, legacy narrative-disabled campaign files, old Undo/Redo frames, obsolete snapshots or old progress fingerprints. Do not backfill memories for historical saves.
+- **Current-version persistence stays enabled:** browser autosave, named snapshots, JSON export/import and reload should work when written by the same current development schema. Keep all current-version game+narrative transactions atomic. Do not delete these useful testing capabilities.
+- **Undo/Redo stays required** and includes memories, statements, traits, relationship causes, RNG, cooldowns, current game state and protected action-progress snapshots.
+- **Unrecognized/incompatible saves:** detect by a clear schema/version marker, show a readable incompatibility/reset message, do not silently reinterpret the data and do not automatically overwrite the invalid old copy. Offer a fresh campaign. No manual recovery/conversion tool required.
+- **Protected current-version gameplay progress:** revealed tiles, committed dice/answers and instruction cursors remain resumable after reload; do not reroll committed results. The simple solution may update the fingerprint algorithm *within the new schema* without old-fingerprint migration.
+- **Validation remains essential:** reject dangling references and malformed current-schema content. The existing ~6 MB export bound and browser quota errors still deserve basic testing, but do not create an elaborate cross-version storage strategy.
+- **Old-version files are disposable during active development.** Label the app and development handoff accordingly; warn before an incompatible saved campaign is replaced.
+- **Stable persistence postponed:** establish formal cross-release save guarantees, migration policy and upgrade testing when a stable product version is declared, not in Milestone 2.
+
+**Implementation-sequence consequence:** remove the migration-first workstream. Start with current-schema memory contracts and evidence validation, then deliver conquest → grievance → related incident → callback → dossier with current-version Undo/Redo and reload, and expand event coverage afterward. Design experiments should not be blocked on old-save compatibility.
 
 ## Acceptance criteria
 
@@ -140,7 +155,7 @@ Any preparatory schema hooks must be backward-compatible and not silently activa
 
 **AC-M2-05 Restraint:** Repeated taxes/administrative failures vary response or produce silence; ordinary scenes remain brief, with optional expansion. Direct local participants are not routinely displaced by distant arc participants.
 
-**AC-M2-06 Transaction integrity:** Old saves, new saves, snapshots, import/export, Undo, Redo, cancelled actions, locked/revealed events and saved dice/instruction progress preserve exact memory, chosen words, RNG and cooldown state. A new branch clears Redo coherently.
+**AC-M2-06 Transaction integrity:** **Current-version** autosaves, snapshots, import/export, Undo, Redo, cancelled actions, locked/revealed events and saved dice/instruction progress preserve exact memory, chosen words, RNG and cooldown state. A new branch clears Redo coherently. Previous development save versions are **not** required to load.
 
 **AC-M2-07 Mechanical equivalence:** The same reported physical outcomes produce identical canonical board state, incident facts, lawful actions and gameplay RNG with narrative enabled or disabled in all four scenarios.
 
@@ -159,7 +174,7 @@ Any preparatory schema hooks must be backward-compatible and not silently activa
 5. **Capital collapse:** Each real released subject gets accurate allegiance history; unrelated rulers do not invent personal witness of the original conquest.
 6. **Failed rebellion and officer rout:** No unsupported sovereignty, death, betrayal or restored claimant is asserted.
 7. **Undo/Redo alternate timeline:** Undo drops memories and statements from removed incidents; Redo restores exact text and identities; a different new action cannot remember the abandoned branch.
-8. **All-scenarios regression:** Four scenario starts, full existing event-stack/ending workflow, old saves, debug isolation, snapshots, pending roll/reveal state, export limits and narrative-on/off board equivalence.
+8. **All-scenarios regression:** Four scenario starts, full existing event-stack/ending workflow, **current-schema saves**, debug isolation, snapshots, pending roll/reveal state, export limits and narrative-on/off board equivalence.
 9. **UI review:** Check ordinary and multi-region scenes, roster/dossiers, quiet/standard/full, reload, expandable evidence, regular/debug entry points and readability on the intended shared tablet/laptop layout.
 
 For each scenario, retain machine-verifiable assertions and a short readable narrative trace. Avoid tests that compare only a hard-coded line without checking its required incident facts. Use seeded narrative RNG for reproducible fixtures.
@@ -167,7 +182,7 @@ For each scenario, retain machine-verifiable assertions and a short readable nar
 ## Approval and agent workflow
 
 - **Approved now:** M2-01–25 choices, preserved alternatives, the smaller Milestone 2 scope above, and this written specification.
-- **Not yet authorised:** Editing gameplay/narrative application modules to implement M2; broad refactors; new fictional mechanical rules; adding uploaded publisher PDFs to the repository.
+- **Not yet authorised:** Editing gameplay/narrative application modules to implement M2; broad refactors; new fictional mechanical rules; adding uploaded publisher PDFs to the repository. **The development-only persistence policy above is approved specification scope, not permission to start coding.**
 - **On implementation authorisation:** Codex should inspect `AGENTS.md`, this spec, NR requirements, first milestone scope, current code and existing tests; work in reviewable increments. If a meaningful design/tuning decision is unspecified, propose it instead of treating an example as an approved default.
 - **On delivery:** Report commit/PR, implemented AC IDs, tests actually run, browser checks, representative chronicles, storage measurements, and any deferred/partially met requirements. Update current-status only with verified behaviour.
 - **On acceptance:** The user and review agent examine both automated evidence and story quality; targeted corrections become tracked findings in git, with the requirements decision ledger retained.
