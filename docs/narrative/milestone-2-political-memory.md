@@ -62,7 +62,7 @@ Create structured memory records for selected characters and relevant canonical 
 - Stable memory ID; owning character; incident ID(s); subject region(s) and any related character IDs.
 - Memory origin: `direct`, `indirect`, `statement`, or `inherited` (the inherited type may be schema-ready but generation is deferred).
 - Event category and factual references, distinct from authored subjective interpretation.
-- Importance or salience; emotional valence/mood impact; a saved narrative relevance/cooldown marker.
+- Separate historical significance and current emotional importance (each 0–100), distinct emotional valence/mood impact, and saved narrative relevance/cooldown markers. See M2-27A/E trial tuning.
 - Whether the belief is a suspicion/opinion or supported fact, and supporting incident/statement IDs. Unknown motives remain unknown.
 - Original interpretation if generated, plus room for future versioned revisions. **Full reinterpretation chains are deferred.**
 
@@ -143,6 +143,59 @@ Any preparatory schema hooks must be consistent within the **current development
 
 **Implementation-sequence consequence:** remove the migration-first workstream. Start with current-schema memory contracts and evidence validation, then deliver conquest → grievance → related incident → callback → dossier with current-version Undo/Redo and reload, and expand event coverage afterward. Design experiments should not be blocked on old-save compatibility.
 
+## Final technical decisions and provisional narrative tuning (M2-26 and M2-27A–E)
+
+**Approved 24 October 2026.** These decisions resolve the remaining pre-implementation questions from Codex's implementation plan. The *approaches* below are approved design. Numerical ranges are **configurable experimental trial defaults**, not permanent balance commitments.
+
+### M2-26 — Debug deletion of referenced history
+
+- **Approved A:** A Debug-mode command that deletes an individual incident must be blocked if the current-version narrative evidence graph refers to it (memories, relationship causes, significant statements, scene/callback references, or arcs when implemented).
+- Explain which references block removal. Unreferenced report/incident deletion remains possible. Complete Debug campaign reset remains possible.
+- Normal gameplay Undo/Redo still removes/restores entire game+narrative transitions atomically; it is **not** blocked by this protection.
+- **Deferred B:** cascade-delete all dependent narrative evidence. **Deferred C:** retain deleted incidents in a separate evidence archive.
+
+### M2-27A — Two distinct memory-significance dimensions
+
+- **Historical significance (0–100):** enduring importance of an event in a character's life; usually stable, though later facts can reveal greater significance.
+- **Current emotional importance (0–100):** present psychological/political salience; may fade, strengthen or resurface with recorded context.
+- Keep emotional **direction/valence** separate from magnitude: pride, gratitude, shame, resentment etc. A forgiven conquest may remain historically defining while emotionally less consuming.
+- Dossiers should distinguish defining historical events from currently pressing grievances; do not erase old history when emotional importance approaches zero.
+- **Deferred A:** one mutable importance score. **Deferred C:** several independently quantified emotion scores per memory.
+
+### M2-27B — Relationship adjustment pattern
+
+- **Approved B:** moderate event-driven, directional relationship changes with cumulative reinforcement and diminishing returns near a dimension's extremes.
+- Keep hostility, respect, gratitude, mistrust, loyalty and familiarity independent. Major disasters may have a substantial immediate effect; an old institution-level grievance must **not** automatically assign personal guilt to a named adviser.
+- Trial magnitudes: ordinary administrative grievance **+2–5 hostility**; repeat Tax **+4–8**; significant humiliation **+8–15**; conquest of one's kingdom **+15–25**; helpful intervention **+5–12 gratitude**; major supported assistance **+10–20 gratitude**; meaningful reconciliation **−5–15 hostility**; repeated positive encounters **+2–6 familiarity/respect**. All require correct incident and actor eligibility.
+- **Deferred A:** strong one-off changes (e.g. 30–40 points). **Deferred C:** very small, slow changes requiring many encounters.
+
+### M2-27C — Conservative core personality development
+
+- **Approved B:** ordinary events chiefly affect memories, relationships, mood and confidence. Accumulated meaningful experiences can occasionally move one core trait by approximately **±1–2** on a 0–100 scale.
+- Affected dimensions might move a total of roughly **3–10 points across a typical full campaign**, not as a guarantee, target or per-event allocation. Every lasting change requires supported causes. Fast changes in mood/confidence remain possible.
+- **Deferred A:** noticeable per-event shifts around 2–5, potentially 15–25 total. **Deferred C:** nearly immutable core traits.
+
+### M2-27D — Moderate callback and appearance cooldowns
+
+- **Approved B:** normally suppress an explicit repeated reference to the same memory for approximately **2–3 relevant narrative incidents** after use. Do not equate cooldown with elapsed years or one complete game turn.
+- Track distinct current-version cooldowns for **(1) memory callbacks, (2) template/phrase families, and (3) speaker appearance**. Selected values and last-use markers persist and are undone/redone with the exact scene.
+- A genuinely significant new development may override a memory cooldown, but still needs eligible fresh wording and factual support. Memories may influence tone or attitude throughout a cooldown.
+- **Deferred A:** short cooldowns. **Deferred C:** long once-per-turn-or-rarer callbacks.
+
+### M2-27E — Trial salience ranges and context-sensitive fading
+
+- **Approved:** keep tuning in one central configuration/policy module and use the following ranges as **starting values to test**, not immutable specifications.
+- Initial *historical significance* suggestions (0–100): personal catastrophe **80–95**; major triumph **75–90**; major political reversal/subordination **60–80**; failed rebellion/humiliation **50–75**; repeated administrative grievance **35–60**; ordinary tax/setback **15–35**; indirectly learned low-personal-relevance event **10–30**.
+- For *current emotional importance*: start from the incident's personal salience and emotional context; do not mechanically copy historical significance in every case.
+- Trial update magnitudes: ordinary fading roughly **−2 per committed New Turn**; supporting/related incident **+10–15**; major reopening of grievance **+15–25**; meaningful reconciliation **−10–20** emotional importance. Clamp scores to **0–100**. Do not delete the underlying memory or supporting incidents at zero.
+- **Context-sensitive fading is essential:** weaken fading for major defining events, reduce/suspend it while the political grievance remains actively unresolved (e.g., continuing occupation), increase fading for minor resolved events, and allow evidence-backed reconciliation to accelerate emotional cooling. Never make a continuing humiliation disappear simply because three years elapsed.
+- The tuning policy should document the selected trial values; narrative scenario tests and exported traces should allow comparison. Developers may adjust these **trial constants** after observing deterministic representative campaigns without reopening these decisions, but must record substantive changes and avoid modifying factual guardrails.
+- Preserved tuning alternatives: fixed/stronger or weaker rates, single-score importance, rapid or near-fixed personality, strong/very slow relationship effects, and short/long dialogue cooldowns.
+
+### Previously unresolved technical interpretation
+
+The `direct` origin means **directly affected by the recorded political or administrative consequence**, *not* eyewitness attendance at a battle or private meeting. This definition is approved for this scope. Indirect political awareness never establishes unsupported private knowledge.
+
 ## Acceptance criteria
 
 **AC-M2-01 Historical truth:** Every memory/quote/callback refers to a committed surviving incident or actual saved utterance; fictional pre-campaign material is separately labelled. Non-observed assertions remain subjective. No stale reference survives an Undo or different Redo branch.
@@ -181,9 +234,9 @@ For each scenario, retain machine-verifiable assertions and a short readable nar
 
 ## Approval and agent workflow
 
-- **Approved now:** M2-01–25 choices, preserved alternatives, the smaller Milestone 2 scope above, and this written specification.
+- **Approved now:** M2-01–25 choices, M2-26 and M2-27A–E decisions, all preserved alternatives, the smaller Milestone 2 scope and development-only persistence. The proposed numeric ranges are adjustable trial defaults.
 - **Not yet authorised:** Editing gameplay/narrative application modules to implement M2; broad refactors; new fictional mechanical rules; adding uploaded publisher PDFs to the repository. **The development-only persistence policy above is approved specification scope, not permission to start coding.**
-- **On implementation authorisation:** Codex should inspect `AGENTS.md`, this spec, NR requirements, first milestone scope, current code and existing tests; work in reviewable increments. If a meaningful design/tuning decision is unspecified, propose it instead of treating an example as an approved default.
+- **On implementation authorisation:** Codex should inspect `AGENTS.md`, this spec, NR requirements, first milestone scope, current code and existing tests; work in reviewable increments. Use the approved trial tuning policy here; if a meaningful *new* design choice is unspecified, propose it rather than silently assuming authority.
 - **On delivery:** Report commit/PR, implemented AC IDs, tests actually run, browser checks, representative chronicles, storage measurements, and any deferred/partially met requirements. Update current-status only with verified behaviour.
 - **On acceptance:** The user and review agent examine both automated evidence and story quality; targeted corrections become tracked findings in git, with the requirements decision ledger retained.
 
