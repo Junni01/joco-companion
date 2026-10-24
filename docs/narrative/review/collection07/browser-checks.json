@@ -1,0 +1,14 @@
+{
+  "checks": [
+    "normal controls suppress a real rebellion while the hostile ruler retains an evidence-backed hostile reaction",
+    "political response, exact words and source evidence survive persisted Undo/Redo",
+    "five-turn imported chronicle and changed political attitude are inspectable on desktop and tablet without horizontal overflow",
+    "multi-turn HTML chronicle is readable and script-free"
+  ],
+  "errors": [],
+  "browser": "156.0.8078.47",
+  "viewportChecks": [
+    "1440x1000",
+    "1024x768"
+  ]
+}

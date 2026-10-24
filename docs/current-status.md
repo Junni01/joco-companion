@@ -56,6 +56,12 @@ The first playable integration of Collections 01–04 (including 01B) selects 42
 
 Verification: 184 automated tests pass; isolated Chrome checks pass at desktop/tablet/mobile widths, including exact approved callbacks and dossier evidence, with no page errors. Ten reproducible synthetic chronicles demonstrate 34 integrated IDs. See [technical report](narrative/approved-dialogue-implementation.md), [unsupported prerequisites and scope deferrals](narrative/approved-dialogue-deferred.md), and [review index](narrative/review/approved-dialogue/README.md). Human narrative-quality review remains pending. Changes are committed locally; no push or deployment is claimed.
 
+## Collection 07 polish — 24 October 2026
+
+Implemented 19 exact approved fallback entries and evidence-based political reactions, reusing current M2 memories, relationships and cooldowns. Company defence no longer automatically grants every ruler relief/gratitude. Selection distinguishes hostile, aligned, ambiguous and cautious responses without a new permanent alignment attribute. No gameplay mechanics, dynasties, portraits or migration work were added.
+
+Verification: 200 automated tests pass. Full browser regressions and Collection 07 political-response checks pass on desktop/tablet, including current-version import/reload and persisted Undo/Redo, with no page errors. Five seeded campaigns span four/five actual turns, phase/deck/Parliament progression and final scoring. See [report and four deferred entries](narrative/collection07-implementation.md) and [multi-turn review package](narrative/review/collection07/README.md). Narrative-quality acceptance remains pending. These completed commits are intended for the user-authorized GitHub push; hosting is unchanged.
+
 ## Transfer and deployment
 
 Destination: https://github.com/Junni01/joco-companion. Preserve main history and verify destination refs before declaring transfer complete. GitHub does not automatically deploy the existing Sites host. Retain `.openai/hosting.json` project identity; never commit access credentials.

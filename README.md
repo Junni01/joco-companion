@@ -51,6 +51,10 @@ This experimental build uses development save version 2. It preserves current-ve
 
 The first dialogue integration selects 42 exact approved entries from Collections 01–04 using recorded facts, relevant memories, relationships and individual voices. It reuses M2 persistence and cooldowns; long exchanges and Collection 05 remain deferred. See the [technical report](docs/narrative/approved-dialogue-implementation.md), [entry-level deferrals](docs/narrative/approved-dialogue-deferred.md) and [campaign review package](docs/narrative/review/approved-dialogue/README.md). Narrative-quality review remains with the user and ChatGPT.
 
+## Collection 07 polish
+
+Collection 07 adds 19 exact fallback alternatives and derives political reactions from existing grievances and relationship evidence. Hostile rulers no longer automatically welcome Company suppression. See the [technical report and deferrals](docs/narrative/collection07-implementation.md) and [multi-turn narrative review package](docs/narrative/review/collection07/README.md).
+
 ## Saves and hosting
 
 Campaigns live in browser storage, separately for regular and debug play. Source transfer does not move them: export JSON in the app and import it in the destination browser.

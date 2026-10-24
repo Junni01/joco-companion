@@ -1,0 +1,69 @@
+{
+  "collection07Entries": 19,
+  "demonstratedIds": [
+    "FB07-ADM-SEC-02",
+    "FB07-CH-ADM-01",
+    "FB07-DEF-RUL-01",
+    "FB07-DEF-RUL-02",
+    "FB07-DEF-RUL-03",
+    "FB07-LOSS-ARM-01",
+    "FB07-MIL-ARM-01",
+    "FB07-MIL-RUL-01",
+    "FB07-REB-RUL-01",
+    "FB07-TAX-RUL-02",
+    "FB07-TAX-RUL-03",
+    "FB07-TAX-SEC-01"
+  ],
+  "fixtures": [
+    {
+      "name": "proud-grievance",
+      "scenario": "1710",
+      "turns": 5,
+      "incidents": 53,
+      "manualEvents": 3,
+      "stackDraws": 5,
+      "finalPosture": "hostile",
+      "jsonBytes": 356974
+    },
+    {
+      "name": "cautious-resistance",
+      "scenario": "1710",
+      "turns": 5,
+      "incidents": 53,
+      "manualEvents": 3,
+      "stackDraws": 5,
+      "finalPosture": "hostile",
+      "jsonBytes": 358029
+    },
+    {
+      "name": "reconciliation",
+      "scenario": "1710",
+      "turns": 5,
+      "incidents": 59,
+      "manualEvents": 10,
+      "stackDraws": 5,
+      "finalPosture": "aligned",
+      "jsonBytes": 407952
+    },
+    {
+      "name": "late-company",
+      "scenario": "1813",
+      "turns": 4,
+      "incidents": 41,
+      "manualEvents": 2,
+      "stackDraws": 4,
+      "finalPosture": "hostile",
+      "jsonBytes": 361405
+    },
+    {
+      "name": "mid-company",
+      "scenario": "1758",
+      "turns": 5,
+      "incidents": 53,
+      "manualEvents": 3,
+      "stackDraws": 5,
+      "finalPosture": "hostile",
+      "jsonBytes": 356923
+    }
+  ]
+}
