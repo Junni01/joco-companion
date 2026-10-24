@@ -15,7 +15,7 @@ test('conquest → memory → grievance → Tax callback → inspectable evidenc
  const evidence=resolveFact(evidenceIndex(conquered),memory.evidence[0]);assert.equal(evidence.fact.type,'company-conquest');assert.equal(evidence.fact.region,'bombay');
  const relation=conquered.narrative.characters['ruler-bombay'].relations['institution:company'];assert(relation.hostility>=15&&relation.hostility<=25);assert.equal(relation.causes[0].memoryIds[0],memory.id);
  const taxed=commit(conquered,{type:'tax',region:'bombay'}),line=taxed.history.at(-1).narrative.lines.find(l=>l.callbackMemoryIds.includes(memory.id));
- assert(line);assert(line.text.includes('Company took control of Bombay'));assert(line.evidence.every(r=>r.incidentId===taxed.history.at(-1).incident.id));
+ assert(line);assert(['CB-C-TAX-01','CB-C-TAX-02','CB-C-TAX-03','CB-T02-03','RU-T02-02'].includes(line.templateId));assert(line.evidence.every(r=>r.incidentId===taxed.history.at(-1).incident.id));
  assert(taxed.narrative.memories[memory.id].emotionalImportance>memory.emotionalImportance);
  const html=profileHTML(taxed,'ruler-bombay');for(const text of ['Defining memories','Historical significance','Current emotional importance','Relationship reasons','Chronological personal memory journal',memory.createdIncident])assert(html.includes(text),text);
  assert.deepEqual(decode(encode(taxed)).state,taxed);

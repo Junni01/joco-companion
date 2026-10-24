@@ -1,3 +1,4 @@
+import {selectApprovedDialogue} from './narrative-approved.js';
 import {TEMPLATES} from './narrative-content.js';
 import {POLICY,MEMORY_PROFILES,narrativeRandom} from './narrative-policy.js';
 import {adjustRelationship} from './narrative-memory.js';
@@ -61,6 +62,8 @@ function statementMemory(n,state,entry,s,ownerId){
 }
 export function renderPoliticalDialogue(before,state,entry,scene,contexts,add){
  const n=state.narrative,candidates=[],used=new Set(),assurances=new Map();
+ // A single authored observation replaces the summary only for a single-region context.
+ if(contexts.length===1){const chosen=selectApprovedDialogue(state,entry,null,contexts[0],'chronicler');if(chosen)Object.assign(scene.lines[0],chosen);}
  for(const ctx of contexts){
   const ruler=n.characters[ctx.rulerId||n.seats[ctx.region]];
   const connection=Math.max(0,...ruler.memoryIds.map(id=>n.memories[id]).filter(m=>m.region===ctx.region).map(m=>m.historicalSignificance));
@@ -72,12 +75,14 @@ export function renderPoliticalDialogue(before,state,entry,scene,contexts,add){
  candidates.sort((a,b)=>priority(b)-priority(a));let callbackCount=0;
  for(const {c,role,ctx} of candidates){
   if(c.condition!=='alive'||used.has(c.id)||!ctx.evidence.length)continue;
-  let chosen=(ctx.perspective!=='sovereign'&&(callbackCount===0||ctx.major)?(quoteCallback(before,state,c,ctx)||(role==='ruler'?memoryCallback(before,state,c,ctx):null)):null)||primary(c,ctx,role,n);
+  const quotation=ctx.perspective!=='sovereign'&&(callbackCount===0||ctx.major)?quoteCallback(before,state,c,ctx):null;
+  const authored=quotation?null:selectApprovedDialogue(state,entry,c,ctx,role);
+  let chosen=quotation||authored||(ctx.perspective!=='sovereign'&&(callbackCount===0||ctx.major)?(quoteCallback(before,state,c,ctx)||(role==='ruler'?memoryCallback(before,state,c,ctx):null)):null)||primary(c,ctx,role,n);
   if(!chosen)continue;
   const callbacks=[...(chosen.callbackMemoryIds||[]),...(chosen.callbackStatementIds||[])];
   const overrides=callbacks.filter(key=>c.pacing.callbacks[key]&&c.pacing.relevant-c.pacing.callbacks[key].at<c.pacing.callbacks[key].cooldown);
   const line=add(chosen.templateId,chosen.text,c.id,chosen.emotion);
-  Object.assign(line,{evidence:ctx.evidence,callbackMemoryIds:chosen.callbackMemoryIds||[],callbackStatementIds:chosen.callbackStatementIds||[],phraseFamily:chosen.family,cooldownOverride:overrides.length?'new-major-political-outcome':null});
+  Object.assign(line,{evidence:chosen.evidence||ctx.evidence,callbackMemoryIds:chosen.callbackMemoryIds||[],callbackStatementIds:chosen.callbackStatementIds||[],phraseFamily:chosen.family,cooldownOverride:overrides.length?'new-major-political-outcome':null});
   for(const key of callbacks)c.pacing.callbacks[key]={at:c.pacing.relevant,cooldown:POLICY.memoryCooldown,incidentId:entry.incident.id};
   if(callbacks.length){c.pacing.lastCallbackAt=c.pacing.relevant;callbackCount++;}
   c.pacing.templates.push({id:chosen.templateId,at:c.pacing.relevant});c.pacing.templates=c.pacing.templates.slice(-POLICY.recentBuffer);
