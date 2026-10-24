@@ -104,8 +104,8 @@ export function commitNarrative(before,result){
   }
   if(f.type==='release'){summary.push(`${name(f.region)} became sovereign after ${name(f.capital)} lost its empire.`);reactions.push(['released',f.region,{released:true,battleOrigin:ended?.origin==='battle'}]);}
   if(f.type==='join'){summary.push(`${name(f.region)} became subordinate to ${name(f.capital)} following the attack.`);reactions.push(['subordination',f.region,{joined:true,capital:name(f.capital)}]);/* Political-memory processing records directional causes. */}
-  if(f.type==='deployment'&&f.outcome!=='success'){summary.push(`The Company deployment in ${name(f.region)} ended in ${f.outcome==='catastrophe'?'catastrophic failure':'failure'}; ${f.losses} officer losses were reported.`);reactions.push(['deployment-failed',f.region,{failedDeployment:true},f.army]);}
-  if(f.type==='intervention'){summary.push(`The Company intervention in ${name(f.region)} opened its orders and cleared unrest.`);reactions.push(['intervention',f.region,{intervention:true},f.army]);}
+  if(f.type==='deployment'&&f.outcome!=='success'){summary.push(`The Company deployment in ${name(f.region)} ended in ${f.outcome==='catastrophe'?'catastrophic failure':'failure'}; ${f.losses} officer ${f.losses===1?'loss was':'losses were'} reported.`);reactions.push(['deployment-failed',f.region,{failedDeployment:true},f.army]);}
+  if(f.type==='intervention'){const change=incident.changes.find(c=>c.region===f.region),effects=[];if(change?.before.unrest>0&&change.after.unrest===0)effects.push('cleared its unrest');if(change&&Object.keys(change.before.orders).some(o=>!change.before.orders[o]&&change.after.orders[o]))effects.push('reopened closed orders');summary.push(`The Company intervention in ${name(f.region)} ${effects.join(' and ')}.`);reactions.push(['intervention',f.region,{intervention:true},f.army]);}
  }
  for(const change of incident.changes){const c=n.characters[n.seats[change.region]];c.position=position(change.after);}
  if(['tax','unrest','govern'].includes(entry.actionType)){
@@ -116,6 +116,7 @@ export function commitNarrative(before,result){
    reactions.push([tax?'tax':'administration',region,{tax,generalTax,firstTax:tax&&!generalTax&&reportedTax?.ordinal===1,repeatedTax:tax&&!generalTax&&(reportedTax?.ordinal>1||input.reason==='tax'),administration:!tax},state.regions[region].presidency]);/* Political-memory processing records the Tax assessment. */
   }
  }
+ if(entry.actionType==='tax'&&facts.some(f=>f.type==='tax'&&f.mode==='governor'&&f.ordinal>1))summary.push('A familiar demand has acquired a fresh entry.');
  const politicalContexts=processPoliticalMemories(before,state,entry,reactions);
  if(entry.actionType==='next-turn'){
   const c=chapter(state,n,before.turn);if(n.lastAgedTurn<state.turn){for(const person of Object.values(n.characters))if(person.condition!=='dead')person.age+=3;n.lastAgedTurn=state.turn;}

@@ -26,9 +26,14 @@ export function contextForReaction(before,state,entry,reaction){
  const old=before.regions[region],now=state.regions[region];
  return {trigger,category,region,context:{...context,clearedUnrest:old.unrest>0&&now.unrest===0,reopenedOrders:Object.keys(old.orders).some(o=>!old.orders[o]&&now.orders[o]),addedUnrest:now.unrest>old.unrest},presidency,evidence,major:!!MEMORY_PROFILES[category]?.strong};
 }
-function interpretation(category,region,origin,c){
+function interpretation(category,region,origin,c,perspective){
  const place=regionName(region),direct=origin==='direct';
- const body=category==='company-conquest'?`I regard Company control in ${place} as a constraint on our court.`:
+ const body=perspective==='sovereign'&&category==='rebellion-won'?`I regard ${place}'s successful rebellion as a loss of our authority.`:
+ perspective==='sovereign'&&category==='rebellion-failed'?`I take some reassurance from the failed rebellion in ${place}, without assuming the dispute has ended.`:
+ perspective==='sovereign'&&category==='subordination'?`I regard the new allegiance of ${place} as a gain in our political authority.`:
+ perspective==='sovereign'&&category==='released'?`I regard the release of ${place} as a loss of our empire's authority.`:
+ perspective==='defender'?`I welcome the failure of the Company expedition in ${place}; its wider intentions remain unknown.`:
+ category==='company-conquest'?`I regard Company control in ${place} as a constraint on our court.`:
  category==='intervention'?`I welcome the recorded restoration of order in ${place}, without treating every earlier grievance as settled.`:
  category.startsWith('tax')?`I regard ${category==='tax-repeat'?'the repeated demands':'this Tax'} in ${place} with ${c.traits.caution>=50?'caution':'resentment'}.`:
  category==='released'?`I consider the recorded end of ${place}'s subordination a defining political change.`:
@@ -60,9 +65,12 @@ function addMemory(n,state,entry,c,ctx,origin,relatedIds=[],target=null){
  if(!ctx.evidence.length)return null;
  const id=`memory:${entry.incident.id}:${ctx.evidence[0].factKey}:${c.id}:${ctx.category}`;
  if(n.memories[id])return n.memories[id];
- const profile=MEMORY_PROFILES[ctx.category];if(!profile)return null;
+ let profile=MEMORY_PROFILES[ctx.category];if(!profile)return null;
+ if(ctx.perspective==='sovereign')profile={...profile,...(ctx.category==='subordination'?{significance:80,importance:65,emotion:'pride',hostility:0,respect:4}:ctx.category==='rebellion-failed'?{significance:60,importance:45,emotion:'pride',hostility:5}:ctx.category==='released'?{significance:80,importance:70,emotion:'humiliation'}:{significance:75,importance:70,emotion:'humiliation'})};
+ const perspective=ctx.perspective||(['deployment-failed','deployment-catastrophe'].includes(ctx.category)&&c.role==='ruler'&&state.regions[ctx.region].control==='indian'?'defender':'local');
+ if(perspective==='defender')profile={...profile,emotion:'relief',importance:40};
  const factor=origin==='direct'?1:c.role==='heir'?.35:.6;
- const m={id,ownerId:c.id,category:ctx.category,region:ctx.region,relatedCharacterIds:relatedIds,origin,evidence:ctx.evidence,statementIds:[],createdTurn:entry.turn,createdIncident:entry.incident.id,sequence:state.incidentSequence,historicalSignificance:Math.round(profile.significance*factor),emotionalImportance:Math.round(profile.importance*factor),emotion:profile.emotion,interpretation:interpretation(ctx.category,ctx.region,origin,c),updates:[],capital:ctx.context.capital?ctx.context.capital.toLowerCase():null};
+ const m={id,ownerId:c.id,category:ctx.category,region:ctx.region,relatedCharacterIds:relatedIds,origin,evidence:ctx.evidence,statementIds:[],createdTurn:entry.turn,createdIncident:entry.incident.id,sequence:state.incidentSequence,historicalSignificance:Math.round(profile.significance*factor),emotionalImportance:Math.round(profile.importance*factor),emotion:profile.emotion,perspective,interpretation:interpretation(ctx.category,ctx.region,origin,c,perspective),updates:[],capital:ctx.context.capital?ctx.context.capital.toLowerCase():null};
  n.memories[id]=m;c.memoryIds.push(id);
  if(!c.incidents.includes(entry.incident.id))c.incidents.push(entry.incident.id);
  if(origin==='direct'){
@@ -82,19 +90,23 @@ function addMemory(n,state,entry,c,ctx,origin,relatedIds=[],target=null){
  }return m;
 }
 export function processPoliticalMemories(before,state,entry,reactions){
- const n=state.narrative,contexts=reactions.map(r=>contextForReaction(before,state,entry,r)),involved=new Set();
+ const n=state.narrative,contexts=reactions.map(r=>contextForReaction(before,state,entry,r)),involved=new Set(),opponents=[];
  for(const ctx of contexts){
   if(!MEMORY_PROFILES[ctx.category]||!ctx.evidence.length)continue;
-  const ruler=n.characters[n.seats[ctx.region]],target=ctx.trigger==='subordination'?ctx.context.capital?.toLowerCase():ctx.trigger.startsWith('rebellion-')?before.regions[ctx.region].overlord:null;
+  const ruler=n.characters[n.seats[ctx.region]],target=ctx.trigger==='subordination'?ctx.context.capital?.toLowerCase():ctx.trigger.startsWith('rebellion-')||ctx.trigger==='released'?before.regions[ctx.region].overlord:null;
   const targetEntity=target?{kind:'character',id:n.seats[target]}:['company-conquest','company-defence','tax','tax-repeat','administration','intervention'].includes(ctx.category)?{kind:'institution',id:'company'}:null;
   if(ruler.condition!=='dead'){addMemory(n,state,entry,ruler,ctx,'direct',targetEntity?.kind==='character'?[targetEntity.id]:[],targetEntity);involved.add(ruler.id);}
+  if(target&&n.seats[target]!==ruler.id){
+   const sovereign=n.characters[n.seats[target]],opponentContext={...ctx,perspective:'sovereign',rulerId:sovereign.id,adviserId:null};
+   if(sovereign.condition==='alive'){addMemory(n,state,entry,sovereign,opponentContext,'direct',[ruler.id],{kind:'character',id:ruler.id});involved.add(sovereign.id);opponents.push(opponentContext);}
+  }
   // Immediate relevant awareness is not omniscience or claimed attendance.
   const adviserRole=['company-conquest','company-loss','company-defence','deployment-failed','deployment-catastrophe'].includes(ctx.category)?'army':['tax','tax-repeat','administration','intervention'].includes(ctx.category)?'secretary':null;
   ctx.adviserId=adviserRole&&ctx.presidency?(adviserRole==='secretary'&&state.laws.governorGeneral?'secretary-general':`${adviserRole}-${ctx.presidency}`):null;
   const adviser=n.characters[ctx.adviserId];if(adviser&&adviser.condition==='alive'){addMemory(n,state,entry,adviser,ctx,'indirect',[ruler.id]);involved.add(adviser.id);}
   if(ctx.major){
    const interested=new Set(ruler.family.map(f=>f.id));
-   const formerCapital=before.regions[ctx.region].overlord;if(formerCapital)interested.add(n.seats[formerCapital]);
+   const formerCapital=before.regions[ctx.region].overlord;if(formerCapital&&formerCapital!==target)interested.add(n.seats[formerCapital]);
    for(const id of interested){const c=n.characters[id];if(c&&c.id!==ruler.id&&c.condition==='alive'){addMemory(n,state,entry,c,ctx,'indirect',[ruler.id]);involved.add(c.id);}}
   }
   for(const old of Object.values(n.memories)){
@@ -103,7 +115,7 @@ export function processPoliticalMemories(before,state,entry,reactions){
    const reconcile=ctx.category==='intervention'&&['company-conquest','tax','tax-repeat','administration'].includes(old.category);
    const related=old.category===ctx.category||['company-conquest','subordination'].includes(old.category);
    if(reconcile||related){const delta=reconcile?-POLICY.reconcile:ctx.major?POLICY.reopen:POLICY.reinforce;
-    const next=clamp(old.emotionalImportance+delta);old.updates.push({incidentId:entry.incident.id,evidence:ctx.evidence,delta:next-old.emotionalImportance,kind:reconcile?'partial-reconciliation':'reinforced'});old.emotionalImportance=next;
+    const next=clamp(old.emotionalImportance+delta);if(next!==old.emotionalImportance)old.updates.push({incidentId:entry.incident.id,evidence:ctx.evidence,delta:next-old.emotionalImportance,kind:reconcile?'partial-reconciliation':'reinforced'});old.emotionalImportance=next;
    }
   }
  }
@@ -112,5 +124,5 @@ export function processPoliticalMemories(before,state,entry,reactions){
   const fade=memoryUnresolved(m,state)?0:m.historicalSignificance>=75?1:POLICY.fade;
   if(fade&&m.emotionalImportance){const next=clamp(m.emotionalImportance-fade);m.updates.push({incidentId:entry.incident.id,evidence:[],delta:next-m.emotionalImportance,kind:'faded'});m.emotionalImportance=next;}
  }
- return contexts;
+ return [...contexts,...opponents];
 }

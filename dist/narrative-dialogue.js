@@ -21,7 +21,8 @@ function memoryCallback(before,state,c,ctx){
  for(const old of memories){
   if(!allowedCallback(c,old.id,ctx.major))continue;
   let text=null,family='memory-'+old.category+'-'+ctx.category;
-  if(old.category==='company-conquest'&&['tax','tax-repeat','administration'].includes(ctx.category))text=`The Company took control of ${name(ctx.region)} before this demand. The court has not forgotten.`;
+  if(old.category==='company-conquest'&&['tax','tax-repeat'].includes(ctx.category))text=`The Company took control of ${name(ctx.region)} before this demand. ${c.voice.directness>=3?'That history will not be lost among the Tax entries.':c.voice.formality>=3?'Our court has retained that entry in its account.':'The court has not forgotten.'}`;
+  else if(old.category==='company-conquest'&&ctx.category==='administration')text=`The Company took control of ${name(ctx.region)}. This administrative setback gives our court another reason to remember.`;
   else if(old.category==='company-conquest'&&ctx.category==='intervention')text=`Order has improved in ${name(ctx.region)}. My account of the Company's arrival remains unchanged.`;
   else if(old.category==='company-conquest'&&ctx.category==='company-loss')text=`Company control of ${name(ctx.region)} has ended. I still remember its beginning.`;
   else if(old.category==='subordination'&&ctx.category==='released')text=`The allegiance of ${name(ctx.region)} to ${name(old.capital)} has ended. I remember how it began.`;
@@ -36,15 +37,19 @@ function quoteCallback(before,state,c,ctx){
  const candidates=Object.values(before.narrative.statements).filter(s=>s.type==='assurance'&&s.region===ctx.region&&(s.speakerId===c.id||s.audienceIds.includes(c.id))).reverse();
  for(const s of candidates){if(!allowedCallback(c,s.id,ctx.major))continue;
   const speaker=state.narrative.characters[s.speakerId];
-  return {templateId:'m2-quote-assurance',family:'quote-assurance',text:`“${s.text}” ${s.speakerId===c.id?'That was my earlier assessment':`That was ${speaker.name}'s earlier assessment`}. The new unrest in ${name(ctx.region)} gives us reason to reconsider the hope, without pretending to know anyone's motives.`,emotion:'worried',callbackMemoryIds:[],callbackStatementIds:[s.id]};
+  return {templateId:'m2-quote-assurance',family:'quote-assurance',text:`“${s.text}” ${s.speakerId===c.id?'I was hopeful about the earlier improvement':`${speaker.name} was hopeful about the earlier improvement`}. The new unrest in ${name(ctx.region)} calls for a fresh assessment.`,emotion:'worried',callbackMemoryIds:[],callbackStatementIds:[s.id]};
  }return null;
 }
 function primary(c,ctx,role,n){
- if(role==='secretary'&&ctx.category==='intervention'&&(ctx.context.clearedUnrest||ctx.context.reopenedOrders))return {templateId:ctx.context.clearedUnrest?'m2-assurance-unrest':'m2-assurance-orders',family:'assurance',text:ctx.context.clearedUnrest?`The unrest in ${name(ctx.region)} has been cleared. I hope this settlement holds.`:`The closed orders in ${name(ctx.region)} have reopened. I hope this settlement holds.`,emotion:'relieved',statementType:'assurance'};
+ if(ctx.perspective==='sovereign'){
+  const lines={'subordination':`The allegiance of ${name(ctx.region)} has changed. Our court must now deal with the authority the result gives us.`,'rebellion-won':`The rebellion in ${name(ctx.region)} has succeeded. We cannot write its independence out of the record.`, 'rebellion-failed':`The rebellion in ${name(ctx.region)} has failed. I shall not mistake that outcome for an end to the dispute.`, 'released':`Our empire no longer holds ${name(ctx.region)}. Earlier authority does not describe our present position.`};
+  if(lines[ctx.category])return {templateId:'m2-sovereign-'+ctx.category,family:'sovereign-'+ctx.category,text:lines[ctx.category],emotion:ctx.category==='rebellion-won'?'worried':'watchful'};
+ }
+ if(role==='secretary'&&ctx.category==='intervention'&&(ctx.context.clearedUnrest||ctx.context.reopenedOrders))return {templateId:ctx.context.clearedUnrest?'m2-assurance-unrest':'m2-assurance-orders',family:'assurance',text:ctx.context.clearedUnrest?`The unrest in ${name(ctx.region)} has been cleared. I hope the improvement lasts.`:`The closed orders in ${name(ctx.region)} have reopened. I hope the improvement lasts.`,emotion:'relieved',statementType:'assurance'};
  const eligible=[...TEMPLATES,...variants].filter(t=>t.trigger===ctx.trigger&&t.role===role&&t.requires.every(r=>ctx.context[r])&&(!t.trait||c.traits[t.trait]>=40));
  const fresh=eligible.filter(t=>!c.pacing.templates.some(p=>p.id===t.id&&c.pacing.relevant-p.at<POLICY.templateCooldown));
  if(!fresh.length)return null;
- const ranked=fresh.map(t=>({t,weight:10+t.requires.length*8+(variants.includes(t)?0:20)+(t.trait?Math.round(c.traits[t.trait]/10):0)+(t.tone==='formal'?c.voice.formality:t.tone==='dry'?c.voice.humour:c.voice.restraint)})).sort((a,b)=>b.weight-a.weight);
+ const ranked=fresh.map(t=>({t,weight:10+t.requires.length*8+(variants.includes(t)?0:20)+(t.trait?Math.round(c.traits[t.trait]/10):0)+(t.tone==='formal'?c.voice.formality:t.tone==='dry'?c.voice.humour:t.tone==='proud'?c.voice.directness:c.voice.restraint)})).sort((a,b)=>b.weight-a.weight);
  const best=ranked.filter(t=>t.weight===ranked[0].weight),t=best[narrativeRandom(n,best.length)].t;
  return {templateId:t.id,family:t.id,text:fill(t.text,ctx),emotion:t.emotion};
 }
@@ -57,7 +62,7 @@ function statementMemory(n,state,entry,s,ownerId){
 export function renderPoliticalDialogue(before,state,entry,scene,contexts,add){
  const n=state.narrative,candidates=[],used=new Set(),assurances=new Map();
  for(const ctx of contexts){
-  const ruler=n.characters[n.seats[ctx.region]];
+  const ruler=n.characters[ctx.rulerId||n.seats[ctx.region]];
   const connection=Math.max(0,...ruler.memoryIds.map(id=>n.memories[id]).filter(m=>m.region===ctx.region).map(m=>m.historicalSignificance));
   candidates.push({c:ruler,role:'ruler',ctx,priority:1000+(ctx.major?100:0)+connection});
   const adviser=n.characters[ctx.adviserId];
@@ -67,7 +72,7 @@ export function renderPoliticalDialogue(before,state,entry,scene,contexts,add){
  candidates.sort((a,b)=>priority(b)-priority(a));let callbackCount=0;
  for(const {c,role,ctx} of candidates){
   if(c.condition!=='alive'||used.has(c.id)||!ctx.evidence.length)continue;
-  let chosen=(callbackCount===0||ctx.major?(quoteCallback(before,state,c,ctx)||(role==='ruler'?memoryCallback(before,state,c,ctx):null)):null)||primary(c,ctx,role,n);
+  let chosen=(ctx.perspective!=='sovereign'&&(callbackCount===0||ctx.major)?(quoteCallback(before,state,c,ctx)||(role==='ruler'?memoryCallback(before,state,c,ctx):null)):null)||primary(c,ctx,role,n);
   if(!chosen)continue;
   const callbacks=[...(chosen.callbackMemoryIds||[]),...(chosen.callbackStatementIds||[])];
   const overrides=callbacks.filter(key=>c.pacing.callbacks[key]&&c.pacing.relevant-c.pacing.callbacks[key].at<c.pacing.callbacks[key].cooldown);
@@ -87,7 +92,14 @@ export function renderPoliticalDialogue(before,state,entry,scene,contexts,add){
    adjustRelationship(n,c.id,{kind:'character',id:assurance.speakerId},entry,null,{gratitude:3,respect:2,familiarity:3},'A response to the adviser’s saved assurance, not credit for ordering the intervention.',[assurance.id]);
    adjustRelationship(n,assurance.speakerId,{kind:'character',id:c.id},entry,null,{respect:2,familiarity:2},'A supported exchange about the recorded intervention.',[assurance.id]);
   }
-  for(const statementId of chosen.callbackStatementIds||[])for(const m of Object.values(n.memories))if(m.ownerId===c.id&&m.statementIds.includes(statementId))m.updates.push({incidentId:entry.incident.id,evidence:ctx.evidence,delta:0,kind:'challenged-expectation'});
+  for(const statementId of chosen.callbackStatementIds||[])for(const m of Object.values(n.memories))if(m.ownerId===c.id&&m.statementIds.includes(statementId)){
+   const statement=n.statements[statementId],relation=c.relations['character:'+statement.speakerId];
+   const trusting=c.traits.loyalty>=60||(relation?.respect||0)>=50;
+   const doubtful=c.traits.vindictiveness>=60||(relation?.mistrust||0)>=30;
+   const assessment=trusting?'The renewed unrest challenges the hope in this note. I remain inclined to trust its author; that is my judgement, not proof of the outcome.':doubtful?'The new unrest makes me less confident in the assurance. It does not establish intentional deception.':'I now treat the hope in this assurance more cautiously. The earlier improvement remains part of the record.';
+   m.currentAssessment={kind:'opinion',text:assessment,incidentId:entry.incident.id,evidence:ctx.evidence};
+   m.updates.push({incidentId:entry.incident.id,evidence:ctx.evidence,delta:0,kind:'challenged-expectation'});
+  }
   used.add(c.id);if(!c.incidents.includes(entry.incident.id))c.incidents.push(entry.incident.id);
  }
 }

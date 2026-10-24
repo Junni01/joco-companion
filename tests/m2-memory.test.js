@@ -40,7 +40,7 @@ test('actual saved assurance is quoted exactly later without claiming intentiona
  const {state,states}=storySequence(),statement=Object.values(states[4].narrative.statements)[0];assert(statement);
  const quoted=state.history.at(-1).narrative.lines.find(l=>l.callbackStatementIds.includes(statement.id));assert(quoted);assert(quoted.text.includes(statement.text));
  const oldLine=states[4].history.at(-1).narrative.lines.find(l=>l.id===statement.lineId);assert.equal(oldLine.text,statement.text);assert(statement.audienceIds.includes(quoted.speakerId));
- assert(quoted.text.includes('without pretending to know'));assert(!/lied|betrayed/.test(quoted.text));
+ assert(quoted.text.includes('new unrest'));assert(!/lied|betrayed|deliberately|conspired/.test(quoted.text));
  assert(Object.values(state.narrative.memories).some(m=>m.statementIds.includes(statement.id)&&m.updates.some(u=>u.kind==='challenged-expectation')));
 });
 
@@ -79,6 +79,13 @@ test('M1 development files are rejected; current narrative-off/on saves still ro
  const old=JSON.parse(encode(narrativeState()));old.version=1;assert.throws(()=>decode(JSON.stringify(old)),/Unsupported development save version/);
 });
 
+test('challenged assurances preserve original interpretations and allow personality-dependent reassessment',()=>{
+ const s=storySequence().states[4],statement=Object.values(s.narrative.statements)[0],id=Object.values(s.narrative.memories).find(m=>m.ownerId==='ruler-bombay'&&m.statementIds.includes(statement.id)).id;
+ const original=clone(s.narrative.memories[id].interpretation);s.narrative.characters['ruler-bombay'].traits.loyalty=80;
+ const next=commit(s,{type:'tax',region:'bombay'});assert.deepEqual(next.narrative.memories[id].interpretation,original);assert.match(next.narrative.memories[id].currentAssessment.text,/inclined to trust/);
+ assert(profileHTML(next,'ruler-bombay').includes('Current assessment'));
+});
+
 test('referenced debug incident deletion is blocked with named evidence; unreferenced records remain removable',()=>{
  const s=storySequence().state,id=s.history[0].incident.id;
  assert.throws(()=>assertHistoryDeletionAllowed(s,[id]),e=>e.message.includes(id)&&e.message.includes('Memory')&&e.message.includes('Saved line'));
@@ -91,4 +98,16 @@ test('representative complete loops work in all four scenarios with supported ad
   assert(state.history.some(h=>h.narrative?.lines.some(l=>l.callbackMemoryIds.length)));assert(state.history.some(h=>h.narrative?.lines.some(l=>l.callbackStatementIds.length)));
   const generalTax=state.history.find(h=>h.actionType==='tax');if(scenario==='1813')assert(generalTax.incident.facts.some(f=>f.type==='tax'&&f.mode==='general'));
  }
+});
+
+test('political-memory processing never consumes the gameplay crypto source',()=>{
+ const s=narrativeState(),descriptor=Object.getOwnPropertyDescriptor(globalThis,'crypto');
+ Object.defineProperty(globalThis,'crypto',{configurable:true,value:{getRandomValues(){assert.fail('Narrative consumed gameplay randomness');}}});
+ try{const conquered=commit(s,{type:'deploy',...deployment()});commit(conquered,{type:'tax',region:'bombay'});}finally{if(descriptor)Object.defineProperty(globalThis,'crypto',descriptor);else delete globalThis.crypto;}
+});
+
+test('invalid current-version undo frames and malformed canonical fact arrays cannot be exported',()=>{
+ const good=storySequence().state,bad=clone(good);Object.values(bad.narrative.memories)[0].evidence[0].incidentId='not-real';
+ assert.throws(()=>encode(good,[bad]),/Invalid narrative/);
+ const malformed=clone(good);malformed.history[0].incident.facts=null;assert.throws(()=>validate(malformed),/canonical incident facts/);
 });

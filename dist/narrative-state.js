@@ -20,7 +20,9 @@ function matches(category,f){
 export function validatePoliticalMemory(state){
  const n=state.narrative;
  check(n.version===POLITICAL_VERSION&&n.policyVersion===POLICY.id,'unsupported current development narrative version');
- check(record(n.memories)&&record(n.statements)&&Array.isArray(n.arcs),'memory/statement collections');
+ check(record(n.memories)&&record(n.statements)&&Array.isArray(n.arcs)&&n.arcs.length===0,'memory/statement collections; arc generation is deferred');
+ check(Array.isArray(state.history),'canonical history collection');
+ for(const h of state.history){check(record(h),'history entry');if(h.incident)check(record(h.incident)&&Array.isArray(h.incident.facts)&&h.incident.facts.every(f=>record(f)&&typeof f.type==='string'&&(!f.region||state.regions[f.region])),'canonical incident facts');}
  const index=evidenceIndex(state),ids=new Set(),sceneOrders=new Map();
  for(const [order,h] of state.history.entries()){
   if(h.incident){check(typeof h.incident.id==='string'&&!ids.has(h.incident.id),'duplicate incident ID');ids.add(h.incident.id);check(h.incident.facts.every((f,i)=>f.factId==='fact-'+i),'stable fact identity');}
@@ -30,15 +32,19 @@ export function validatePoliticalMemory(state){
  function refs(evidence,maxOrder){check(Array.isArray(evidence),'fact references');for(const r of evidence){const resolved=resolveFact(index,r);check(resolved&&resolved.order<=maxOrder,'dangling or future fact reference');}}
  for(const c of Object.values(n.characters)){
   check(Array.isArray(c.memoryIds)&&new Set(c.memoryIds).size===c.memoryIds.length&&c.memoryIds.every(id=>n.memories[id]?.ownerId===c.id),'character memory ownership');
+  check(c.incidents.every(id=>ids.has(id)),'personal incident journal source');
   check(score(c.confidence)&&record(c.voice)&&['formality','directness','restraint','humour'].every(k=>Number.isInteger(c.voice[k])&&c.voice[k]>=0&&c.voice[k]<=3),'voice/confidence');
   check(c.pacing&&Number.isInteger(c.pacing.relevant)&&c.pacing.relevant>=0&&Number.isInteger(c.pacing.lastAppearance)&&c.pacing.lastAppearance<=c.pacing.relevant&&Array.isArray(c.pacing.templates)&&Array.isArray(c.pacing.phrases)&&record(c.pacing.callbacks),'saved pacing');
-  for(const v of Object.values(c.pacing.callbacks))check(Number.isInteger(v.at)&&v.at>=0&&v.at<=c.pacing.relevant&&v.cooldown===POLICY.memoryCooldown&&ids.has(v.incidentId),'callback pacing source');
+  check(Number.isInteger(c.pacing.lastCallbackAt)&&c.pacing.lastCallbackAt<=c.pacing.relevant,'callback clock');
+  for(const p of c.pacing.templates)check(text(p.id)&&Number.isInteger(p.at)&&p.at<=c.pacing.relevant,'template pacing');
+  for(const p of c.pacing.phrases)check(text(p.family)&&Number.isInteger(p.at)&&p.at<=c.pacing.relevant,'phrase pacing');
+  for(const [key,v] of Object.entries(c.pacing.callbacks))check((n.memories[key]||n.statements[key])&&Number.isInteger(v.at)&&v.at>=0&&v.at<=c.pacing.relevant&&v.cooldown===POLICY.memoryCooldown&&ids.has(v.incidentId),'callback pacing source');
   check(c.development&&Array.isArray(c.development.strongExperiences)&&c.development.strongExperiences.every(id=>ids.has(id))&&Array.isArray(c.development.changes),'development records');
   for(const change of c.development.changes)check(Object.hasOwn(c.traits,change.trait)&&Number.isInteger(change.delta)&&Math.abs(change.delta)<=2&&change.incidentIds.every(id=>ids.has(id)),'trait cause');
   for(const relation of Object.values(c.relations)){
    check(relation.target&&((relation.target.kind==='institution'&&relation.target.id==='company')||(relation.target.kind==='character'&&n.characters[relation.target.id])),'relationship target');
    check(Array.isArray(relation.causes)&&relation.origins.every(id=>ids.has(id)),'relationship source');
-   for(const cause of relation.causes)check(ids.has(cause.incidentId)&&cause.memoryIds.every(id=>n.memories[id]?.ownerId===c.id)&&cause.statementIds.every(id=>n.statements[id])&&record(cause.deltas)&&Object.entries(cause.deltas).every(([d,v])=>DIMENSIONS.includes(d)&&Number.isInteger(v))&&text(cause.reason),'relationship cause');
+   for(const cause of relation.causes){const order=index.incidents.get(cause.incidentId)?.order;check(order!==undefined&&cause.memoryIds.every(id=>n.memories[id]?.ownerId===c.id&&index.incidents.get(n.memories[id].createdIncident)?.order<=order)&&cause.statementIds.every(id=>n.statements[id]&&index.incidents.get(n.statements[id].incidentId)?.order<=order)&&record(cause.deltas)&&Object.entries(cause.deltas).every(([d,v])=>DIMENSIONS.includes(d)&&Number.isInteger(v))&&text(cause.reason),'relationship cause');}
   }
  }
  for(const [id,m] of Object.entries(n.memories)){
@@ -49,12 +55,14 @@ export function validatePoliticalMemory(state){
   check(m.evidence.every(r=>resolveFact(index,r).fact.region===m.region),'memory region factual predicate');
   check(Array.isArray(m.statementIds)&&m.statementIds.every(id=>n.statements[id]),'memory statement source');
   for(const update of m.updates){const source=index.incidents.get(update.incidentId);check(source&&source.order>=created.order&&Number.isInteger(update.delta)&&text(update.kind),'memory update source');refs(update.evidence,source.order);}
+  if(m.currentAssessment){const source=index.incidents.get(m.currentAssessment.incidentId);check(source&&source.order>=created.order&&m.currentAssessment.kind==='opinion'&&text(m.currentAssessment.text),'current assessment');refs(m.currentAssessment.evidence,source.order);}
  }
  for(const [id,s] of Object.entries(n.statements)){
   const source=index.lines.get(s.lineId);check(s.id===id&&source&&s.incidentId===source.entry.incident.id&&s.text===source.line.text&&s.speakerId===source.line.speakerId&&source.line.statementId===id,'exact saved statement');
   check(['assurance','gratitude','threat','insult','promise'].includes(s.type)&&s.audienceIds.every(id=>n.characters[id]),'statement type/audience');refs(s.evidence,source.order);
  }
  const lineIds=new Set();
+ for(const chapter of n.chapters)check(chapter.incidents.every(id=>ids.has(id)),'chapter source');
  for(const [order,h] of state.history.entries())for(const l of h.narrative?.lines||[]){
   check(typeof l.id==='string'&&!lineIds.has(l.id),'duplicate line ID');lineIds.add(l.id);refs(l.evidence,order);
   check(Array.isArray(l.callbackMemoryIds)&&Array.isArray(l.callbackStatementIds),'callback fields');

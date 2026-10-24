@@ -56,7 +56,7 @@ export function resolveAction(s,d){
  if(s.gameEnd&&d.type!=='rename')throw Error('This game has ended. Use Undo to reopen it before recording gameplay.');
  if(d.type==='event'&&d.stackTile){assert(!d.manualTest,'A stack draw cannot also be a manual test.');assert(s.eventStack?.pending?.tileId===d.stackTile,'This tile is not the pending stack event.');d={...d,...pendingEvent(s.eventStack)};}
  if(d.type==='event'&&d.stormFace!==undefined){assert(d.event==='foreign'&&integer(d.stormFace,0,5),'Invalid Foreign Invasion storm die face.');assert(d.storm===undefined||d.storm===STORM_RESULTS[d.stormFace],'Foreign Invasion storm result does not match its saved die.');d={...d,storm:STORM_RESULTS[d.stormFace]};}
- if(s.eventStack?.pending&&!['event','stack-draw'].includes(d.type))throw Error('Resolve the revealed stack event before taking another game action.');
+ if(s.eventStack?.pending&&!['event','stack-draw','rename'].includes(d.type))throw Error('Resolve the revealed stack event before taking another game action.');
  if(s.eventStack?.pending&&d.type==='event'&&!d.stackTile)throw Error('Resolve the revealed stack tile before running a manual test.');
  const n=clone(s),instructions=[],cascaded=new Set(),losses=[],officerRouts=[],scenes=[],elephantMoves=[];
  const journal=incidentRecorder(s,n,d);

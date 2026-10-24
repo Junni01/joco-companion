@@ -77,6 +77,7 @@ export function record(s,next,title){validate(next);next.history=[...s.history,{
 export function encode(state,undo=[],progress=null,undoProgress=[],redo=[]){
  validate(state);validateRedo(redo);
  const start=Math.max(0,undo.length-20),kept=undo.slice(start),keptProgress=kept.map((s,i)=>validateActionProgress(s,undoProgress[start+i]||null));
+ kept.forEach(validate);
  const base={format:'john-company-india',version:2,state,undo:kept,progress:validateActionProgress(state,progress),undoProgress:keptProgress,...(redo.length?{redo:clone(redo)}:{})};
  return encodeFrames(base);
 }
