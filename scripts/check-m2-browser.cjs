@@ -11,6 +11,7 @@ const out=process.argv[3]||path.join(os.tmpdir(),'joco-m2-browser');fs.mkdirSync
   page.setDefaultTimeout(15000);page.on('pageerror',e=>errors.push(e.message));
   const click=async id=>{await page.locator('#'+id).click();if(await page.locator('#dialog').isVisible())assert.equal(await page.locator('#form-error').textContent().catch(()=>''),'');};
   const current=async(debug=false)=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)),debug?'jc-india-debug-campaign-v1':'jc-india-campaign-v1');
+  const approved=new Map((await import('../dist/narrative-approved-content.js')).APPROVED_DIALOGUE.map(e=>[e.id,e]));
   const mark=text=>{checks.push(text);console.log('PASS',text);};
   const selectBombay=async()=>{await page.locator('[data-tab="register"]').click();await page.locator('[data-select="bombay"]').click();};
   const deploy=async(regional=false)=>{
@@ -28,9 +29,14 @@ const out=process.argv[3]||path.join(os.tmpdir(),'joco-m2-browser');fs.mkdirSync
   let saved=await current();assert.equal(saved.version,2);assert.equal(saved.state.regions.bombay.control,'company');
   const conquest=Object.values(saved.state.narrative.memories).find(m=>m.ownerId==='ruler-bombay'&&m.category==='company-conquest');assert(conquest);
   await selectBombay();await tax();saved=await current();assert(saved.state.history.at(-1).narrative.lines.some(l=>l.callbackMemoryIds.includes(conquest.id)));
+  const approvedCallback=saved.state.history.at(-1).narrative.lines.find(l=>approved.has(l.templateId)&&l.callbackMemoryIds.includes(conquest.id));assert(approvedCallback);assert.equal(approvedCallback.text,approved.get(approvedCallback.templateId).text);
+  mark('exact approved conquest-to-Tax callback selected with saved evidence');
   mark('normal touch controls: conquest, personal memory, grievance and Tax callback; preview is inert');
   await click('ruler-profile');await page.getByRole('heading',{name:'Defining memories',exact:true}).waitFor();await page.locator('#dialog-content .memory-evidence summary').first().click();
   assert((await page.locator('#dialog-content').innerText()).includes(conquest.createdIncident));
+  await page.locator('.dialogue-evidence > details > summary').click();await page.locator('.dialogue-evidence').getByText(approvedCallback.text,{exact:true}).waitFor();assert((await page.locator('.dialogue-evidence').innerText()).includes(approvedCallback.templateId));mark('dossier shows exact approved words and expandable callback sources');
+  await page.locator('.dialogue-evidence').scrollIntoViewIfNeeded();await page.locator('#dialog').screenshot({path:path.join(out,'dialogue-evidence-desktop.png')});
+  await page.locator('#dialog-content').evaluate(el=>el.scrollTop=0);
   await page.locator('#dialog').screenshot({path:path.join(out,'dossier-desktop.png')});await click('close-dialog');
   await click('region-governor-action');await click('governor-administer');await click('review-action');await click('confirm-action');
   await deploy(true);saved=await current();const statement=Object.values(saved.state.narrative.statements)[0];assert(statement);
@@ -41,7 +47,8 @@ const out=process.argv[3]||path.join(os.tmpdir(),'joco-m2-browser');fs.mkdirSync
   await page.locator('[data-narrative-mode="quiet"]').click();assert.equal((await current()).state.narrative.intensity,'quiet');await page.locator('[data-narrative-mode="full"]').click();
   await click('save-menu');await click('snapshot');const download=page.waitForEvent('download');await click('menu-export-chronicle');await(await download).saveAs(path.join(out,'live-browser-chronicle.html'));await click('close-dialog');
   await selectBombay();await click('ruler-profile');await page.setViewportSize({width:390,height:844});
-  assert(await page.locator('#dialog-content').evaluate(el=>el.scrollWidth<=el.clientWidth+1));await page.locator('#dialog').screenshot({path:path.join(out,'dossier-mobile.png')});await click('close-dialog');
+  await page.locator('.dialogue-evidence > details > summary').click();await page.locator('.dialogue-evidence .memory-evidence > summary').first().click();await page.locator('.dialogue-evidence').scrollIntoViewIfNeeded();
+  assert(await page.locator('#dialog-content').evaluate(el=>el.scrollWidth<=el.clientWidth+1));await page.locator('#dialog').screenshot({path:path.join(out,'dialogue-evidence-mobile.png')});await page.locator('#dialog-content').evaluate(el=>el.scrollTop=0);await page.locator('#dialog').screenshot({path:path.join(out,'dossier-mobile.png')});await click('close-dialog');
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await page.screenshot({path:path.join(out,'story-mobile.png'),fullPage:true});
   mark('dossier evidence, quiet/full, snapshot/export and 390px mobile layout');await page.setViewportSize({width:1024,height:768});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await selectBombay();await click('ruler-profile');assert(await page.locator('#dialog-content').evaluate(el=>el.scrollWidth<=el.clientWidth+1));await page.locator('#dialog').screenshot({path:path.join(out,'dossier-tablet.png')});await click('close-dialog');mark('1024x768 tablet dossier and map layout');await page.setViewportSize({width:1440,height:1000});
   await click('events-phase-action');await click('manual-phase-storm');await page.locator('[data-phase-face="4"]').click();await click('confirm-phase-storm');await click('phase-map');await click('phase-next');

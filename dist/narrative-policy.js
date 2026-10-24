@@ -10,6 +10,8 @@ export const POLICY={
  templateBaseWeight:10,conditionWeight:8,originalCatalogBonus:20,traitWeightDivisor:10,requiredTraitMinimum:40,recentBuffer:8,
  personalReply:{gratitude:3,respect:2,familiarity:3},personalResponse:{respect:2,familiarity:2}
 };
+// Trial selection thresholds for the first approved dialogue integration. No mechanical effects.
+export const APPROVED_POLICY={highTrait:60,professionalCaution:50,bitterHostility:20,humour:1,restraint:2,formality:2,definingSignificance:75,callbackWeight:100,importanceDivisor:10};
 export const SOVEREIGN_PROFILES={
  subordination:{significance:80,importance:65,emotion:'pride',hostility:0,respect:4},
  'rebellion-failed':{significance:60,importance:45,emotion:'pride',hostility:5},

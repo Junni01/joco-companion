@@ -50,6 +50,12 @@ The first-release political-memory slice is implemented locally in reviewable co
 
 Six seeded synthetic chronicles and current-version JSON files are in `docs/narrative/review/m2/`; regenerate with `node scripts/export-m2-review.mjs`. See `docs/narrative/milestone-2-implementation.md` for AC mapping, trial tuning, measurements and reproduction. The 120-Tax stress case retains 121 incidents/243 memories within the 6 MB cap by pruning reversible frames. Joint human narrative-quality review (AC-M2-10) remains pending. No GitHub push, PR or hosting deployment was performed.
 
+## Approved dialogue integration — 24 October 2026
+
+The first playable integration of Collections 01–04 (including 01B) selects 42 exact approved entries through the existing M2 event/memory engine. Fact guards precede personality/relationship weighting; saved callback evidence is inspectable in dossiers and exports. Gameplay resolvers, current-version persistence and Undo/Redo are unchanged. No old-save migrations, portraits, Collection 05 or long conversations were added.
+
+Verification: 184 automated tests pass; isolated Chrome checks pass at desktop/tablet/mobile widths, including exact approved callbacks and dossier evidence, with no page errors. Ten reproducible synthetic chronicles demonstrate 34 integrated IDs. See [technical report](narrative/approved-dialogue-implementation.md), [unsupported prerequisites and scope deferrals](narrative/approved-dialogue-deferred.md), and [review index](narrative/review/approved-dialogue/README.md). Human narrative-quality review remains pending. Changes are committed locally; no push or deployment is claimed.
+
 ## Transfer and deployment
 
 Destination: https://github.com/Junni01/joco-companion. Preserve main history and verify destination refs before declaring transfer complete. GitHub does not automatically deploy the existing Sites host. Retain `.openai/hosting.json` project identity; never commit access credentials.

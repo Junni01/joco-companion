@@ -1,5 +1,5 @@
 import {APPROVED_DIALOGUE} from './narrative-approved-content.js';
-import {POLICY,narrativeRandom} from './narrative-policy.js';
+import {POLICY,APPROVED_POLICY as AP,narrativeRandom} from './narrative-policy.js';
 
 export const approvedById=new Map(APPROVED_DIALOGUE.map(e=>[e.id,e]));
 function boardAt(state,entry,region,after=false){
@@ -8,14 +8,14 @@ function boardAt(state,entry,region,after=false){
  for(const h of state.history.slice(order+1)){const change=h.incident?.changes.find(c=>c.region===region);if(change)return change.before;}
  return state.regions[region];
 }
-const high=(c,key)=>c.traits[key]>=60;
-const bitter=c=>high(c,'vindictiveness')||(c.relations['institution:company']?.hostility||0)>=20;
-const dry=c=>c.voice.humour>=1;
-const pragmatic=c=>c.voice.restraint>=2;
+const high=(c,key)=>c.traits[key]>=AP.highTrait;
+const bitter=c=>high(c,'vindictiveness')||(c.relations['institution:company']?.hostility||0)>=AP.bitterHostility;
+const dry=c=>c.voice.humour>=AP.humour;
+const pragmatic=c=>c.voice.restraint>=AP.restraint;
 const cautious=c=>high(c,'caution');
 const proud=c=>high(c,'pride');
 const career=c=>high(c,'ambition');
-const professional=c=>c.traits.caution>=50&&c.voice.restraint>=2;
+const professional=c=>c.traits.caution>=AP.professionalCaution&&pragmatic(c);
 
 // Facts come from resolver-owned records, never English instructions or inferred meetings.
 export function approvedContext(state,entry,region,perspective){
@@ -50,7 +50,7 @@ const rules={
  'RC-V01':{role:'ruler',event:f=>f.conquest,voice:c=>high(c,'vindictiveness'),trait:'vindictiveness',salient:true},
  'RC-V02':{role:'ruler',event:f=>f.conquest,voice:bitter,trait:'vindictiveness'},
  'AC-C01':{role:'army',event:f=>f.armedConquest,voice:career,trait:'ambition'},
- 'AC-C02':{role:'army',event:f=>f.armedConquest,voice:c=>c.voice.formality>=2&&dry(c)},
+ 'AC-C02':{role:'army',event:f=>f.armedConquest,voice:c=>c.voice.formality>=AP.formality&&dry(c)},
  'AC-C03':{role:'army',event:f=>f.armedConquest,voice:c=>proud(c)&&!cautious(c),trait:'pride'},
  'AC-C04':{role:'army',event:f=>f.armedConquest,voice:professional,trait:'caution'},
  'CB-C-TAX-01':{role:'ruler',event:f=>f.tax,voice:bitter,memory:'company-conquest',trait:'vindictiveness'},
@@ -63,7 +63,7 @@ const rules={
  'RU-T02-01':{role:'ruler',event:f=>f.tax,voice:c=>dry(c)&&pragmatic(c)},
  'RU-T02-02':{role:'ruler',event:f=>f.tax,voice:c=>proud(c)||bitter(c),memory:'company-conquest',trait:'pride'},
  'CH-T02-03':{role:'chronicler',event:f=>f.admin},
- 'AD-T02-03':{role:'secretary',event:f=>f.admin,voice:c=>c.voice.formality>=2&&proud(c)},
+ 'AD-T02-03':{role:'secretary',event:f=>f.admin,voice:c=>c.voice.formality>=AP.formality&&proud(c)},
  'CH-R03-01':{role:'chronicler',event:f=>f.unrest&&f.companyBefore},
  'RU-R03-01':{role:'ruler',event:f=>f.unrest&&f.companyBefore,voice:c=>high(c,'ambition'),trait:'ambition'},
  'RU-R03-02':{role:'ruler',event:f=>f.unrest,voice:c=>cautious(c)||pragmatic(c),trait:'caution'},
@@ -75,7 +75,7 @@ const rules={
  'CH-M04-01':{role:'chronicler',event:f=>f.failure},
  'CH-M04-02':{role:'chronicler',event:f=>f.catastrophe},
  'AD-M04-01':{role:'army',event:f=>f.failure,voice:c=>proud(c)&&!cautious(c),trait:'pride'},
- 'AD-M04-02':{role:'army',event:f=>f.failure,voice:c=>c.voice.formality>=2&&dry(c)},
+ 'AD-M04-02':{role:'army',event:f=>f.failure,voice:c=>c.voice.formality>=AP.formality&&dry(c)},
  'AD-M04-03':{role:'army',event:f=>f.failure,voice:professional,trait:'caution'},
  'AD-M04-04':{role:'army',event:f=>f.catastrophe,voice:career,trait:'ambition'},
  'AD-M04-05':{role:'army',event:f=>f.catastrophe,voice:c=>proud(c)&&!cautious(c),trait:'pride'},
@@ -101,7 +101,7 @@ function factualEligibility(state,entry,c,role,f,e,r,memoryId=null,historical=fa
    if(!supported)return null;
   }
  }
- if(r.salient&&!Object.values(state.narrative.memories).some(m=>m.ownerId===c.id&&m.category==='company-conquest'&&m.createdIncident===entry.incident.id&&m.historicalSignificance>=75))return null;
+ if(r.salient&&!Object.values(state.narrative.memories).some(m=>m.ownerId===c.id&&m.category==='company-conquest'&&m.createdIncident===entry.incident.id&&m.historicalSignificance>=AP.definingSignificance))return null;
  if(r.grievance&&!Object.values(state.narrative.memories).some(m=>m.region===f.region&&state.history.findIndex(h=>h.incident?.id===m.createdIncident)<state.history.findIndex(h=>h.incident?.id===entry.incident.id)&&['company-conquest','subordination','tax-repeat'].includes(m.category)))return null;
  const memories=r.memory?priorConquest(state,entry,c,f.region):[];
  const memory=memoryId?memories.find(m=>m.id===memoryId):memories[0];
@@ -118,7 +118,7 @@ export function approvedCandidates(state,entry,c,ctx,role){
   if(candidate.memory){const pacing=c.pacing,key=candidate.memory.id,last=pacing.callbacks[key];
    if(!ctx.major&&(pacing.relevant-pacing.lastCallbackAt<POLICY.globalCallbackCooldown||(last&&pacing.relevant-last.at<last.cooldown)))return [];
   }
-  return [{...candidate,evidence:f.evidence,weight:(r.memory?100:0)+(r.trait?c.traits[r.trait]:0)+(candidate.memory?Math.round(candidate.memory.emotionalImportance/10):0)}];
+  return [{...candidate,evidence:f.evidence,weight:(r.memory?AP.callbackWeight:0)+(r.trait?c.traits[r.trait]:0)+(candidate.memory?Math.round(candidate.memory.emotionalImportance/AP.importanceDivisor):0)}];
  });
 }
 export function selectApprovedDialogue(state,entry,c,ctx,role){

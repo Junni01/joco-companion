@@ -1,0 +1,121 @@
+{
+  "integrated": 42,
+  "demonstratedIds": [
+    "AC-C01",
+    "AC-C03",
+    "AC-C04",
+    "AD-M04-01",
+    "AD-M04-02",
+    "AD-M04-03",
+    "AD-M04-04",
+    "AD-M04-05",
+    "AD-M04-08",
+    "AD-R03-05",
+    "AD-T02-01",
+    "AD-T02-03",
+    "CB-C-FAIL-02",
+    "CB-C-REB-03",
+    "CB-C-TAX-01",
+    "CB-C-TAX-02",
+    "CB-C-TAX-03",
+    "CB-R03-01",
+    "CB-T02-03",
+    "CH-C01",
+    "CH-C03",
+    "CH-C04",
+    "CH-M04-01",
+    "CH-M04-02",
+    "CH-R03-01",
+    "CH-R03-02",
+    "CH-R03-03",
+    "CH-T02-03",
+    "RC-D02",
+    "RC-V02",
+    "RU-M04-05",
+    "RU-R03-01",
+    "RU-R03-02",
+    "RU-T02-02"
+  ],
+  "fixtures": [
+    {
+      "name": "story-1710",
+      "scenario": "1710",
+      "premise": "Seed 1234. Normal reported conquest, Tax, administrative failure, intervention and renewed unrest. Existing exact assurance callbacks remain part of this sequence.",
+      "incidents": 5,
+      "approvedLines": 9,
+      "jsonBytes": 97168
+    },
+    {
+      "name": "story-1758",
+      "scenario": "1758",
+      "premise": "Seed 1234. Normal reported conquest, Tax, administrative failure, intervention and renewed unrest. Existing exact assurance callbacks remain part of this sequence.",
+      "incidents": 5,
+      "approvedLines": 9,
+      "jsonBytes": 96821
+    },
+    {
+      "name": "story-1813",
+      "scenario": "1813",
+      "premise": "Seed 1234. Normal reported conquest, Tax, administrative failure, intervention and renewed unrest. Existing exact assurance callbacks remain part of this sequence.",
+      "incidents": 5,
+      "approvedLines": 10,
+      "jsonBytes": 132429
+    },
+    {
+      "name": "story-1710-long",
+      "scenario": "1710-long",
+      "premise": "Seed 1234. Normal reported conquest, Tax, administrative failure, intervention and renewed unrest. Existing exact assurance callbacks remain part of this sequence.",
+      "incidents": 5,
+      "approvedLines": 9,
+      "jsonBytes": 97203
+    },
+    {
+      "name": "personality-proud",
+      "scenario": "1710-long",
+      "premise": "Seed 4321. Initial fictional proud ruler profile (pride=90; other core traits=20), a cautious professional Army adviser and vain secretary are explicitly selected test personas. No campaign history is injected. Conquest → two Taxes → genuinely suppressed rebellion → actual unsuccessful administration → genuine Company loss to rebellion → failed attempt to reconquer. Leader events are explicitly manual-test event resolution with supplied defence outcomes, never inferred from unrest.",
+      "incidents": 7,
+      "approvedLines": 14,
+      "jsonBytes": 114156
+    },
+    {
+      "name": "personality-cautious",
+      "scenario": "1710-long",
+      "premise": "Seed 4321. Initial fictional cautious ruler profile (caution=90; other core traits=20), a cautious professional Army adviser and vain secretary are explicitly selected test personas. No campaign history is injected. Conquest → two Taxes → genuinely suppressed rebellion → actual unsuccessful administration → genuine Company loss to rebellion → failed attempt to reconquer. Leader events are explicitly manual-test event resolution with supplied defence outcomes, never inferred from unrest.",
+      "incidents": 7,
+      "approvedLines": 15,
+      "jsonBytes": 114196
+    },
+    {
+      "name": "personality-vindictive",
+      "scenario": "1710-long",
+      "premise": "Seed 4321. Initial fictional vindictive ruler profile (vindictiveness=90; other core traits=20), a cautious professional Army adviser and vain secretary are explicitly selected test personas. No campaign history is injected. Conquest → two Taxes → genuinely suppressed rebellion → actual unsuccessful administration → genuine Company loss to rebellion → failed attempt to reconquer. Leader events are explicitly manual-test event resolution with supplied defence outcomes, never inferred from unrest.",
+      "incidents": 7,
+      "approvedLines": 15,
+      "jsonBytes": 114128
+    },
+    {
+      "name": "military-professional",
+      "scenario": "1710-long",
+      "premise": "Seed 2468. Initial fictional professional Army adviser profile (caution=90; other core traits=20). Actual failed attack → actual successful conquest → Tax callback → repeat Tax/unrest → explicitly reported catastrophic intervention with one officer loss (no named death). No further deployment is attempted after catastrophe. No command, weather, retreat or casualty circumstances are invented.",
+      "incidents": 5,
+      "approvedLines": 10,
+      "jsonBytes": 89692
+    },
+    {
+      "name": "military-overconfident",
+      "scenario": "1710-long",
+      "premise": "Seed 2468. Initial fictional overconfident Army adviser profile (pride=90; other core traits=20). Actual failed attack → actual successful conquest → Tax callback → repeat Tax/unrest → explicitly reported catastrophic intervention with one officer loss (no named death). No further deployment is attempted after catastrophe. No command, weather, retreat or casualty circumstances are invented.",
+      "incidents": 5,
+      "approvedLines": 11,
+      "jsonBytes": 89794
+    },
+    {
+      "name": "military-careerist",
+      "scenario": "1710-long",
+      "premise": "Seed 2468. Initial fictional careerist Army adviser profile (ambition=90; other core traits=20). Actual failed attack → actual successful conquest → Tax callback → repeat Tax/unrest → explicitly reported catastrophic intervention with one officer loss (no named death). No further deployment is attempted after catastrophe. No command, weather, retreat or casualty circumstances are invented.",
+      "incidents": 5,
+      "approvedLines": 11,
+      "jsonBytes": 89868
+    }
+  ]
+}

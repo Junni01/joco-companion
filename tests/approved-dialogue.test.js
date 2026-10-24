@@ -9,7 +9,7 @@ import {undoFrame,redoFrame} from '../dist/transactions.js';
 import {profileHTML,sceneHTML} from '../dist/narrative-ui.js';
 import {storySequence,narrativeState,commit,deployment} from './m2-fixtures.js';
 const scene=s=>s.history.at(-1).narrative;
-const eligible=(s,role='ruler',region='bombay')=>approvedCandidates(s,s.history.at(-1),s.narrative.characters[role==='ruler'?'ruler-'+region:role+'-bombay'],{region,major:false},role).map(x=>x.entry.id);
+const eligible=(original,role='ruler',region='bombay')=>{const s=clone(original),c=s.narrative.characters[role==='ruler'?'ruler-'+region:role+'-bombay'];c.pacing.templates=[];return approvedCandidates(s,s.history.at(-1),c,{region,major:false},role).map(x=>x.entry.id);};
 function persona(s,id,trait){const c=s.narrative.characters[id];for(const k of Object.keys(c.traits))c.traits[k]=20;c.traits[trait]=90;c.voice={formality:1,directness:2,restraint:1,humour:1};return s;}
 const event=patch=>({type:'event',event:'leader',manualTest:true,topRegion:'bombay',shape:'circle',redirectShape:'circle',modifier:0,...patch});
 
@@ -111,4 +111,8 @@ test('standard scenes stay brief and expansion/rendering never selects additiona
  assert((html.split('<blockquote').length-1)<=3||html.includes('<details'));
  profileHTML(s,'ruler-bombay');sceneHTML(scene(s),{intensity:'full'});assert.deepEqual(s,original);
  assert(!APPROVED_DIALOGUE.some(e=>e.id.startsWith('EX-')||e.source.includes('dynasties')));
+});
+
+test('unsupported reforms, petitions, casualties, promises, careers and whole scenes stay withheld',()=>{
+ for(const id of ['CH-T02-01','RU-T02-03','EX-T02-02','EX-T02-03','AD-M04-06','RU-M04-04','CH-M04-03','RV-M04-07','RV-M04-08','EX-M04-02','CB-C-REB-01','CB-C-REB-02'])assert(!approvedById.has(id));
 });

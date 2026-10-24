@@ -47,6 +47,10 @@ New narrative campaigns now retain personal memories, directional relationship c
 
 This experimental build uses development save version 2. It preserves current-version autosave, snapshots, JSON import/export, Undo/Redo and protected rolls/reveals, but does not migrate older development saves. Unsupported stored data is left untouched until an explicit replacement. Narrative-quality acceptance still requires joint review.
 
+## Approved dialogue collections
+
+The first dialogue integration selects 42 exact approved entries from Collections 01–04 using recorded facts, relevant memories, relationships and individual voices. It reuses M2 persistence and cooldowns; long exchanges and Collection 05 remain deferred. See the [technical report](docs/narrative/approved-dialogue-implementation.md), [entry-level deferrals](docs/narrative/approved-dialogue-deferred.md) and [campaign review package](docs/narrative/review/approved-dialogue/README.md). Narrative-quality review remains with the user and ChatGPT.
+
 ## Saves and hosting
 
 Campaigns live in browser storage, separately for regular and debug play. Source transfer does not move them: export JSON in the app and import it in the destination browser.
