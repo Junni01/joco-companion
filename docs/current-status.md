@@ -68,6 +68,12 @@ Implemented 20 exact approved trade entries and personal repetition guards. Fict
 
 Verification: 218 automated tests pass, including exact pre-change gameplay wording/outcomes and current-version persistence/Undo/Redo. Trade-specific desktop/tablet browser checks and existing full browser regressions pass with no page errors. Five actual multi-turn synthetic campaigns demonstrate 19/20 integrated entries and the repeated-secretary fix. See [technical report and prerequisites](narrative/collection08a-implementation.md), [review index](narrative/review/collection08a/README.md) and [restoration log](narrative/review/collection08a/restoration-log.md). Narrative-quality acceptance remains pending. Delivery includes a user-authorized GitHub push; hosting remains unchanged.
 
+## Collection 08B — 25 October 2026
+
+Implemented bounded thematic end-of-turn chapters using committed structured evidence, same-person memories/lines, relationship reasons and saved ending states. Full supported CH08-01/02, expressly permitted personal/hope omissions, factual continuations and quiet pages replace action-label enumeration. Complete chronology remains separate. Full CH08-03 and the unsupported personal hope in full CH08-04 remain deferred; see the [report and writing audit](narrative/collection08b-implementation.md).
+
+Verification: 238 automated tests pass, including evidence/order/identity/end-state rejection, chapter repetition, current-version save/load and Undo/Redo, unchanged ordinary 08A scene/RNG baselines and gameplay equivalence. Actual New Turn desktop/tablet browser flows pass with optional evidence and no page errors; existing regular/debug and 08A suites remain green. [Review package](narrative/review/collection08b/README.md) includes four five-turn campaigns and a reversal checkpoint, with prose beside sources and correctly rejected attractive references. Narrative-quality acceptance is pending. Changes are committed locally; this task does not include a push or hosting deployment.
+
 ## Transfer and deployment
 
 Destination: https://github.com/Junni01/joco-companion. Preserve main history and verify destination refs before declaring transfer complete. GitHub does not automatically deploy the existing Sites host. Retain `.openai/hosting.json` project identity; never commit access credentials.

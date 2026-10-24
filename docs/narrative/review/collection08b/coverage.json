@@ -1,0 +1,177 @@
+{
+  "fixtures": [
+    {
+      "name": "possession-and-governance",
+      "turns": 5,
+      "incidents": 41,
+      "templates": [
+        {
+          "turn": 1,
+          "status": "substantial",
+          "threads": [
+            "CH08-01"
+          ]
+        },
+        {
+          "turn": 2,
+          "status": "substantial",
+          "threads": [
+            "CH08-FACT-ADMIN-CONTINUED"
+          ]
+        },
+        {
+          "turn": 3,
+          "status": "substantial",
+          "threads": [
+            "CH08-04-FACTUAL"
+          ]
+        },
+        {
+          "turn": 4,
+          "status": "quiet",
+          "threads": []
+        },
+        {
+          "turn": 5,
+          "status": "quiet",
+          "threads": []
+        }
+      ],
+      "jsonBytes": 238278
+    },
+    {
+      "name": "commercial-memory",
+      "turns": 5,
+      "incidents": 71,
+      "templates": [
+        {
+          "turn": 1,
+          "status": "substantial",
+          "threads": [
+            "CH08-02"
+          ]
+        },
+        {
+          "turn": 2,
+          "status": "substantial",
+          "threads": [
+            "CH08-FACT-ADMIN-CONTINUED"
+          ]
+        },
+        {
+          "turn": 3,
+          "status": "substantial",
+          "threads": [
+            "CH08-FACT-TRADE-OPEN"
+          ]
+        },
+        {
+          "turn": 4,
+          "status": "substantial",
+          "threads": [
+            "CH08-FACT-TRADE-RECLOSED"
+          ]
+        },
+        {
+          "turn": 5,
+          "status": "quiet",
+          "threads": []
+        }
+      ],
+      "jsonBytes": 788107
+    },
+    {
+      "name": "useful-partner-is-not-protection-proof",
+      "turns": 5,
+      "incidents": 56,
+      "templates": [
+        {
+          "turn": 1,
+          "status": "substantial",
+          "threads": [
+            "CH08-02"
+          ]
+        },
+        {
+          "turn": 2,
+          "status": "substantial",
+          "threads": [
+            "CH08-FACT-TRADE-OPEN"
+          ]
+        },
+        {
+          "turn": 3,
+          "status": "quiet",
+          "threads": []
+        },
+        {
+          "turn": 4,
+          "status": "substantial",
+          "threads": [
+            "CH08-FACT-TRADE-RECLOSED"
+          ]
+        },
+        {
+          "turn": 5,
+          "status": "quiet",
+          "threads": []
+        }
+      ],
+      "jsonBytes": 572885
+    },
+    {
+      "name": "diplomatic-memory",
+      "turns": 5,
+      "incidents": 55,
+      "templates": [
+        {
+          "turn": 1,
+          "status": "substantial",
+          "threads": [
+            "CH08-02"
+          ]
+        },
+        {
+          "turn": 2,
+          "status": "substantial",
+          "threads": [
+            "CH08-FACT-TRADE-OPEN"
+          ]
+        },
+        {
+          "turn": 3,
+          "status": "quiet",
+          "threads": []
+        },
+        {
+          "turn": 4,
+          "status": "substantial",
+          "threads": [
+            "CH08-FACT-TRADE-RECLOSED"
+          ]
+        },
+        {
+          "turn": 5,
+          "status": "quiet",
+          "threads": []
+        }
+      ],
+      "jsonBytes": 420778
+    },
+    {
+      "name": "reclosed-before-the-chapter",
+      "turns": 1,
+      "incidents": 13,
+      "templates": [
+        {
+          "turn": 1,
+          "status": "substantial",
+          "threads": [
+            "CH08-FACT-TRADE-RECLOSED"
+          ]
+        }
+      ],
+      "jsonBytes": 142923
+    }
+  ]
+}

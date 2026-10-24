@@ -57,7 +57,11 @@ Collection 07 adds 19 exact fallback alternatives and derives political reaction
 
 ## Collection 08A trade dialogue
 
-Commercial reactions now use 20 exact approved entries, actual disruption/restoration evidence and personal experience instead of repeated reassurance. Gameplay order terminology is preserved. See the [technical report and deferrals](docs/narrative/collection08a-implementation.md) and [multi-turn review package](docs/narrative/review/collection08a/README.md). Collection 08B thematic chapters remain deferred.
+Commercial reactions now use 20 exact approved entries, actual disruption/restoration evidence and personal experience instead of repeated reassurance. Gameplay order terminology is preserved. See the [technical report and deferrals](docs/narrative/collection08a-implementation.md) and [multi-turn review package](docs/narrative/review/collection08a/README.md). Chapter composition is covered separately by Collection 08B below.
+
+## Collection 08B thematic chapters
+
+End-of-turn chapters now select one or two evidence-backed threads instead of enumerating action labels. Exact conditional passages, narrower factual variants, saved source inspection and quiet turns preserve the separate full chronology. See the [implementation and writing audit](docs/narrative/collection08b-implementation.md) and [multi-turn chapter review](docs/narrative/review/collection08b/README.md). Narrative-quality acceptance remains with the user and ChatGPT.
 
 ## Saves and hosting
 
