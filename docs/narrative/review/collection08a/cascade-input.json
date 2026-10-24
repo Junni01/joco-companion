@@ -1,0 +1,9 @@
+{
+  "type": "event",
+  "event": "turmoil",
+  "manualTest": true,
+  "topRegion": "hyderabad",
+  "shape": "circle",
+  "redirectShape": "circle",
+  "modifier": 0
+}

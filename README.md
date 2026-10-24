@@ -55,6 +55,10 @@ The first dialogue integration selects 42 exact approved entries from Collection
 
 Collection 07 adds 19 exact fallback alternatives and derives political reactions from existing grievances and relationship evidence. Hostile rulers no longer automatically welcome Company suppression. See the [technical report and deferrals](docs/narrative/collection07-implementation.md) and [multi-turn narrative review package](docs/narrative/review/collection07/README.md).
 
+## Collection 08A trade dialogue
+
+Commercial reactions now use 20 exact approved entries, actual disruption/restoration evidence and personal experience instead of repeated reassurance. Gameplay order terminology is preserved. See the [technical report and deferrals](docs/narrative/collection08a-implementation.md) and [multi-turn review package](docs/narrative/review/collection08a/README.md). Collection 08B thematic chapters remain deferred.
+
 ## Saves and hosting
 
 Campaigns live in browser storage, separately for regular and debug play. Source transfer does not move them: export JSON in the app and import it in the destination browser.

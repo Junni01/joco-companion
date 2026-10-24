@@ -62,6 +62,12 @@ Implemented 19 exact approved fallback entries and evidence-based political reac
 
 Verification: 200 automated tests pass. Full browser regressions and Collection 07 political-response checks pass on desktop/tablet, including current-version import/reload and persisted Undo/Redo, with no page errors. Five seeded campaigns span four/five actual turns, phase/deck/Parliament progression and final scoring. See [report and four deferred entries](narrative/collection07-implementation.md) and [multi-turn review package](narrative/review/collection07/README.md). Narrative-quality acceptance remains pending. These completed commits are intended for the user-authorized GitHub push; hosting is unchanged.
 
+## Collection 08A — 24 October 2026
+
+Implemented 20 exact approved trade entries and personal repetition guards. Fiction distinguishes disrupted opportunities, Special Envoy restoration, military reopening and genuine cascades; physical controls/instructions retain component terminology. Same-character commercial experience and earlier saved words drive varied reactions or silence. No new permanent relationship attributes, portraits, dynasty/career generation or migrations were added. The chapter composition function is unchanged: 08B remains deferred.
+
+Verification: 218 automated tests pass, including exact pre-change gameplay wording/outcomes and current-version persistence/Undo/Redo. Trade-specific desktop/tablet browser checks and existing full browser regressions pass with no page errors. Five actual multi-turn synthetic campaigns demonstrate 19/20 integrated entries and the repeated-secretary fix. See [technical report and prerequisites](narrative/collection08a-implementation.md), [review index](narrative/review/collection08a/README.md) and [restoration log](narrative/review/collection08a/restoration-log.md). Narrative-quality acceptance remains pending. Delivery includes a user-authorized GitHub push; hosting remains unchanged.
+
 ## Transfer and deployment
 
 Destination: https://github.com/Junni01/joco-companion. Preserve main history and verify destination refs before declaring transfer complete. GitHub does not automatically deploy the existing Sites host. Retain `.openai/hosting.json` project identity; never commit access credentials.

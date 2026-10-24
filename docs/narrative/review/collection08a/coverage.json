@@ -1,0 +1,94 @@
+{
+  "integrated": 20,
+  "demonstratedIds": [
+    "TR08-CASC-CH-01",
+    "TR08-CASC-OFF-01",
+    "TR08-CASC-RUL-01",
+    "TR08-CASC-SEC-01",
+    "TR08-DIPL-CH-01",
+    "TR08-DIPL-RUL-01",
+    "TR08-DIPL-RUL-02",
+    "TR08-DISR-CH-01",
+    "TR08-DISR-RUL-01",
+    "TR08-DISR-RUL-02",
+    "TR08-DISR-SEC-01",
+    "TR08-MIL-OFF-01",
+    "TR08-MIL-RUL-01",
+    "TR08-REL-RUL-01",
+    "TR08-REL-RUL-03",
+    "TR08-REST-SEC-01",
+    "TR08-REST-SEC-02",
+    "TR08-REST-SEC-03",
+    "TR08-REST-SEC-04"
+  ],
+  "fixtures": [
+    {
+      "name": "hostile-military",
+      "scenario": "1710",
+      "turns": 5,
+      "incidents": 71,
+      "restorations": 10,
+      "savedSecretaryReactions": [
+        "TR08-REST-SEC-01",
+        "TR08-REST-SEC-02",
+        "TR08-REST-SEC-03",
+        "TR08-REST-SEC-04"
+      ],
+      "jsonBytes": 776444
+    },
+    {
+      "name": "procedural-military",
+      "scenario": "1710",
+      "turns": 5,
+      "incidents": 71,
+      "restorations": 10,
+      "savedSecretaryReactions": [
+        "TR08-REST-SEC-04",
+        "TR08-REST-SEC-03"
+      ],
+      "jsonBytes": 771696
+    },
+    {
+      "name": "diplomatic-access",
+      "scenario": "1710",
+      "turns": 5,
+      "incidents": 55,
+      "restorations": 10,
+      "savedSecretaryReactions": [
+        "TR08-REST-SEC-01",
+        "TR08-REST-SEC-02",
+        "TR08-REST-SEC-04",
+        "TR08-REST-SEC-03"
+      ],
+      "jsonBytes": 409776
+    },
+    {
+      "name": "cooperative-commerce",
+      "scenario": "1710",
+      "turns": 5,
+      "incidents": 56,
+      "restorations": 10,
+      "savedSecretaryReactions": [
+        "TR08-REST-SEC-01",
+        "TR08-REST-SEC-02",
+        "TR08-REST-SEC-03",
+        "TR08-REST-SEC-04"
+      ],
+      "jsonBytes": 562865
+    },
+    {
+      "name": "connected-cascades",
+      "scenario": "1813",
+      "turns": 4,
+      "incidents": 59,
+      "restorations": 8,
+      "savedSecretaryReactions": [
+        "TR08-REST-SEC-01",
+        "TR08-REST-SEC-02",
+        "TR08-REST-SEC-04",
+        "TR08-REST-SEC-03"
+      ],
+      "jsonBytes": 642860
+    }
+  ]
+}

@@ -1,0 +1,2507 @@
+{
+  "format": "john-company-india",
+  "version": 2,
+  "state": {
+    "schemaVersion": 1,
+    "scenario": "1813",
+    "campaignName": "Post Monopoly",
+    "turn": 5,
+    "gameEnd": null,
+    "indiaPhase": null,
+    "parliamentFinishedTurn": null,
+    "eventStack": {
+      "version": 1,
+      "draw": [
+        "madras-windfall",
+        "madras-peace",
+        "delhi-turmoil",
+        "hyderabad-leader",
+        "punjab-leader",
+        "hyderabad-windfall",
+        "bombay-crisis",
+        "bombay-leader",
+        "punjab-turmoil",
+        "punjab-crisis",
+        "maratha-turmoil",
+        "bengal-leader",
+        "madras-shuffle",
+        "mysore-peace",
+        "bombay-turmoil",
+        "mysore-crisis",
+        "bengal-crisis",
+        "maratha-foreign",
+        "maratha-crisis",
+        "delhi-crisis"
+      ],
+      "discard": [],
+      "pending": null
+    },
+    "chinaOffice": true,
+    "laws": {
+      "royalProtection": false,
+      "governorGeneral": true,
+      "envoyChina": false,
+      "zamindarTaxes": false,
+      "treasureReform": false,
+      "sepoyRecruitment": false,
+      "calicoActs": true,
+      "militaryOversight": true,
+      "deregulation": true
+    },
+    "elephant": {
+      "from": "mysore",
+      "to": "madras"
+    },
+    "regions": {
+      "punjab": {
+        "control": "indian",
+        "presidency": null,
+        "overlord": null,
+        "empireCapital": false,
+        "strength": 2,
+        "unrest": 0,
+        "lootAvailable": true,
+        "orders": {
+          "p7": false
+        }
+      },
+      "delhi": {
+        "control": "indian",
+        "presidency": null,
+        "overlord": null,
+        "empireCapital": false,
+        "strength": 1,
+        "unrest": 0,
+        "lootAvailable": true,
+        "orders": {
+          "d5n": true,
+          "d3": false,
+          "d5e": false
+        }
+      },
+      "bengal": {
+        "control": "company",
+        "presidency": "bengal",
+        "overlord": null,
+        "empireCapital": false,
+        "strength": 0,
+        "unrest": 1,
+        "lootAvailable": false,
+        "orders": {
+          "be5": false,
+          "be6": false
+        }
+      },
+      "bombay": {
+        "control": "company",
+        "presidency": "bombay",
+        "overlord": null,
+        "empireCapital": false,
+        "strength": 0,
+        "unrest": 2,
+        "lootAvailable": false,
+        "orders": {
+          "bo3n": true,
+          "bo3s": true,
+          "bo4": true
+        }
+      },
+      "maratha": {
+        "control": "indian",
+        "presidency": null,
+        "overlord": null,
+        "empireCapital": false,
+        "strength": 2,
+        "unrest": 0,
+        "lootAvailable": true,
+        "orders": {
+          "ma4": true,
+          "ma3": false,
+          "ma2": true
+        }
+      },
+      "hyderabad": {
+        "control": "indian",
+        "presidency": null,
+        "overlord": null,
+        "empireCapital": false,
+        "strength": 1,
+        "unrest": 0,
+        "lootAvailable": true,
+        "orders": {
+          "h7": false
+        }
+      },
+      "mysore": {
+        "control": "indian",
+        "presidency": null,
+        "overlord": null,
+        "empireCapital": false,
+        "strength": 2,
+        "unrest": 0,
+        "lootAvailable": true,
+        "orders": {
+          "my3": true,
+          "my6": true
+        }
+      },
+      "madras": {
+        "control": "company",
+        "presidency": "madras",
+        "overlord": null,
+        "empireCapital": false,
+        "strength": 0,
+        "unrest": 1,
+        "lootAvailable": false,
+        "orders": {
+          "md5": true,
+          "md4": false
+        }
+      }
+    },
+    "history": [
+      {
+        "kind": "action",
+        "actionType": "tax",
+        "title": "Bombay · Governor General Tax",
+        "report": "Resolve the successful Tax’s £2 payment on the table; do not place it in the Governor General’s own treasury.\n\nAdd 1 unrest to Bombay (now 1).",
+        "input": {
+          "type": "tax",
+          "region": "bombay",
+          "taxMode": "general"
+        },
+        "incident": {
+          "version": 1,
+          "id": "incident-1",
+          "type": "tax",
+          "input": {
+            "type": "tax",
+            "region": "bombay",
+            "taxMode": "general"
+          },
+          "turn": 5,
+          "scenario": "1813",
+          "provenance": "gameplay",
+          "changes": [
+            {
+              "region": "bombay",
+              "before": {
+                "control": "company",
+                "presidency": "bombay",
+                "overlord": null,
+                "empireCapital": false,
+                "strength": 0,
+                "unrest": 0,
+                "lootAvailable": false,
+                "orders": {
+                  "bo3n": true,
+                  "bo3s": true,
+                  "bo4": true
+                }
+              },
+              "after": {
+                "control": "company",
+                "presidency": "bombay",
+                "overlord": null,
+                "empireCapital": false,
+                "strength": 0,
+                "unrest": 1,
+                "lootAvailable": false,
+                "orders": {
+                  "bo3n": true,
+                  "bo3s": true,
+                  "bo4": true
+                }
+              }
+            }
+          ],
+          "facts": [
+            {
+              "factId": "fact-0",
+              "type": "tax",
+              "region": "bombay",
+              "mode": "general",
+              "ordinal": 1,
+              "unrest": 1
+            },
+            {
+              "factId": "fact-1",
+              "type": "unrest",
+              "region": "bombay",
+              "amount": 1,
+              "cause": "tax",
+              "reason": null
+            }
+          ],
+          "elephant": {
+            "before": {
+              "from": "mysore",
+              "to": "madras"
+            },
+            "after": {
+              "from": "mysore",
+              "to": "madras"
+            }
+          },
+          "laws": {
+            "before": {
+              "royalProtection": false,
+              "governorGeneral": true,
+              "envoyChina": false,
+              "zamindarTaxes": false,
+              "treasureReform": false,
+              "sepoyRecruitment": false,
+              "calicoActs": true,
+              "militaryOversight": true,
+              "deregulation": true
+            },
+            "after": {
+              "royalProtection": false,
+              "governorGeneral": true,
+              "envoyChina": false,
+              "zamindarTaxes": false,
+              "treasureReform": false,
+              "sepoyRecruitment": false,
+              "calicoActs": true,
+              "militaryOversight": true,
+              "deregulation": true
+            }
+          }
+        },
+        "regionLosses": [],
+        "officerRouts": [],
+        "scenes": [],
+        "elephantMoves": [],
+        "turn": 5,
+        "at": "2026-10-24T12:00:00.000Z",
+        "narrative": {
+          "id": "incident-1",
+          "turn": 5,
+          "lines": [
+            {
+              "id": "incident-1:line-0",
+              "templateId": "CH-R03-01",
+              "text": "The Company had expected gratitude, or at least obedience. The inhabitants, demonstrating their usual difficulty with administrative terminology, appeared to have confused both with resentment.",
+              "speakerId": "chronicler",
+              "speaker": "Chronicler",
+              "role": "Anonymous narrator",
+              "emotion": "Dry satire",
+              "incidentId": "incident-1",
+              "evidence": [
+                {
+                  "incidentId": "incident-1",
+                  "factKey": "fact-0"
+                },
+                {
+                  "incidentId": "incident-1",
+                  "factKey": "fact-1"
+                }
+              ],
+              "callbackMemoryIds": [],
+              "callbackStatementIds": [],
+              "provenance": "Authored fictional dialogue",
+              "family": "CH-R03-01",
+              "selectionEvidence": []
+            },
+            {
+              "id": "incident-1:line-1",
+              "templateId": "FB07-TAX-RUL-01",
+              "text": "“The Company has presented its demands. I shall reserve my gratitude until I discover what remains afterward.”",
+              "speakerId": "ruler-bombay",
+              "speaker": "Madhav of Bombay",
+              "role": "retained local ruler",
+              "emotion": "Guarded",
+              "incidentId": "incident-1",
+              "evidence": [
+                {
+                  "incidentId": "incident-1",
+                  "factKey": "fact-0"
+                },
+                {
+                  "incidentId": "incident-1",
+                  "factKey": "fact-1"
+                }
+              ],
+              "callbackMemoryIds": [],
+              "callbackStatementIds": [],
+              "provenance": "Authored fictional dialogue",
+              "phraseFamily": "FB07-TAX-RUL-01",
+              "selectionEvidence": [],
+              "cooldownOverride": null
+            },
+            {
+              "id": "incident-1:line-2",
+              "templateId": "FB07-TAX-SEC-01",
+              "text": "“The revenue has been requested. I am confident the gentlemen responsible for providing it will appreciate the distinction between a request and an obligation.”",
+              "speakerId": "secretary-general",
+              "speaker": "Arthur Pembroke",
+              "role": "Governor General secretary",
+              "emotion": "Composed, smug",
+              "incidentId": "incident-1",
+              "evidence": [
+                {
+                  "incidentId": "incident-1",
+                  "factKey": "fact-0"
+                },
+                {
+                  "incidentId": "incident-1",
+                  "factKey": "fact-1"
+                }
+              ],
+              "callbackMemoryIds": [],
+              "callbackStatementIds": [],
+              "provenance": "Authored fictional dialogue",
+              "phraseFamily": "FB07-TAX-SEC-01",
+              "selectionEvidence": [],
+              "cooldownOverride": null
+            }
+          ],
+          "coverage": "specific",
+          "provenance": "gameplay"
+        }
+      },
+      {
+        "kind": "action",
+        "actionType": "govern",
+        "title": "Governor General · Govern check",
+        "report": "Add 1 unrest to Bengal (now 1).\n\nAdd 1 unrest to Bombay (now 2).\n\nAdd 1 unrest to Madras (now 1).\n\nResolve any office consequences on the table. The failed-check unrest includes all reported sixes.",
+        "input": {
+          "type": "govern",
+          "outcome": "failure",
+          "sixes": 0
+        },
+        "incident": {
+          "version": 1,
+          "id": "incident-2",
+          "type": "govern",
+          "input": {
+            "type": "govern",
+            "outcome": "failure",
+            "sixes": 0
+          },
+          "turn": 5,
+          "scenario": "1813",
+          "provenance": "gameplay",
+          "changes": [
+            {
+              "region": "bengal",
+              "before": {
+                "control": "company",
+                "presidency": "bengal",
+                "overlord": null,
+                "empireCapital": false,
+                "strength": 0,
+                "unrest": 0,
+                "lootAvailable": false,
+                "orders": {
+                  "be5": false,
+                  "be6": false
+                }
+              },
+              "after": {
+                "control": "company",
+                "presidency": "bengal",
+                "overlord": null,
+                "empireCapital": false,
+                "strength": 0,
+                "unrest": 1,
+                "lootAvailable": false,
+                "orders": {
+                  "be5": false,
+                  "be6": false
+                }
+              }
+            },
+            {
+              "region": "bombay",
+              "before": {
+                "control": "company",
+                "presidency": "bombay",
+                "overlord": null,
+                "empireCapital": false,
+                "strength": 0,
+                "unrest": 1,
+                "lootAvailable": false,
+                "orders": {
+                  "bo3n": true,
+                  "bo3s": true,
+                  "bo4": true
+                }
+              },
+              "after": {
+                "control": "company",
+                "presidency": "bombay",
+                "overlord": null,
+                "empireCapital": false,
+                "strength": 0,
+                "unrest": 2,
+                "lootAvailable": false,
+                "orders": {
+                  "bo3n": true,
+                  "bo3s": true,
+                  "bo4": true
+                }
+              }
+            },
+            {
+              "region": "madras",
+              "before": {
+                "control": "company",
+                "presidency": "madras",
+                "overlord": null,
+                "empireCapital": false,
+                "strength": 0,
+                "unrest": 0,
+                "lootAvailable": false,
+                "orders": {
+                  "md5": true,
+                  "md4": false
+                }
+              },
+              "after": {
+                "control": "company",
+                "presidency": "madras",
+                "overlord": null,
+                "empireCapital": false,
+                "strength": 0,
+                "unrest": 1,
+                "lootAvailable": false,
+                "orders": {
+                  "md5": true,
+                  "md4": false
+                }
+              }
+            }
+          ],
+          "facts": [
+            {
+              "factId": "fact-0",
+              "type": "unrest",
+              "region": "bengal",
+              "amount": 1,
+              "cause": "govern",
+              "reason": null
+            },
+            {
+              "factId": "fact-1",
+              "type": "unrest",
+              "region": "bombay",
+              "amount": 1,
+              "cause": "govern",
+              "reason": null
+            },
+            {
+              "factId": "fact-2",
+              "type": "unrest",
+              "region": "madras",
+              "amount": 1,
+              "cause": "govern",
+              "reason": null
+            }
+          ],
+          "elephant": {
+            "before": {
+              "from": "mysore",
+              "to": "madras"
+            },
+            "after": {
+              "from": "mysore",
+              "to": "madras"
+            }
+          },
+          "laws": {
+            "before": {
+              "royalProtection": false,
+              "governorGeneral": true,
+              "envoyChina": false,
+              "zamindarTaxes": false,
+              "treasureReform": false,
+              "sepoyRecruitment": false,
+              "calicoActs": true,
+              "militaryOversight": true,
+              "deregulation": true
+            },
+            "after": {
+              "royalProtection": false,
+              "governorGeneral": true,
+              "envoyChina": false,
+              "zamindarTaxes": false,
+              "treasureReform": false,
+              "sepoyRecruitment": false,
+              "calicoActs": true,
+              "militaryOversight": true,
+              "deregulation": true
+            }
+          }
+        },
+        "regionLosses": [],
+        "officerRouts": [],
+        "scenes": [],
+        "elephantMoves": [],
+        "turn": 5,
+        "at": "2026-10-24T12:00:00.000Z",
+        "narrative": {
+          "id": "incident-2",
+          "turn": 5,
+          "lines": [
+            {
+              "id": "incident-2:line-0",
+              "templateId": "chronicler-govern-v1",
+              "text": "Bengal: Governor General failure recorded; 1 unrest added. Bombay: Governor General failure recorded; 1 unrest added. Madras: Governor General failure recorded; 1 unrest added.",
+              "speakerId": "chronicler",
+              "speaker": "Chronicler",
+              "role": "Anonymous narrator",
+              "emotion": "neutral",
+              "incidentId": "incident-2",
+              "evidence": [
+                {
+                  "incidentId": "incident-2",
+                  "factKey": "fact-0"
+                },
+                {
+                  "incidentId": "incident-2",
+                  "factKey": "fact-1"
+                },
+                {
+                  "incidentId": "incident-2",
+                  "factKey": "fact-2"
+                }
+              ],
+              "callbackMemoryIds": [],
+              "callbackStatementIds": [],
+              "provenance": "Authored fictional dialogue"
+            },
+            {
+              "id": "incident-2:line-1",
+              "templateId": "ruler-admin-1",
+              "text": "The administration in Bengal has produced another matter for the court to consider.",
+              "speakerId": "ruler-bengal",
+              "speaker": "Azim of Bengal",
+              "role": "retained local ruler",
+              "emotion": "worried",
+              "incidentId": "incident-2",
+              "evidence": [
+                {
+                  "incidentId": "incident-2",
+                  "factKey": "fact-0"
+                }
+              ],
+              "callbackMemoryIds": [],
+              "callbackStatementIds": [],
+              "provenance": "Authored fictional dialogue",
+              "phraseFamily": "ruler-admin-1",
+              "selectionEvidence": [],
+              "cooldownOverride": null
+            },
+            {
+              "id": "incident-2:line-2",
+              "templateId": "RU-R03-01",
+              "text": "“A discontented population is a dangerous thing. Particularly when those responsible for its discontent believe themselves universally adored.”",
+              "speakerId": "ruler-madras",
+              "speaker": "Mansur of Madras",
+              "role": "retained local ruler",
+              "emotion": "Calculating",
+              "incidentId": "incident-2",
+              "evidence": [
+                {
+                  "incidentId": "incident-2",
+                  "factKey": "fact-2"
+                }
+              ],
+              "callbackMemoryIds": [],
+              "callbackStatementIds": [],
+              "provenance": "Authored fictional dialogue",
+              "phraseFamily": "RU-R03-01",
+              "selectionEvidence": [],
+              "cooldownOverride": null
+            },
+            {
+              "id": "incident-2:line-3",
+              "templateId": "RU-R03-02",
+              "text": "“Anger is easily gathered. It is rather more difficult to persuade it to march in the same direction.”",
+              "speakerId": "ruler-bombay",
+              "speaker": "Madhav of Bombay",
+              "role": "retained local ruler",
+              "emotion": "Restrained",
+              "incidentId": "incident-2",
+              "evidence": [
+                {
+                  "incidentId": "incident-2",
+                  "factKey": "fact-1"
+                }
+              ],
+              "callbackMemoryIds": [],
+              "callbackStatementIds": [],
+              "provenance": "Authored fictional dialogue",
+              "phraseFamily": "RU-R03-02",
+              "selectionEvidence": [],
+              "cooldownOverride": null
+            },
+            {
+              "id": "incident-2:line-4",
+              "templateId": "FB07-ADM-SEC-02",
+              "text": "“There appears to have been a failure somewhere between the issuing of instructions and their unfortunate execution.”",
+              "speakerId": "secretary-general",
+              "speaker": "Arthur Pembroke",
+              "role": "Governor General secretary",
+              "emotion": "Anxious",
+              "incidentId": "incident-2",
+              "evidence": [
+                {
+                  "incidentId": "incident-2",
+                  "factKey": "fact-0"
+                }
+              ],
+              "callbackMemoryIds": [],
+              "callbackStatementIds": [],
+              "provenance": "Authored fictional dialogue",
+              "phraseFamily": "FB07-ADM-SEC-02",
+              "selectionEvidence": [],
+              "cooldownOverride": null
+            }
+          ],
+          "coverage": "specific",
+          "provenance": "gameplay"
+        }
+      },
+      {
+        "kind": "action",
+        "actionType": "event",
+        "title": "Manual event test · Turmoil",
+        "report": "Close Hyderabad £7 (only order). Return any writer there to its owner; flip any filled-order token.\n\nManual test: the digital event stack and phase event count are unchanged. Use Undo to reverse this test’s board effects.",
+        "input": {
+          "type": "event",
+          "event": "turmoil",
+          "manualTest": true,
+          "topRegion": "hyderabad",
+          "shape": "circle",
+          "redirectShape": "circle",
+          "modifier": 0
+        },
+        "incident": {
+          "version": 1,
+          "id": "incident-3",
+          "type": "event",
+          "input": {
+            "type": "event",
+            "event": "turmoil",
+            "manualTest": true,
+            "topRegion": "hyderabad",
+            "shape": "circle",
+            "redirectShape": "circle",
+            "modifier": 0
+          },
+          "turn": 5,
+          "scenario": "1813",
+          "provenance": "manual-test",
+          "changes": [
+            {
+              "region": "hyderabad",
+              "before": {
+                "control": "indian",
+                "presidency": null,
+                "overlord": null,
+                "empireCapital": false,
+                "strength": 1,
+                "unrest": 0,
+                "lootAvailable": true,
+                "orders": {
+                  "h7": true
+                }
+              },
+              "after": {
+                "control": "indian",
+                "presidency": null,
+                "overlord": null,
+                "empireCapital": false,
+                "strength": 1,
+                "unrest": 0,
+                "lootAvailable": true,
+                "orders": {
+                  "h7": false
+                }
+              }
+            }
+          ],
+          "facts": [
+            {
+              "factId": "fact-0",
+              "type": "order-closed",
+              "region": "hyderabad",
+              "order": "h7"
+            }
+          ],
+          "elephant": {
+            "before": {
+              "from": "mysore",
+              "to": "madras"
+            },
+            "after": {
+              "from": "mysore",
+              "to": "madras"
+            }
+          },
+          "laws": {
+            "before": {
+              "royalProtection": false,
+              "governorGeneral": true,
+              "envoyChina": false,
+              "zamindarTaxes": false,
+              "treasureReform": false,
+              "sepoyRecruitment": false,
+              "calicoActs": true,
+              "militaryOversight": true,
+              "deregulation": true
+            },
+            "after": {
+              "royalProtection": false,
+              "governorGeneral": true,
+              "envoyChina": false,
+              "zamindarTaxes": false,
+              "treasureReform": false,
+              "sepoyRecruitment": false,
+              "calicoActs": true,
+              "militaryOversight": true,
+              "deregulation": true
+            }
+          }
+        },
+        "regionLosses": [],
+        "officerRouts": [],
+        "scenes": [],
+        "elephantMoves": [],
+        "turn": 5,
+        "at": "2026-10-24T12:00:00.000Z",
+        "narrative": {
+          "id": "incident-3",
+          "turn": 5,
+          "lines": [
+            {
+              "id": "incident-3:line-0",
+              "templateId": "chronicler-event-v1",
+              "text": "Hyderabad: a commercial opportunity was disrupted.",
+              "speakerId": "chronicler",
+              "speaker": "Chronicler",
+              "role": "Anonymous narrator",
+              "emotion": "neutral",
+              "incidentId": "incident-3",
+              "evidence": [
+                {
+                  "incidentId": "incident-3",
+                  "factKey": "fact-0"
+                }
+              ],
+              "callbackMemoryIds": [],
+              "callbackStatementIds": [],
+              "provenance": "Authored fictional dialogue"
+            },
+            {
+              "id": "incident-3:line-1",
+              "templateId": "TR08-DISR-RUL-01",
+              "text": "“The Company appears astonished that trade requires the cooperation of those with whom it wishes to trade.”",
+              "speakerId": "ruler-hyderabad",
+              "speaker": "Yusuf of Hyderabad",
+              "role": "sovereign ruler",
+              "emotion": "critical",
+              "incidentId": "incident-3",
+              "evidence": [
+                {
+                  "incidentId": "incident-3",
+                  "factKey": "fact-0"
+                }
+              ],
+              "callbackMemoryIds": [],
+              "callbackStatementIds": [],
+              "provenance": "Authored fictional dialogue",
+              "phraseFamily": "TR08-DISR-RUL-01",
+              "selectionEvidence": [],
+              "cooldownOverride": null,
+              "tradeRegion": "hyderabad",
+              "tradeKind": "trade-disruption",
+              "experienceLineIds": []
+            }
+          ],
+          "coverage": "specific",
+          "provenance": "manual-test"
+        }
+      }
+    ],
+    "narrative": {
+      "version": 2,
+      "enabled": true,
+      "intensity": "standard",
+      "rng": 983475832,
+      "nextIncident": 4,
+      "characters": {
+        "ruler-punjab": {
+          "id": "ruler-punjab",
+          "name": "Salim of Punjab",
+          "aliases": [],
+          "region": "punjab",
+          "age": 53,
+          "dynasty": "House of Salim of Punjab",
+          "role": "ruler",
+          "condition": "alive",
+          "position": "sovereign ruler",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 54,
+            "pride": 23,
+            "caution": 55,
+            "ruthlessness": 74,
+            "loyalty": 67,
+            "vindictiveness": 57
+          },
+          "family": [
+            {
+              "id": "heir-punjab",
+              "tie": "younger sibling"
+            }
+          ],
+          "claims": [
+            "punjab"
+          ],
+          "relations": {},
+          "incidents": [],
+          "background": "A small circle of relatives debates policy before the court assembles.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 1,
+            "directness": 2,
+            "restraint": 2,
+            "humour": 2
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "heir-punjab": {
+          "id": "heir-punjab",
+          "name": "Rahim of Punjab",
+          "aliases": [],
+          "region": "punjab",
+          "age": 45,
+          "dynasty": "House of Salim of Punjab",
+          "role": "heir",
+          "condition": "alive",
+          "position": "family member",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 20,
+            "pride": 44,
+            "caution": 24,
+            "ruthlessness": 75,
+            "loyalty": 78,
+            "vindictiveness": 50
+          },
+          "family": [
+            {
+              "id": "ruler-punjab",
+              "tie": "older sibling"
+            }
+          ],
+          "claims": [],
+          "relations": {},
+          "incidents": [],
+          "background": "A younger sibling within this fictional household; no earlier campaign events are asserted.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 1,
+            "directness": 2,
+            "restraint": 1,
+            "humour": 2
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "ruler-delhi": {
+          "id": "ruler-delhi",
+          "name": "Jalal of Delhi",
+          "aliases": [],
+          "region": "delhi",
+          "age": 54,
+          "dynasty": "House of Jalal of Delhi",
+          "role": "ruler",
+          "condition": "alive",
+          "position": "sovereign ruler",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 47,
+            "pride": 56,
+            "caution": 59,
+            "ruthlessness": 29,
+            "loyalty": 76,
+            "vindictiveness": 38
+          },
+          "family": [
+            {
+              "id": "heir-delhi",
+              "tie": "younger sibling"
+            }
+          ],
+          "claims": [
+            "delhi"
+          ],
+          "relations": {},
+          "incidents": [],
+          "background": "The court prizes ceremony; its ruler prefers a concise petition.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 2,
+            "directness": 1,
+            "restraint": 2,
+            "humour": 1
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "heir-delhi": {
+          "id": "heir-delhi",
+          "name": "Kamal of Delhi",
+          "aliases": [],
+          "region": "delhi",
+          "age": 46,
+          "dynasty": "House of Jalal of Delhi",
+          "role": "heir",
+          "condition": "alive",
+          "position": "family member",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 73,
+            "pride": 35,
+            "caution": 34,
+            "ruthlessness": 44,
+            "loyalty": 69,
+            "vindictiveness": 76
+          },
+          "family": [
+            {
+              "id": "ruler-delhi",
+              "tie": "older sibling"
+            }
+          ],
+          "claims": [],
+          "relations": {},
+          "incidents": [],
+          "background": "A younger sibling within this fictional household; no earlier campaign events are asserted.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 3,
+            "directness": 1,
+            "restraint": 1,
+            "humour": 1
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "ruler-bengal": {
+          "id": "ruler-bengal",
+          "name": "Azim of Bengal",
+          "aliases": [],
+          "region": "bengal",
+          "age": 42,
+          "dynasty": "House of Azim of Bengal",
+          "role": "ruler",
+          "condition": "alive",
+          "position": "retained local ruler",
+          "mood": "worried",
+          "traits": {
+            "ambition": 42,
+            "pride": 64,
+            "caution": 40,
+            "ruthlessness": 24,
+            "loyalty": 32,
+            "vindictiveness": 64
+          },
+          "family": [
+            {
+              "id": "heir-bengal",
+              "tie": "younger sibling"
+            }
+          ],
+          "claims": [
+            "bengal"
+          ],
+          "relations": {
+            "institution:company": {
+              "hostility": 5,
+              "respect": 0,
+              "gratitude": 0,
+              "mistrust": 0,
+              "loyalty": 0,
+              "familiarity": 3,
+              "origins": [
+                "incident-2"
+              ],
+              "target": {
+                "kind": "institution",
+                "id": "company"
+              },
+              "causes": [
+                {
+                  "id": "cause:incident-2:ruler-bengal:institution:company:memory:incident-2:fact-0:ruler-bengal:administration",
+                  "incidentId": "incident-2",
+                  "memoryIds": [
+                    "memory:incident-2:fact-0:ruler-bengal:administration"
+                  ],
+                  "statementIds": [],
+                  "deltas": {
+                    "hostility": 5,
+                    "familiarity": 3
+                  },
+                  "reason": "administration in Bengal; this is Azim of Bengal's assessment, not a claim about hidden orders."
+                }
+              ]
+            }
+          },
+          "incidents": [
+            "incident-2"
+          ],
+          "background": "The ruler cultivates a reputation for careful listening.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [
+            "memory:incident-2:fact-0:ruler-bengal:administration"
+          ],
+          "confidence": 44,
+          "voice": {
+            "formality": 1,
+            "directness": 1,
+            "restraint": 1,
+            "humour": 1
+          },
+          "pacing": {
+            "relevant": 1,
+            "lastAppearance": 1,
+            "lastCallbackAt": -10,
+            "templates": [
+              {
+                "id": "ruler-admin-1",
+                "at": 1
+              }
+            ],
+            "phrases": [
+              {
+                "family": "ruler-admin-1",
+                "at": 1
+              }
+            ],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "heir-bengal": {
+          "id": "heir-bengal",
+          "name": "Nasir of Bengal",
+          "aliases": [],
+          "region": "bengal",
+          "age": 34,
+          "dynasty": "House of Azim of Bengal",
+          "role": "heir",
+          "condition": "alive",
+          "position": "family member",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 78,
+            "pride": 25,
+            "caution": 75,
+            "ruthlessness": 65,
+            "loyalty": 51,
+            "vindictiveness": 23
+          },
+          "family": [
+            {
+              "id": "ruler-bengal",
+              "tie": "older sibling"
+            }
+          ],
+          "claims": [],
+          "relations": {},
+          "incidents": [],
+          "background": "A younger sibling within this fictional household; no earlier campaign events are asserted.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 3,
+            "directness": 1,
+            "restraint": 3,
+            "humour": 1
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "ruler-bombay": {
+          "id": "ruler-bombay",
+          "name": "Madhav of Bombay",
+          "aliases": [],
+          "region": "bombay",
+          "age": 48,
+          "dynasty": "House of Madhav of Bombay",
+          "role": "ruler",
+          "condition": "alive",
+          "position": "retained local ruler",
+          "mood": "Restrained",
+          "traits": {
+            "ambition": 72,
+            "pride": 85,
+            "caution": 75,
+            "ruthlessness": 57,
+            "loyalty": 52,
+            "vindictiveness": 74
+          },
+          "family": [
+            {
+              "id": "heir-bombay",
+              "tie": "younger sibling"
+            }
+          ],
+          "claims": [
+            "bombay"
+          ],
+          "relations": {
+            "institution:company": {
+              "hostility": 10,
+              "respect": 0,
+              "gratitude": 0,
+              "mistrust": 0,
+              "loyalty": 0,
+              "familiarity": 6,
+              "origins": [
+                "incident-1",
+                "incident-2"
+              ],
+              "target": {
+                "kind": "institution",
+                "id": "company"
+              },
+              "causes": [
+                {
+                  "id": "cause:incident-1:ruler-bombay:institution:company:memory:incident-1:fact-0:ruler-bombay:tax",
+                  "incidentId": "incident-1",
+                  "memoryIds": [
+                    "memory:incident-1:fact-0:ruler-bombay:tax"
+                  ],
+                  "statementIds": [],
+                  "deltas": {
+                    "hostility": 4,
+                    "familiarity": 3
+                  },
+                  "reason": "tax in Bombay; this is Madhav of Bombay's assessment, not a claim about hidden orders."
+                },
+                {
+                  "id": "cause:incident-2:ruler-bombay:institution:company:memory:incident-2:fact-1:ruler-bombay:administration",
+                  "incidentId": "incident-2",
+                  "memoryIds": [
+                    "memory:incident-2:fact-1:ruler-bombay:administration"
+                  ],
+                  "statementIds": [],
+                  "deltas": {
+                    "hostility": 6,
+                    "familiarity": 3
+                  },
+                  "reason": "administration in Bombay; this is Madhav of Bombay's assessment, not a claim about hidden orders."
+                }
+              ]
+            }
+          },
+          "incidents": [
+            "incident-1",
+            "incident-2"
+          ],
+          "background": "The court prizes ceremony; its ruler prefers a concise petition.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [
+            "memory:incident-1:fact-0:ruler-bombay:tax",
+            "memory:incident-2:fact-1:ruler-bombay:administration"
+          ],
+          "confidence": 38,
+          "voice": {
+            "formality": 1,
+            "directness": 3,
+            "restraint": 3,
+            "humour": 1
+          },
+          "pacing": {
+            "relevant": 2,
+            "lastAppearance": 2,
+            "lastCallbackAt": -10,
+            "templates": [
+              {
+                "id": "FB07-TAX-RUL-01",
+                "at": 1
+              },
+              {
+                "id": "RU-R03-02",
+                "at": 2
+              }
+            ],
+            "phrases": [
+              {
+                "family": "FB07-TAX-RUL-01",
+                "at": 1
+              },
+              {
+                "family": "RU-R03-02",
+                "at": 2
+              }
+            ],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "heir-bombay": {
+          "id": "heir-bombay",
+          "name": "Keshav of Bombay",
+          "aliases": [],
+          "region": "bombay",
+          "age": 40,
+          "dynasty": "House of Madhav of Bombay",
+          "role": "heir",
+          "condition": "alive",
+          "position": "family member",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 55,
+            "pride": 70,
+            "caution": 36,
+            "ruthlessness": 58,
+            "loyalty": 74,
+            "vindictiveness": 66
+          },
+          "family": [
+            {
+              "id": "ruler-bombay",
+              "tie": "older sibling"
+            }
+          ],
+          "claims": [],
+          "relations": {},
+          "incidents": [],
+          "background": "A younger sibling within this fictional household; no earlier campaign events are asserted.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 1,
+            "directness": 1,
+            "restraint": 2,
+            "humour": 2
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "ruler-maratha": {
+          "id": "ruler-maratha",
+          "name": "Gopal of Maratha",
+          "aliases": [],
+          "region": "maratha",
+          "age": 36,
+          "dynasty": "House of Gopal of Maratha",
+          "role": "ruler",
+          "condition": "alive",
+          "position": "sovereign ruler",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 36,
+            "pride": 68,
+            "caution": 79,
+            "ruthlessness": 65,
+            "loyalty": 28,
+            "vindictiveness": 47
+          },
+          "family": [
+            {
+              "id": "heir-maratha",
+              "tie": "younger sibling"
+            }
+          ],
+          "claims": [
+            "maratha"
+          ],
+          "relations": {},
+          "incidents": [],
+          "background": "The court prizes ceremony; its ruler prefers a concise petition.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 2,
+            "directness": 3,
+            "restraint": 1,
+            "humour": 0
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "heir-maratha": {
+          "id": "heir-maratha",
+          "name": "Vishwanath of Maratha",
+          "aliases": [],
+          "region": "maratha",
+          "age": 28,
+          "dynasty": "House of Gopal of Maratha",
+          "role": "heir",
+          "condition": "alive",
+          "position": "family member",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 28,
+            "pride": 77,
+            "caution": 23,
+            "ruthlessness": 20,
+            "loyalty": 73,
+            "vindictiveness": 62
+          },
+          "family": [
+            {
+              "id": "ruler-maratha",
+              "tie": "older sibling"
+            }
+          ],
+          "claims": [],
+          "relations": {},
+          "incidents": [],
+          "background": "A younger sibling within this fictional household; no earlier campaign events are asserted.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 2,
+            "directness": 2,
+            "restraint": 1,
+            "humour": 2
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "ruler-hyderabad": {
+          "id": "ruler-hyderabad",
+          "name": "Yusuf of Hyderabad",
+          "aliases": [],
+          "region": "hyderabad",
+          "age": 36,
+          "dynasty": "House of Yusuf of Hyderabad",
+          "role": "ruler",
+          "condition": "alive",
+          "position": "sovereign ruler",
+          "mood": "critical",
+          "traits": {
+            "ambition": 72,
+            "pride": 38,
+            "caution": 38,
+            "ruthlessness": 76,
+            "loyalty": 59,
+            "vindictiveness": 39
+          },
+          "family": [
+            {
+              "id": "heir-hyderabad",
+              "tie": "younger sibling"
+            }
+          ],
+          "claims": [
+            "hyderabad"
+          ],
+          "relations": {},
+          "incidents": [
+            "incident-3"
+          ],
+          "background": "A small circle of relatives debates policy before the court assembles.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [
+            "memory:incident-3:fact-0:ruler-hyderabad:trade-disruption"
+          ],
+          "confidence": 50,
+          "voice": {
+            "formality": 2,
+            "directness": 3,
+            "restraint": 3,
+            "humour": 2
+          },
+          "pacing": {
+            "relevant": 1,
+            "lastAppearance": 1,
+            "lastCallbackAt": -10,
+            "templates": [
+              {
+                "id": "TR08-DISR-RUL-01",
+                "at": 1
+              }
+            ],
+            "phrases": [
+              {
+                "family": "TR08-DISR-RUL-01",
+                "at": 1
+              }
+            ],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "heir-hyderabad": {
+          "id": "heir-hyderabad",
+          "name": "Husain of Hyderabad",
+          "aliases": [],
+          "region": "hyderabad",
+          "age": 28,
+          "dynasty": "House of Yusuf of Hyderabad",
+          "role": "heir",
+          "condition": "alive",
+          "position": "family member",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 78,
+            "pride": 27,
+            "caution": 60,
+            "ruthlessness": 70,
+            "loyalty": 43,
+            "vindictiveness": 66
+          },
+          "family": [
+            {
+              "id": "ruler-hyderabad",
+              "tie": "older sibling"
+            }
+          ],
+          "claims": [],
+          "relations": {},
+          "incidents": [],
+          "background": "A younger sibling within this fictional household; no earlier campaign events are asserted.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 2,
+            "directness": 2,
+            "restraint": 3,
+            "humour": 2
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "ruler-mysore": {
+          "id": "ruler-mysore",
+          "name": "Deva of Mysore",
+          "aliases": [],
+          "region": "mysore",
+          "age": 37,
+          "dynasty": "House of Deva of Mysore",
+          "role": "ruler",
+          "condition": "alive",
+          "position": "sovereign ruler",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 49,
+            "pride": 47,
+            "caution": 42,
+            "ruthlessness": 58,
+            "loyalty": 69,
+            "vindictiveness": 38
+          },
+          "family": [
+            {
+              "id": "heir-mysore",
+              "tie": "younger sibling"
+            }
+          ],
+          "claims": [
+            "mysore"
+          ],
+          "relations": {},
+          "incidents": [],
+          "background": "The ruler cultivates a reputation for careful listening.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 1,
+            "directness": 3,
+            "restraint": 3,
+            "humour": 0
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "heir-mysore": {
+          "id": "heir-mysore",
+          "name": "Chandra of Mysore",
+          "aliases": [],
+          "region": "mysore",
+          "age": 29,
+          "dynasty": "House of Deva of Mysore",
+          "role": "heir",
+          "condition": "alive",
+          "position": "family member",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 56,
+            "pride": 68,
+            "caution": 63,
+            "ruthlessness": 47,
+            "loyalty": 54,
+            "vindictiveness": 27
+          },
+          "family": [
+            {
+              "id": "ruler-mysore",
+              "tie": "older sibling"
+            }
+          ],
+          "claims": [],
+          "relations": {},
+          "incidents": [],
+          "background": "A younger sibling within this fictional household; no earlier campaign events are asserted.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 1,
+            "directness": 1,
+            "restraint": 2,
+            "humour": 1
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "ruler-madras": {
+          "id": "ruler-madras",
+          "name": "Mansur of Madras",
+          "aliases": [],
+          "region": "madras",
+          "age": 46,
+          "dynasty": "House of Mansur of Madras",
+          "role": "ruler",
+          "condition": "alive",
+          "position": "retained local ruler",
+          "mood": "Calculating",
+          "traits": {
+            "ambition": 69,
+            "pride": 20,
+            "caution": 52,
+            "ruthlessness": 24,
+            "loyalty": 44,
+            "vindictiveness": 52
+          },
+          "family": [
+            {
+              "id": "heir-madras",
+              "tie": "younger sibling"
+            }
+          ],
+          "claims": [
+            "madras"
+          ],
+          "relations": {
+            "institution:company": {
+              "hostility": 4,
+              "respect": 0,
+              "gratitude": 0,
+              "mistrust": 0,
+              "loyalty": 0,
+              "familiarity": 3,
+              "origins": [
+                "incident-2"
+              ],
+              "target": {
+                "kind": "institution",
+                "id": "company"
+              },
+              "causes": [
+                {
+                  "id": "cause:incident-2:ruler-madras:institution:company:memory:incident-2:fact-2:ruler-madras:administration",
+                  "incidentId": "incident-2",
+                  "memoryIds": [
+                    "memory:incident-2:fact-2:ruler-madras:administration"
+                  ],
+                  "statementIds": [],
+                  "deltas": {
+                    "hostility": 4,
+                    "familiarity": 3
+                  },
+                  "reason": "administration in Madras; this is Mansur of Madras's assessment, not a claim about hidden orders."
+                }
+              ]
+            }
+          },
+          "incidents": [
+            "incident-2"
+          ],
+          "background": "The ruler cultivates a reputation for careful listening.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [
+            "memory:incident-2:fact-2:ruler-madras:administration"
+          ],
+          "confidence": 44,
+          "voice": {
+            "formality": 3,
+            "directness": 2,
+            "restraint": 1,
+            "humour": 2
+          },
+          "pacing": {
+            "relevant": 1,
+            "lastAppearance": 1,
+            "lastCallbackAt": -10,
+            "templates": [
+              {
+                "id": "RU-R03-01",
+                "at": 1
+              }
+            ],
+            "phrases": [
+              {
+                "family": "RU-R03-01",
+                "at": 1
+              }
+            ],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "heir-madras": {
+          "id": "heir-madras",
+          "name": "Abdul of Madras",
+          "aliases": [],
+          "region": "madras",
+          "age": 38,
+          "dynasty": "House of Mansur of Madras",
+          "role": "heir",
+          "condition": "alive",
+          "position": "family member",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 61,
+            "pride": 63,
+            "caution": 70,
+            "ruthlessness": 69,
+            "loyalty": 66,
+            "vindictiveness": 35
+          },
+          "family": [
+            {
+              "id": "ruler-madras",
+              "tie": "older sibling"
+            }
+          ],
+          "claims": [],
+          "relations": {},
+          "incidents": [],
+          "background": "A younger sibling within this fictional household; no earlier campaign events are asserted.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 2,
+            "directness": 2,
+            "restraint": 1,
+            "humour": 0
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "secretary-bombay": {
+          "id": "secretary-bombay",
+          "name": "Edward Hale",
+          "aliases": [],
+          "region": "bombay",
+          "age": 45,
+          "dynasty": "Company institution",
+          "role": "secretary",
+          "condition": "alive",
+          "position": "Presidency secretary of Bombay",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 38,
+            "pride": 30,
+            "caution": 85,
+            "ruthlessness": 56,
+            "loyalty": 37,
+            "vindictiveness": 31
+          },
+          "family": [],
+          "claims": [],
+          "relations": {},
+          "incidents": [],
+          "background": "A fictional institutional adviser, distinct from every player officeholder.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 3,
+            "directness": 1,
+            "restraint": 3,
+            "humour": 1
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "secretary-madras": {
+          "id": "secretary-madras",
+          "name": "Edward Mercer",
+          "aliases": [],
+          "region": "madras",
+          "age": 50,
+          "dynasty": "Company institution",
+          "role": "secretary",
+          "condition": "alive",
+          "position": "Presidency secretary of Madras",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 34,
+            "pride": 58,
+            "caution": 52,
+            "ruthlessness": 39,
+            "loyalty": 38,
+            "vindictiveness": 63
+          },
+          "family": [],
+          "claims": [],
+          "relations": {},
+          "incidents": [],
+          "background": "A fictional institutional adviser, distinct from every player officeholder.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 3,
+            "directness": 2,
+            "restraint": 3,
+            "humour": 0
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "secretary-bengal": {
+          "id": "secretary-bengal",
+          "name": "Thomas Mercer",
+          "aliases": [],
+          "region": "bengal",
+          "age": 38,
+          "dynasty": "Company institution",
+          "role": "secretary",
+          "condition": "alive",
+          "position": "Presidency secretary of Bengal",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 80,
+            "pride": 34,
+            "caution": 33,
+            "ruthlessness": 51,
+            "loyalty": 45,
+            "vindictiveness": 47
+          },
+          "family": [],
+          "claims": [],
+          "relations": {},
+          "incidents": [],
+          "background": "A fictional institutional adviser, distinct from every player officeholder.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 1,
+            "directness": 1,
+            "restraint": 3,
+            "humour": 2
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "army-bombay": {
+          "id": "army-bombay",
+          "name": "Thomas Bell",
+          "aliases": [],
+          "region": "bombay",
+          "age": 47,
+          "dynasty": "Company institution",
+          "role": "army",
+          "condition": "alive",
+          "position": "Army adjutant of Bombay",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 62,
+            "pride": 85,
+            "caution": 67,
+            "ruthlessness": 76,
+            "loyalty": 56,
+            "vindictiveness": 78
+          },
+          "family": [],
+          "claims": [],
+          "relations": {},
+          "incidents": [],
+          "background": "A fictional institutional adviser, distinct from every player officeholder.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 1,
+            "directness": 1,
+            "restraint": 2,
+            "humour": 2
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "army-madras": {
+          "id": "army-madras",
+          "name": "Thomas Avery",
+          "aliases": [],
+          "region": "madras",
+          "age": 41,
+          "dynasty": "Company institution",
+          "role": "army",
+          "condition": "alive",
+          "position": "Army adjutant of Madras",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 44,
+            "pride": 47,
+            "caution": 42,
+            "ruthlessness": 55,
+            "loyalty": 24,
+            "vindictiveness": 65
+          },
+          "family": [],
+          "claims": [],
+          "relations": {},
+          "incidents": [],
+          "background": "A fictional institutional adviser, distinct from every player officeholder.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 3,
+            "directness": 3,
+            "restraint": 2,
+            "humour": 2
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "army-bengal": {
+          "id": "army-bengal",
+          "name": "Thomas Finch",
+          "aliases": [],
+          "region": "bengal",
+          "age": 44,
+          "dynasty": "Company institution",
+          "role": "army",
+          "condition": "alive",
+          "position": "Army adjutant of Bengal",
+          "mood": "watchful",
+          "traits": {
+            "ambition": 67,
+            "pride": 62,
+            "caution": 76,
+            "ruthlessness": 76,
+            "loyalty": 53,
+            "vindictiveness": 50
+          },
+          "family": [],
+          "claims": [],
+          "relations": {},
+          "incidents": [],
+          "background": "A fictional institutional adviser, distinct from every player officeholder.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [],
+          "confidence": 50,
+          "voice": {
+            "formality": 1,
+            "directness": 1,
+            "restraint": 3,
+            "humour": 2
+          },
+          "pacing": {
+            "relevant": 0,
+            "lastAppearance": -10,
+            "lastCallbackAt": -10,
+            "templates": [],
+            "phrases": [],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        },
+        "secretary-general": {
+          "id": "secretary-general",
+          "name": "Arthur Pembroke",
+          "aliases": [],
+          "region": "bengal",
+          "age": 38,
+          "dynasty": "Company institution",
+          "role": "secretary",
+          "condition": "alive",
+          "position": "Governor General secretary",
+          "mood": "Anxious",
+          "traits": {
+            "ambition": 80,
+            "pride": 34,
+            "caution": 33,
+            "ruthlessness": 51,
+            "loyalty": 45,
+            "vindictiveness": 47
+          },
+          "family": [],
+          "claims": [],
+          "relations": {},
+          "incidents": [
+            "incident-1",
+            "incident-2"
+          ],
+          "background": "A fictional institutional adviser, distinct from every player officeholder.",
+          "provenance": "Fictional pre-campaign background",
+          "memoryIds": [
+            "memory:incident-1:fact-0:secretary-general:tax",
+            "memory:incident-2:fact-0:secretary-general:administration",
+            "memory:incident-2:fact-1:secretary-general:administration",
+            "memory:incident-2:fact-2:secretary-general:administration"
+          ],
+          "confidence": 50,
+          "voice": {
+            "formality": 3,
+            "directness": 1,
+            "restraint": 3,
+            "humour": 2
+          },
+          "pacing": {
+            "relevant": 2,
+            "lastAppearance": 2,
+            "lastCallbackAt": -10,
+            "templates": [
+              {
+                "id": "FB07-TAX-SEC-01",
+                "at": 1
+              },
+              {
+                "id": "FB07-ADM-SEC-02",
+                "at": 2
+              }
+            ],
+            "phrases": [
+              {
+                "family": "FB07-TAX-SEC-01",
+                "at": 1
+              },
+              {
+                "family": "FB07-ADM-SEC-02",
+                "at": 2
+              }
+            ],
+            "callbacks": {}
+          },
+          "development": {
+            "strongExperiences": [],
+            "changes": [],
+            "lastChangedTurn": null
+          }
+        }
+      },
+      "seats": {
+        "punjab": "ruler-punjab",
+        "delhi": "ruler-delhi",
+        "bengal": "ruler-bengal",
+        "bombay": "ruler-bombay",
+        "maratha": "ruler-maratha",
+        "hyderabad": "ruler-hyderabad",
+        "mysore": "ruler-mysore",
+        "madras": "ruler-madras"
+      },
+      "allegiances": [],
+      "chapters": [],
+      "lastIncident": "incident-3",
+      "lastAgedTurn": 5,
+      "policyVersion": "m2-trial-1",
+      "memories": {
+        "memory:incident-1:fact-0:ruler-bombay:tax": {
+          "id": "memory:incident-1:fact-0:ruler-bombay:tax",
+          "ownerId": "ruler-bombay",
+          "category": "tax",
+          "region": "bombay",
+          "relatedCharacterIds": [],
+          "origin": "direct",
+          "evidence": [
+            {
+              "incidentId": "incident-1",
+              "factKey": "fact-0"
+            }
+          ],
+          "statementIds": [],
+          "createdTurn": 5,
+          "createdIncident": "incident-1",
+          "sequence": 1,
+          "historicalSignificance": 25,
+          "emotionalImportance": 25,
+          "emotion": "resentment",
+          "perspective": "local",
+          "interpretation": {
+            "version": 1,
+            "kind": "opinion",
+            "text": "I regard this Tax in Bombay with caution."
+          },
+          "updates": [],
+          "capital": null
+        },
+        "memory:incident-1:fact-0:secretary-general:tax": {
+          "id": "memory:incident-1:fact-0:secretary-general:tax",
+          "ownerId": "secretary-general",
+          "category": "tax",
+          "region": "bombay",
+          "relatedCharacterIds": [
+            "ruler-bombay"
+          ],
+          "origin": "indirect",
+          "evidence": [
+            {
+              "incidentId": "incident-1",
+              "factKey": "fact-0"
+            }
+          ],
+          "statementIds": [],
+          "createdTurn": 5,
+          "createdIncident": "incident-1",
+          "sequence": 1,
+          "historicalSignificance": 15,
+          "emotionalImportance": 15,
+          "emotion": "resentment",
+          "perspective": "local",
+          "interpretation": {
+            "version": 1,
+            "kind": "opinion",
+            "text": "I regard this Tax in Bombay with resentment."
+          },
+          "updates": [],
+          "capital": null
+        },
+        "memory:incident-2:fact-0:ruler-bengal:administration": {
+          "id": "memory:incident-2:fact-0:ruler-bengal:administration",
+          "ownerId": "ruler-bengal",
+          "category": "administration",
+          "region": "bengal",
+          "relatedCharacterIds": [],
+          "origin": "direct",
+          "evidence": [
+            {
+              "incidentId": "incident-2",
+              "factKey": "fact-0"
+            }
+          ],
+          "statementIds": [],
+          "createdTurn": 5,
+          "createdIncident": "incident-2",
+          "sequence": 2,
+          "historicalSignificance": 35,
+          "emotionalImportance": 35,
+          "emotion": "concern",
+          "perspective": "local",
+          "interpretation": {
+            "version": 1,
+            "kind": "opinion",
+            "text": "I consider the recorded administration in Bengal personally significant."
+          },
+          "updates": [],
+          "capital": null
+        },
+        "memory:incident-2:fact-0:secretary-general:administration": {
+          "id": "memory:incident-2:fact-0:secretary-general:administration",
+          "ownerId": "secretary-general",
+          "category": "administration",
+          "region": "bengal",
+          "relatedCharacterIds": [
+            "ruler-bengal"
+          ],
+          "origin": "indirect",
+          "evidence": [
+            {
+              "incidentId": "incident-2",
+              "factKey": "fact-0"
+            }
+          ],
+          "statementIds": [],
+          "createdTurn": 5,
+          "createdIncident": "incident-2",
+          "sequence": 2,
+          "historicalSignificance": 21,
+          "emotionalImportance": 21,
+          "emotion": "concern",
+          "perspective": "local",
+          "interpretation": {
+            "version": 1,
+            "kind": "opinion",
+            "text": "I consider the recorded administration in Bengal relevant to this household or institution."
+          },
+          "updates": [],
+          "capital": null
+        },
+        "memory:incident-2:fact-1:ruler-bombay:administration": {
+          "id": "memory:incident-2:fact-1:ruler-bombay:administration",
+          "ownerId": "ruler-bombay",
+          "category": "administration",
+          "region": "bombay",
+          "relatedCharacterIds": [],
+          "origin": "direct",
+          "evidence": [
+            {
+              "incidentId": "incident-2",
+              "factKey": "fact-1"
+            }
+          ],
+          "statementIds": [],
+          "createdTurn": 5,
+          "createdIncident": "incident-2",
+          "sequence": 2,
+          "historicalSignificance": 35,
+          "emotionalImportance": 35,
+          "emotion": "concern",
+          "perspective": "local",
+          "interpretation": {
+            "version": 1,
+            "kind": "opinion",
+            "text": "I consider the recorded administration in Bombay personally significant."
+          },
+          "updates": [],
+          "capital": null
+        },
+        "memory:incident-2:fact-1:secretary-general:administration": {
+          "id": "memory:incident-2:fact-1:secretary-general:administration",
+          "ownerId": "secretary-general",
+          "category": "administration",
+          "region": "bombay",
+          "relatedCharacterIds": [
+            "ruler-bombay"
+          ],
+          "origin": "indirect",
+          "evidence": [
+            {
+              "incidentId": "incident-2",
+              "factKey": "fact-1"
+            }
+          ],
+          "statementIds": [],
+          "createdTurn": 5,
+          "createdIncident": "incident-2",
+          "sequence": 2,
+          "historicalSignificance": 21,
+          "emotionalImportance": 21,
+          "emotion": "concern",
+          "perspective": "local",
+          "interpretation": {
+            "version": 1,
+            "kind": "opinion",
+            "text": "I consider the recorded administration in Bombay relevant to this household or institution."
+          },
+          "updates": [],
+          "capital": null
+        },
+        "memory:incident-2:fact-2:ruler-madras:administration": {
+          "id": "memory:incident-2:fact-2:ruler-madras:administration",
+          "ownerId": "ruler-madras",
+          "category": "administration",
+          "region": "madras",
+          "relatedCharacterIds": [],
+          "origin": "direct",
+          "evidence": [
+            {
+              "incidentId": "incident-2",
+              "factKey": "fact-2"
+            }
+          ],
+          "statementIds": [],
+          "createdTurn": 5,
+          "createdIncident": "incident-2",
+          "sequence": 2,
+          "historicalSignificance": 35,
+          "emotionalImportance": 35,
+          "emotion": "concern",
+          "perspective": "local",
+          "interpretation": {
+            "version": 1,
+            "kind": "opinion",
+            "text": "I consider the recorded administration in Madras personally significant."
+          },
+          "updates": [],
+          "capital": null
+        },
+        "memory:incident-2:fact-2:secretary-general:administration": {
+          "id": "memory:incident-2:fact-2:secretary-general:administration",
+          "ownerId": "secretary-general",
+          "category": "administration",
+          "region": "madras",
+          "relatedCharacterIds": [
+            "ruler-madras"
+          ],
+          "origin": "indirect",
+          "evidence": [
+            {
+              "incidentId": "incident-2",
+              "factKey": "fact-2"
+            }
+          ],
+          "statementIds": [],
+          "createdTurn": 5,
+          "createdIncident": "incident-2",
+          "sequence": 2,
+          "historicalSignificance": 21,
+          "emotionalImportance": 21,
+          "emotion": "concern",
+          "perspective": "local",
+          "interpretation": {
+            "version": 1,
+            "kind": "opinion",
+            "text": "I consider the recorded administration in Madras relevant to this household or institution."
+          },
+          "updates": [],
+          "capital": null
+        },
+        "memory:incident-3:fact-0:ruler-hyderabad:trade-disruption": {
+          "id": "memory:incident-3:fact-0:ruler-hyderabad:trade-disruption",
+          "ownerId": "ruler-hyderabad",
+          "category": "trade-disruption",
+          "region": "hyderabad",
+          "relatedCharacterIds": [],
+          "origin": "direct",
+          "evidence": [
+            {
+              "incidentId": "incident-3",
+              "factKey": "fact-0"
+            }
+          ],
+          "statementIds": [],
+          "createdTurn": 5,
+          "createdIncident": "incident-3",
+          "sequence": 3,
+          "historicalSignificance": 25,
+          "emotionalImportance": 25,
+          "emotion": "concern",
+          "perspective": "local",
+          "interpretation": {
+            "version": 1,
+            "kind": "supported-observation",
+            "text": "A commercial opportunity in Hyderabad was disrupted. This does not establish that all regional commerce stopped."
+          },
+          "updates": [],
+          "capital": null
+        }
+      },
+      "statements": {},
+      "arcs": []
+    },
+    "incidentSequence": 3
+  },
+  "progress": null,
+  "undo": [],
+  "undoProgress": []
+}
