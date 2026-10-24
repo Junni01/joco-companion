@@ -1,5 +1,5 @@
 import {TEMPLATES} from './narrative-content.js';
-import {POLICY,narrativeRandom} from './narrative-policy.js';
+import {POLICY,MEMORY_PROFILES,narrativeRandom} from './narrative-policy.js';
 import {adjustRelationship} from './narrative-memory.js';
 const name=r=>r.charAt(0).toUpperCase()+r.slice(1);
 const fill=(text,ctx)=>text.replaceAll('{region}',name(ctx.region)).replaceAll('{capital}',ctx.context.capital||'the capital');
@@ -13,11 +13,11 @@ const variants=[
  {id:'m2-secretary-tax-2',trigger:'tax',role:'secretary',requires:['tax'],emotion:'watchful',tone:'dry',text:'The demand in {region} has its own entry. We shall not mistake the entry for a local endorsement.'},
  {id:'m2-secretary-admin-2',trigger:'administration',role:'secretary',requires:['administration'],emotion:'worried',tone:'formal',text:'The result in {region} is recorded. The instructions and the explanation remain separate matters.'}
 ];
-function allowedCallback(c,key,major){if(!major&&c.pacing.relevant-c.pacing.lastCallbackAt<2)return false;const last=c.pacing.callbacks[key];return !last||c.pacing.relevant-last.at>=last.cooldown||major;}
+function allowedCallback(c,key,major){if(!major&&c.pacing.relevant-c.pacing.lastCallbackAt<POLICY.globalCallbackCooldown)return false;const last=c.pacing.callbacks[key];return !last||c.pacing.relevant-last.at>=last.cooldown||major;}
 function memoryCallback(before,state,c,ctx){
  const n=state.narrative;
  const memories=Object.values(before.narrative.memories).filter(m=>m.ownerId===c.id&&m.region===ctx.region&&m.origin!=='statement').sort((a,b)=>
-  (b.category==='company-conquest'?100:0)+(b.historicalSignificance+b.emotionalImportance)/2-((a.category==='company-conquest'?100:0)+(a.historicalSignificance+a.emotionalImportance)/2));
+  (b.category==='company-conquest'?POLICY.conquestRecallBonus:0)+(b.historicalSignificance+b.emotionalImportance)/2-((a.category==='company-conquest'?POLICY.conquestRecallBonus:0)+(a.historicalSignificance+a.emotionalImportance)/2));
  for(const old of memories){
   if(!allowedCallback(c,old.id,ctx.major))continue;
   let text=null,family='memory-'+old.category+'-'+ctx.category;
@@ -46,17 +46,17 @@ function primary(c,ctx,role,n){
   if(lines[ctx.category])return {templateId:'m2-sovereign-'+ctx.category,family:'sovereign-'+ctx.category,text:lines[ctx.category],emotion:ctx.category==='rebellion-won'?'worried':'watchful'};
  }
  if(role==='secretary'&&ctx.category==='intervention'&&(ctx.context.clearedUnrest||ctx.context.reopenedOrders))return {templateId:ctx.context.clearedUnrest?'m2-assurance-unrest':'m2-assurance-orders',family:'assurance',text:ctx.context.clearedUnrest?`The unrest in ${name(ctx.region)} has been cleared. I hope the improvement lasts.`:`The closed orders in ${name(ctx.region)} have reopened. I hope the improvement lasts.`,emotion:'relieved',statementType:'assurance'};
- const eligible=[...TEMPLATES,...variants].filter(t=>t.trigger===ctx.trigger&&t.role===role&&t.requires.every(r=>ctx.context[r])&&(!t.trait||c.traits[t.trait]>=40));
+ const eligible=[...TEMPLATES,...variants].filter(t=>t.trigger===ctx.trigger&&t.role===role&&t.requires.every(r=>ctx.context[r])&&(!t.trait||c.traits[t.trait]>=POLICY.requiredTraitMinimum));
  const fresh=eligible.filter(t=>!c.pacing.templates.some(p=>p.id===t.id&&c.pacing.relevant-p.at<POLICY.templateCooldown));
  if(!fresh.length)return null;
- const ranked=fresh.map(t=>({t,weight:10+t.requires.length*8+(variants.includes(t)?0:20)+(t.trait?Math.round(c.traits[t.trait]/10):0)+(t.tone==='formal'?c.voice.formality:t.tone==='dry'?c.voice.humour:t.tone==='proud'?c.voice.directness:c.voice.restraint)})).sort((a,b)=>b.weight-a.weight);
+ const ranked=fresh.map(t=>({t,weight:POLICY.templateBaseWeight+t.requires.length*POLICY.conditionWeight+(variants.includes(t)?0:POLICY.originalCatalogBonus)+(t.trait?Math.round(c.traits[t.trait]/POLICY.traitWeightDivisor):0)+(t.tone==='formal'?c.voice.formality:t.tone==='dry'?c.voice.humour:t.tone==='proud'?c.voice.directness:c.voice.restraint)})).sort((a,b)=>b.weight-a.weight);
  const best=ranked.filter(t=>t.weight===ranked[0].weight),t=best[narrativeRandom(n,best.length)].t;
  return {templateId:t.id,family:t.id,text:fill(t.text,ctx),emotion:t.emotion};
 }
 function statementMemory(n,state,entry,s,ownerId){
  const c=n.characters[ownerId],id=`memory:${s.id}:${ownerId}`;
  if(n.memories[id])return;
- n.memories[id]={id,ownerId,category:'statement',region:s.region,relatedCharacterIds:[s.speakerId],origin:'statement',evidence:s.evidence,statementIds:[s.id],createdTurn:entry.turn,createdIncident:entry.incident.id,sequence:state.incidentSequence,historicalSignificance:40,emotionalImportance:35,emotion:'expectation',interpretation:{version:1,kind:'opinion',text:'I remember this assurance as an expression of hope, not a guaranteed outcome.'},updates:[],capital:null};c.memoryIds.push(id);
+ n.memories[id]={id,ownerId,category:'statement',region:s.region,relatedCharacterIds:[s.speakerId],origin:'statement',evidence:s.evidence,statementIds:[s.id],createdTurn:entry.turn,createdIncident:entry.incident.id,sequence:state.incidentSequence,historicalSignificance:MEMORY_PROFILES.statement.significance,emotionalImportance:MEMORY_PROFILES.statement.importance,emotion:'expectation',interpretation:{version:1,kind:'opinion',text:'I remember this assurance as an expression of hope, not a guaranteed outcome.'},updates:[],capital:null};c.memoryIds.push(id);
  if(!c.incidents.includes(entry.incident.id))c.incidents.push(entry.incident.id);
 }
 export function renderPoliticalDialogue(before,state,entry,scene,contexts,add){
@@ -64,11 +64,11 @@ export function renderPoliticalDialogue(before,state,entry,scene,contexts,add){
  for(const ctx of contexts){
   const ruler=n.characters[ctx.rulerId||n.seats[ctx.region]];
   const connection=Math.max(0,...ruler.memoryIds.map(id=>n.memories[id]).filter(m=>m.region===ctx.region).map(m=>m.historicalSignificance));
-  candidates.push({c:ruler,role:'ruler',ctx,priority:1000+(ctx.major?100:0)+connection});
+  candidates.push({c:ruler,role:'ruler',ctx,priority:POLICY.rulerPriority+(ctx.major?POLICY.majorPriority:0)+connection});
   const adviser=n.characters[ctx.adviserId];
-  if(adviser)candidates.push({c:adviser,role:adviser.role,ctx,priority:ctx.category==='intervention'?1200:700});
+  if(adviser)candidates.push({c:adviser,role:adviser.role,ctx,priority:ctx.category==='intervention'?POLICY.exchangePriority:POLICY.adviserPriority});
  }
- const priority=x=>x.priority-(x.c.pacing.relevant-x.c.pacing.lastAppearance<=POLICY.speakerCooldown?25:0);
+ const priority=x=>x.priority-(x.c.pacing.relevant-x.c.pacing.lastAppearance<=POLICY.speakerCooldown?POLICY.appearancePenalty:0);
  candidates.sort((a,b)=>priority(b)-priority(a));let callbackCount=0;
  for(const {c,role,ctx} of candidates){
   if(c.condition!=='alive'||used.has(c.id)||!ctx.evidence.length)continue;
@@ -80,8 +80,8 @@ export function renderPoliticalDialogue(before,state,entry,scene,contexts,add){
   Object.assign(line,{evidence:ctx.evidence,callbackMemoryIds:chosen.callbackMemoryIds||[],callbackStatementIds:chosen.callbackStatementIds||[],phraseFamily:chosen.family,cooldownOverride:overrides.length?'new-major-political-outcome':null});
   for(const key of callbacks)c.pacing.callbacks[key]={at:c.pacing.relevant,cooldown:POLICY.memoryCooldown,incidentId:entry.incident.id};
   if(callbacks.length){c.pacing.lastCallbackAt=c.pacing.relevant;callbackCount++;}
-  c.pacing.templates.push({id:chosen.templateId,at:c.pacing.relevant});c.pacing.templates=c.pacing.templates.slice(-8);
-  c.pacing.phrases.push({family:chosen.family,at:c.pacing.relevant});c.pacing.phrases=c.pacing.phrases.slice(-8);c.pacing.lastAppearance=c.pacing.relevant;c.mood=chosen.emotion;
+  c.pacing.templates.push({id:chosen.templateId,at:c.pacing.relevant});c.pacing.templates=c.pacing.templates.slice(-POLICY.recentBuffer);
+  c.pacing.phrases.push({family:chosen.family,at:c.pacing.relevant});c.pacing.phrases=c.pacing.phrases.slice(-POLICY.recentBuffer);c.pacing.lastAppearance=c.pacing.relevant;c.mood=chosen.emotion;
   if(chosen.statementType){
    const audience=n.characters[n.seats[ctx.region]],s={id:`statement:${line.id}`,speakerId:c.id,audienceIds:audience.condition==='alive'?[audience.id]:[],incidentId:entry.incident.id,lineId:line.id,region:ctx.region,type:chosen.statementType,text:line.text,evidence:ctx.evidence};
    n.statements[s.id]=s;line.statementId=s.id;statementMemory(n,state,entry,s,c.id);s.audienceIds.forEach(id=>statementMemory(n,state,entry,s,id));assurances.set(ctx.region,s);
@@ -89,13 +89,13 @@ export function renderPoliticalDialogue(before,state,entry,scene,contexts,add){
   const assurance=assurances.get(ctx.region);
   if(role==='ruler'&&ctx.category==='intervention'&&assurance){
    line.replyToLineId=assurance.lineId;line.replyToStatementId=assurance.id;
-   adjustRelationship(n,c.id,{kind:'character',id:assurance.speakerId},entry,null,{gratitude:3,respect:2,familiarity:3},'A response to the adviser’s saved assurance, not credit for ordering the intervention.',[assurance.id]);
-   adjustRelationship(n,assurance.speakerId,{kind:'character',id:c.id},entry,null,{respect:2,familiarity:2},'A supported exchange about the recorded intervention.',[assurance.id]);
+   adjustRelationship(n,c.id,{kind:'character',id:assurance.speakerId},entry,null,POLICY.personalReply,'A response to the adviser’s saved assurance, not credit for ordering the intervention.',[assurance.id]);
+   adjustRelationship(n,assurance.speakerId,{kind:'character',id:c.id},entry,null,POLICY.personalResponse,'A supported exchange about the recorded intervention.',[assurance.id]);
   }
   for(const statementId of chosen.callbackStatementIds||[])for(const m of Object.values(n.memories))if(m.ownerId===c.id&&m.statementIds.includes(statementId)){
    const statement=n.statements[statementId],relation=c.relations['character:'+statement.speakerId];
-   const trusting=c.traits.loyalty>=60||(relation?.respect||0)>=50;
-   const doubtful=c.traits.vindictiveness>=60||(relation?.mistrust||0)>=30;
+   const trusting=c.traits.loyalty>=POLICY.loyaltyThreshold||(relation?.respect||0)>=POLICY.trustThreshold;
+   const doubtful=c.traits.vindictiveness>=POLICY.vindictivenessThreshold||(relation?.mistrust||0)>=POLICY.mistrustThreshold;
    const assessment=trusting?'The renewed unrest challenges the hope in this note. I remain inclined to trust its author; that is my judgement, not proof of the outcome.':doubtful?'The new unrest makes me less confident in the assurance. It does not establish intentional deception.':'I now treat the hope in this assurance more cautiously. The earlier improvement remains part of the record.';
    m.currentAssessment={kind:'opinion',text:assessment,incidentId:entry.incident.id,evidence:ctx.evidence};
    m.updates.push({incidentId:entry.incident.id,evidence:ctx.evidence,delta:0,kind:'challenged-expectation'});

@@ -15,7 +15,7 @@ const event=(name,patch={})=>({type:'event',event:name,manualTest:true,topRegion
 const deploy=(patch={})=>({army:'bombay',target:'bombay',regiments:6,officers:2,alliances:[],outcome:'success',losses:1,...patch});
 function mechanics(s){const n=clone(s);delete n.narrative;if(n.gameEnd)delete n.gameEnd.at;for(const h of n.history){delete h.at;delete h.narrative;if(h.incident)delete h.incident.id;}return n;}
 
-test('new cast matches all four scenarios, remains fictional and leaves legacy saves untouched',()=>{
+test('new cast matches all four scenarios, remains fictional and leaves current-version narrative-off saves unchanged',()=>{
  for(const scenario of ['1710','1758','1813','1710-long']){
   const legacy=initialState(scenario),s=enabled(clone(legacy));validate(s);
   assert.deepEqual(decode(encode(legacy)).state,legacy);assert.equal(legacy.narrative,undefined);

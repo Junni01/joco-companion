@@ -1,10 +1,10 @@
-import {POLITICAL_VERSION,POLICY,MEMORY_PROFILES,DIMENSIONS,clamp,narrativeRandom} from './narrative-policy.js';
+import {POLITICAL_VERSION,POLICY,MEMORY_PROFILES,SOVEREIGN_PROFILES,DIMENSIONS,clamp,narrativeRandom} from './narrative-policy.js';
 import {factRef} from './narrative-evidence.js';
 const regionName=r=>r.charAt(0).toUpperCase()+r.slice(1);
 export function initializePoliticalMemory(n){
  n.version=POLITICAL_VERSION;n.policyVersion=POLICY.id;n.memories={};n.statements={};n.arcs=[];
  for(const c of Object.values(n.characters)){
-  c.memoryIds=[];c.confidence=50;c.voice={formality:1+narrativeRandom(n,3),directness:1+narrativeRandom(n,3),restraint:1+narrativeRandom(n,3),humour:narrativeRandom(n,3)};
+  c.memoryIds=[];c.confidence=POLICY.confidenceInitial;c.voice={formality:1+narrativeRandom(n,POLICY.voiceLevels),directness:1+narrativeRandom(n,POLICY.voiceLevels),restraint:1+narrativeRandom(n,POLICY.voiceLevels),humour:narrativeRandom(n,POLICY.voiceLevels)};
   c.pacing={relevant:0,lastAppearance:-10,lastCallbackAt:-10,templates:[],phrases:[],callbacks:{}};
   c.development={strongExperiences:[],changes:[],lastChangedTurn:null};
  }return n;
@@ -35,7 +35,7 @@ function interpretation(category,region,origin,c,perspective){
  perspective==='defender'?`I welcome the failure of the Company expedition in ${place}; its wider intentions remain unknown.`:
  category==='company-conquest'?`I regard Company control in ${place} as a constraint on our court.`:
  category==='intervention'?`I welcome the recorded restoration of order in ${place}, without treating every earlier grievance as settled.`:
- category.startsWith('tax')?`I regard ${category==='tax-repeat'?'the repeated demands':'this Tax'} in ${place} with ${c.traits.caution>=50?'caution':'resentment'}.`:
+ category.startsWith('tax')?`I regard ${category==='tax-repeat'?'the repeated demands':'this Tax'} in ${place} with ${c.traits.caution>=POLICY.cautiousInterpretationThreshold?'caution':'resentment'}.`:
  category==='released'?`I consider the recorded end of ${place}'s subordination a defining political change.`:
  category==='rebellion-failed'?`I regard the failed rebellion in ${place} as a setback, not proof of anyone's private motives.`:
  `I consider the recorded ${category.replaceAll('-',' ')} in ${place} ${direct?'personally significant':'relevant to this household or institution'}.`;
@@ -56,7 +56,7 @@ export function adjustRelationship(n,ownerId,target,entry,memoryId,requested,rea
  if(r.causes.some(c=>c.id===causeId))return;
  const deltas={};for(const [dimension,amount] of Object.entries(requested)){
   // Diminishing returns applies to increases; cooling need not erase existing reasons.
-  const scaled=amount>0?Math.max(1,Math.round(amount*(1-r[dimension]/125))):amount;
+  const scaled=amount>0?Math.max(1,Math.round(amount*(1-r[dimension]/POLICY.diminishingDenominator))):amount;
   const value=clamp(r[dimension]+scaled);deltas[dimension]=value-r[dimension];r[dimension]=value;
  }
  r.origins.push(entry.incident.id);r.causes.push({id:causeId,incidentId:entry.incident.id,memoryIds:memoryId?[memoryId]:[],statementIds,deltas,reason});
@@ -66,24 +66,24 @@ function addMemory(n,state,entry,c,ctx,origin,relatedIds=[],target=null){
  const id=`memory:${entry.incident.id}:${ctx.evidence[0].factKey}:${c.id}:${ctx.category}`;
  if(n.memories[id])return n.memories[id];
  let profile=MEMORY_PROFILES[ctx.category];if(!profile)return null;
- if(ctx.perspective==='sovereign')profile={...profile,...(ctx.category==='subordination'?{significance:80,importance:65,emotion:'pride',hostility:0,respect:4}:ctx.category==='rebellion-failed'?{significance:60,importance:45,emotion:'pride',hostility:5}:ctx.category==='released'?{significance:80,importance:70,emotion:'humiliation'}:{significance:75,importance:70,emotion:'humiliation'})};
+ if(ctx.perspective==='sovereign')profile={...profile,...SOVEREIGN_PROFILES[ctx.category]};
  const perspective=ctx.perspective||(['deployment-failed','deployment-catastrophe'].includes(ctx.category)&&c.role==='ruler'&&state.regions[ctx.region].control==='indian'?'defender':'local');
- if(perspective==='defender')profile={...profile,emotion:'relief',importance:40};
- const factor=origin==='direct'?1:c.role==='heir'?.35:.6;
+ if(perspective==='defender')profile={...profile,emotion:'relief',importance:POLICY.defenderImportance};
+ const factor=origin==='direct'?1:c.role==='heir'?POLICY.heirAwarenessFactor:POLICY.institutionAwarenessFactor;
  const m={id,ownerId:c.id,category:ctx.category,region:ctx.region,relatedCharacterIds:relatedIds,origin,evidence:ctx.evidence,statementIds:[],createdTurn:entry.turn,createdIncident:entry.incident.id,sequence:state.incidentSequence,historicalSignificance:Math.round(profile.significance*factor),emotionalImportance:Math.round(profile.importance*factor),emotion:profile.emotion,perspective,interpretation:interpretation(ctx.category,ctx.region,origin,c,perspective),updates:[],capital:ctx.context.capital?ctx.context.capital.toLowerCase():null};
  n.memories[id]=m;c.memoryIds.push(id);
  if(!c.incidents.includes(entry.incident.id))c.incidents.push(entry.incident.id);
  if(origin==='direct'){
-  c.mood=profile.emotion;c.confidence=clamp(c.confidence+(['pride','relief','gratitude'].includes(profile.emotion)?6:-6));
+  c.mood=profile.emotion;c.confidence=clamp(c.confidence+(['pride','relief','gratitude'].includes(profile.emotion)?POLICY.confidenceStep:-POLICY.confidenceStep));
   if(target){const changes={};for(const d of DIMENSIONS)if(profile[d])changes[d]=profile[d];
-   if(Object.keys(changes).length){changes.familiarity=3;const weight=c.traits.pride>=60&&changes.hostility>0?1:0;changes.hostility&&(changes.hostility+=weight+narrativeRandom(n,2));
+   if(Object.keys(changes).length){changes.familiarity=POLICY.baseFamiliarity;const weight=c.traits.pride>=POLICY.prideThreshold&&changes.hostility>0?POLICY.prideBonus:0;changes.hostility&&(changes.hostility+=weight+narrativeRandom(n,POLICY.reactionVariation));
     adjustRelationship(n,c.id,target,entry,id,changes,`${ctx.category.replaceAll('-',' ')} in ${regionName(ctx.region)}; this is ${c.name}'s assessment, not a claim about hidden orders.`);
    }
   }
   if(profile.strong&&!c.development.strongExperiences.includes(entry.incident.id)){
    c.development.strongExperiences.push(entry.incident.id);
    if(c.development.strongExperiences.length%POLICY.traitEvery===0&&c.development.lastChangedTurn!==entry.turn){
-    const trait='caution',delta=(profile.emotion==='pride'?-1:1)*(1+(narrativeRandom(n,4)===0?1:0)),actual=clamp(c.traits[trait]+delta)-c.traits[trait];
+    const trait='caution',delta=(profile.emotion==='pride'?-1:1)*(1+(narrativeRandom(n,POLICY.traitDoubleChance)===0?1:0)),actual=clamp(c.traits[trait]+delta)-c.traits[trait];
     if(actual){c.traits[trait]+=actual;c.development.changes.push({trait,delta:actual,turn:entry.turn,incidentIds:c.development.strongExperiences.slice(-POLICY.traitEvery)});c.development.lastChangedTurn=entry.turn;}
    }
   }

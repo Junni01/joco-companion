@@ -111,3 +111,11 @@ test('invalid current-version undo frames and malformed canonical fact arrays ca
  assert.throws(()=>encode(good,[bad]),/Invalid narrative/);
  const malformed=clone(good);malformed.history[0].incident.facts=null;assert.throws(()=>validate(malformed),/canonical incident facts/);
 });
+
+test('saved invasion die, officer report and instruction cursor remain paired with existing political memories',()=>{
+ const s=storySequence().state,input={type:'event',event:'foreign',manualTest:true,topRegion:'delhi',shape:'circle',redirectShape:'circle',stormFace:1,storm:'west',rolls:{bombay:5},defenses:{'foreign:bombay':0},officerRouts:{bombay:2}};
+ const progress={fingerprint:JSON.stringify(s),input,stage:'resolve',ui:{instructionCursor:2}},raw=encode(s,[],progress),restored=decode(raw);
+ assert.deepEqual(restored.progress,progress);assert.deepEqual(restored.state.narrative,s.narrative);
+ const result=commit(restored.state,restored.progress.input);assert.deepEqual(result.history.at(-1).input.rolls,{bombay:5});assert.equal(result.history.at(-1).officerRouts[0].removed,2);assert(result.history.at(-1).narrative.lines.some(l=>l.callbackMemoryIds.length));assert(Object.values(result.narrative.characters).every(c=>c.condition==='alive'));
+ const undone=undoFrame(result,null,[restored.state],[restored.progress],[]);assert.deepEqual(undone.progress,progress);assert.deepEqual(redoFrame(undone.state,undone.progress,undone.undo,undone.undoProgress,undone.redo).state,result);
+});

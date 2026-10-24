@@ -1,6 +1,21 @@
 // M2-26/27 approved experimental defaults. These affect fiction only.
 export const POLITICAL_VERSION=2;
-export const POLICY={id:'m2-trial-1',reinforce:12,reopen:20,reconcile:15,fade:2,memoryCooldown:3,templateCooldown:3,speakerCooldown:1,traitEvery:3,traitTurnCap:2};
+export const POLICY={
+ id:'m2-trial-1',reinforce:12,reopen:20,reconcile:15,fade:2,memoryCooldown:3,globalCallbackCooldown:2,templateCooldown:3,speakerCooldown:1,
+ traitEvery:3,traitTurnCap:2,traitDoubleChance:4,confidenceInitial:50,confidenceStep:6,voiceLevels:3,
+ heirAwarenessFactor:.35,institutionAwarenessFactor:.6,defenderImportance:40,cautiousInterpretationThreshold:50,
+ diminishingDenominator:125,baseFamiliarity:3,prideThreshold:60,prideBonus:1,reactionVariation:2,
+ trustThreshold:50,loyaltyThreshold:60,mistrustThreshold:30,vindictivenessThreshold:60,
+ rulerPriority:1000,majorPriority:100,adviserPriority:700,exchangePriority:1200,appearancePenalty:25,conquestRecallBonus:100,
+ templateBaseWeight:10,conditionWeight:8,originalCatalogBonus:20,traitWeightDivisor:10,requiredTraitMinimum:40,recentBuffer:8,
+ personalReply:{gratitude:3,respect:2,familiarity:3},personalResponse:{respect:2,familiarity:2}
+};
+export const SOVEREIGN_PROFILES={
+ subordination:{significance:80,importance:65,emotion:'pride',hostility:0,respect:4},
+ 'rebellion-failed':{significance:60,importance:45,emotion:'pride',hostility:5},
+ released:{significance:80,importance:70,emotion:'humiliation'},
+ 'rebellion-won':{significance:75,importance:70,emotion:'humiliation'}
+};
 export const MEMORY_PROFILES={
  'company-conquest':{significance:85,importance:80,emotion:'resentment',hostility:20,mistrust:6,strong:true},
  'company-loss':{significance:75,importance:65,emotion:'uncertainty',strong:true},
