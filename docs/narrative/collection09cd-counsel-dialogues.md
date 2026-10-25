@@ -115,18 +115,21 @@ Creative possibilities: no dividends triggers dismay, high dividends trigger sel
 
 ## Companion guided turn workflow — finalized player direction (25 October 2026)
 
-The companion deliberately **does not cover London Season, Family or Hiring**. Players already know how to play; these three physical-game phases are handled entirely at the table, without tutorial screens, completion questions, reminders, or extra companion controls. The app starts its active guided workflow at Company Operation.
+The companion deliberately **does not cover London Season, Family or Hiring**. Players already know how to play; these three physical-game phases are handled entirely at the table, without tutorial screens, completion questions, reminders or extra companion controls. The app starts its active guided workflow at Company Operation.
 
-Follow the actual published phase order; **Bonuses is immediately after Company Operation**, not grouped with Upkeep.
+**User-approved UI consolidation:** Published **Bonuses (V)** and **Revenue (VI)** are separate physical-game phases, but should be presented as **one companion stage, “Bonuses & Revenue.”** Keep the real rules order intact: Bonuses instructions **first**, then Revenue instructions and, in Narrative mode, brief Revenue reporting/shareholder scene. Do not add an independent companion phase transition for Bonuses.
 
-1. **Company Operation (IV):** Army Deploy, Director/Special Envoy and regional Governor interactions, with applicable counsel and resolutions.
-2. **Bonuses (V):** Concise physical instructions only where the companion's tracked state adds value; don't require tracking family-level payments.
-3. **Revenue (VI):** Physical instructions; light narrative-mode reporting on dividends, emergency loans and actual Standing; shareholder scene drawing on completed current-turn operations and prior India Events.
-4. **Events in India (VII):** Resolve events; narrate each event as eligible, and Elephant movement/public stack transitions as distinct suspense beats.
-5. **Parliament Meets (VIII):** Atmospheric fictional parliamentary complaints/debate before the real voting procedure, with no fabricated mechanical parliamentary decisions.
-6. **Upkeep and Refresh (IX):** Concise applicable physical reminders; then app **New Turn** advances the continuing narrative/history (New Turn is not a published extra game phase).
+Companion stages:
 
-Company failures and scenario exceptions take precedence, including Revenue's immediate route to Final Scoring. Omitted physical phases are **not** omitted from the actual board game. This is approved navigation direction only; it does not authorize 09D-2 implementation or new prose.
+1. **Company Operation (physical IV):** Army Deploy, Director/Special Envoy and regional Governor interactions, with counsel and resolutions.
+2. **Bonuses & Revenue (physical V then VI):** concise physical Bonuses instructions followed by Revenue instructions; optional narrative-mode reporting on dividends, emergency loans and actual Standing, then a shareholder scene or Revenue-failure epilogue.
+3. **Events in India (physical VII):** resolve events; each eligible event can receive its own scene, and Elephant movement/public stack transitions get distinct anticipatory beats.
+4. **Parliament Meets (physical VIII):** fictional parliamentary complaints/debate around the existing real pre-vote window, without fabricated mechanical choices.
+5. **Upkeep and Refresh (physical IX):** concise applicable physical instructions; then **New Turn** advances the companion's continuing narrative/history. New Turn is an app control, not an additional physical phase.
+
+**Normal mode:** For the combined Bonuses & Revenue stage, show only appropriate physical instructions without shareholder reporting or fictional scene. **Narrative mode:** request only the minimal Revenue facts for a shareholder scene, with no separate Bonuses reporting. If failure happens during Revenue, immediately route to the proper end-game epilogue and Final Scoring; do not present subsequent unused Revenue steps or later phases.
+
+Company failure timing and scenario exceptions take precedence. The three earlier physical phases are still played on the board; the companion simply doesn't guide them. This is approved workflow design, **not** authorization for 09D-2 implementation or new authored dialogue.
 
 ## Permanent advisers and ownership
 
