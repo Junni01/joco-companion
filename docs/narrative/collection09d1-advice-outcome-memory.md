@@ -1,6 +1,6 @@
 # Collection 09D-1 — Committed Counsel and Action-Outcome Memory
 
-**Status:** Design and narrative metadata direction **approved by user**, 25 October 2026. Exact 09D-1 outcome dialogue also creatively approved. **No implementation authorization yet**; review 09C-2 results before a dedicated Codex 09D-1 task. 09C-2 planning previews are being implemented separately. This document specifies 09D-1 history only; moving scenes into resolution dialogs belongs to 09D-2 and adviser rivalries/reputation to 09D-3.
+**Status:** Design and exact outcome dialogue approved by user. **Scoped 09D-1 implementation authorized 25 October 2026, following review of completed 09C-2.** Commit-linked advice evidence and immediate guarded outcome responses only; 09D-2 dialog relocation and 09D-3 long-term rivalries/reputation remain deferred. This document specifies 09D-1 history only; moving scenes into resolution dialogs belongs to 09D-2 and adviser rivalries/reputation to 09D-3.
 
 ## Purpose
 
@@ -74,19 +74,21 @@ Exactly one record for one speaker's actually delivered recommendation per mater
 - A Governor's successful check with a different effect permits wounded pride; failure does not.
 - Predictions are not retroactive; prior personal thoughts are not other advisers' public knowledge.
 - No dialogues about unreported deaths, lost Company troops, realized China trade, historical promises or player families.
-- Existing authored outcome lines in `writing/collection09c-adviser-candidates.md` are creatively approved **as writing** but 09D implementation is deferred. The 18 exact outcome lines in `writing/collection09d1-outcome-candidates.md` are now **creatively approved**, including four editorial replacements. That is **writing approval only**, not permission to implement 09D-1 in code or to begin 09D-2/09D-3.
+- Existing authored outcome lines in `writing/collection09c-adviser-candidates.md` are creatively approved **as writing** but 09D implementation is deferred. The 18 exact outcome lines in `writing/collection09d1-outcome-candidates.md` are now **creatively approved**, including four editorial replacements. This has now received **scoped 09D-1 implementation authorization** after 09C-2 review, but not authorization to begin 09D-2 or 09D-3.
 
 ## Acceptance scenarios for eventual Codex delivery
 
 - One Army attempt: visible, discouraging pre-action counsel → committed success, reported failure, catastrophic failure; suitable outcome interpretation and preserved exact quote.
 - One Deploy canceled, target changed twice and dialog reopened: no historical record until a real attempt; saved final supported advice matches the actual attempted target.
 - Director: India preliminary preference → successful check → China chosen; preserve true utterance phase, optionally log an actual post-check reaction. Repeat with failed check: no implied rejected preference.
-- Governor: Tax recommended → successful Administer → regiment chosen, versus failed check with no effect; prevent spurious "ignored".
+- Governor: Tax recommended → successful Administer → a **genuinely tracked** different effect chosen (only if the current resolver represents that effect), versus failed check with no effect; prevent spurious "ignored". **Current 09C-2 implementation does not model full Regiment/Ship successful-effect lifecycle**: do not add fictional choices, silently modify rules, or record an untracked physical effect. Withhold this branch and identify the blocker if necessary.
 - Two contrasting advisers genuinely seen in one exchange: both speaker IDs, individual words, shared unit, one incident; no unrelated randomly inserted quotation.
 - Same state under a different hidden event order: advice eligibility unchanged; no hidden-info leak.
 - Prior current-schema save and narrative-off save remain valid; strict full save/Undo/Redo/reload/import/export and debug isolation.
 - Renderer eventually shows physical instructions first and narrative afterward (09D-2); **do not conflate this UI work with 09D-1**.
 
-## Next review
+## Implementation entry gate and engineering review
 
-The catalogue's human creative review is complete. Next resolve one precise engineering question: for physical checks, which existing UI transition can reliably prove that the player saw advice **before** reporting the roll? If that cannot be established in 09C-2, store only truly visible, correctly phased utterances and suppress "overruled" callbacks until the proper evidence exists. Do not silently fake chronology.
+09C-2 has finished, reporting 315 passing tests; consult `collection09c2-implementation.md`, `collection09c2-dialogue-status.md`, and actual transient counsel modules before implementing. Its advice cache is deliberately **unsaved**. Introduce only an additive binding to the actual authoritative action result; never infer a recommendation by reselecting a template after action resolution. Deliver a specific audit of the protected roll / dialog reporting transitions and distinguish advice visibly presented before a physical check from post-result commentary. Governor Tax-only support is a hard present limitation, not an invitation to broaden mechanics.
+
+The catalogue's human creative review is complete. Resolve one precise engineering question: for physical checks, which existing UI transition can reliably prove that the player saw advice **before** reporting the roll? If that cannot be established in 09C-2, store only truly visible, correctly phased utterances and suppress "overruled" callbacks until the proper evidence exists. Do not silently fake chronology.
