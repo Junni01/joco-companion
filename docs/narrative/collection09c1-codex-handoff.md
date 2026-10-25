@@ -1,0 +1,15 @@
+# Codex handoff — Collection 09C-1 Company Operations UI ONLY
+
+Pull latest `main` for `Junni01/joco-companion`. Read `AGENTS.md`, `README.md`, `docs/current-status.md`, `docs/narrative/collection09cd-company-operations.md`, `docs/narrative/collection09-spec.md`, rules audit and relevant regular/debug action tests. Audit existing `dist/` source first.
+
+**Implement only 09C-1 (UI/workflow, not narrative).** Move Deploy initiation into three compact persistent Bombay/Madras/Bengal Army panels. Army is implicit in clicked button; existing legal target selection, strength and resolution logic is authoritative. Selected region retains Governor/administration and regional actions and should no longer be the required Deploy origin.
+
+Provide a prominent Director of Trade (or Governor General when legally replaced) operations panel. Start Special Envoy from the Director context: select provisional intended branch/eligible India closed Order or establishment of China office, then report the physically rolled check success/failure, then confirm. **In the physical rules the branch is chosen after a successful roll; the app ordering is a reporting convenience**, so allow an intended branch to change before committing a successful result. Support repeat attempts. No resolved effect on failed check; cancellation leaves gameplay/narrative untouched. When the GG law replaces Director, do not leave a false Envoy affordance. Preserve existing Governor General action workflow. China Superintendent's separate Trade in China action acts after Bengal; don't conflate it with opening the office via Envoy. Show existing status/action access only if supported; do not implement a new trade finance or result ledger in this phase.
+
+Read the publisher PDF/rules audit for **Special Envoy** and **China office** specifics rather than extrapolating from mockups. `dist/` is app source. Touch-first, clear disabled reasons, no new dependencies/build.
+
+Don't implement 09C-2 advisers, advice preview/memories, 09D narrative relocation, China assistant/opium commentary, Collection 10, new hidden forecast data, officeholder/ships/money tracking or Site deployment. No unapproved dialogue writing.
+
+Keep current gameplay resolvers/effects, all physical input fields, scenario/office law gates, known Shuffle projection, current-schema state, Undo/Redo and regular/debug parity. Test multi-target deployments and Special Envoy failed/successful/illegal/cancelled paths; Governor General replacement; office already established; actual enabled China status; desktop/tablet touch layout. Run `npm test` and appropriate browser checks. Update `docs/current-status.md` and an implementation report, commit/push to `main`, and summarize commits, tests, limitations, UI evidence and no deployment.
+
+**Stop and report a specific source/rule ambiguity before implementing a wrong mechanical branch.** If the existing app lacks a rule-required active Special Envoy or Superintendent flow, limit this delivery to safe entry-point refactoring and report the missing component rather than inventing full semantics.
