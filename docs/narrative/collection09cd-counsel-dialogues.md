@@ -47,6 +47,16 @@ This clarifies product intent; do not refactor a Codex task already in progress 
 - Keep the user-approved dedicated **single scrollable narrative page** within existing action dialogs for scenes, with future optional portraits. Do not add per-line clicks, read acknowledgements, duplicate map toasts or extra invented gameplay decisions; preserve physical instructions and already-necessary transition acknowledgements.
 - Scope control: this approves dramaturgical direction, **not** new anticipation prose nor 09D-2 implementation. Review actual current event-stack and Elephant state-machine ordering before a Codex handoff.
 
+## 09D-2 India event narration policy — Option A accepted (25 October 2026)
+
+**User approved Option A:** Every resolved India event type—including routine Turmoil, Windfall, Peace, Leader and Shuffle—gets an **opportunity** for its own narrative scene, even when the mechanical effect is small. A single chronicler remark can be sufficient; a major event can support a longer exchange. Do not gate scenes solely on the magnitude of mechanical change or arbitrarily silence a fixed percentage of routine events.
+
+- **Creative freedom for small events:** The chronicler and characters may invent humorous *incidental* scenarios, small social embarrassments, misunderstandings, rituals, bureaucratic absurdities or local colour that plausibly accompany the actual event. Fiction is part of the entertainment, not a factual incident ledger. A quiet Windfall or routine Shuffle may warrant a great joke.
+- **Consequences remain authoritative:** Do not assert unreported material payments to specific players, deaths, battles, troop losses, new alliances, real control changes or other game-changing facts. Distinguish subjective claims and incidental fictional embellishment from actual tracked outcomes. The mechanical result and physical instructions are always exact.
+- **Flexible scene size and casting:** One chronicler line is enough; sometimes a ruler or adviser joins, and multi-region Cascade effects may produce multiple voices in one scene. No enforced character count, factual-coverage checklist, obligatory multi-line quota or maximum dialogue length. Avoid generic filler if no suitable approved writing is available.
+- **Group subeffects, not distinct suspense beats:** An individual Order closing, Writer returned, tower adjustment or unrest removal should normally be part of its parent event's scene rather than a new page. The distinct Elephant-movement and newly public top-of-event-stack suspense scene remains eligible between events even if no crisis has yet occurred.
+- **No implementation authorization:** This is approved narrative direction for future 09D-2 writing and UI design; new exact production dialogue requires its own creative review. Keep accepted 09D-1 and current mechanics intact.
+
 ## Permanent advisers and ownership
 
 - **Three persistent military advisers**, one each for Bombay, Madras and Bengal Presidency Army. Adviser belongs to institutional Army, not to a player-family Commander. Changing a player Commander doesn't destroy the fictional adviser or their history.
