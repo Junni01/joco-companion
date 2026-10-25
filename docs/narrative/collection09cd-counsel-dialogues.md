@@ -89,6 +89,18 @@ UI guidance: plus/minus controls, no manual typing or player-family/share invent
 
 Creative possibilities: no dividends triggers dismay, high dividends trigger self-serving praise, emergency loans provoke panic or rationalization, Standing colours confidence. Incidental shareholders can argue and contradict one another. Fictional investment worries are welcome; don't invent a specific player's losses or unreported Company finance facts. No new rule choices or extra acknowledgements.
 
+## Revenue failure as shareholder epilogue — user-approved direction (25 October 2026)
+
+**User decision:** Since Company failure may occur during Revenue, the Revenue flow must support an **end-game branch**. When the Company fails, replace the ordinary shareholder scene with a **dedicated final shareholders' epilogue** in Narrative mode, then guide players directly to published Final Scoring. In Normal mode, provide the actual final scoring instructions with no fictional page. Do not continue into Events in India or Parliament after Revenue failure.
+
+**Rules:** Revenue printed p.27: if Standing reaches the leftmost track space, the Company fails and proceeds to Final Scoring **immediately**. This may occur from emergency loans/Public Embarrassment or failed Expectations before the Chairman would pay dividends; do not require completing hypothetical later Revenue steps. Other failure points have their own distinct timing: failure during Events in India finishes that phase before Final Scoring (p.31), and a legislated Company failure finishes the vote (p.34). Never repurpose the Revenue timing for all endings.
+
+**UI:** Offer a clear narrative-aware end-game path and preferably derive failure from the entered actual Standing position, avoiding a redundant 'failed?' confirmation. A user may need to report that failure occurred at an earlier Revenue step rather than supplying nonexistent completed-dividend information. Respect back navigation, save/undo and existing physical stage semantics. Don't introduce a second Company-failure vote, payout, or homebrew rule.
+
+**Creative:** The last shareholders' gathering can be longer and more theatrical, with incidental fictional proprietors, secretaries and chronicler, contrasting their financial anxieties with the Company's actually recorded history. It may refer to known territory, disasters and Company reputation, but not invent specific player-family fortune losses or financial details not reported. Creative humour or sober endings are both permissible. Store an actual end-state distinction so the ordinary scene is not also shown for the same Revenue outcome.
+
+**Status:** Approved design intent only, **no 09D-2 or end-game implementation authorization** or final prose approval. Verify existing app Revenue / Company failure support before engineering handoff.
+
 ## Permanent advisers and ownership
 
 - **Three persistent military advisers**, one each for Bombay, Madras and Bengal Presidency Army. Adviser belongs to institutional Army, not to a player-family Commander. Changing a player Commander doesn't destroy the fictional adviser or their history.
