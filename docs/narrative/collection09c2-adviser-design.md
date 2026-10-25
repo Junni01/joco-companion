@@ -20,6 +20,16 @@ A stable identifier for person, distinct identifier for office and an optional o
 - Cancel/Back before action commitment leaves **no historical quote, relationship change, prediction memory or claim that an expedition happened**. Committed results record only the exact advice visibly attached to the final actual chosen plan; maintain exact source and speaker identity.
 - If users change action/effect **after rolling but before confirming**, align saved advice with the **final effect**; do not pretend an earlier preview warned about another decision. Avoid falsely presenting a line never seen as if delivered before the roll. Distinguish post-roll explanation from genuine pre-roll counsel.
 
+## Post-check effect choice: Special Envoy and Governor Administer
+
+**A recommendation is not a compulsory declaration of the effect.** Both Special Envoy and Governor Administer are checks whose legal benefit is chosen *after success*. UI action-first preference is provisional. Players can still change their mind after the check succeeds. Deploy is different: its target/attempt is configured before physical resolution.
+
+For Special Envoy distinguish original visible adviser preference, actual reported check result, revised preference/final chosen effect, and outcome commentary. If the user changes the effect after success, any newly displayed comment is **post-roll counsel/reaction**, not a falsified pre-roll warning. Save only lines truly displayed and associate their temporal role (pre-check or post-check). A failed check has no elected successful effect to remember.
+
+For Governor Administer, keep the selected-region entry point. Before the physical check, the appropriate regional administrative assistant can recommend an eligible use of potential success (Tax / Commission Regiment / Build Company Ship according to actual current rules). After reported success, the player selects whichever legally permitted action they prefer; only then may the adviser react to being followed or disregarded. Failed checks have no resulting choice and cannot imply deliberate disagreement. Governor General replacement must use accurate office/assistant identity and its own legal actions.
+
+This feature **does not require tracking a player's identity, family, motive or treasury**. Advice is merely fictional commentary on options the game actually grants. A later callback can express personal irritation only if the original recommendation and chosen different effect were recorded in a committed action.
+
 ## Concrete advice structure
 
 A recommendation record should capture `speakerId`, `institutionId`, `actionKind`, `armyId` or target Order/China office effect, `targetId(s)`, `stance` (encourage / discourage / qualified / neutral), `renderedText`, `templateId`, `publicEvidenceIds`, `visibleAtCommit`, and the game incident ID if one is committed. The implementation must not use the dialogue to decide legal actions or mutate physical outcomes. This is a conceptual contract: fit current narrative schema, don't create duplicate logs.
@@ -32,6 +42,12 @@ A recommendation record should capture `speakerId`, `institutionId`, `actionKind
 - Director's Secretary: interest in access to closed/open Indian Orders and proper bureaucratic procedure, remembering only committed missions.
 - China assistant: derive interest from controlled-region printed opium icons, `before`/`after` supply deltas and actual Superintendent activation. Opium is potential access, not traded cargo/profit. Board icon counts remain pending separate board-asset verification; no direct changes in 09C-2 until verified.
 - Regional Governor secretaries stay embedded in region details. Governor General law replacement must not keep an active Director/old Governor fictional office in dialogue.
+
+## Sequence and persistence refinement
+
+Capture preview-visible candidate ID/text and its logical timestamp **inside the current dialog session**, without committing narrative history. On final confirmation, record which utterances were genuinely displayed as pre-check advice, any distinct post-check switch reaction, final legal effect and incident ID; do not change narrative history on a cancelled plan. If the player reports failure, omit all claims that they freely declined the preferred effect. If the app has no method to evidence that the preferred advice was seen before the physical roll, suppress claims of ignored advice rather than infer them.
+
+Create callbacks only after committed results and guard against unsupported specific explanations for a failed Special Envoy check (the court's refusal is not established).
 
 ## Creative and technical acceptance gate
 
