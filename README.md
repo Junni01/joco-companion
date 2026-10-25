@@ -65,7 +65,7 @@ End-of-turn chapters now select one or two evidence-backed threads instead of en
 
 ## Collection 09A/09B political outlooks
 
-The selected region now shows a saved private ruler assessment grounded in public circumstances and personal experience. Known Shuffle batches inform outlooks without exposing hidden fronts or order. See [implementation and limits](docs/narrative/collection09-implementation.md) and the [small creative-review demonstration](docs/narrative/collection09-demo.md). Company counsel and event placement (09C/09D) remain deferred.
+The selected region now shows a saved private ruler assessment grounded in public circumstances and personal experience. Known Shuffle batches inform outlooks without exposing hidden fronts or order. See [implementation and limits](docs/narrative/collection09-implementation.md) and the [small creative-review demonstration](docs/narrative/collection09-demo.md). The [approved writing polish](docs/narrative/collection09-polish-implementation.md) adds 48 eligible personality variants with 12 evidence deferrals; see the [small integration review](docs/narrative/collection09-polish-demo.md). Company counsel and event placement (09C/09D) remain deferred.
 
 ## Saves and hosting
 

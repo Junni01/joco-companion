@@ -1,0 +1,20 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {clone} from '../dist/model.js';
+import {rulerSummaryHTML,profileHTML} from '../dist/narrative-ui.js';
+import {APPROVED_OUTLOOKS} from '../dist/narrative-outlook-content.js';
+import {contrastingShuffle,frontierOutlook,grievanceShuffle} from '../tests/outlook-polish-fixtures.js';
+const rows=['# Collection 09B writing polish — small integration review','','Exact approved writing; final acceptance of the integrated experience remains with the user and ChatGPT. These are **controlled synthetic cast profiles and public deck setup**, not changes to personality caused by gameplay. The three Crisis discards are explicitly staged public information. Actual phase/draw/Shuffle resolvers generate the saved thoughts. Private thoughts are not public speeches.',''];
+function show(label,state,region){const o=state.narrative.outlooks[region];rows.push(`## ${label}`,'',`**${state.narrative.characters[o.characterId].name}** · \`${o.templateId}\``,'',`> ${o.text}`,'',`Support: ${o.context.issues.join(', ')}. Saved at ${o.sourceIncidentId}; private, policy ${o.selectionPolicy}. ${o.memoryIds.length?'Owned memory sources: '+o.memoryIds.join(', ')+'.':''}`,'');return o;}
+const f=contrastingShuffle();
+assert.equal(show('One dangerous Shuffle: ambitious ruler',f.state,'madras').templateId,'09B-dangerous-climate-ambitious');
+assert.equal(show('Same Shuffle: cautious ruler',f.state,'hyderabad').templateId,'09B-dangerous-climate-anxious');
+assert.equal(show('Same Shuffle: confident, low-aptitude ruler',f.state,'mysore').templateId,'09B-dangerous-climate-complacent');
+rows.push('All three see the same returned batch: three Crisis types, unknown order. They are outside the immediate local frontier threat. Low aptitude permits this error under this stable public context; it does not force error in every situation.','');
+show('Threatened frontier: proud ruler',frontierOutlook(true).state,'bombay');show('Same frontier: cautious ruler',frontierOutlook(false).state,'bombay');rows.push('The Bombay examples are alternate initial cast fixtures, not a personality change caused by an event.','');
+const grievance=show('Personal conquest grievance survives general instability',grievanceShuffle().state,'bombay');assert(grievance.templateId.startsWith('09B-conquest-grievance-'));
+rows.push('The conquest and hostility are actual owned evidence. General military atmosphere is eligible but ranks below the unresolved personal loss. No receipt of revenue, visiting officials or present garrison is invented.','');
+const before=clone(f.state),thought=f.state.narrative.outlooks.hyderabad.text;for(let i=0;i<8;i++){rulerSummaryHTML(f.state,'hyderabad');rulerSummaryHTML(f.state,'madras');profileHTML(f.state,'ruler-hyderabad');}assert.deepEqual(f.state,before);
+f.draw();f.resolve();assert.equal(f.state.narrative.outlooks.hyderabad.text,thought);
+rows.push('## Stability after reading and a real event','','Eight repeated region/profile reads leave the entire state unchanged. A subsequent actual Crisis resolves; the returned batch falls to two. The cautious ruler still thinks:', '',`> ${thought}`,'','The exact words legitimately survive while their saved public evidence advances. No claim of vindication, hidden foreknowledge or public advice is added.','','## Integration limits','',`${APPROVED_OUTLOOKS.filter(e=>!e.blocked).length} approved entries are selectable; ${APPROVED_OUTLOOKS.filter(e=>e.blocked).length} remain withheld for factual implications not safely established. See the implementation report for every blocked ID. No sentence was rewritten to enable it.`, '', 'Review focus: are these voices distinct, are local priorities right, and does occasional overconfidence feel motivated rather than mechanically assigned?');
+fs.writeFileSync(new URL('../docs/narrative/collection09-polish-demo.md',import.meta.url),rows.map(line=>line.trimEnd()).join('\n')+'\n');console.log('Small approved-writing integration demonstration generated.');
