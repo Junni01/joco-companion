@@ -113,18 +113,20 @@ Creative possibilities: no dividends triggers dismay, high dividends trigger sel
 
 **Status:** Approved design intent only, **no 09D-2 or end-game implementation authorization** or final prose approval. Verify existing app Revenue / Company failure support before engineering handoff.
 
-## Companion guided turn workflow — user direction (25 October 2026)
+## Companion guided turn workflow — finalized player direction (25 October 2026)
 
-The **companion's top-level guided sequence**, distinct from a full tutorial or reproduction of all board-game phases, is:
+The companion deliberately **does not cover London Season, Family or Hiring**. Players already know how to play; these three physical-game phases are handled entirely at the table, without tutorial screens, completion questions, reminders, or extra companion controls. The app starts its active guided workflow at Company Operation.
 
-1. **Company Operations:** existing Army Deploy, Director/Special Envoy and regional Governor interactions, with applicable counsel and resolutions.
-2. **Revenue:** physical instructions; minimal narrative-mode reporting (dividend count, emergency-loan count and actual Standing); shareholder scene drawing on current-turn completed operations and prior India Events.
-3. **Events in India:** resolve actual events and their consequences; show separate suspense scenes on Elephant movement/public stack transitions as existing timing permits.
-4. **Parliament:** atmospheric parliamentary debate scene before actual voting, while respecting what proposal/law the companion actually knows.
-5. **Upkeep and bonuses:** concise, actionable end-of-turn physical instructions and applicable bonus effects; no assumed tracking of unreported finances/components.
-6. **New Turn:** advance app turn and process legitimate persistent-narrative ageing/history/chronicle updates.
+Follow the actual published phase order; **Bonuses is immediately after Company Operation**, not grouped with Upkeep.
 
-This is **UI navigation for the companion**, not an assertion that any omitted actions in the physical game cease to exist or a change to published sequencing. Observe real event/failure exceptions and actual scenario rules. In particular a Revenue Standing failure routes immediately to Final Scoring, with the appropriate narrative epilogue rather than later phases; other official failures use their own legal timing. No new implementation is authorized by this summary.
+1. **Company Operation (IV):** Army Deploy, Director/Special Envoy and regional Governor interactions, with applicable counsel and resolutions.
+2. **Bonuses (V):** Concise physical instructions only where the companion's tracked state adds value; don't require tracking family-level payments.
+3. **Revenue (VI):** Physical instructions; light narrative-mode reporting on dividends, emergency loans and actual Standing; shareholder scene drawing on completed current-turn operations and prior India Events.
+4. **Events in India (VII):** Resolve events; narrate each event as eligible, and Elephant movement/public stack transitions as distinct suspense beats.
+5. **Parliament Meets (VIII):** Atmospheric fictional parliamentary complaints/debate before the real voting procedure, with no fabricated mechanical parliamentary decisions.
+6. **Upkeep and Refresh (IX):** Concise applicable physical reminders; then app **New Turn** advances the continuing narrative/history (New Turn is not a published extra game phase).
+
+Company failures and scenario exceptions take precedence, including Revenue's immediate route to Final Scoring. Omitted physical phases are **not** omitted from the actual board game. This is approved navigation direction only; it does not authorize 09D-2 implementation or new prose.
 
 ## Permanent advisers and ownership
 
