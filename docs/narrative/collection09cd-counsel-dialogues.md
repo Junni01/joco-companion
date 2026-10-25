@@ -20,6 +20,18 @@
 
 This clarifies product intent; do not refactor a Codex task already in progress or deploy Site solely for this documentation addition.
 
+## 09D-2 mode-aware dialog composition — revised creative direction (25 October 2026)
+
+**User decision:** Do not make narrative authors certify that dialogue repeats any predetermined outcome facts. The narrative must remain free-flowing, humorous, selective, contradictory and character-driven. An earlier proposal to suppress normal summaries according to fact-by-fact coverage metadata is **rejected**.
+
+- **Both modes share a concise factual result title** describing the actual resolution (for example, "Bombay's Attack on Hyderabad Fails Catastrophically" or "Company Takes Control of Delhi"). That title is the main shared statement of what happened.
+- **Both modes retain the exact actionable physical instructions, mandatory effects, essential numbers and legal decisions.** Where an event genuinely requires a separate result indication or a state-change detail to avoid ambiguity, keep it; do not force a character to narrate the rules.
+- **Normal mode** uses the shared title and rules-resolution UI, with concise neutral supporting status only when genuinely useful.
+- **Narrative mode** uses the same title and rules-resolution UI, plus chronicler/ruler/adviser scenes that may focus on irony, relationships, observations, unease, jokes or historical callbacks. No mandatory fact-repetition template slots, coverage matrices or dialogue fact checklists.
+- Character selection still obeys **eligibility and provenance**: dialogue cannot invent consequential events, unreported officer deaths, received payments, actual completed China trade or other important unsupported factual history. Characters may boast, misunderstand, speculate and exaggerate as subjective speech.
+- Avoid duplicating static summary paragraphs already supplied by the title. Don't force chronicler, ruler and adviser to recount the identical outcome. The chronicler may remain silent or spend their line entirely on comic interpretation.
+- Scene placement and exact 09D-2 implementation are **not yet authorized**; this is an approved UI and editorial direction. Keep 09D-1 work in progress separate.
+
 ## Permanent advisers and ownership
 
 - **Three persistent military advisers**, one each for Bombay, Madras and Bengal Presidency Army. Adviser belongs to institutional Army, not to a player-family Commander. Changing a player Commander doesn't destroy the fictional adviser or their history.
