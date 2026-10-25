@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-25",
+  "implementationCommit": "68b858a2cb1105e0968a1f3b7a49fab5d069af8e",
+  "automated": {
+    "command": "npm test",
+    "tests": 339,
+    "passed": 339,
+    "failed": 0,
+    "baseline": 315
+  },
+  "dialogue": {
+    "newEnabled": 15,
+    "newWithheld": 3,
+    "priorResultEnabled": 12,
+    "planningUnitsUnchanged": 17
+  },
+  "newBrowserChecks": {
+    "checks": [
+      "desktop: acknowledged Army victory/failure/catastrophe bind exact saved reactions; reload Undo/Redo do not duplicate",
+      "desktop: target changes/cancellation do not save; unacknowledged visible advice cannot become an earlier prediction",
+      "desktop: two actual speakers persist as one shared exchange with independent reactions",
+      "desktop: Envoy original Indian advice survives post-check China revision, JSON import/export, snapshot restore and readable chronicle; failure establishes no ignored choice or fictional commerce",
+      "desktop: Governor optional Tax recommendation binds only supported actual Tax/failure outcomes",
+      "desktop: debug actual commit/cancel and timing parity",
+      "tablet: acknowledged Army victory/failure/catastrophe bind exact saved reactions; reload Undo/Redo do not duplicate",
+      "tablet: target changes/cancellation do not save; unacknowledged visible advice cannot become an earlier prediction",
+      "tablet: two actual speakers persist as one shared exchange with independent reactions",
+      "tablet: Envoy original Indian advice survives post-check China revision, JSON import/export, snapshot restore and readable chronicle; failure establishes no ignored choice or fictional commerce",
+      "tablet: Governor optional Tax recommendation binds only supported actual Tax/failure outcomes",
+      "tablet: debug actual commit/cancel and timing parity"
+    ],
+    "errors": [],
+    "browser": "156.0.8078.47",
+    "viewports": [
+      "1440x900",
+      "1024x768"
+    ]
+  },
+  "existingPassingSuites": [
+    "check-counsel-browser.cjs",
+    "check-operations-browser.cjs",
+    "check-m2-browser.cjs",
+    "check-outlook-browser.cjs",
+    "check-trade-browser.cjs"
+  ],
+  "additionalExistingViewports": [
+    "1440x1000",
+    "390x844"
+  ],
+  "hostedSiteDeployed": false,
+  "creativeAcceptance": "Pending user and ChatGPT review of integrated selection/pacing"
+}

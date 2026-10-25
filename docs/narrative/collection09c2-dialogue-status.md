@@ -1,5 +1,8 @@
 # Collection 09C-2 — Enabled and withheld authored units
 
+> Historical 09C-2 availability below. The completed [09D-1 implementation](collection09d1-implementation.md#exact-dialogue-availability) now enables 12 previously deferred applicable result entries plus 15 new 09D-1 entries. It does not broaden the 17 selectable planning units or their factual guards.
+
+
 Exact source: [approved collection](writing/collection09c-adviser-candidates.md). Of 47 authored units (45 individual entries and two exchanges), **17 are selectable** (18 spoken lines) and **30 remain withheld/deferred**. An exchange is one unit and its lines are selected intact. Writing approval does not override an unavailable factual guard or authorize 09D.
 
 ## Selectable

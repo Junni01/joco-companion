@@ -65,7 +65,7 @@ End-of-turn chapters now select one or two evidence-backed threads instead of en
 
 ## Collection 09A/09B political outlooks
 
-The selected region now shows a saved private ruler assessment grounded in public circumstances and personal experience. Known Shuffle batches inform outlooks without exposing hidden fronts or order. See [implementation and limits](docs/narrative/collection09-implementation.md) and the [small creative-review demonstration](docs/narrative/collection09-demo.md). The [approved writing polish](docs/narrative/collection09-polish-implementation.md) provides personality variants; the [final evidence review](docs/narrative/collection09-evidence-implementation.md) enables 56 of 60 entries, including one specific-road condition, with four consequential-fact deferrals; see the [small integration review](docs/narrative/collection09-polish-demo.md). Company counsel and event placement (09C/09D) remain deferred.
+The selected region now shows a saved private ruler assessment grounded in public circumstances and personal experience. Known Shuffle batches inform outlooks without exposing hidden fronts or order. See [implementation and limits](docs/narrative/collection09-implementation.md) and the [small creative-review demonstration](docs/narrative/collection09-demo.md). The [approved writing polish](docs/narrative/collection09-polish-implementation.md) provides personality variants; the [final evidence review](docs/narrative/collection09-evidence-implementation.md) enables 56 of 60 entries, including one specific-road condition, with four consequential-fact deferrals; see the [small integration review](docs/narrative/collection09-polish-demo.md). Company planning counsel and committed outcome integration are described below; resolution-dialog relocation remains deferred.
 
 ## Saves and hosting
 
@@ -84,6 +84,13 @@ See the [implementation report and small UI demonstration](docs/narrative/collec
 
 ## Collection 09C-2 planning counsel
 
-Narrative-enabled Army, Director/China and optional Governor planning now reuse continuing advisers for exact approved, fact-guarded counsel. Unchanged previews remain stable and create no saved incidents, quotations or memories. Existing cast IDs and current-version saves are preserved; 09D committed-advice history and callbacks remain deferred.
+Narrative-enabled Army, Director/China and optional Governor planning now reuse continuing advisers for exact approved, fact-guarded counsel. Unchanged previews remain stable and create no saved incidents, quotations or memories. Existing cast IDs and current-version saves are preserved. The 09D-1 extension below adds history only when the real action commits; recurring callbacks remain deferred.
 
 See the [implementation report](docs/narrative/collection09c2-implementation.md), [small creative-review demonstration](docs/narrative/collection09c2-demo.md) and [enabled/withheld dialogue IDs](docs/narrative/collection09c2-dialogue-status.md). Integrated voice selection/pacing remains for user/ChatGPT review. No hosted Site deployment.
+
+
+## Collection 09D-1 committed advice
+
+Exact displayed planning words and compatible immediate reactions now save with the actual committed action. An optional reading acknowledgement distinguishes player-attested pre-check advice from uncertain physical timing; cancellation leaves no history. Envoy success remains legally revisable, while failure creates no ignored-choice claim. Standard scenes stay brief, with expandable original advice and dossier/chronicle evidence.
+
+See the [implementation and withheld-effect limits](docs/narrative/collection09d1-implementation.md), [small creative-review demonstration](docs/narrative/collection09d1-demo.md) and [verification](docs/narrative/collection09d1-verification.json). 09D-2 relocation and 09D-3 recurring callbacks/rivalries remain deferred. No hosted Site deployment.
