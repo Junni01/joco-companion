@@ -68,6 +68,17 @@ Historical context: parliamentary criticism of Company patronage, military polic
 
 Creative eligibility: parliamentary speeches can comment on the **publicly recorded preceding India Phase**, cumulative disasters/successes, trade disruptions, known political shifts and the actually selected law when entered; no assumption about untracked dividends, specific families' payments, actual votes or hidden information. Opposed MPs may contradict one another for humour; self-serving hypocrisy is encouraged, but it's not evidence of a gameplay bribe or patronage deal. Occasional one-speaker speeches or short parliamentary exchanges should be adequate; separate narrative scene, no line-by-line click-through. Treat this as a proposed extension beyond 09D-2's authorized scope until user settles timing and reviews prose.
 
+## Future East India House shareholder scene — proposed for Revenue (25 October 2026)
+
+**User idea, not implementation approval:** In addition to fictional MPs before the Parliament vote, show fictional stock proprietors/investors voicing fears about their family fortunes and disputing Company management. The rulebook's Sequence of Play puts **Revenue (VI)** immediately before **Events in India (VII)** and **Parliament Meets (VIII)**; Revenue pays expenses, checks Expectations, pays dividends and adjusts Standing (printed p.27). A Revenue-close scene is the natural opportunity to let investors react to **actual** financial performance without introducing a new playable shareholder-meeting phase.
+
+- Historical tone: Company shareholders ('proprietors') could argue about returns, patronage, debt and governance. Refer to a fictional gathering at East India House as *theatrical framing*, not an assertion that an additional required Court of Proprietors meeting appears in the published game sequence.
+- Fictional shareholders may be one-off incidental voices, with different attitudes: desperate family investor, wealthy proprietor, self-interested apologist, shareholder demanding dividend despite financial danger, outraged holder of many shares, Company clerk. The fictional investor does not stand in for a particular player's family or owned shares; avoid inventing player-specific finances or votes.
+- Select jokes from **actual recorded Revenue facts only**: dividends declared or withheld if known, emergency loans, balance/standing/expectations where tracked. If the companion does not capture the Revenue outcome, use genuinely neutral shareholder anxiety or omit fact-specific claims, rather than inventing a dividend decision.
+- Creative intent is a separate short **single scrollable story scene**, potentially with future portraits, not a new mechanical action, read acknowledgement, vote or mandatory user report. Preserve exact board-game phases and the approved separate narrative page treatment.
+- Dramatic turn cadence: **East India House (money)** → **Events in India (territory and crisis)** → **Westminster (politics)**. The London shareholders cannot respond to later India events in the same turn before those events occur.
+- Not yet a Codex implementation instruction; confirm exact Revenue integration and which financial values the app actually records before authoring guarded production lines.
+
 ## Permanent advisers and ownership
 
 - **Three persistent military advisers**, one each for Bombay, Madras and Bengal Presidency Army. Adviser belongs to institutional Army, not to a player-family Commander. Changing a player Commander doesn't destroy the fictional adviser or their history.
