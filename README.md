@@ -81,3 +81,9 @@ Reference assets derived from supplied game materials retain their original owne
 The India page now has permanent Director of Trade and Bombay/Madras/Bengal Army panels. Army Deploy fixes its origin before choosing a legal target; Governor administration stays in the selected Company region. Special Envoy starts with a provisional intended effect, permits revision after success, and distinguishes establishing the China office from the later physical Trade in China check. Governor General replacement is reflected in the controls.
 
 See the [implementation report and small UI demonstration](docs/narrative/collection09c1-implementation.md). This is a UI-only integration: adviser counsel, new memories and 09D dialogue movement remain deferred. No hosted Site deployment.
+
+## Collection 09C-2 planning counsel
+
+Narrative-enabled Army, Director/China and optional Governor planning now reuse continuing advisers for exact approved, fact-guarded counsel. Unchanged previews remain stable and create no saved incidents, quotations or memories. Existing cast IDs and current-version saves are preserved; 09D committed-advice history and callbacks remain deferred.
+
+See the [implementation report](docs/narrative/collection09c2-implementation.md), [small creative-review demonstration](docs/narrative/collection09c2-demo.md) and [enabled/withheld dialogue IDs](docs/narrative/collection09c2-dialogue-status.md). Integrated voice selection/pacing remains for user/ChatGPT review. No hosted Site deployment.
