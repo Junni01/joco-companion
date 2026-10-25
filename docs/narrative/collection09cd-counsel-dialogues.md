@@ -35,6 +35,18 @@ This clarifies product intent; do not refactor a Codex task already in progress 
 - **Future portraits:** Design the dedicated narrative page to accommodate optional portraits alongside free-form multi-speaker dialogue and longer scenes. Use persistent character identity for portraits when later available. **Do not** generate or invent production character portraits, add mandatory portrait slots, or block 09D-2 on Collection 10 identity/artwork.
 - Scene placement is now directionally selected, but **09D-2 implementation is not yet authorized**; finalize specific UX flow and user approval first. Preserve accepted 09D-1 behavior.
 
+## 09D-2 India Phase pacing — consequential and anticipatory scenes (user-approved, 25 October 2026)
+
+**Critical distinction:** India Phase narrative alternates between **consequence** (a resolved actual Crisis/event and its fallout) and **anticipation** (Elephant movement plus a newly visible top-of-stack region). Do not suppress an anticipation scene merely because no crisis has yet resolved or because the transition has only minor immediate mechanical effects. This visible movement/reveal is a dramatic beat in itself.
+
+- Preserve the existing game's true order and separate protected physical/instruction stages: resolve current event and its meaningful fallout; physically advance Elephant and event stack when the rules instruct; expose only the actually revealed public information; offer the anticipation scene; then resolve the next event. The narrative must follow the *actual* engine timing, not force an invented universal sequence for every event type.
+- At the Elephant/top-of-stack beat, use **both distinct public facts** as available: Elephant's current region and the actual visible top-stack region, Company/independent control, unrest, recent regional changes, Army-related facts genuinely established, and prior history. They may be different regions; do not conflate them.
+- High unrest in a Company-controlled region creates justified **alarm** and political speculation, not a guaranteed Rebellion or a prediction of a hidden event. A recent defeat can darken the outlook, while a quiet region may create complacency or unease. Some forecasts will prove wrong; that is part of the story.
+- The top visible region is public location/context only. **Never use hidden card/tile face, unrevealed event order, future result or covert RNG** to select or phrase anticipation; preserve hidden-information protections and reproducible narration.
+- After a substantial resolved event, give the result its own narrative scene where appropriate. Small sub-effects belonging to that same event can be included within that scene rather than generating extra pages. Yet Elephant movement and visible-stack transitions must remain narratively eligible between events—these are suspense beats, not redundant result summaries.
+- Keep the user-approved dedicated **single scrollable narrative page** within existing action dialogs for scenes, with future optional portraits. Do not add per-line clicks, read acknowledgements, duplicate map toasts or extra invented gameplay decisions; preserve physical instructions and already-necessary transition acknowledgements.
+- Scope control: this approves dramaturgical direction, **not** new anticipation prose nor 09D-2 implementation. Review actual current event-stack and Elephant state-machine ordering before a Codex handoff.
+
 ## Permanent advisers and ownership
 
 - **Three persistent military advisers**, one each for Bombay, Madras and Bengal Presidency Army. Adviser belongs to institutional Army, not to a player-family Commander. Changing a player Commander doesn't destroy the fictional adviser or their history.
