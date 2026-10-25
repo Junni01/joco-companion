@@ -1,3 +1,4 @@
+import {initializeOutlooks,updateOutlooks} from './narrative-outlooks.js';
 import {composeChapter} from './narrative-chapters.js';
 import {initializePoliticalMemory,processPoliticalMemories} from './narrative-memory.js';
 import {renderPoliticalDialogue} from './narrative-dialogue.js';
@@ -31,7 +32,7 @@ export function createNarrative(state,seed=seedValue()){
   n.characters[id]={id,name:fullName,aliases:[],region,age:30+random(n,21),dynasty:'Company institution',role,condition:'alive',position:label+' of '+name(region),mood:'watchful',traits:Object.fromEntries(TRAITS.map(t=>[t,20+random(n,61)])),family:[],claims:[],relations:{},incidents:[],background:'A fictional institutional adviser, distinct from every player officeholder.',provenance:'Fictional pre-campaign background'};
  }
  n.characters['secretary-general']={...copy(n.characters['secretary-bengal']),id:'secretary-general',name:'Arthur Pembroke',region:'bengal',position:'Governor General secretary'};
- return initializePoliticalMemory(n);
+ return initializeOutlooks(state,initializePoliticalMemory(n));
 }
 export function validateNarrative(state){
  const n=state.narrative;if(n===undefined||n===null)return;
@@ -81,10 +82,11 @@ export function commitNarrative(before,result){
     if(state.regions[region].overlord&&!n.allegiances.some(a=>a.subject===region&&!a.end))n.allegiances.push({id:'debug-'+n.nextIncident+++'-'+region,subject:region,capital:state.regions[region].overlord,subjectRuler:n.seats[region],capitalRuler:n.seats[state.regions[region].overlord],start:state.turn,origin:'unknown',promises:[],end:null,provenance:'Debug setup'});
    }
   }
+  if(entry?.kind==='correction')updateOutlooks(before,state,entry);
   return state;
  }
  // Stack reservation and phase bookkeeping are retained facts but need no duplicate scene.
- if(['stack-draw','phase-ships','phase-finish','parliament-finish'].includes(entry.actionType))return state;
+ if(['stack-draw','phase-ships','phase-finish','parliament-finish'].includes(entry.actionType)){updateOutlooks(before,state,entry);return state;}
  const incident=entry.incident||{type:entry.actionType||entry.kind,input:{},facts:[],changes:[]};
  const id=incident.id||'incident-'+n.nextIncident,lines=[],affected=new Set(incident.changes.map(c=>c.region));
  n.nextIncident=Math.max(n.nextIncident+1,(state.incidentSequence||0)+1);
@@ -127,6 +129,6 @@ export function commitNarrative(before,result){
  renderPoliticalDialogue(before,state,entry,scene,politicalContexts.filter(ctx=>ctx.category!=='intervention'||!commerce.some(c=>c.region===ctx.region&&c.category==='trade-military')),add);
  for(const region of affected){const c=n.characters[n.seats[region]];if(!c.incidents.includes(id))c.incidents.push(id);}
  for(const line of lines){if(line.speakerId!=='chronicler'){const c=n.characters[line.speakerId];if(!c.incidents.includes(id))c.incidents.push(id);}}
- entry.narrative=scene;if(entry.incident)entry.incident.id=id;n.lastIncident=id;return state;
+ entry.narrative=scene;if(entry.incident)entry.incident.id=id;n.lastIncident=id;updateOutlooks(before,state,entry);return state;
 }
 export function dominantTraits(person){return Object.entries(person.traits).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([key])=>TRAIT_LABELS[key]).join(', ');}

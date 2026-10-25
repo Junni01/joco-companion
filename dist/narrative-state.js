@@ -1,3 +1,4 @@
+import {validateOutlooks} from './narrative-outlooks.js';
 import {validateChapters} from './narrative-chapters.js';
 import {validateApprovedLine} from './narrative-approved.js';
 import {tradeContexts,validateTradeLine} from './narrative-trade.js';
@@ -69,6 +70,7 @@ export function validatePoliticalMemory(state){
   check(['assurance','gratitude','threat','insult','promise'].includes(s.type)&&s.audienceIds.every(id=>n.characters[id]),'statement type/audience');refs(s.evidence,source.order);
  }
  validateChapters(state);
+ validateOutlooks(state);
  const lineIds=new Set();
  for(const chapter of n.chapters)check(chapter.incidents.every(id=>ids.has(id)),'chapter source');
  for(const [order,h] of state.history.entries())for(const l of h.narrative?.lines||[]){

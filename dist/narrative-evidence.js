@@ -16,6 +16,8 @@ export function incidentReferences(state,id){
  for(const c of Object.values(n.characters))for(const change of c.development?.changes||[])if(change.incidentIds.includes(id))found.push(`Trait change for ${c.name}`);
  for(const c of Object.values(n.characters))if(c.incidents.includes(id))found.push(`Personal incident journal (${c.name})`);
  for(const chapter of n.chapters)if(chapter.incidents.includes(id)||chapter.closureIncidentId===id)found.push(`Chapter ${chapter.title}`);
+ for(const outlook of Object.values(n.outlooks||{}))if(outlook.sourceIncidentId===id||outlook.context.batch?.sourceIncidentId===id||outlook.memoryIds.some(mid=>n.memories[mid]?.createdIncident===id))found.push(`Private outlook (${n.characters[outlook.characterId]?.name})`);
+ if(n.foresight?.batch?.sourceIncidentId===id||n.foresight?.observedIncidentId===id)found.push('Public forecast knowledge');
  for(const arc of n.arcs||[])if((arc.incidentIds||[]).includes(id))found.push(`Arc ${arc.id}`);
  return [...new Set(found)];
 }
