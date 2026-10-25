@@ -1,3 +1,4 @@
+import {createCounselSession,planningCounselHTML} from './narrative-counsel.js';
 import {scenarioFor,finalTurn} from './scenarios.js';
 import {showElephantSteps,showStackRegion} from './resolution-pages.js';
 import {TILES,pendingEvent,exposedRegion} from './event-stack.js';
@@ -13,6 +14,7 @@ const symbols={circle:'● Circle',triangle:'▲ Triangle',square:'■ Square'};
 export function openGameActions({state,showDialog,apply,esc,start,onPhase,onProgressSaved}){
  const $=id=>document.getElementById(id);
  let d={},stage='form',instructionCursor=0;
+ const counselSession=createCounselSession(state);
  const error=e=>{$('form-error').textContent=e.message||e;};
  const pick=(id,label,items,value='')=>`<label>${esc(label)}<select id="${id}"><option value="">Choose…</option>${items.map(([v,l])=>`<option value="${esc(v)}" ${v===value?'selected':''}>${esc(l)}</option>`).join('')}</select></label>`;
  const regions=ids=>ids.map(id=>[id,REGIONS[id].name]);
@@ -33,7 +35,13 @@ export function openGameActions({state,showDialog,apply,esc,start,onPhase,onProg
   const companies=companyRegions(state);
   if(type==='governor'){
    const fixed=d.regionContext,blocked=operationsBlockReason(state)||(state.laws.governorGeneral?'Governor General has replaced regional Governors. Use the Governor General controls.':!companies.length?'There are no Company regions.':fixed&&!companies.includes(fixed)?'This region is not under Company control.':'');
-   show('Governor actions',`${fixed?`<p class="notice">${esc(REGIONS[fixed].name)}</p>`:''}<p>Choose the action to report.</p><div class="action-menu"><button id="governor-tax" ${blocked?'disabled':''}>Tax</button><button id="governor-administer" ${blocked?'disabled':''}>Unsuccessful Administer</button></div>${blocked?`<p class="small-note">${esc(blocked)}</p>`:'<p class="small-note">The first Tax in a region each turn adds no unrest. Later Taxes add one. Unsuccessful Administer adds the unrest required by the active laws.</p>'}`);
+   show('Governor actions',`${fixed?`<p class="notice">${esc(REGIONS[fixed].name)}</p>`:''}<p>Before the physical check, you may open optional planning. After resolving it, report the actual effect or failure.</p>${fixed?`<button id="governor-plan" ${blocked?'disabled':''}>Plan Administer · optional</button>`:''}<div class="action-menu"><button id="governor-tax" ${blocked?'disabled':''}>Tax</button><button id="governor-administer" ${blocked?'disabled':''}>Unsuccessful Administer</button></div>${blocked?`<p class="small-note">${esc(blocked)}</p>`:'<p class="small-note">The first Tax in a region each turn adds no unrest. Later Taxes add one. Unsuccessful Administer adds the unrest required by the active laws. Other permitted successful effects are handled on the physical board.</p>'}`);
+   if(fixed)$('governor-plan').onclick=()=>{
+    if(blocked)return;
+    const preview=counselSession.preview({kind:'governor',region:fixed});
+    show('Plan Administer',`<p class="notice">${esc(REGIONS[fixed].name)}</p><p>Any recommendation is provisional. Make the physical Administer check under the current rules, then choose any permitted successful effect on the table. Nothing here declares or records Tax, a regiment or a ship.</p>${planningCounselHTML(preview,esc)}<p class="small-note">If you have already rolled, this view is not evidence of an earlier warning. Shipbuilding and regiment commissioning remain untracked; use the normal controls only to report an actual Tax or unsuccessful Administer.</p>`,'<button id="governor-return">Return to result reporting</button>');
+    $('governor-return').onclick=()=>startForm('governor',{regionContext:fixed});
+   };
    $('governor-tax').onclick=()=>startForm('tax',{regionContext:fixed});
    $('governor-administer').onclick=()=>startForm('unrest',{regionContext:fixed,reason:'failure',governorAction:true});
   }else if(type==='unrest'&&d.governorAction){
@@ -54,10 +62,12 @@ export function openGameActions({state,showDialog,apply,esc,start,onPhase,onProg
    // No region lock: successful checks retain the printed right to choose another effect.
    delete d.regionContext;delete d.region;
    const planValid=()=>d.purpose==='china'?!state.chinaOffice:d.purpose==='order'&&orders.includes(d.order);
-   form('Special Envoy',`<p>Choose an intended effect before reporting the physical check. This is provisional: after success you may change the effect or target before confirming.</p>${pick('purpose','Intended action',[...(orders.length?[['order','Open Order in India']]:[]),...(!state.chinaOffice?[['china','Establish Superintendent of Trade in China']]:[])],d.purpose)}<div id="order-field">${pick('order','Closed order outside Company control',orders.map(o=>[o,orderLabel(o)]),d.order)}</div>${!orders.length?'<p class="small-note">No closed Orders outside Company control are available.</p>':''}${state.chinaOffice?'<p class="small-note">The Superintendent office already exists; it cannot be created again.</p>':''}<p>Make the physical Special Envoy check: each £1 spent grants one die, with no penalty. It may be attempted repeatedly. Resolve spending and dice on the table.</p>${pick('outcome','Final check outcome',[['success','Success'],['failure','Failure'],['catastrophe','Catastrophic failure']],d.outcome)}<p class="small-note">Establishing the Superintendent creates and immediately hires the office. It does not resolve the later Trade in China check, move cargo or add opium. After Special Envoy, the Director may make up to two writer/ship transfers between Presidencies/sea zones on the table.</p>`,()=>({outcome:$('outcome').value,purpose:$('purpose').value,order:$('purpose').value==='order'?$('order').value:undefined}),()=>{
+   form('Special Envoy',`<p>Choose an intended effect before reporting the physical check. This is provisional: after success you may change the effect or target before confirming.</p>${pick('purpose','Intended action',[...(orders.length?[['order','Open Order in India']]:[]),...(!state.chinaOffice?[['china','Establish Superintendent of Trade in China']]:[])],d.purpose)}<div id="order-field">${pick('order','Closed order outside Company control',orders.map(o=>[o,orderLabel(o)]),d.order)}</div>${!orders.length?'<p class="small-note">No closed Orders outside Company control are available.</p>':''}${state.chinaOffice?'<p class="small-note">The Superintendent office already exists; it cannot be created again.</p>':''}<p>Make the physical Special Envoy check: each £1 spent grants one die, with no penalty. It may be attempted repeatedly. Resolve spending and dice on the table.</p><div id="envoy-counsel"></div>${pick('outcome','Final check outcome',[['success','Success'],['failure','Failure'],['catastrophe','Catastrophic failure']],d.outcome)}<p class="small-note">Establishing the Superintendent creates and immediately hires the office. It does not resolve the later Trade in China check, move cargo or add opium. After Special Envoy, the Director may make up to two writer/ship transfers between Presidencies/sea zones on the table.</p>`,()=>({outcome:$('outcome').value,purpose:$('purpose').value,order:$('purpose').value==='order'?$('order').value:undefined}),()=>{
     $('order-field').hidden=$('purpose').value!=='order';
     $('outcome').disabled=!planValid();
     $('review-action').disabled=!planValid()||!d.outcome;
+    const panel=$('envoy-counsel'),html=planningCounselHTML(counselSession.preview({kind:'envoy',purpose:$('purpose').value,order:$('order').value},$('outcome').value),esc);
+    if(panel.innerHTML!==html)panel.innerHTML=html;
    });
    $('review-action').onclick=()=>{try{Object.assign(d,{purpose:$('purpose').value,order:$('purpose').value==='order'?$('order').value:undefined,outcome:$('outcome').value});if(!planValid())throw Error('Choose an available intended effect and, for India, a specific closed Order outside Company control.');save();advance();}catch(e){error(e);}};
   }else if(type==='event'&&d.stackTile){

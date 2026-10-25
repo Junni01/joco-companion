@@ -1,9 +1,10 @@
+import {createCounselSession,planningCounselHTML} from './narrative-counsel.js';
 import {showElephantSteps} from './resolution-pages.js';
 import {IDS,PRESIDENCIES,REGIONS,ALLIANCES,legalTargets,deploymentBlockReason,deploymentStrength,deploymentCheck,resolveDeployment} from './model.js';
 export function openDeployment({state,showDialog,apply,esc,targetRegion=null,army=null}){
  const $=id=>document.getElementById(id);
  if(army!==null&&!PRESIDENCIES.includes(army))throw Error('Choose a valid originating Army.');
- const fixedArmy=army;
+ const fixedArmy=army,counselSession=createCounselSession(state);
  // Old unconfirmed deployment drafts no longer block or survive reopening.
  try{localStorage.removeItem('jc-deploy-draft-v2');}catch{}
  const armyReason=army=>targetRegion?deploymentBlockReason(state,army,targetRegion):legalTargets(state,army).length?'':'No legal target is available to this army this turn.';
@@ -20,13 +21,20 @@ export function openDeployment({state,showDialog,apply,esc,targetRegion=null,arm
   if(step===4)body=`<p>For <b>every outcome</b>, each player rolls one die per officer they exhausted in this action. Each 6 removes one of their officers to supply. Never check regiments.</p><label>Officers lost out of ${d.officers}<input id="losses" type="number" min="0" max="${d.officers}" value="${d.losses}"></label><p class="small-note">Report the total after all players finish. This is separate from removing the Commander after catastrophe.</p>`;
   if(step===5){const r=resolveDeployment(state,d);body=`<h4>${esc(r.title)}</h4><p>Apply the following on the physical board. Confirming records this deployment and updates the app together.</p><ol>${r.instructions.slice(reviewCursor).map(t=>`<li>${esc(t)}</li>`).join('')}</ol><p class="small-note">No cash, trophy totals or player identities are tracked. Closing without confirming leaves the app unchanged; reverse any unconfirmed physical changes yourself. Undo reverses a confirmed action.</p>`;}
   if(step>=1&&step<=3)body='<div id="strength-summary"></div>'+body;
+  if(state.narrative?.enabled&&step>=1&&step<=2)body+='<div id="deploy-counsel"></div>';
   showDialog(`Deploy · ${title}`,`${fixedArmy?`<p class="notice"><b>${REGIONS[fixedArmy].name} Army</b> · Origin fixed for this deployment.</p>`:''}<p class="eyebrow">STEP ${fixedArmy?step:targetRegion?(step||1):step+1} OF ${fixedArmy||targetRegion?5:6}</p>${fixedArmy&&step===1?'<p>Use the physical Army box to check available pieces. Buy any local alliances through the President before deploying.</p>':''}${body}`,`<button id="cancel-deploy">Cancel</button>${step>(fixedArmy?1:0)?'<button id="back-deploy">Back</button>':''}<button id="next-deploy" class="primary" ${(step===0&&armyReason(d.army))||(step===1&&!legalTargets(state,d.army).length)?'disabled':''}>${step===5?'Confirm & apply':'Continue'}</button>`);
   const capture=()=>{if(step===0){if(d.army!==$('army').value){d.target=targetRegion||'';d.alliances=[];}d.army=$('army').value;$('next-deploy').disabled=!!armyReason(d.army);}if(step===1)d.target=$('target').value;if(step===2){d.regiments=Number($('regiments').value);d.officers=Number($('officers').value);d.alliances=[...document.querySelectorAll('[data-alliance]:checked')].map(e=>e.dataset.alliance);}if(step===3)d.outcome=$('outcome').value;if(step===4)d.losses=Number($('losses').value);updateStrength();};
   function updateStrength(){
+   updateCounsel();
    const panel=$('strength-summary');if(!panel)return;
    if(!d.target){panel.innerHTML='';return;}
    const c=deploymentStrength(state,d),r=state.regions[d.target];
    panel.innerHTML=`<section class="strength-card"><p class="eyebrow">${esc(REGIONS[d.target].name)} · ${r.control==='company'?'COMPANY REGION':c.defenders.length>1?'EMPIRE DEFENCE':'REGIONAL DEFENCE'}</p><div class="strength-columns"><div><h4>Defending strength</h4>${c.defenders.map(v=>`<div class="strength-row"><span>${esc(REGIONS[v.id].name)}${v.id===d.target?' (target)':''}</span><b>${v.strength}</b></div>`).join('')}<div class="strength-row strength-total"><span>Total defence</span><b>${c.defense}</b></div></div>${step>1?`<div><h4>Committed strength</h4><div class="strength-row"><span>Regiments</span><b>${d.regiments}</b></div><div class="strength-row"><span>Officers</span><b>${d.officers}</b></div>${c.allies.map(a=>`<div class="strength-row"><span>${esc(a.name)}</span><b>${a.strength}</b></div>`).join('')}<div class="strength-row strength-total"><span>Total committed</span><b>${c.strength}</b></div></div>`:''}</div>${step>1?`<div class="dice-total" role="status" aria-live="polite"><strong>${c.strength} − ${c.defense} = ${c.dice} dice</strong><span>${c.dice>0?'Ready to roll after committing these forces.':`No roll available. Add ${1-c.dice} more strength to roll at least one die.`}</span></div>`:''}${r.control==='company'?'<p class="small-note">Company-controlled regions have zero defending strength.</p>':c.defenders.length>1?'<p class="small-note">All regions in the defending empire contribute, including the capital and every subject.</p>':''}</section>`;
+  }
+  function updateCounsel(){
+   if(step<1||step>2)return;const panel=$('deploy-counsel');if(!panel)return;
+   const html=planningCounselHTML(counselSession.preview({kind:'deploy',army:d.army,target:d.target}),esc);
+   if(panel.innerHTML!==html)panel.innerHTML=html;
   }
   updateStrength();
   $('dialog-content').onchange=capture;
