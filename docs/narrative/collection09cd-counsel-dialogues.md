@@ -58,6 +58,16 @@ This clarifies product intent; do not refactor a Codex task already in progress 
 - **Group subeffects, not distinct suspense beats:** An individual Order closing, Writer returned, tower adjustment or unrest removal should normally be part of its parent event's scene rather than a new page. The distinct Elephant-movement and newly public top-of-event-stack suspense scene remains eligible between events even if no crisis has yet occurred.
 - **No implementation authorization:** This is approved narrative direction for future 09D-2 writing and UI design; new exact production dialogue requires its own creative review. Keep accepted 09D-1 and current mechanics intact.
 
+## Future Parliament phase opening scene — proposed direction (25 October 2026)
+
+**User idea under creative review, not implementation authorization:** After Events in India and as Parliament Meets begins, offer a humorous theatrical scene in Westminster featuring **fictional, incidental MPs** voicing grievances about the East India Company before the vote. This broadens the story from India to political life in Britain; MPs need not be persistent NPCs or players' own officeholders.
+
+Historical context: parliamentary criticism of Company patronage, military policy, corruption, nabobs, territorial sovereignty and profits intensified especially after the 1760s; extensive investigations and debates took place in the 1770s and 1780s. The game's phase structure provides artistic license to revisit such controversies in every turn, but avoid inventing verbatim historical speeches or falsely assigning fictional lines to real MPs.
+
+**Timing suggestion for review:** According to the game rulebook Parliament Meets (p.34), the Prime Minister first draws/selects a law, selects a policy, reads the law and establishes its starting support, then members debate before voting. If the scene should comment on the selected law or policy, place it in the **existing pre-vote debate window**, after the law/policy is known and before voting starts. An atmospheric arrival-in-Parliament scene on phase entry is an alternative, but must not pretend to know the yet-unselected law. Do not move the real game steps or add a fake vote, policy choice or read-acknowledgement.
+
+Creative eligibility: parliamentary speeches can comment on the **publicly recorded preceding India Phase**, cumulative disasters/successes, trade disruptions, known political shifts and the actually selected law when entered; no assumption about untracked dividends, specific families' payments, actual votes or hidden information. Opposed MPs may contradict one another for humour; self-serving hypocrisy is encouraged, but it's not evidence of a gameplay bribe or patronage deal. Occasional one-speaker speeches or short parliamentary exchanges should be adequate; separate narrative scene, no line-by-line click-through. Treat this as a proposed extension beyond 09D-2's authorized scope until user settles timing and reviews prose.
+
 ## Permanent advisers and ownership
 
 - **Three persistent military advisers**, one each for Bombay, Madras and Bengal Presidency Army. Adviser belongs to institutional Army, not to a player-family Commander. Changing a player Commander doesn't destroy the fictional adviser or their history.
