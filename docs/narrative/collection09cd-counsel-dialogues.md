@@ -11,6 +11,14 @@
 - Other regional rulers may speak on opening/closing their region's Order, conquest and broader trade cascades; all speakers may disagree when facts warrant.
 - Names, status and memory must persist with stable institution/person identity. Collection 10A full fictional names will be specified separately; don't tie storage keys to a mutable rendered name. Draft names and sample lines are not production-approved.
 
+## Check-first action choice and narrative consequences
+
+Special Envoy and Governor Administer grant a **choice of effect after successful checks** under the actual game rules. The companion may collect an intended preference **before** the player reports the physical check to support better narrative, but this cannot lock a post-success choice. On a successful check, permit lawful revision/choice of effect and distinguish pre-check recommendation from post-check commentary. On failure, no successful effect choice exists, so an adviser cannot claim their recommendation was deliberately rejected.
+
+Governor Administer remains a **regional Governor action**. A continuing regional assistant may recommend an eligible Tax, Commission Regiment, or Build Company Ship as a provisional plan; after success, respond to the actual selected effect. The Governor General law replaces offices, so any comparable commentary must use its valid powers and adviser rather than pretend regional Governors remain.
+
+Avoid assuming a failed Envoy check was caused by a hostile court; a competent clerk may privately spin the failure but the chronicler does not certify rejected negotiations.
+
 ## Action-first counsel and transaction boundaries
 
 **Deploy**: Army panel fixes the Army; once a meaningful legal target/plan is configured, show concise pre-action counsel. One primary adviser ordinarily; sometimes a relevant second speaker respectfully contradicts. No game-stat reference in character speech. Target and Army-specific facts, public outlook and sourced adviser memories determine eligibility, never hidden event faces.
