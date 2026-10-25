@@ -63,6 +63,10 @@ Commercial reactions now use 20 exact approved entries, actual disruption/restor
 
 End-of-turn chapters now select one or two evidence-backed threads instead of enumerating action labels. Exact conditional passages, narrower factual variants, saved source inspection and quiet turns preserve the separate full chronology. See the [implementation and writing audit](docs/narrative/collection08b-implementation.md) and [multi-turn chapter review](docs/narrative/review/collection08b/README.md). Narrative-quality acceptance remains with the user and ChatGPT. The [approved fallback polish and guarded final coda](docs/narrative/collection08b-fallback-polish-implementation.md) have a [new multi-turn review package](docs/narrative/review/collection08b-polish/README.md).
 
+## Collection 09A/09B political outlooks
+
+The selected region now shows a saved private ruler assessment grounded in public circumstances and personal experience. Known Shuffle batches inform outlooks without exposing hidden fronts or order. See [implementation and limits](docs/narrative/collection09-implementation.md) and the [small creative-review demonstration](docs/narrative/collection09-demo.md). Company counsel and event placement (09C/09D) remain deferred.
+
 ## Saves and hosting
 
 Campaigns live in browser storage, separately for regular and debug play. Source transfer does not move them: export JSON in the app and import it in the destination browser.

@@ -90,3 +90,11 @@ Browser campaign state is separate: export/import JSON to move it. Original uplo
 
 The user approved the **design** for political forecasts, persistent private ruler outlooks, pre-action Company counsel and eventual post-action callbacks. Detailed source of truth: [Collection 09 specification](narrative/collection09-spec.md), [writing brief](narrative/writing/collection09-outlooks.md), and [decision/deferral log](narrative/collection09-decisions.md). **09A/09B are authorized next for implementation; 09C/09D are designed but not yet authorized for implementation.** All writing examples remain illustrative until creative review. None of Collection 09 is implemented by this documentation change. Existing gameplay, tests and Site deployment are unchanged.
 
+
+## Collection 09A/09B implementation — 25 October 2026
+
+Implemented the public-information forecast projection and saved private ruler outlook in the selected-region panel. Sovereign/subject/Company primary and secondary exposure, real visible strength and unrest, public remaining event types and known unordered Shuffle batches guide personality-, aptitude- and memory-sensitive assessments. Hidden faces, draw order and saved Shuffle permutations never enter forecast selection. Returned batch counts are consumed once at reveal, cleared at exhaustion, replaced by real Shuffle and conservatively invalidated by debug setup corrections. Missing current-schema disclosure history creates no inferred batch.
+
+Private thoughts persist through current-version save/load, snapshots and Undo/Redo; reading, region selection, profiles, cancelling Deploy and export do not reroll them. They are not public dialogue, promises or shared knowledge. No 09C/09D counsel, placement/callback integration, portraits, new mechanics or migration work was added.
+
+Verification: **261 automated tests pass**, with actual Shuffle/Elephant/reveal and stable panel browser checks on desktop/tablet, plus the existing regular/debug/protected-progress/mobile regressions. See [technical report, decisions and limits](narrative/collection09-implementation.md), [small demonstration](narrative/collection09-demo.md) and `narrative/collection09-verification.json`. New catalogue wording remains pending user/ChatGPT creative review. This delivery commits and pushes to main; **the hosted Site is not deployed**.
