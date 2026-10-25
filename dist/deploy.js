@@ -36,7 +36,7 @@ export function openDeployment({state,showDialog,apply,esc,targetRegion=null,arm
    if(step<1||step>2)return;const panel=$('deploy-counsel');if(!panel)return;
    const plan={kind:'deploy',army:d.army,target:d.target},preview=counselSession.preview(plan);
    if(preview&&adviceAttempt.reported)preview.temporalRole='after-report';
-   const html=planningCounselHTML(preview,esc)+adviceAttempt.controlsHTML(preview,plan);
+   const html=planningCounselHTML(preview,esc);
    if(panel.innerHTML!==html)panel.innerHTML=html;
    adviceAttempt.watch(preview,plan,panel);
   }
@@ -48,3 +48,4 @@ export function openDeployment({state,showDialog,apply,esc,targetRegion=null,arm
  }
  draw();
 }
+

@@ -124,7 +124,7 @@ export function validateAdviceHistory(state){
    assert(s.institutionId===institution&&s.actionKind===s.plan.kind&&s.armyId===(s.plan.army||null)&&same(s.targetIds,[s.plan.target||s.plan.region||s.plan.order||'china-office']),'institution/action/target linkage');
    assert(same(s.plan,JSON.parse(planKey(s.plan))),'canonical statement plan');
    assert(['pre-check','pre-commit','post-check'].includes(s.utterancePhase)&&s.shownInAttempt&&Number.isInteger(s.shownInAttempt.sequence)&&s.shownInAttempt.sequence>0,'display provenance');
-   if(s.utterancePhase==='pre-check')assert(s.shownInAttempt.method==='player-attested-before-check'&&s.shownInAttempt.sequence<a.report.sequence,'pre-check acknowledgement must precede report');
+   if(s.utterancePhase==='pre-check')assert(['rendered-before-report','player-attested-before-check'].includes(s.shownInAttempt.method)&&s.shownInAttempt.sequence<a.report.sequence,'pre-result rendering must precede report');
    else assert(s.shownInAttempt.method==='viewport-visible'&&(s.utterancePhase==='post-check'?s.shownInAttempt.sequence>a.report.sequence:s.shownInAttempt.sequence<a.report.sequence),'visible timing cannot be backdated');
    if(s.actionKind==='deploy'||s.actionKind==='governor')assert(same(s.plan,outcome.plan),'final attempted target must match');
    else assert(s.utterancePhase==='post-check'?same(s.plan,outcome.plan):same(s.plan,a.report.plan),'Envoy original intent vs final effect');

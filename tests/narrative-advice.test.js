@@ -36,7 +36,7 @@ for(const stance of ['encourage','discourage'])for(const outcome of ['success','
 
 test('conditional caution is not rewritten as opposition or a promise; absence of pre-check timing suppresses retrospective claims',()=>{
  const s=counselState();profile(s,'army-bombay','careful');const r=advisedResult(s,plain,deployment()),row=records(r.state)[0];assert.equal(row.stance,'conditional');assert.equal(row.followedStatus,'not-applicable/unknown');assert.equal(row.responseLineId,null);assert(row.qualification.length);
- profile(s,'army-bombay','ambitious');const unknown=advisedResult(s,plain,deployment({outcome:'failure'}),{ack:false});const u=records(unknown.state)[0];assert.equal(u.utterancePhase,'pre-commit');assert.equal(u.followedStatus,'not-applicable/unknown');assert.equal(u.responseLineId,null);
+ profile(s,'army-bombay','ambitious');const unknown=advisedResult(s,plain,deployment({outcome:'failure'}),{afterReport:true});const u=records(unknown.state)[0];assert.equal(u.utterancePhase,'post-check');assert.equal(u.followedStatus,'not-applicable/unknown');assert.equal(u.responseLineId,null);
 });
 
 test('qualified support retains its actual reservation, without claiming prediction accuracy',()=>{
@@ -49,21 +49,21 @@ test('two delivered advisers remain an intact unit, with separate stances, audie
  assert.equal(state.history.at(-1).narrative.lines.filter(l=>l.adviceIds).length,2);assert.deepEqual(state.narrative.characters['army-madras'].relations,s.narrative.characters['army-madras'].relations);
 });
 
-test('unseen, cancelled or post-report acknowledgements cannot manufacture pre-check speech',()=>{
+test('unseen, cancelled or post-report rendering cannot manufacture pre-check speech',()=>{
  const s=counselState();profile(s,'army-bombay','ambitious');
- assert.equal(records(advisedResult(s,plain,deployment(),{ack:false,visible:false}).state).length,0);
+ assert.equal(records(advisedResult(s,plain,deployment(),{visible:false}).state).length,0);
  const a=createAdviceAttempt(s),v=displayed(a,s,plain);v.close();a.report(plain,'success');assert.equal(records(commitNarrative(s,a.attach(resolveDeployment(s,deployment()),plain))).length,0);
- const b=createAdviceAttempt(s),late=displayed(b,s,plain,{ack:false});b.report(plain,'success');late.button.onclick();const loaded=validate(commitNarrative(s,b.attach(resolveDeployment(s,deployment()),plain)));assert.equal(records(loaded)[0].utterancePhase,'pre-commit');
+ const b=createAdviceAttempt(s);b.report(plain,'success');displayed(b,s,plain);const loaded=validate(commitNarrative(s,b.attach(resolveDeployment(s,deployment()),plain)));assert.equal(records(loaded)[0].utterancePhase,'post-check');
 });
 
 test('changing targets before reporting discards abandoned advice; only the final actual plan may bind',()=>{
  const s=counselState();profile(s,'army-bombay','ambitious');const a=createAdviceAttempt(s);displayed(a,s,plain);const final={...plain,target:'hyderabad'};displayed(a,s,final);a.report(final,'success');const state=validate(commitNarrative(s,a.attach(resolveDeployment(s,deployment({target:'hyderabad'})),final)));assert.equal(records(state).length,1);assert.deepEqual(records(state)[0].targetIds,['hyderabad']);
- const b=createAdviceAttempt(s);displayed(b,s,plain);b.report(plain,'success');displayed(b,s,final,{ack:true});const post=validate(commitNarrative(s,b.attach(resolveDeployment(s,deployment({target:'hyderabad'})),final)));assert.equal(records(post)[0].utterancePhase,'post-check');assert.equal(records(post)[0].responseLineId,null);
+ const b=createAdviceAttempt(s);displayed(b,s,plain);b.report(plain,'success');displayed(b,s,final,{});const post=validate(commitNarrative(s,b.attach(resolveDeployment(s,deployment({target:'hyderabad'})),final)));assert.equal(records(post)[0].utterancePhase,'post-check');assert.equal(records(post)[0].responseLineId,null);
 });
 
 for(const original of ['order','china'])test(`Envoy ${original} preference survives success and a genuinely different final effect without backdating later speech`,()=>{
  const s=counselState();profile(s,'secretary-general','careful');profile(s,'secretary-bengal','confident');const a=createAdviceAttempt(s),first={kind:'envoy',purpose:original,...(original==='order'?{order:'d3'}:{})},final={kind:'envoy',purpose:original==='order'?'china':'order',...(original==='china'?{order:'d3'}:{})};
- displayed(a,s,first);a.report(first,'success');displayed(a,s,final,{ack:false});const input={type:'envoy',purpose:final.purpose,order:final.order,outcome:'success'},state=validate(commitNarrative(s,a.attach(resolveAction(s,input),final))),rs=records(state);
+ displayed(a,s,first);a.report(first,'success');displayed(a,s,final,{});const input={type:'envoy',purpose:final.purpose,order:final.order,outcome:'success'},state=validate(commitNarrative(s,a.attach(resolveAction(s,input),final))),rs=records(state);
  assert.equal(rs.length,2);assert.equal(rs[0].utterancePhase,'pre-check');assert.equal(rs[0].followedStatus,'different-effect');assert.equal(rs[1].utterancePhase,'post-check');assert.equal(rs[1].followedStatus,'not-applicable/unknown');assert.equal(rs[0].text,COUNSEL_BY_ID[rs[0].templateId].text);assert(response(state,rs[0]));assert.equal(state.chinaOffice,original==='order');assert.equal(state.regions.delhi.orders.d3,original==='china');assert(!state.history.some(h=>h.actionType==='china-trade'));
 });
 

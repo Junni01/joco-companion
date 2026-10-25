@@ -41,7 +41,7 @@ export function openGameActions({state,showDialog,apply,esc,start,onPhase,onProg
     if(blocked)return;
     const plan={kind:'governor',region:fixed},preview=counselSession.preview(plan);
     if(preview&&adviceAttempt.reported)preview.temporalRole='after-report';
-    show('Plan Administer',`<p class="notice">${esc(REGIONS[fixed].name)}</p><p>Any recommendation is provisional. Make the physical Administer check under the current rules, then choose any permitted successful effect on the table. Nothing here declares or records Tax, a regiment or a ship.</p><div id="governor-plan-counsel">${planningCounselHTML(preview,esc)}${adviceAttempt.controlsHTML(preview,plan)}</div><p class="small-note">If you have already rolled, this view is not evidence of an earlier warning. Shipbuilding and regiment commissioning remain untracked; use the normal controls only to report an actual Tax or unsuccessful Administer.</p>`,'<button id="governor-return">Return to result reporting</button>');
+    show('Plan Administer',`<p class="notice">${esc(REGIONS[fixed].name)}</p><p>Any recommendation is provisional. Make the physical Administer check under the current rules, then choose any permitted successful effect on the table. Nothing here declares or records Tax, a regiment or a ship.</p><div id="governor-plan-counsel">${planningCounselHTML(preview,esc)}</div><p class="small-note">If you have already rolled, this view is not evidence of an earlier warning. Shipbuilding and regiment commissioning remain untracked; use the normal controls only to report an actual Tax or unsuccessful Administer.</p>`,'<button id="governor-return">Return to result reporting</button>');
     adviceAttempt.watch(preview,plan,$('governor-plan-counsel'));
     $('governor-return').onclick=()=>startForm('governor',{regionContext:fixed});
    };
@@ -71,7 +71,7 @@ export function openGameActions({state,showDialog,apply,esc,start,onPhase,onProg
     $('review-action').disabled=!planValid()||!d.outcome;
     const plan={kind:'envoy',purpose:$('purpose').value,order:$('order').value};
     adviceAttempt.report(plan,$('outcome').value);
-    const preview=counselSession.preview(plan,$('outcome').value),panel=$('envoy-counsel'),html=planningCounselHTML(preview,esc)+adviceAttempt.controlsHTML(preview,plan);
+    const preview=counselSession.preview(plan,$('outcome').value),panel=$('envoy-counsel'),html=planningCounselHTML(preview,esc);
     if(panel.innerHTML!==html)panel.innerHTML=html;
     adviceAttempt.watch(preview,plan,panel);
    });
@@ -221,3 +221,4 @@ export function openGameActions({state,showDialog,apply,esc,start,onPhase,onProg
  else if(start){if(start==='blackmail-menu')blackmail();else if(start==='parliament-menu')parliament();else if(typeof start==='string')startForm(start);else startForm(start.type,start);}
  else menu();
 }
+
