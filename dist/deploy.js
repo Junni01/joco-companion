@@ -48,4 +48,3 @@ export function openDeployment({state,showDialog,apply,esc,targetRegion=null,arm
  }
  draw();
 }
-

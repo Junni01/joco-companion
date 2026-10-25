@@ -221,4 +221,3 @@ export function openGameActions({state,showDialog,apply,esc,start,onPhase,onProg
  else if(start){if(start==='blackmail-menu')blackmail();else if(start==='parliament-menu')parliament();else if(typeof start==='string')startForm(start);else startForm(start.type,start);}
  else menu();
 }
-

@@ -1,6 +1,6 @@
 # Collection 09D-1 — small review demonstration
 
-Synthetic isolated campaigns with explicitly configured personalities. Reported physical outcomes and reading acknowledgements are manual test inputs; authoritative consequences come from the real resolvers. This demonstrates integration, not creative acceptance.
+Synthetic isolated campaigns with explicitly configured personalities. Reported physical outcomes are manual test inputs; authoritative consequences come from the real resolvers. This demonstrates integration, not creative acceptance.
 
 ## Support, committed victory
 
@@ -8,7 +8,7 @@ Synthetic isolated campaigns with explicitly configured personalities. Reported 
 
 > If we wait until every neighbour welcomes our arrival, we shall never leave the Presidency.
 
-Source: `09C-army-expansion-hungry`; timing: **pre-check**, player-attested-before-check. Stance: **encourage**; reservations: none explicitly stated.
+Source: `09C-army-expansion-hungry`; timing: **pre-check**, rendered-before-report. Stance: **encourage**; reservations: none explicitly stated.
 
 Committed action: `incident-1`, deploy; target delhi; reported **success**; actual effect null; interpretation **followed**. Evidence: incident-1/fact-0, incident-1/fact-1, incident-1/fact-2, incident-1/fact-3. Public sources: board:delhi, army:bombay.
 
@@ -22,7 +22,7 @@ Committed action: `incident-1`, deploy; target delhi; reported **success**; actu
 
 > This is an unfortunate moment to send our strength in search of further obligations.
 
-Source: `09C-army-known-danger`; timing: **pre-check**, player-attested-before-check. Stance: **discourage**; reservations: an unfortunate moment to send our strength in search of further obligations.
+Source: `09C-army-known-danger`; timing: **pre-check**, rendered-before-report. Stance: **discourage**; reservations: an unfortunate moment to send our strength in search of further obligations.
 
 Committed action: `incident-8`, deploy; target hyderabad; reported **catastrophe**; actual effect null; interpretation **proceeded-despite-warning**. Evidence: incident-8/fact-0. Public sources: board:hyderabad, army:madras, public-crisis-batch.
 
@@ -36,7 +36,7 @@ Committed action: `incident-8`, deploy; target hyderabad; reported **catastrophe
 
 > I should prefer to call it an invitation to commerce. The court may find that wording less alarming.
 
-Source: `09C-envoy-india-diplomat`; timing: **pre-check**, player-attested-before-check. Stance: **prefer-effect**; reservations: The court may find that wording less alarming.
+Source: `09C-envoy-india-diplomat`; timing: **pre-check**, rendered-before-report. Stance: **prefer-effect**; reservations: The court may find that wording less alarming.
 
 Committed action: `incident-1`, envoy; target d3; reported **success**; actual effect {"kind":"china-office"}; interpretation **different-effect**. Evidence: committed incident input/result (no regional fact; no additional event invented). Public sources: closed-order:d3.
 
@@ -56,16 +56,16 @@ Committed action: `incident-1`, envoy; target china-office; reported **success**
 
 > There is now an office. I shall not mistake its existence for a successful voyage.
 
-## Same support without verified pre-check timing
+## Same support first displayed after reporting
 
 **Edward Avery** (army-bombay; army:bombay)
 
 > If we wait until every neighbour welcomes our arrival, we shall never leave the Presidency.
 
-Source: `09C-army-expansion-hungry`; timing: **pre-commit**, viewport-visible. Stance: **encourage**; reservations: none explicitly stated.
+Source: `09C-army-expansion-hungry`; timing: **post-check**, viewport-visible. Stance: **encourage**; reservations: none explicitly stated.
 
 Committed action: `incident-1`, deploy; target delhi; reported **success**; actual effect null; interpretation **not-applicable/unknown**. Evidence: incident-1/fact-0, incident-1/fact-1, incident-1/fact-2, incident-1/fact-3. Public sources: board:delhi, army:bombay.
 
 **No advice-linked reaction:** the required retrospective evidence is absent.
 
-The last example deliberately withholds the appealing “supported victory” reaction: visible text alone does not prove it preceded the physical check. Cancelled or abandoned target previews produce no committed statements. Governor Regiment/Ship and alternative-effect claims remain withheld because their actual successful effects are not recorded.
+The last example deliberately withholds the appealing “supported victory” reaction: its actual render phase is after the reported result. Cancelled or abandoned target previews produce no committed statements. Governor Regiment/Ship and alternative-effect claims remain withheld because their actual successful effects are not recorded.

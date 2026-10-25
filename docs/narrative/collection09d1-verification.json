@@ -16,14 +16,14 @@
   },
   "newBrowserChecks": {
     "checks": [
-      "desktop: acknowledged Army victory/failure/catastrophe bind exact saved reactions; reload Undo/Redo do not duplicate",
-      "desktop: target changes/cancellation do not save; unacknowledged visible advice cannot become an earlier prediction",
+      "desktop: automatically observed Army victory/failure/catastrophe bind exact saved reactions; reload Undo/Redo do not duplicate",
+      "desktop: target changes/cancellation do not save; rendered pre-result advice needs no reading acknowledgement",
       "desktop: two actual speakers persist as one shared exchange with independent reactions",
       "desktop: Envoy original Indian advice survives post-check China revision, JSON import/export, snapshot restore and readable chronicle; failure establishes no ignored choice or fictional commerce",
       "desktop: Governor optional Tax recommendation binds only supported actual Tax/failure outcomes",
       "desktop: debug actual commit/cancel and timing parity",
-      "tablet: acknowledged Army victory/failure/catastrophe bind exact saved reactions; reload Undo/Redo do not duplicate",
-      "tablet: target changes/cancellation do not save; unacknowledged visible advice cannot become an earlier prediction",
+      "tablet: automatically observed Army victory/failure/catastrophe bind exact saved reactions; reload Undo/Redo do not duplicate",
+      "tablet: target changes/cancellation do not save; rendered pre-result advice needs no reading acknowledgement",
       "tablet: two actual speakers persist as one shared exchange with independent reactions",
       "tablet: Envoy original Indian advice survives post-check China revision, JSON import/export, snapshot restore and readable chronicle; failure establishes no ignored choice or fictional commerce",
       "tablet: Governor optional Tax recommendation binds only supported actual Tax/failure outcomes",
@@ -48,5 +48,7 @@
     "390x844"
   ],
   "hostedSiteDeployed": false,
-  "creativeAcceptance": "Pending user and ChatGPT review of integrated selection/pacing"
+  "creativeAcceptance": "Pending user and ChatGPT review of integrated selection/pacing",
+  "renderPhaseAlignmentCommit": "1a948c44d1da92aa94a566d76ad3b79c7171c2f0",
+  "approvedUXDocumentationMergedThrough": "40e70261edb057481faf7b431babb8b78843af84"
 }

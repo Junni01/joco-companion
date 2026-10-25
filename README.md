@@ -91,6 +91,6 @@ See the [implementation report](docs/narrative/collection09c2-implementation.md)
 
 ## Collection 09D-1 committed advice
 
-Exact displayed planning words and compatible immediate reactions now save with the actual committed action. An optional reading acknowledgement distinguishes player-attested pre-check advice from uncertain physical timing; cancellation leaves no history. Envoy success remains legally revisable, while failure creates no ignored-choice claim. Standard scenes stay brief, with expandable original advice and dossier/chronicle evidence.
+Exact displayed planning words and compatible immediate reactions now save with the actual committed action. Actual pre-result rendering records when the adviser offered counsel without adding a reading acknowledgement; cancellation leaves no history. Envoy success remains legally revisable, while failure creates no ignored-choice claim. Standard scenes stay brief, with expandable original advice and dossier/chronicle evidence.
 
 See the [implementation and withheld-effect limits](docs/narrative/collection09d1-implementation.md), [small creative-review demonstration](docs/narrative/collection09d1-demo.md) and [verification](docs/narrative/collection09d1-verification.json). 09D-2 relocation and 09D-3 recurring callbacks/rivalries remain deferred. No hosted Site deployment.
