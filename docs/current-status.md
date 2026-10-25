@@ -85,3 +85,8 @@ Verification: **247 automated tests pass**. Isolated desktop/tablet checks cover
 Destination: https://github.com/Junni01/joco-companion. Preserve main history and verify destination refs before declaring transfer complete. GitHub does not automatically deploy the existing Sites host. Retain `.openai/hosting.json` project identity; never commit access credentials.
 
 Browser campaign state is separate: export/import JSON to move it. Original uploaded rule/board/event PDFs are not all in this checkout. Existing tracked reference assets, citations, rules audit and narrative review are preserved; do not claim every historical chat attachment is included.
+
+## Collection 09 design handoff — 25 October 2026
+
+The user approved the **design** for political forecasts, persistent private ruler outlooks, pre-action Company counsel and eventual post-action callbacks. Detailed source of truth: [Collection 09 specification](narrative/collection09-spec.md), [writing brief](narrative/writing/collection09-outlooks.md), and [decision/deferral log](narrative/collection09-decisions.md). **09A/09B are authorized next for implementation; 09C/09D are designed but not yet authorized for implementation.** All writing examples remain illustrative until creative review. None of Collection 09 is implemented by this documentation change. Existing gameplay, tests and Site deployment are unchanged.
+
