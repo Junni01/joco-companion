@@ -41,8 +41,33 @@ The precise second speaker must be an actually present continuing fictional advi
 | `09C-envoy-india-diplomat` | Intended specific eligible closed Order in non-Company Indian region | Diplomatic | I should prefer to call it an invitation to commerce. The court may find that wording less alarming. |
 | `09C-envoy-india-cynic` | Same | Cynical | We shall request the opening of trade with all proper courtesy. Courtesy is cheaper than concessions. |
 | `09C-envoy-india-confident` | Same | Overconfident | The proposal is eminently reasonable. I expect that to count for something, though experience is strangely divided on the point. |
-| `09C-envoy-india-failure` | Actual reported failure for intended India Order; no order opens | Dry | The court remains unconvinced. I shall describe the mission as an exchange of preliminary sentiments. |
+| `09C-envoy-india-failure` | Actual reported failure for intended India Order; no order opens | Dry | The mission has failed to produce an agreement. Fortunately, my report need not be quite so definite. |
 | `09C-envoy-india-success` | Actual success and order really opens | Self-satisfied | At last, an arrangement in which the parties have found a common interest. I shall leave the proportions unspecified. |
+
+## Governor Administer — pre-check recommendations and post-success choice (new editorial candidates)
+
+Unlike a specific deployment, Governor **Administer** is a check followed by a choice among rule-permitted effects after success. The proposed preference is **not a declaration** of a specific outcome. Never claim actual Tax, regiment commissioning or shipbuilding before its effect is committed. In campaigns where Governor General has replaced Governors, use a correctly eligible separate General adviser and never a fictitious active Governor.
+
+| ID | Eligibility | Voice | Exact proposed text |
+|---|---|---|---|
+| `09C-governor-plan-tax` | Governor Administer planning; Tax is actually legal among eventual successful effects | Fiscal/pragmatic | I recommend improving the Company's finances. It is difficult to govern a province upon promises alone. |
+| `09C-governor-plan-regiment` | Governor Administer planning; Commission Regiment is legally available | Military-minded | Our neighbours may respect an argument more readily when we have men to defend it. |
+| `09C-governor-plan-ship` | Governor Administer planning; Build Company Ship legally available | Commercial | A ship would carry our interests further than another memorandum. I have written enough of those to be certain. |
+| `09C-governor-plan-prudent` | Governor Administer planning; at least two successful effect options plausible | Cautious | I should prefer an undertaking whose consequences we shall not spend the next year explaining. |
+| `09D-governor-followed` | Successful check, committed effect matches this adviser's **actually saved** prior recommendation | Pleased | I am relieved that my advice was of some use. One grows accustomed to the opposite. |
+| `09D-governor-overruled` | Successful check, player chooses legal effect other than adviser's **actually saved** recommendation | Wounded pride | An interesting choice. I shall revise my memorandum to make room for it. |
+| `09D-governor-check-failed` | Real failed Administer check; no successful effect selected | Dry | Our plans are extensive. Our achievements for the present are rather more modest. |
+
+**Choice guard:** Select these only where the live resolver confirms legal effects and check lifecycle. No adviser can accuse a Governor of *ignoring a recommendation* if the check failed, if the effect was unavailable, or if the relevant preview was never visible/saved.
+
+## Special Envoy — changing the intended effect after success (new editorial candidates)
+
+| ID | Eligibility | Voice | Exact proposed text |
+|---|---|---|---|
+| `09D-envoy-switched-to-china` | Successful Envoy check; initial actually visible India-opening preference, final legal choice establishes Superintendent in China | Director's Secretary, resigned | China, then. I shall inform our Indian correspondents that their affairs have been temporarily overtaken by geography. |
+| `09D-envoy-switched-to-india` | Successful Envoy check; initial actually visible China office preference, final choice opens a legal Indian Order | China assistant, disappointed | India has prevailed upon us once again. I shall try to look pleased on behalf of our future trade in China. |
+
+A switch can be recorded as *actual preview history* only if the player was shown the first recommendation and then visibly changed the intended effect within the same real attempt; distinguish this from independently selected UI defaults and from unreported player motive. A successful check grants a choice; a failed check never grants an alternative effect.
 
 ## China assistant — distinct interest in opium access
 
