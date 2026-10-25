@@ -1,3 +1,4 @@
+import {createAdviceAttempt} from './narrative-advice-session.js';
 import {createCounselSession,planningCounselHTML} from './narrative-counsel.js';
 import {scenarioFor,finalTurn} from './scenarios.js';
 import {showElephantSteps,showStackRegion} from './resolution-pages.js';
@@ -14,7 +15,7 @@ const symbols={circle:'● Circle',triangle:'▲ Triangle',square:'■ Square'};
 export function openGameActions({state,showDialog,apply,esc,start,onPhase,onProgressSaved}){
  const $=id=>document.getElementById(id);
  let d={},stage='form',instructionCursor=0;
- const counselSession=createCounselSession(state);
+ const counselSession=createCounselSession(state),adviceAttempt=createAdviceAttempt(state);
  const error=e=>{$('form-error').textContent=e.message||e;};
  const pick=(id,label,items,value='')=>`<label>${esc(label)}<select id="${id}"><option value="">Choose…</option>${items.map(([v,l])=>`<option value="${esc(v)}" ${v===value?'selected':''}>${esc(l)}</option>`).join('')}</select></label>`;
  const regions=ids=>ids.map(id=>[id,REGIONS[id].name]);
@@ -38,12 +39,14 @@ export function openGameActions({state,showDialog,apply,esc,start,onPhase,onProg
    show('Governor actions',`${fixed?`<p class="notice">${esc(REGIONS[fixed].name)}</p>`:''}<p>Before the physical check, you may open optional planning. After resolving it, report the actual effect or failure.</p>${fixed?`<button id="governor-plan" ${blocked?'disabled':''}>Plan Administer · optional</button>`:''}<div class="action-menu"><button id="governor-tax" ${blocked?'disabled':''}>Tax</button><button id="governor-administer" ${blocked?'disabled':''}>Unsuccessful Administer</button></div>${blocked?`<p class="small-note">${esc(blocked)}</p>`:'<p class="small-note">The first Tax in a region each turn adds no unrest. Later Taxes add one. Unsuccessful Administer adds the unrest required by the active laws. Other permitted successful effects are handled on the physical board.</p>'}`);
    if(fixed)$('governor-plan').onclick=()=>{
     if(blocked)return;
-    const preview=counselSession.preview({kind:'governor',region:fixed});
-    show('Plan Administer',`<p class="notice">${esc(REGIONS[fixed].name)}</p><p>Any recommendation is provisional. Make the physical Administer check under the current rules, then choose any permitted successful effect on the table. Nothing here declares or records Tax, a regiment or a ship.</p>${planningCounselHTML(preview,esc)}<p class="small-note">If you have already rolled, this view is not evidence of an earlier warning. Shipbuilding and regiment commissioning remain untracked; use the normal controls only to report an actual Tax or unsuccessful Administer.</p>`,'<button id="governor-return">Return to result reporting</button>');
+    const plan={kind:'governor',region:fixed},preview=counselSession.preview(plan);
+    if(preview&&adviceAttempt.reported)preview.temporalRole='after-report';
+    show('Plan Administer',`<p class="notice">${esc(REGIONS[fixed].name)}</p><p>Any recommendation is provisional. Make the physical Administer check under the current rules, then choose any permitted successful effect on the table. Nothing here declares or records Tax, a regiment or a ship.</p><div id="governor-plan-counsel">${planningCounselHTML(preview,esc)}${adviceAttempt.controlsHTML(preview,plan)}</div><p class="small-note">If you have already rolled, this view is not evidence of an earlier warning. Shipbuilding and regiment commissioning remain untracked; use the normal controls only to report an actual Tax or unsuccessful Administer.</p>`,'<button id="governor-return">Return to result reporting</button>');
+    adviceAttempt.watch(preview,plan,$('governor-plan-counsel'));
     $('governor-return').onclick=()=>startForm('governor',{regionContext:fixed});
    };
-   $('governor-tax').onclick=()=>startForm('tax',{regionContext:fixed});
-   $('governor-administer').onclick=()=>startForm('unrest',{regionContext:fixed,reason:'failure',governorAction:true});
+   $('governor-tax').onclick=()=>{adviceAttempt.report({kind:'governor',region:fixed},'success');startForm('tax',{regionContext:fixed});};
+   $('governor-administer').onclick=()=>{adviceAttempt.report({kind:'governor',region:fixed},'failure');startForm('unrest',{regionContext:fixed,reason:'failure',governorAction:true});};
   }else if(type==='unrest'&&d.governorAction){
    const fixed=d.regionContext;
    form('Unsuccessful Administer',`${fixed?`<p class="notice">${esc(REGIONS[fixed].name)}</p>`:pick('region','Company region',regions(companies),d.region)}<p>Add <b>${state.laws.zamindarTaxes?2:1} unrest</b>${state.laws.zamindarTaxes?' under Zamindar Taxes':''}. Report either failure or catastrophic failure here; handle any dismissal on the table.</p>`,()=>({region:fixed||$('region').value,reason:'failure'}));
@@ -66,8 +69,11 @@ export function openGameActions({state,showDialog,apply,esc,start,onPhase,onProg
     $('order-field').hidden=$('purpose').value!=='order';
     $('outcome').disabled=!planValid();
     $('review-action').disabled=!planValid()||!d.outcome;
-    const panel=$('envoy-counsel'),html=planningCounselHTML(counselSession.preview({kind:'envoy',purpose:$('purpose').value,order:$('order').value},$('outcome').value),esc);
+    const plan={kind:'envoy',purpose:$('purpose').value,order:$('order').value};
+    adviceAttempt.report(plan,$('outcome').value);
+    const preview=counselSession.preview(plan,$('outcome').value),panel=$('envoy-counsel'),html=planningCounselHTML(preview,esc)+adviceAttempt.controlsHTML(preview,plan);
     if(panel.innerHTML!==html)panel.innerHTML=html;
+    adviceAttempt.watch(preview,plan,panel);
    });
    $('review-action').onclick=()=>{try{Object.assign(d,{purpose:$('purpose').value,order:$('purpose').value==='order'?$('order').value:undefined,outcome:$('outcome').value});if(!planValid())throw Error('Choose an available intended effect and, for India, a specific closed Order outside Company control.');save();advance();}catch(e){error(e);}};
   }else if(type==='event'&&d.stackTile){
@@ -166,7 +172,7 @@ export function openGameActions({state,showDialog,apply,esc,start,onPhase,onProg
   show('Review · '+r.title,`<p>Complete the physical instructions below, then confirm to save all map changes together. If you close without confirming, reverse any unconfirmed physical changes yourself.</p>${remaining.length?`<ol class="action-instructions">${remaining.map(t=>`<li>${esc(t)}</li>`).join('')}</ol>`:'<p>All listed board changes and Elephant movements have been reviewed. Confirm to record the result.</p>'}${r.scenes?.map(scene=>`<blockquote><b>${esc(scene.speaker)}</b> · ${esc(scene.role)}<p>${esc(scene.text)}</p></blockquote>`).join('')||''}`,`${d.type==='envoy'?'<button id="revise-envoy">Change intended effect / target</button>':''}<button id="confirm-action" class="primary">Confirm & apply</button>`);
   if(d.type==='envoy')$('revise-envoy').onclick=()=>startForm('envoy',d);
   let confirmed=false;
-  $('confirm-action').onclick=()=>{if(confirmed)return;try{confirmed=true;$('confirm-action').disabled=true;apply(r);localStorage.removeItem(ACTION_DRAFT);if(d.type==='event'&&d.stackTile)showStackRegion({state:r.state,showDialog,esc});else if(d.type==='france'&&d.parliamentSelection){state=r.state;d={};parliamentChoices(null,r);}else $('dialog').close();}catch(e){confirmed=false;if($('confirm-action'))$('confirm-action').disabled=false;error(e);}};
+  $('confirm-action').onclick=()=>{if(confirmed)return;try{confirmed=true;$('confirm-action').disabled=true;apply(adviceAttempt.attach(r,d.type==='envoy'?{kind:'envoy',purpose:d.purpose,order:d.order}:['tax','unrest'].includes(d.type)?{kind:'governor',region:d.region||d.regionContext}:{kind:'unsupported'}));localStorage.removeItem(ACTION_DRAFT);if(d.type==='event'&&d.stackTile)showStackRegion({state:r.state,showDialog,esc});else if(d.type==='france'&&d.parliamentSelection){state=r.state;d={};parliamentChoices(null,r);}else $('dialog').close();}catch(e){confirmed=false;if($('confirm-action'))$('confirm-action').disabled=false;error(e);}};
  }
  function menu(){
   if(state.gameEnd){show('Game ended',`<p>This chronicle is closed: <b>${esc(END_REASONS[state.gameEnd.reason])}</b>, turn ${state.gameEnd.turn}.</p><p>Inspect the map and Campaign record, export a backup from Saved games, or use Undo to reopen the game.</p>`);return;}

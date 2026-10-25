@@ -1,3 +1,4 @@
+import {commitAdvice} from './narrative-advice.js';
 import {initializeOutlooks,updateOutlooks} from './narrative-outlooks.js';
 import {composeChapter} from './narrative-chapters.js';
 import {initializePoliticalMemory,processPoliticalMemories} from './narrative-memory.js';
@@ -129,6 +130,6 @@ export function commitNarrative(before,result){
  renderPoliticalDialogue(before,state,entry,scene,politicalContexts.filter(ctx=>ctx.category!=='intervention'||!commerce.some(c=>c.region===ctx.region&&c.category==='trade-military')),add);
  for(const region of affected){const c=n.characters[n.seats[region]];if(!c.incidents.includes(id))c.incidents.push(id);}
  for(const line of lines){if(line.speakerId!=='chronicler'){const c=n.characters[line.speakerId];if(!c.incidents.includes(id))c.incidents.push(id);}}
- entry.narrative=scene;if(entry.incident)entry.incident.id=id;n.lastIncident=id;updateOutlooks(before,state,entry);return state;
+ entry.narrative=scene;if(entry.incident)entry.incident.id=id;n.lastIncident=id;updateOutlooks(before,state,entry);commitAdvice(before,state,entry,scene,result);return state;
 }
 export function dominantTraits(person){return Object.entries(person.traits).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([key])=>TRAIT_LABELS[key]).join(', ');}

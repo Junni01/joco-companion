@@ -1,20 +1,21 @@
+import {adviceRecordsHTML} from './narrative-advice-ui.js';
 import {chapterEvidenceHTML} from './narrative-chapter-ui.js';
 import {politicalProfileHTML,politicalExportHTML,dialogueEvidenceHTML} from './narrative-memory-ui.js';
 import {dominantTraits} from './narrative.js';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const label=r=>r.charAt(0).toUpperCase()+r.slice(1);
 const silhouette='<svg class="character-silhouette" viewBox="0 0 64 80" role="img" aria-label="Generic character silhouette"><circle cx="32" cy="23" r="14"/><path d="M8 76V62c0-17 10-24 24-24s24 7 24 24v14z"/></svg>';
-export function sceneHTML(scene,{intensity='full',archive=false}={}){
+export function sceneHTML(scene,{intensity='full',archive=false,statements={}}={}){
  if(!scene)return '';
  const limit=intensity==='quiet'?0:intensity==='standard'?3:scene.lines.length;
  const lineHTML=line=>`<blockquote class="narrative-line">${line.speakerId==='chronicler'?'<span class="chronicler-icon" aria-hidden="true">▤</span>':silhouette}<div><b>${esc(line.speaker)}</b><small>${esc(line.role)} · ${esc(line.emotion)}</small><p>${esc(line.text)}</p></div></blockquote>`;
  const lines=scene.lines.map(lineHTML);
- return `<section class="narrative-scene" aria-label="Saved narrative scene"><p class="eyebrow">FICTIONAL CAMPAIGN CHRONICLE${scene.provenance==='manual-test'?' · MANUAL TEST':''}</p>${scene.coverage==='summary'?'<p class="small-note">Factual summary · richer reactions for this event are planned.</p>':''}${lines.slice(0,limit).join('')}${lines.length>limit?`<details${archive?' open':''}><summary>${limit?'More voices':'Read saved scene'}</summary>${lines.slice(limit).join('')}</details>`:''}</section>`;
+ return `<section class="narrative-scene" aria-label="Saved narrative scene"><p class="eyebrow">FICTIONAL CAMPAIGN CHRONICLE${scene.provenance==='manual-test'?' · MANUAL TEST':''}</p>${scene.coverage==='summary'?'<p class="small-note">Factual summary · richer reactions for this event are planned.</p>':''}${lines.slice(0,limit).join('')}${lines.length>limit?`<details${archive?' open':''}><summary>${limit?'More voices':'Read saved scene'}</summary>${lines.slice(limit).join('')}</details>`:''}${adviceRecordsHTML((scene.advice?.statementIds||[]).map(id=>statements[id]).filter(Boolean),{archive})}</section>`;
 }
 export function latestSceneHTML(state){
  if(!state.narrative)return '';
  const scene=state.history.findLast(h=>h.narrative)?.narrative;
- return `<article class="paper-card"><div class="card-heading"><h3>Campaign voices</h3><button id="open-roster">Characters & chapters</button></div><p class="small-note">Fiction follows the recorded game. Complete every physical instruction first.</p><div class="choice-buttons" role="group" aria-label="Narrative display">${['quiet','standard','full'].map(mode=>`<button data-narrative-mode="${mode}" aria-pressed="${state.narrative.intensity===mode}">${label(mode)}</button>`).join('')}</div>${scene?sceneHTML(scene,{intensity:state.narrative.intensity}):'<p>Your fictional cast is ready. Recorded events will appear here.</p>'}</article>`;
+ return `<article class="paper-card"><div class="card-heading"><h3>Campaign voices</h3><button id="open-roster">Characters & chapters</button></div><p class="small-note">Fiction follows the recorded game. Complete every physical instruction first.</p><div class="choice-buttons" role="group" aria-label="Narrative display">${['quiet','standard','full'].map(mode=>`<button data-narrative-mode="${mode}" aria-pressed="${state.narrative.intensity===mode}">${label(mode)}</button>`).join('')}</div>${scene?sceneHTML(scene,{intensity:state.narrative.intensity,statements:state.narrative.statements}):'<p>Your fictional cast is ready. Recorded events will appear here.</p>'}</article>`;
 }
 export function rulerSummaryHTML(state,region){
  const n=state.narrative;if(!n)return '';const c=n.characters[n.seats[region]];

@@ -1,11 +1,12 @@
 import {REGIONS,PRESIDENCIES,legalTargets} from './model.js';
-import {ORDER_OWNER} from './actions.js';
 import {operationsBlockReason,taxBlockReason} from './administration.js';
 import {publicKnowledge,forecastRegion} from './narrative-outlooks.js';
 import {institutionalAdviser,adviserAptitude,adviserPlanningRole} from './narrative-advisers.js';
 import {COUNSEL_BY_ID} from './narrative-counsel-content.js';
 const copy=v=>JSON.parse(JSON.stringify(v));
 const exposure=['company-primary','company-secondary'];
+// Lazy catalogue lookup avoids an initialization cycle when saved advice is validated.
+const orderOwner=order=>Object.keys(REGIONS).find(id=>REGIONS[id].orders.some(([oid])=>oid===order));
 const voice=(state,c)=>({A:c.traits.ambition,P:c.traits.pride,C:c.traits.caution,R:c.traits.ruthlessness,L:c.traits.loyalty,V:c.traits.vindictiveness,F:c.confidence,K:adviserAptitude(state,c),formal:c.voice.formality,restraint:c.voice.restraint,humour:c.voice.humour});
 const frontierCount=(state,extra=null)=>new Set(Object.keys(state.regions).filter(id=>state.regions[id].control==='company'||id===extra).flatMap(id=>REGIONS[id].neighbors).filter(id=>state.regions[id].control!=='company'&&id!==extra)).size;
 
@@ -26,7 +27,7 @@ function recentDeployments(state,c,army){
 
 // Selection sees publicKnowledge's explicit projection only for forecasts. It never
 // reads undrawn faces, saved Shuffle permutations, hidden positions or narrative RNG.
-export function eligiblePlanningCounsel(state,plan){
+export function eligiblePlanningCounsel(state,plan,projection=null){
  if(!state.narrative?.enabled||operationsBlockReason(state))return [];
  const choices=[],{kind}=plan;
  const add=(id,c,institutionId,score,stance,evidence)=>{
@@ -37,7 +38,7 @@ export function eligiblePlanningCounsel(state,plan){
  if(kind==='deploy'){
   if(!PRESIDENCIES.includes(plan.army)||!legalTargets(state,plan.army).includes(plan.target))return [];
   const institution='army:'+plan.army,c=institutionalAdviser(state,institution);if(!c)return [];
-  const v=voice(state,c),r=state.regions[plan.target],p=publicKnowledge(state);
+  const v=voice(state,c),r=state.regions[plan.target],p=projection||publicKnowledge(state);
   const bases=Object.keys(state.regions).filter(id=>state.regions[id].control==='company'&&state.regions[id].presidency===plan.army);
   const exposed=bases.filter(id=>forecastRegion(p,id).issues.some(x=>exposure.includes(x)));
   const friendly=r.control==='company',expansion=!friendly&&!r.overlord&&bases.some(id=>REGIONS[id].neighbors.includes(plan.target));
@@ -74,7 +75,7 @@ export function eligiblePlanningCounsel(state,plan){
  }else if(kind==='envoy'){
   if(state.laws.governorGeneral)return [];
   if(plan.purpose==='order'){
-   const region=ORDER_OWNER[plan.order];if(!region||state.regions[region].control!=='indian'||state.regions[region].orders[plan.order])return [];
+   const region=orderOwner(plan.order);if(!region||state.regions[region].control!=='indian'||state.regions[region].orders[plan.order])return [];
    const institution='director-of-trade',c=institutionalAdviser(state,institution);if(!c)return [];const v=voice(state,c);
    const evidence=[{id:'closed-order:'+plan.order,kind:'public-order',order:plan.order,region,control:'indian',open:false}];
    if(v.C>=55||v.L>=65)add('09C-envoy-india-diplomat',c,institution,50+v.C*.2+v.L*.1,'qualified',evidence);

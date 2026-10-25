@@ -1,3 +1,4 @@
+import {validateAdviceHistory} from './narrative-advice.js';
 import {validateOutlooks} from './narrative-outlooks.js';
 import {validateChapters} from './narrative-chapters.js';
 import {validateApprovedLine} from './narrative-approved.js';
@@ -51,7 +52,7 @@ export function validatePoliticalMemory(state){
   for(const relation of Object.values(c.relations)){
    check(relation.target&&((relation.target.kind==='institution'&&relation.target.id==='company')||(relation.target.kind==='character'&&n.characters[relation.target.id])),'relationship target');
    check(Array.isArray(relation.causes)&&relation.origins.every(id=>ids.has(id)),'relationship source');
-   for(const cause of relation.causes){const order=index.incidents.get(cause.incidentId)?.order;check(order!==undefined&&cause.memoryIds.every(id=>n.memories[id]?.ownerId===c.id&&index.incidents.get(n.memories[id].createdIncident)?.order<=order)&&cause.statementIds.every(id=>n.statements[id]&&index.incidents.get(n.statements[id].incidentId)?.order<=order)&&record(cause.deltas)&&Object.entries(cause.deltas).every(([d,v])=>DIMENSIONS.includes(d)&&Number.isInteger(v))&&text(cause.reason),'relationship cause');}
+   for(const cause of relation.causes){const order=index.incidents.get(cause.incidentId)?.order;check(order!==undefined&&cause.memoryIds.every(id=>n.memories[id]?.ownerId===c.id&&index.incidents.get(n.memories[id].createdIncident)?.order<=order)&&cause.statementIds.every(id=>n.statements[id]&&n.statements[id].type!=='advice'&&index.incidents.get(n.statements[id].incidentId)?.order<=order)&&record(cause.deltas)&&Object.entries(cause.deltas).every(([d,v])=>DIMENSIONS.includes(d)&&Number.isInteger(v))&&text(cause.reason),'relationship cause');}
   }
  }
  for(const [id,m] of Object.entries(n.memories)){
@@ -65,7 +66,9 @@ export function validatePoliticalMemory(state){
   for(const update of m.updates){const source=index.incidents.get(update.incidentId);check(source&&source.order>=created.order&&Number.isInteger(update.delta)&&text(update.kind),'memory update source');refs(update.evidence,source.order);}
   if(m.currentAssessment){const source=index.incidents.get(m.currentAssessment.incidentId);check(source&&source.order>=created.order&&m.currentAssessment.kind==='opinion'&&text(m.currentAssessment.text),'current assessment');refs(m.currentAssessment.evidence,source.order);}
  }
+ validateAdviceHistory(state);
  for(const [id,s] of Object.entries(n.statements)){
+  if(s.type==='advice'){const source=index.incidents.get(s.incidentId);refs(s.evidence,source.order);continue;}
   const source=index.lines.get(s.lineId);check(s.id===id&&source&&s.incidentId===source.entry.incident.id&&s.text===source.line.text&&s.speakerId===source.line.speakerId&&source.line.statementId===id,'exact saved statement');
   check(['assurance','gratitude','threat','insult','promise'].includes(s.type)&&s.audienceIds.every(id=>n.characters[id]),'statement type/audience');refs(s.evidence,source.order);
  }
@@ -77,7 +80,7 @@ export function validatePoliticalMemory(state){
   check(typeof l.id==='string'&&!lineIds.has(l.id),'duplicate line ID');lineIds.add(l.id);refs(l.evidence,order);
   check(Array.isArray(l.callbackMemoryIds)&&Array.isArray(l.callbackStatementIds),'callback fields');
   for(const id of l.callbackMemoryIds){const m=n.memories[id];check(m&&m.ownerId===l.speakerId&&index.incidents.get(m.createdIncident).order<order,'dangling, future or unknown memory callback');}
-  for(const id of l.callbackStatementIds){const s=n.statements[id];check(s&&index.incidents.get(s.incidentId).order<order&&(s.speakerId===l.speakerId||s.audienceIds.includes(l.speakerId)),'dangling, future or unknown quotation');check(l.text.includes(s.text),'quotation must preserve exact saved wording');}
+  for(const id of l.callbackStatementIds){const s=n.statements[id];check(s&&s.type!=='advice'&&index.incidents.get(s.incidentId).order<order&&(s.speakerId===l.speakerId||s.audienceIds.includes(l.speakerId)),'dangling, future or unknown quotation');check(l.text.includes(s.text),'quotation must preserve exact saved wording');}
   if(l.selectionEvidence)refs(l.selectionEvidence,order);
   validateApprovedLine(state,h,l);
   validateTradeLine(state,h,l);

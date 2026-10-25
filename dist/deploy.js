@@ -1,14 +1,15 @@
+import {createAdviceAttempt} from './narrative-advice-session.js';
 import {createCounselSession,planningCounselHTML} from './narrative-counsel.js';
 import {showElephantSteps} from './resolution-pages.js';
 import {IDS,PRESIDENCIES,REGIONS,ALLIANCES,legalTargets,deploymentBlockReason,deploymentStrength,deploymentCheck,resolveDeployment} from './model.js';
 export function openDeployment({state,showDialog,apply,esc,targetRegion=null,army=null}){
  const $=id=>document.getElementById(id);
  if(army!==null&&!PRESIDENCIES.includes(army))throw Error('Choose a valid originating Army.');
- const fixedArmy=army,counselSession=createCounselSession(state);
+ const fixedArmy=army,counselSession=createCounselSession(state),adviceAttempt=createAdviceAttempt(state);
  // Old unconfirmed deployment drafts no longer block or survive reopening.
  try{localStorage.removeItem('jc-deploy-draft-v2');}catch{}
  const armyReason=army=>targetRegion?deploymentBlockReason(state,army,targetRegion):legalTargets(state,army).length?'':'No legal target is available to this army this turn.';
- let reviewReady=false,reviewCursor=0;
+ let reviewReady=false,reviewCursor=0,committed=false;
  let step=fixedArmy?1:0,d={army:fixedArmy||PRESIDENCIES.find(a=>!armyReason(a))||'bombay',target:targetRegion||'',officers:0,regiments:0,alliances:[],outcome:'',losses:0};
  const options=(ids,value)=>ids.map(id=>`<option value="${id}" ${id===value?'selected':''}>${REGIONS[id].name}</option>`).join('');
  function draw(){
@@ -23,7 +24,7 @@ export function openDeployment({state,showDialog,apply,esc,targetRegion=null,arm
   if(step>=1&&step<=3)body='<div id="strength-summary"></div>'+body;
   if(state.narrative?.enabled&&step>=1&&step<=2)body+='<div id="deploy-counsel"></div>';
   showDialog(`Deploy · ${title}`,`${fixedArmy?`<p class="notice"><b>${REGIONS[fixedArmy].name} Army</b> · Origin fixed for this deployment.</p>`:''}<p class="eyebrow">STEP ${fixedArmy?step:targetRegion?(step||1):step+1} OF ${fixedArmy||targetRegion?5:6}</p>${fixedArmy&&step===1?'<p>Use the physical Army box to check available pieces. Buy any local alliances through the President before deploying.</p>':''}${body}`,`<button id="cancel-deploy">Cancel</button>${step>(fixedArmy?1:0)?'<button id="back-deploy">Back</button>':''}<button id="next-deploy" class="primary" ${(step===0&&armyReason(d.army))||(step===1&&!legalTargets(state,d.army).length)?'disabled':''}>${step===5?'Confirm & apply':'Continue'}</button>`);
-  const capture=()=>{if(step===0){if(d.army!==$('army').value){d.target=targetRegion||'';d.alliances=[];}d.army=$('army').value;$('next-deploy').disabled=!!armyReason(d.army);}if(step===1)d.target=$('target').value;if(step===2){d.regiments=Number($('regiments').value);d.officers=Number($('officers').value);d.alliances=[...document.querySelectorAll('[data-alliance]:checked')].map(e=>e.dataset.alliance);}if(step===3)d.outcome=$('outcome').value;if(step===4)d.losses=Number($('losses').value);updateStrength();};
+  const capture=()=>{if(step===0){if(d.army!==$('army').value){d.target=targetRegion||'';d.alliances=[];}d.army=$('army').value;$('next-deploy').disabled=!!armyReason(d.army);}if(step===1)d.target=$('target').value;if(step===2){d.regiments=Number($('regiments').value);d.officers=Number($('officers').value);d.alliances=[...document.querySelectorAll('[data-alliance]:checked')].map(e=>e.dataset.alliance);}if(step===3){d.outcome=$('outcome').value;adviceAttempt.report({kind:'deploy',army:d.army,target:d.target},d.outcome);}if(step===4)d.losses=Number($('losses').value);updateStrength();};
   function updateStrength(){
    updateCounsel();
    const panel=$('strength-summary');if(!panel)return;
@@ -33,14 +34,17 @@ export function openDeployment({state,showDialog,apply,esc,targetRegion=null,arm
   }
   function updateCounsel(){
    if(step<1||step>2)return;const panel=$('deploy-counsel');if(!panel)return;
-   const html=planningCounselHTML(counselSession.preview({kind:'deploy',army:d.army,target:d.target}),esc);
+   const plan={kind:'deploy',army:d.army,target:d.target},preview=counselSession.preview(plan);
+   if(preview&&adviceAttempt.reported)preview.temporalRole='after-report';
+   const html=planningCounselHTML(preview,esc)+adviceAttempt.controlsHTML(preview,plan);
    if(panel.innerHTML!==html)panel.innerHTML=html;
+   adviceAttempt.watch(preview,plan,panel);
   }
   updateStrength();
   $('dialog-content').onchange=capture;
   $('cancel-deploy').onclick=()=>{$('dialog-content').onchange=null;$('dialog').close();};
   if(step>(fixedArmy?1:0))$('back-deploy').onclick=()=>{capture();reviewReady=false;reviewCursor=0;step=targetRegion&&step===2?0:step-1;draw();};
-  $('next-deploy').onclick=()=>{try{capture();if(step===0&&armyReason(d.army))throw Error(armyReason(d.army));if(step===1&&!legalTargets(state,d.army).includes(d.target))throw Error('No legal target selected.');if(step===2)deploymentCheck(state,d);if(step===3&&!d.outcome)throw Error('Choose the final outcome.');if(step===4)resolveDeployment(state,d);if(step===5){const result=resolveDeployment(state,d);apply(result);$('dialog-content').onchange=null;$('dialog').close();return;}step=targetRegion&&step===0?2:step+1;draw();}catch(e){$('form-error').textContent=e.message;}};
+  $('next-deploy').onclick=()=>{try{capture();if(step===0&&armyReason(d.army))throw Error(armyReason(d.army));if(step===1&&!legalTargets(state,d.army).includes(d.target))throw Error('No legal target selected.');if(step===2)deploymentCheck(state,d);if(step===3&&!d.outcome)throw Error('Choose the final outcome.');if(step===4)resolveDeployment(state,d);if(step===5){if(committed)return;const result=resolveDeployment(state,d);committed=true;try{apply(adviceAttempt.attach(result,{kind:'deploy',army:d.army,target:d.target}));}catch(e){committed=false;throw e;}$('dialog-content').onchange=null;$('dialog').close();return;}step=targetRegion&&step===0?2:step+1;draw();}catch(e){$('form-error').textContent=e.message;}};
  }
  draw();
 }
