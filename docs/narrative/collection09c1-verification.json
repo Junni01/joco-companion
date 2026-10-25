@@ -1,0 +1,87 @@
+{
+  "date": "2026-10-25",
+  "implementationCommit": "56929d045f70b7a098413cc3887a62b8b52519ee",
+  "automated": {
+    "command": "npm test",
+    "passed": 292,
+    "failed": 0
+  },
+  "browserSuites": {
+    "operations": {
+      "checks": [
+        "desktop: all three fixed Army launch paths, sole legal home targets, cancellation/reload, failed/successful resolvers and exact persisted Undo/Redo",
+        "desktop: multiple eligible target choices, empire strength, illegal other-Presidency home omitted, origin fixed after Back; Governor stays region-local",
+        "desktop: Envoy order plan precedes outcome; success remains revisable to China; Company Orders excluded; activation, potential proceeds and exact saved narrative Undo/Redo; no duplicate office",
+        "desktop: current-version JSON export/import and snapshot creation preserve the committed China/narrative state",
+        "desktop: both Envoy failure branches, repeat attempts, cancelled successful preview and reload leave map/office unchanged",
+        "desktop: Governor General replaces Director, disables Envoy, removes Governor entry and preserves existing General controls",
+        "desktop: debug all-three launch paths, real Deploy/Envoy commits and regular-storage isolation",
+        "tablet: all three fixed Army launch paths, sole legal home targets, cancellation/reload, failed/successful resolvers and exact persisted Undo/Redo",
+        "tablet: multiple eligible target choices, empire strength, illegal other-Presidency home omitted, origin fixed after Back; Governor stays region-local",
+        "tablet: Envoy order plan precedes outcome; success remains revisable to China; Company Orders excluded; activation, potential proceeds and exact saved narrative Undo/Redo; no duplicate office",
+        "tablet: current-version JSON export/import and snapshot creation preserve the committed China/narrative state",
+        "tablet: both Envoy failure branches, repeat attempts, cancelled successful preview and reload leave map/office unchanged",
+        "tablet: Governor General replaces Director, disables Envoy, removes Governor entry and preserves existing General controls",
+        "tablet: debug all-three launch paths, real Deploy/Envoy commits and regular-storage isolation"
+      ],
+      "errors": [],
+      "browser": "156.0.8078.47",
+      "viewports": [
+        "1440x900",
+        "1024x768"
+      ]
+    },
+    "m2": {
+      "checks": [
+        "exact approved conquest-to-Tax callback selected with saved evidence",
+        "normal touch controls: conquest, personal memory, grievance and Tax callback; preview is inert",
+        "dossier shows exact approved words and expandable callback sources",
+        "intervention, partial reconciliation, saved assurance, exact quote and Undo/Redo across reload",
+        "dossier evidence, quiet/full, snapshot/export and 390px mobile layout",
+        "1024x768 tablet dossier and map layout",
+        "revealed tile/roll progress survives reload and metadata rename/Undo/Redo",
+        "all four scenario starts",
+        "regular/debug isolation, named deletion blockers and unrestricted atomic Undo/Redo",
+        "incompatible save and protected bytes left unchanged, with clear rejection",
+        "explicit new-campaign URL reset clears the unsupported-save gate"
+      ],
+      "errors": [],
+      "browser": "156.0.8078.47",
+      "viewportChecks": [
+        "1440x1000",
+        "1024x768",
+        "390x844"
+      ]
+    },
+    "outlooks": {
+      "checks": [
+        "cancelled Deploy leaves private thoughts, knowledge and RNG unchanged",
+        "actual Shuffle controls preserve March pages and commit the public unordered three-Crisis batch",
+        "region selection, profile reads and reload preserve exact private text and public knowledge",
+        "desktop/tablet private thought and optional public evidence render without overflow",
+        "persisted Undo/Redo restores the exact Shuffle outlook and batch",
+        "reveal consumes one known-batch member and protected reload does not consume it again",
+        "debug entry has saved private outlooks and preserves regular storage"
+      ],
+      "errors": [],
+      "browser": "156.0.8078.47"
+    },
+    "trade": {
+      "checks": [
+        "actual Commander controls retain Open all its orders instructions and select distinct saved commercial reactions",
+        "saved personal experience, exact wording and RNG survive persisted Undo/Redo",
+        "desktop and tablet dossiers expose owned earlier words and commercial evidence without horizontal overflow",
+        "actual Special Envoy controls preserve component terminology and select diplomatic restoration only",
+        "actual manual Turmoil triggers a genuine cascade with saved connected-opportunity evidence"
+      ],
+      "errors": [],
+      "browser": "156.0.8078.47",
+      "viewportChecks": [
+        "1440x1000",
+        "1024x768"
+      ]
+    }
+  },
+  "hostedSiteDeployed": false,
+  "campaignFixtures": "Isolated synthetic campaigns; no personal exports committed."
+}
