@@ -15,7 +15,7 @@ const out=process.argv[3]||path.join(os.tmpdir(),'joco-m2-browser');fs.mkdirSync
   const mark=text=>{checks.push(text);console.log('PASS',text);};
   const selectBombay=async()=>{await page.locator('[data-tab="register"]').click();await page.locator('[data-select="bombay"]').click();};
   const deploy=async(regional=false)=>{
-   await click(regional?'region-deploy-action':'deploy-action');await click('next-deploy');if(!regional)await click('next-deploy');
+   await click('operations-deploy-bombay');await page.getByRole('group',{name:'Target',exact:true}).getByRole('button',{name:'Bombay',exact:true}).click();await click('next-deploy');
    for(let i=0;i<6;i++)await page.getByRole('button',{name:'Increase Regiments',exact:true}).click();
    for(let i=0;i<2;i++)await page.getByRole('button',{name:'Increase Officers',exact:true}).click();
    await click('next-deploy');await page.getByRole('button',{name:'1–2 · Success',exact:true}).click();await click('next-deploy');await click('next-deploy');

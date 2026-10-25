@@ -29,7 +29,7 @@ test('narrative new-game activation, deployment, quiet display, dossier, reload 
  click('save-menu');click('new-campaign');click('narrative-on');click('start-scenario');
  assert(current().state.narrative);assert.equal(Object.keys(current().state.narrative.seats).length,8);
  const initialCast=current().state.narrative;
- click('deploy-action');click('next-deploy');click('next-deploy');nodes.get('regiments').value='6';nodes.get('officers').value='2';click('next-deploy');nodes.get('outcome').value='success';click('next-deploy');nodes.get('losses').value='0';click('next-deploy');
+ click('operations-deploy-bombay');click('next-deploy');nodes.get('regiments').value='6';nodes.get('officers').value='2';click('next-deploy');nodes.get('outcome').value='success';click('next-deploy');nodes.get('losses').value='0';click('next-deploy');
  assert.deepEqual(current().state.narrative,initialCast);click('next-deploy');
  const conquest=current().state;assert.equal(conquest.regions.bombay.control,'company');assert(conquest.history.at(-1).narrative);
  click('undo');assert.equal(current().state.regions.bombay.control,'indian');assert.equal(current().redo.length,1);

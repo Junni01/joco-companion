@@ -12,7 +12,7 @@ const review=path.resolve(__dirname,'../docs/narrative/review/collection08a');
   const load=async name=>{await click('save-menu');await page.locator('#file').setInputFiles(path.join(review,name));await click('confirm-choice');await page.locator('#dialog').waitFor({state:'hidden'});};
   const select=async()=>{await page.locator('[data-tab="register"]').click();await page.locator('[data-select="bombay"]').click();};
   const deploy=async()=>{
-   await click('region-deploy-action');await click('next-deploy');
+   await click('operations-deploy-bombay');await page.getByRole('group',{name:'Target',exact:true}).getByRole('button',{name:'Bombay',exact:true}).click();await click('next-deploy');
    for(let i=0;i<6;i++)await page.getByRole('button',{name:'Increase Regiments',exact:true}).click();for(let i=0;i<2;i++)await page.getByRole('button',{name:'Increase Officers',exact:true}).click();
    await click('next-deploy');await page.getByRole('button',{name:'1–2 · Success',exact:true}).click();await click('next-deploy');await click('next-deploy');
    assert((await page.locator('#dialog-content').innerText()).includes('Open all its orders'));await click('next-deploy');
@@ -33,8 +33,8 @@ const review=path.resolve(__dirname,'../docs/narrative/review/collection08a');
    await page.setViewportSize({width,height});await article.scrollIntoViewIfNeeded();assert(await page.locator('#dialog-content').evaluate(el=>el.scrollWidth<=el.clientWidth+1));await page.locator('#dialog').screenshot({path:path.join(out,'commercial-experience-'+name+'.png')});
   }
   await click('close-dialog');mark('desktop and tablet dossiers expose owned earlier words and commercial evidence without horizontal overflow');
-  await load('before-diplomacy.json');await select();await click('region-envoy-action');await page.getByRole('group',{name:'Final check outcome',exact:true}).getByRole('button',{name:'Success',exact:true}).click();
-  const orders=page.getByRole('group',{name:'Closed order outside Company control',exact:true});await orders.getByRole('button').first().click();await click('review-action');assert((await page.locator('#dialog-content').innerText()).includes('closed-order marker'));await click('confirm-action');
+  await load('before-diplomacy.json');await select();await click('operations-envoy');await page.getByRole('group',{name:'Intended action',exact:true}).getByRole('button',{name:'Open Order in India',exact:true}).click();
+  const orders=page.getByRole('group',{name:'Closed order outside Company control',exact:true});await orders.getByRole('button').first().click();await page.getByRole('group',{name:'Final check outcome',exact:true}).getByRole('button',{name:'Success',exact:true}).click();await click('review-action');assert((await page.locator('#dialog-content').innerText()).includes('closed-order marker'));await click('confirm-action');
   state=(await saved()).state;assert(state.history.at(-1).narrative.lines.some(l=>l.tradeKind==='trade-diplomacy'));assert(!state.history.at(-1).narrative.lines.some(l=>l.tradeKind==='trade-military'));mark('actual Special Envoy controls preserve component terminology and select diplomatic restoration only');
   await load('before-cascade.json');const input=JSON.parse(fs.readFileSync(path.join(review,'cascade-input.json'),'utf8'));await turmoil(input.topRegion);state=(await saved()).state;
   assert(state.history.at(-1).incident.facts.some(f=>f.type==='trade-cascade'));assert(state.history.at(-1).narrative.lines.some(l=>l.templateId==='TR08-CASC-CH-01'));mark('actual manual Turmoil triggers a genuine cascade with saved connected-opportunity evidence');

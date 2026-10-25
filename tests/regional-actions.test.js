@@ -83,7 +83,7 @@ test('regional dialogs lock their region and Tax reason can be changed back to f
  assert.match(h.nodes.get('tax-effect').innerHTML,/0 unrest/);h.click('review-action');h.click('confirm-action');assert.equal(s.regions.bombay.unrest,0);
  open({type:'tax',regionContext:'bombay'});assert.match(h.nodes.get('tax-effect').innerHTML,/1 unrest/);h.click('review-action');h.click('confirm-action');assert.equal(s.regions.bombay.unrest,1);
  open({type:'unrest',regionContext:'bombay'});h.nodes.get('reason').value='tax';h.nodes.get('dialog-content').onchange();h.nodes.get('reason').value='failure';h.nodes.get('dialog-content').onchange();h.click('review-action');h.click('confirm-action');assert.equal(result.state.history.at(-1).actionType,'unrest');assert.equal(s.regions.bombay.unrest,2);
- open({type:'envoy',regionContext:'delhi'});assert(!h.nodes.get('dialog-content').innerHTML.includes('value="md4"'));h.nodes.get('outcome').value='success';h.nodes.get('order').value='d3';h.click('review-action');h.click('confirm-action');assert.equal(s.regions.delhi.orders.d3,true);
+ open({type:'envoy'});assert(h.nodes.get('dialog-content').innerHTML.includes('value="md4"'));h.nodes.get('purpose').value='order';h.nodes.get('outcome').value='success';h.nodes.get('order').value='d3';h.click('review-action');h.click('confirm-action');assert.equal(s.regions.delhi.orders.d3,true);
  assert(!h.storage.has(ACTION_DRAFT));
 });
 

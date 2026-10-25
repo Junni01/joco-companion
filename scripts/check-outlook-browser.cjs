@@ -12,7 +12,7 @@ const base=process.argv[2]||'http://127.0.0.1:4174/dist/',out=process.argv[3]||p
   const mark=s=>{checks.push(s);console.log('PASS',s);};
   await page.goto(base);await page.locator('#save-status').filter({hasText:'Saved in this browser'}).waitFor();await click('save-menu');await page.locator('#file').setInputFiles(file);await click('confirm-choice');
   const initial=await saved();
-  await click('deploy-action');await click('close-dialog');assert.deepEqual(await saved(),initial);mark('cancelled Deploy leaves private thoughts, knowledge and RNG unchanged');
+  await click('operations-deploy-bombay');await click('close-dialog');assert.deepEqual(await saved(),initial);mark('cancelled Deploy leaves private thoughts, knowledge and RNG unchanged');
   await click('events-phase-action');await click('manual-phase-storm');await page.locator('[data-phase-face="4"]').click();await click('confirm-phase-storm');await click('phase-map');await click('phase-next');
   assert.equal((await saved()).state.eventStack.pending.tileId,'madras-shuffle');assert.equal((await saved()).state.narrative.foresight.batch,null);
   await click('review-action');
