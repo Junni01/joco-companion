@@ -1,6 +1,6 @@
 # Collection 09C — Adviser counsel and China colour: authored candidates
 
-**Status:** **DRAFT FOR CREATIVE REVIEW**, 25 October 2026. These are *not yet approved* as production dialogue or dialogue-engine integration. Character names are deliberately omitted pending Collection 10A. Use existing persistent speaker IDs and authored speaker-role voice. Proposed profile/predicate guards are mandatory, not decorative.
+**Status:** **CREATIVELY APPROVED WRITING**, 25 October 2026, following review of eight revisions, China-assistant range and disagreement policy. These exact authored lines are approved for scoped 09C-2 integration where factual predicates can be met; 09D outcome callbacks and dialog relocation remain separate implementation scope. Character names are deliberately omitted pending Collection 10A. Use existing persistent speaker IDs and authored speaker-role voice. Proposed profile/predicate guards are mandatory, not decorative.
 
 **Editorial aim:** No adviser is permanently the sensible one or the idiot. The same factual situation yields conflicting but personally motivated opinions. The army/adviser domain persists, personality varies by campaign. In-world people do not say 'unrest', 'cubes', 'dice', 'opium symbols', 'Orders', 'Elephant', 'deploy' as a board-game action, or mention expected numerical strength. 'Opium' itself is a real commodity and may be named by the China assistant.
 
@@ -8,8 +8,8 @@
 
 | ID | Eligibility | Voice | Exact proposed text |
 |---|---|---|---|
-| `09C-army-defend-professional` | Legal defence / friendly-control target with actual local unrest or exposed threat | Professional, cautious | Securing our own territory will not make the newspapers in London. Losing it certainly would. |
-| `09C-army-defend-vain` | Same supported defence | Proud | I would rather be remembered for a conquest. I suppose preventing a disgrace must serve in the meantime. |
+| `09C-army-defend-professional` | Legal defence / friendly-control target with actual local unrest or exposed threat | Professional, cautious | Securing what we possess wins little praise. Losing it would invite a most thorough inquiry. |
+| `09C-army-defend-vain` | Same supported defence | Proud | I had hoped to be remembered for acquiring provinces. Apparently I must first distinguish myself by retaining them. |
 | `09C-army-defend-calculating` | Same supported defence | Opportunist | A secure frontier is an invitation to greater enterprise. Let us first make sure we have one. |
 | `09C-army-expansion-careful` | Legal conquest attempt against an independent neighbour | Careful | A province is easily admired from a distance. The expense of keeping it is usually learned at closer quarters. |
 | `09C-army-expansion-hungry` | Same conquest target with actual legal opportunity | Ambitious | If we wait until every neighbour welcomes our arrival, we shall never leave the Presidency. |
@@ -18,11 +18,11 @@
 | `09C-army-strong-opponent-rash` | Same | Confident/low aptitude | The size of their forces is most impressive. I trust they will find room to retreat. |
 | `09C-army-strong-opponent-honest` | Same | Ambitious but competent | There is glory to be had here. I would be dishonest if I said there was not also considerable danger. |
 | `09C-army-weak-opponent-mercy` | Legal attempt against weaker displayed Indian position | Restrained | Victory is one question. Whether we shall wish to be responsible for its consequences is quite another. |
-| `09C-army-weak-opponent-vain` | Same | Vainglorious | I anticipate a most agreeable report to London, provided reality has the courtesy to cooperate. |
+| `09C-army-weak-opponent-vain` | Same | Vainglorious | A modest opponent offers a splendid opportunity to demonstrate extraordinary generalship. |
 | `09C-army-known-danger` | 09A public known returned Crisis batch, and plan actually implicates current exposure | Anxious | This is an unfortunate moment to send our strength in search of further obligations. |
 | `09C-army-known-danger-predatory` | Same | Ambitious | If disorder spreads, someone will find a use for it. I should prefer it were us. |
 | `09C-army-recent-failure` | Adviser knows a real prior failed deployment by its institution; no unrecorded actor | Chastened | We have already been offered one lesson in confidence. I should dislike paying for a second. |
-| `09C-army-recent-success` | Adviser knows one or more actual recent successful deployments | Inflated confidence | Our last expedition has made caution distinctly unpopular. I note this without recommending the fashion. |
+| `09C-army-recent-success` | Adviser knows one or more actual recent successful deployments | Inflated confidence | Success has made caution distinctly unpopular. I note this without recommending the fashion. |
 
 ## Contradictory *paired* exchange — only when both guards hold
 
@@ -42,7 +42,7 @@ The precise second speaker must be an actually present continuing fictional advi
 | `09C-envoy-india-cynic` | Same | Cynical | We shall request the opening of trade with all proper courtesy. Courtesy is cheaper than concessions. |
 | `09C-envoy-india-confident` | Same | Overconfident | The proposal is eminently reasonable. I expect that to count for something, though experience is strangely divided on the point. |
 | `09C-envoy-india-failure` | Actual reported failure for intended India Order; no order opens | Dry | The mission has failed to produce an agreement. Fortunately, my report need not be quite so definite. |
-| `09C-envoy-india-success` | Actual success and order really opens | Self-satisfied | At last, an arrangement in which the parties have found a common interest. I shall leave the proportions unspecified. |
+| `09C-envoy-india-success` | Actual success and order really opens | Self-satisfied | Commerce has found an opening. I shall refrain from examining whose interests it serves more generously. |
 
 ## Governor Administer — pre-check recommendations and post-success choice (new editorial candidates)
 
@@ -75,22 +75,51 @@ A switch can be recorded as *actual preview history* only if the player was show
 |---|---|---|---|
 | `09C-china-office-plan` | Intended Superintendent creation, office absent | Eager | A proper office for our interests in China would be a splendid beginning. I should prefer to have something to send it as well. |
 | `09C-china-office-created` | Successful Special Envoy genuinely establishes Superintendent | Bureaucratic satisfaction | At last there is an office to which my memoranda may be addressed. Whether that constitutes progress remains to be seen. |
-| `09C-china-office-failure` | Reported failed Special Envoy intended for China | Dry | The office remains imaginary. I fear my reports to it have become rather more substantial than the institution itself. |
+| `09C-china-office-failure` | Reported failed Special Envoy intended for China | Dry | The establishment of an office in China has been delayed. I shall resist the temptation to call this a triumph of administrative restraint. |
 | `09C-china-zero-access` | Actual zero printed opium icons across Company-controlled regions, office absent or present | Sardonic | Our ambitions in China are admirably extensive. Our means of pursuing them are not. |
 | `09C-china-access-gain` | Committed territorial control change actually increases accessible printed opium icon total | Obsessive | A new source of supply! I confess to finding this rather more exciting than the military particulars. |
 | `09C-china-access-loss` | Committed territorial control change actually decreases accessible icon total | Aggrieved | The loss of territory is regrettable. Its effect upon our prospects in China is positively intolerable. |
-| `09C-china-no-change` | Successful conquest that adds zero opium icons; no claim of China trade | Cynical | Another province acquired, and nothing whatever added to our prospects in China. One must admire the Army's independence of commercial thought. |
+| `09C-china-no-change` | Successful conquest that adds zero opium icons; no claim of China trade | Cynical | Another province acquired, and not a grain added to our prospects in China. I wonder whether the generals consult maps for anything but roads. |
 | `09C-china-high-access` | Available opium total meaningfully high **only after board verified and thresholds established** | Self-interested | India has been obliging to our commercial designs. I make a point of not asking whether it intended to be. |
 
 ## Real outcome follow-through — requires 09D commit-bound advice memory
 
 | ID | Eligibility | Voice | Exact proposed text |
 |---|---|---|---|
-| `09D-warning-failure` | Same adviser actually gave saved discouraging advice for this committed deployment; reported deployment fails | Vindicated but anxious | I advised against this undertaking. It is a miserable consolation to have been heard only by the record. |
+| `09D-warning-failure` | Same adviser actually gave saved discouraging advice for this committed deployment; reported deployment fails | Vindicated but anxious | I advised against this undertaking. I had hoped my caution would prove unnecessary rather than correct. |
 | `09D-warning-success` | Same actual saved warning, deployment succeeds | Proud restraint | I concede that it succeeded. I have not yet conceded that it was wise. |
 | `09D-advocate-failure` | Same adviser actually supported this committed deployment; it fails | Evasive | My recommendation was sound in principle. Events have been uncommonly hostile to principle. |
 | `09D-advocate-success` | Same adviser actually supported and it succeeds | Vain | I am pleased the expedition has confirmed what I had the good sense to recommend. |
 | `09D-callback-later-crisis` | Previous **committed** discouraging advice concerned loss of defence, plus subsequent actual related crisis; no causation inferred | Bitter | I warned that we might be needed here. I had hoped to be wrong. |
+
+
+## Approved adviser personality range and occasional disagreement
+
+**Institution does not dictate morality or temperament.** China affairs is concerned with available opium access, but a campaign's assistant may be commercially enthusiastic, principally worried about the administrative consequences, or morally conflicted. The character's private convictions and competence are chosen from persistent traits, not from office name or ethnicity. Maintain moments of professional sobriety; don't turn every incident into a joke about profit.
+
+**Cross-institutional dissent is rare and evidence-led.** Primary advice normally comes from the action's own Army or trade adviser. A second, separately eligible continuing adviser appears only when a supported interest genuinely differs; for instance a target region would change Company opium access according to **verified printed map icons**, and the China assistant has a legitimate stake. No universal two-adviser debate, no invented audience/presence, and no automatic second speaker from an unrelated Presidency. Paired lines must be authored as a coherent exchange with speaker eligibility and persistent IDs; never splice arbitrary lines.
+
+**Restraint and silence:** No fresh line every time a dialog is reopened, clicked or a +/- counter changes. One stable recommendation for a meaningful current plan is normal; routine plans may receive no counsel. A substantive target/effect change may update the preview. The preview is never treated as a recorded historical utterance until a compatible action is committed.
+
+### Additional China voice candidates — approved wording, guarded future use
+
+| ID | Eligibility | Voice | Exact approved text |
+|---|---|---|---|
+| `09C-china-prospects-commercial` | Real territorial acquisition prospect with verified printed opium access in target, no claimed shipment | Commercial enthusiast | The province may be of little military consequence, but its produce interests me considerably more than its fortifications. |
+| `09C-china-prospects-accountant` | Actual committed loss of Company-accessible printed opium icons; institutional assistant exists | Bureaucratic accountant | Our supply has diminished. I trust someone will explain this development to the Directors before they discover it themselves. |
+| `09C-china-prospects-uneasy` | China-affairs assistant discussing opium trade policy or legitimate potential, without asserting completed transactions | Morally conflicted | We speak rather freely of the advantages of this trade. I find we speak considerably less of those expected to consume its wares. |
+
+These are optional personality variants, not mandatory role attitudes. The first must **not** assert the target is of little military importance unless the supported board-state context makes that comparison appropriate; if that cannot be verified, keep it withheld and report why rather than weaken the guard.
+
+### Additional contextual cross-institution exchange — approved wording, fact-gated
+
+**`09C-exchange-frontier-vs-opium`**: Legal planned conquest, military adviser has a **supported** reason for defending/holding difficulty, and printed map metadata verifies the planned target has opium icons not already accessible to the Company. Both real fictional advisers must be eligible. This is pre-action **speculation**, not a claimed successful conquest or profit.
+
+**Army adviser:** The province will be difficult to hold. I see little advantage in acquiring responsibilities we can scarcely afford.
+
+**China assistant:** Its commercial possibilities are considerable. I should be grateful if the military could trouble itself with the practicalities.
+
+If the current data cannot support the military hold-risk claim, withhold this exchange rather than present it as an objective fact.
 
 ## Review questions
 
@@ -100,4 +129,4 @@ A switch can be recorded as *actual preview history* only if the player was show
 4. Should the China assistant be primarily satirical or occasionally principled about the opium trade?
 5. Do we want any sober reactions to the human cost of Company commerce, rather than making every incident a profit joke?
 
-**No implementation yet:** submit revisions for approval first; don't hand this file to Codex as verbatim-approved production text.
+**Implementation authorization:** This document provides creatively approved **exact text and factual guards** for scoped 09C-2 previews/adviser identity. It does **not** authorize 09D committed-advice callbacks, post-action narration relocation, historical-event invention, new opium map facts, or a site deployment. 09D lines are writing-approved but implementation-deferred.
