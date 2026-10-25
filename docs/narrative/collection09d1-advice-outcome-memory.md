@@ -1,6 +1,6 @@
 # Collection 09D-1 — Committed Counsel and Action-Outcome Memory
 
-**Status:** Design draft for user/ChatGPT review, 25 October 2026. **No implementation authorization yet.** 09C-2 planning previews are being implemented separately. This document specifies 09D-1 history only; moving scenes into resolution dialogs belongs to 09D-2 and adviser rivalries/reputation to 09D-3.
+**Status:** Design and narrative metadata direction **approved by user**, 25 October 2026. Exact 09D-1 outcome dialogue also creatively approved. **No implementation authorization yet**; review 09C-2 results before a dedicated Codex 09D-1 task. 09C-2 planning previews are being implemented separately. This document specifies 09D-1 history only; moving scenes into resolution dialogs belongs to 09D-2 and adviser rivalries/reputation to 09D-3.
 
 ## Purpose
 
@@ -16,12 +16,14 @@ Use the existing structured game incident and narrative statement store. Avoid a
 |---|---|
 | `attemptIncidentId` | Stable id of the **actual committed action attempt** |
 | `speakerId`, `institutionId` | Stable adviser/person and office; independent of transient player officeholder |
-| `templateId`, `renderedText`, `stance` | Exact words heard, authored source ID and meaningful recommendation (encourage, discourage, conditional, prefer-effect, neutral) |
+| `templateId`, `renderedText`, `stance` | Exact words heard, authored source ID and the advised course (encourage, discourage, conditional, prefer-effect, neutral) |
+| `qualification`, `confidenceTone` | Supported risk/reservation expressed **in the actual wording** (if any) and its degree of certainty; authored metadata, not retroactive outcomes or numeric prediction accuracy |
 | `utterancePhase` | `pre-check`, `pre-commit` or `post-check`; do not retroactively label one as another |
 | `targetIds`, `armyId`, `recommendedEffect` | Specific supported plan, with explicit absence when not applicable |
 | `publicEvidenceRef(s)` | Eligibility and player-visible facts at the actual time of speaking; no hidden deck order |
 | `shownInAttempt` | Provenance that the line was actually rendered in the current legitimate attempt, not generated only at result time |
 | `outcomeKind`, `selectedEffect` | From **real committed gameplay resolver**, including physical reported failure/success and resulting final legal effect |
+| `interpretation` | The speaker's later biased understanding of events, separate from authoritative incident facts or evidence-based recommendation metadata |
 | `followedStatus` | `followed`, `different-effect`, `proceeded-despite-warning`, `no-choice-on-failure`, or `not-applicable/unknown`; computed by action-specific rules |
 | `visibility` | Whether the utterance was audible/public within participating Company personnel, privately expressed, or merely an editor preview; no magical sharing |
 | `responseTemplateId`, `responseText` | Optional immediate committed outcome interpretation, independently fact-guarded and saved verbatim |
@@ -59,6 +61,8 @@ Special Envoy establishes Superintendent office or opens a specific legal Indian
 
 ## Memory strength and callbacks boundary
 
+**Never compute a simplistic right/wrong prediction score.** An adviser who encouraged proceeding yet explicitly acknowledged danger did not promise an easy victory. Their recommendation must not be caricatured into one; a later precise warning callback requires the specific risk to have been spoken and saved. Preserve the actual quote even when their retrospective interpretation is self-serving. An eligible two-speaker public debate should save **both** actually shown statements and speaker identities under the same committed incident, even if neither makes an immediate response. A cancelled dialog saves neither.
+
 09D-1 saves a *reliable source* for future memories but does not yet implement long-term adviser rivalries, selective self-serving summaries or recurring callbacks. Normal attempts create at most small linked evidence; no automatically stacking hostility scores. A substantial failed expedition, a catastrophic failure, or a meaningful overridden recommendation may qualify as notable *future* 09D-3 memory, but no fictional vindication is mechanically proved. A single disagreement never creates enmity.
 
 Exactly one record for one speaker's actually delivered recommendation per materially distinct utterance/phase; separate two-speaker exchanges retain both identifiable speakers and joint unit ID. Old pre-09D saves should not be backfilled with advice that was not historically displayed.
@@ -70,7 +74,7 @@ Exactly one record for one speaker's actually delivered recommendation per mater
 - A Governor's successful check with a different effect permits wounded pride; failure does not.
 - Predictions are not retroactive; prior personal thoughts are not other advisers' public knowledge.
 - No dialogues about unreported deaths, lost Company troops, realized China trade, historical promises or player families.
-- Existing authored outcome lines in `writing/collection09c-adviser-candidates.md` are creatively approved **as writing** but 09D implementation is deferred. The new alternatives in `writing/collection09d1-outcome-candidates.md` are **unapproved candidate wording** pending a new user creative review.
+- Existing authored outcome lines in `writing/collection09c-adviser-candidates.md` are creatively approved **as writing** but 09D implementation is deferred. The 18 exact outcome lines in `writing/collection09d1-outcome-candidates.md` are now **creatively approved**, including four editorial replacements. That is **writing approval only**, not permission to implement 09D-1 in code or to begin 09D-2/09D-3.
 
 ## Acceptance scenarios for eventual Codex delivery
 
@@ -85,4 +89,4 @@ Exactly one record for one speaker's actually delivered recommendation per mater
 
 ## Next review
 
-Creative review of the candidate outcome catalogue and one precise engineering question: for physical checks, which existing UI transition can reliably prove that the player saw advice **before** reporting the roll? If that cannot be established in 09C-2, store only truly visible, correctly phased utterances and suppress "overruled" callbacks until the proper evidence exists. Do not silently fake chronology.
+The catalogue's human creative review is complete. Next resolve one precise engineering question: for physical checks, which existing UI transition can reliably prove that the player saw advice **before** reporting the roll? If that cannot be established in 09C-2, store only truly visible, correctly phased utterances and suppress "overruled" callbacks until the proper evidence exists. Do not silently fake chronology.
