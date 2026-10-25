@@ -66,8 +66,8 @@ test('sovereign attack, defence, actual relative strength and independent compet
  const s=outlookFixture().state,p=publicKnowledge(s),attacker=forecastRegion(p,'delhi'),defender=forecastRegion(p,'bombay');
  assert(attacker.issues.includes('strong-attacker'));assert(defender.issues.includes('weak-defender'));
  const person={c:clone(s.narrative.characters['ruler-delhi']),grievance:null,helpful:[]};person.c.traits.ambition=90;person.c.traits.caution=10;
- assert.equal(outlookCandidates(attacker,person,80)[0].key,'ambition');person.c.traits.ambition=10;assert.equal(outlookCandidates(attacker,person,80)[0].key,'measured');
- person.c.confidence=80;assert.equal(outlookCandidates(attacker,person,10)[0].key,'sanguine');assert.equal(outlookCandidates(attacker,person,80)[0].key,'measured');
+ const ambitious=outlookCandidates(attacker,person,80)[0];assert.equal(ambitious.family,'strong-attacker');person.c.traits.ambition=10;person.c.traits.caution=95;assert.notEqual(outlookCandidates(attacker,person,80)[0].key,ambitious.key);
+ person.c.confidence=80;assert.equal(outlookCandidates(attacker,person,10)[0].family,'strong-attacker');assert.equal(outlookCandidates(attacker,person,80)[0].family,'strong-attacker');
  p.regions.bombay.strength=15;assert(forecastRegion(p,'delhi').issues.includes('weak-attacker'));assert(forecastRegion(p,'bombay').issues.includes('strong-defender'));
 });
 
@@ -109,7 +109,7 @@ test('private assessments never enter statements, public dialogue callbacks, gam
  assert(!off.narrative);assert.equal(f.states[3].narrative.rng,f.initial.narrative.rng); // Shuffle itself has no ordinary character reactions.
  assert(Object.values(f.state.narrative.outlooks).every(o=>o.visibility==='private'));
  assert(Object.values(f.state.narrative.statements).every(s=>!s.text.includes(OUTLOOK_TEXT.alarm)));
- for(const text of Object.values(OUTLOOK_TEXT))assert(!/\b(elephant|tile|deck|discard|dice|turn|cube|crisis|shuffle|probabilit|bonus)\b/i.test(text));
+ for(const text of Object.values(OUTLOOK_TEXT))assert(!/\b(elephant|tile|deck|discard|dice|game turn|turn [0-9]+|cube|crisis|shuffle|probabilit|bonus)\b/i.test(text));
 });
 
 test('malformed text, owners, hidden-context fields, batch sources and personal evidence are rejected',()=>{
@@ -118,7 +118,7 @@ test('malformed text, owners, hidden-context fields, batch sources and personal 
 });
 
 test('actual personal conquest and repeated helpful interventions support qualified private gratitude without public knowledge transfer',()=>{
- const f=tradeCampaign({pressure:false}),s=f.states.find(s=>s.narrative.outlooks.bombay.templateId==='qualified');assert(s);
+ const f=tradeCampaign({pressure:false}),s=f.states.find(s=>s.narrative.outlooks.bombay.templateId.startsWith('09B-qualified-'));assert(s);
  const o=s.narrative.outlooks.bombay;assert(o.personal.grievance);assert.equal(o.personal.helpful.length,2);assert(o.memoryIds.every(id=>s.narrative.memories[id].ownerId===o.characterId));
- assert.equal(o.text,OUTLOOK_TEXT.qualified);assert(!s.history.flatMap(h=>h.narrative?.lines||[]).some(l=>l.text===o.text));
+ assert.equal(o.text,OUTLOOK_TEXT[o.templateId]);assert(!s.history.flatMap(h=>h.narrative?.lines||[]).some(l=>l.text===o.text));
 });

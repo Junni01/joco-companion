@@ -1,5 +1,5 @@
 import {EVENT_TILES,TILES,exposedRegion} from './event-stack.js';
-import {OUTLOOK_TEXT} from './narrative-outlook-content.js';
+import {OUTLOOK_TEXT,APPROVED_OUTLOOKS} from './narrative-outlook-content.js';
 const copy=v=>JSON.parse(JSON.stringify(v));
 const counts=ids=>ids.reduce((c,id)=>{const type=TILES[id].event;c[type]=(c[type]||0)+1;return c;},{});
 const sum=c=>Object.values(c).reduce((a,b)=>a+b,0);
@@ -49,9 +49,11 @@ function personal(state,id){
  const causes=c.relations['institution:company']?.causes||[];
  const hostility=causes.reduce((n,c)=>n+(c.deltas.hostility||0),0),gratitude=causes.reduce((n,c)=>n+(c.deltas.gratitude||0),0);
  const helpful=memories.filter(m=>m.category==='intervention');
- return {c,grievance:grievance&&hostility>0?grievance.id:null,helpful:helpful.length>=2&&gratitude>0?helpful.slice(-2).map(m=>m.id):[],reasons:causes.slice(-3).map(c=>c.id)};
+ const recent=memories.at(-1);
+ return {c,grievance:grievance&&hostility>0?grievance.id:null,helpful:helpful.length>=2&&gratitude>0?helpful.slice(-2).map(m=>m.id):[],reasons:causes.slice(-3).map(c=>c.id),recentMemoryId:recent?.id||null,recentCategory:recent?.category||null};
 }
-export function outlookCandidates(situation,person,competence){
+// Frozen selection for validating already-saved v1 words only; never used to generate new thoughts.
+export function legacyOutlookCandidates(situation,person,competence){
  const {c,grievance,helpful}=person,has=key=>situation.issues.includes(key),choices=[];
  const add=(key,score)=>choices.push({key,score});
  add('watch',10);if(has('regional-attention'))add('attention',20);
@@ -75,17 +77,49 @@ export function outlookCandidates(situation,person,competence){
  if(competence<30&&c.confidence>=60&&choices.some(x=>x.score>=70))add('sanguine',100);
  return choices.sort((a,b)=>b.score-a.score||a.key.localeCompare(b.key));
 }
+
+// Concern first, then voice. Generic atmosphere never wins merely because it is broad.
+export const OUTLOOK_PRIORITY={'company-primary':120,'occupied-discontent':115,'weak-defender':110,'strong-defender':105,qualified:109,grievance:108,subject:104,capital:104,'weak-attacker':100,'company-frontier':100,'strong-attacker':98,'company-secondary':118,'military-climate':50,'mixed-climate':45,'commercial-disruption':25};
+function voiceScore(voice,situation,person,competence,family){
+ const {c}=person,t=c.traits,A=t.ambition,P=t.pride,C=t.caution,V=t.vindictiveness,R=t.ruthlessness,L=t.loyalty,F=c.confidence,K=competence;
+ const publicHash=hash(c.id+family+JSON.stringify([situation.elephant,situation.local.strength,situation.local.unrest,situation.batch?.remaining,situation.visibleBackRegion]));
+ const gate=((publicHash^(publicHash>>>16))>>>0)%4===0;
+ const scores={proud:P*1.5+F*.4,calculating:C*.8+K*.6+A*.6,vain:P+A*.8+F*.3,wary:C*1.3+K*.7,defiant:P+V*.7+F*.4,scheming:A+V*.7+K*.3,pragmatic:C*.8+K*.8+(100-P)*.4,nervous:C+(100-F),diplomatic:C+K*.5+L*.5,contemptuous:P+F*.7+V*.3,careful:C*1.4+K*.6,magnanimous:P*.7+L*.8+F*.5,opportunist:A*1.3+R*.5+F*.2,hostile:V*1.3+R*.4+P*.3,anxious:C*1.2+(100-F)*.8,resentful:V+P*.7+(100-L)*.3,watchful:C+K*.7+(100-F)*.3,steadfast:F+C*.6+L*.4,restless:A+V*.5+F*.5,loyal:L*1.3+C*.7,rash:A+R*.5+F*.8-C*.3,politic:C+K*.6+A*.4,alarmed:C+(100-F)*.8+K*.2,ambitious:A*1.6+F*.4,predatory:R*1.3+A*.7,hopeful:L*.7+F*.8+(100-V)*.5,skeptical:C*.8+V*.7+K*.5,fatigued:C*.5+(100-F)*.5,bitter:V*1.3+P*.7,patient:C*1.2+V*.8,grudging:V*.8+P*.8+(100-L)*.4};
+ // Aptitude is neither morality nor destiny. A stable public-context gate permits occasional error.
+ if(['deluded','denial','naive','complacent','dismissive'].includes(voice))return gate&&F>=60&&(K<35||P>=80||A>=85)?230+(100-K)*.3+P*.2:-50;
+ let score=scores[voice]??0;
+ if(['resentment','anger','indignation','bitterness'].includes(c.mood)&&['bitter','resentful','hostile','defiant','grudging','predatory'].includes(voice))score+=35;
+ if(['uncertainty','fear','caution'].includes(c.mood)&&['anxious','nervous','careful','watchful','wary'].includes(voice))score+=25;
+ if(['weariness','fatigue'].includes(c.mood)&&voice==='fatigued')score+=60;
+ if(['company-conquest','tax-repeat','administration'].includes(person.recentCategory)&&['bitter','resentful','defiant','patient'].includes(voice))score+=15;
+ if(person.recentCategory==='intervention'&&['grudging','pragmatic','careful'].includes(voice))score+=15;
+ return score;
+}
+export function outlookCandidates(situation,person,competence){
+ const eligible=new Set(situation.issues),choices=[];
+ if(person.grievance&&situation.local.control==='company')eligible.add('grievance');
+ if(eligible.has('grievance')&&person.helpful.length>=2)eligible.add('qualified');
+ for(const entry of APPROVED_OUTLOOKS){
+  if(entry.blocked||!eligible.has(entry.family))continue;
+  choices.push({key:entry.id,family:entry.family,score:OUTLOOK_PRIORITY[entry.family],voiceScore:voiceScore(entry.voice,situation,person,competence,entry.family)});
+ }
+ // Existing neutral fallbacks only; no newly authored replacement sentences.
+ choices.push({key:situation.issues.includes('regional-attention')?'attention':'watch',family:'neutral',score:10,voiceScore:0});
+ return choices.sort((a,b)=>b.score-a.score||b.voiceScore-a.voiceScore||a.key.localeCompare(b.key));
+}
 function refresh(state,entryId=null){
  const n=state.narrative,p=publicKnowledge(state);
  for(const [region,id] of Object.entries(n.seats)){
   const person=personal(state,id),old=n.outlooks[region];
   if(person.c.condition!=='alive'){delete n.outlooks[region];continue;}
   n.foresight.aptitudes[id]??=hash(id+':'+n.rng)%101;
-  const situation=forecastRegion(p,region),selected=outlookCandidates(situation,person,n.foresight.aptitudes[id])[0];
-  // Same wording is legitimate. Do not churn its saved source on unrelated or routine changes.
-  if(old?.characterId===id&&old.templateId===selected.key&&equal(old.context,situation))continue;
-  const memoryIds=[...(person.grievance?[person.grievance]:[]),...person.helpful];
-  n.outlooks[region]={version:1,visibility:'private',characterId:id,templateId:selected.key,text:OUTLOOK_TEXT[selected.key],sourceIncidentId:entryId,context:situation,personal:{traits:copy(person.c.traits),confidence:person.c.confidence,competence:n.foresight.aptitudes[id],grievance:person.grievance,helpful:person.helpful,reasonIds:person.reasons},memoryIds};
+  const situation=forecastRegion(p,region);
+  const samePerson=old&&equal(old.personal.traits,person.c.traits)&&old.personal.confidence===person.c.confidence&&old.personal.grievance===person.grievance&&equal(old.personal.helpful,person.helpful)&&equal(old.personal.reasonIds,person.reasons)&&(old.personal.mood===undefined||old.personal.mood===person.c.mood);
+  // This also retains earlier saved catalogue wording without conversion on routine commits.
+  if(old?.characterId===id&&equal(old.context,situation)&&samePerson)continue;
+  const selected=outlookCandidates(situation,person,n.foresight.aptitudes[id])[0];
+  const memoryIds=[...new Set([...(person.grievance?[person.grievance]:[]),...person.helpful,...(person.recentMemoryId?[person.recentMemoryId]:[])])];
+  n.outlooks[region]={version:2,selectionPolicy:'09b-polish-1',visibility:'private',characterId:id,templateId:selected.key,text:OUTLOOK_TEXT[selected.key],sourceIncidentId:entryId,context:situation,personal:{traits:copy(person.c.traits),confidence:person.c.confidence,mood:person.c.mood,competence:n.foresight.aptitudes[id],grievance:person.grievance,helpful:person.helpful,reasonIds:person.reasons,recentMemoryId:person.recentMemoryId,recentCategory:person.recentCategory},memoryIds};
  }
 }
 export function initializeOutlooks(state,n){
@@ -120,7 +154,7 @@ export function validateOutlooks(state){
  for(const [id,value] of Object.entries(f.aptitudes))check(n.characters[id]?.role==='ruler'&&Number.isInteger(value)&&value>=0&&value<=100,'independent aptitude');
  for(const [region,o] of Object.entries(n.outlooks)){
   check(record(o)&&record(o.context)&&record(o.personal)&&record(o.personal.traits)&&Array.isArray(o.memoryIds)&&Array.isArray(o.personal.helpful)&&Array.isArray(o.personal.reasonIds),'saved private assessment');
-  check(state.regions[region]&&o.version===1&&o.visibility==='private'&&n.characters[o.characterId]?.region===region&&o.text===OUTLOOK_TEXT[o.templateId]&&source(o.sourceIncidentId),'identity/text/source');
+  check(state.regions[region]&&[1,2].includes(o.version)&&o.visibility==='private'&&n.characters[o.characterId]?.region===region&&o.text===OUTLOOK_TEXT[o.templateId]&&source(o.sourceIncidentId),'identity/text/source');
   check(o.context?.region===region&&Array.isArray(o.context.issues)&&Object.keys(o.context).sort().join(',')==='allegiance,attackerStrength,batch,climate,companyUnrestStrength,defenderStrength,elephant,ended,issues,local,region,revealed,subjectStrength,visibleBackRegion','public context');batch(o.context.batch);
   check(o.context.issues.every(x=>['strong-attacker','weak-attacker','weak-defender','strong-defender','company-frontier','subject','capital','company-primary','company-secondary','military-climate','mixed-climate','occupied-discontent','regional-attention','commercial-disruption','commercial-access'].includes(x)),'public issues');
   check(Object.keys(o.context.local).sort().join(',')==='commercialOpen,commercialTotal,control,empireCapital,overlord,strength,unrest'&&['company','indian'].includes(o.context.local.control),'public local context');
@@ -129,10 +163,14 @@ export function validateOutlooks(state){
   check(typeof o.context.ended==='boolean'&&['military','mixed','uncertain'].includes(o.context.climate),'assessment kind');
   check(o.context.climate!=='military'||o.context.batch?.counts.crisis===o.context.batch?.remaining,'military evidence');
   check(o.memoryIds.every(id=>n.memories[id]?.ownerId===o.characterId),'owned personal evidence');
+  const cutoff=o.sourceIncidentId===null?state.history.length:state.history.findIndex(h=>h.incident?.id===o.sourceIncidentId);
+  check(o.memoryIds.every(id=>state.history.findIndex(h=>h.incident?.id===n.memories[id].createdIncident)<=cutoff),'personal evidence must already exist');
   check(!o.personal.grievance||o.memoryIds.includes(o.personal.grievance)&&n.memories[o.personal.grievance]?.category==='company-conquest','conquest interpretation');
   check(o.personal.helpful.every(id=>o.memoryIds.includes(id)&&n.memories[id]?.category==='intervention'),'helpful experience');
   check(o.personal.reasonIds.every(id=>Object.values(n.characters[o.characterId].relations).some(r=>r.causes.some(c=>c.id===id))),'personal reasons');
-  const c={...n.characters[o.characterId],traits:o.personal.traits,confidence:o.personal.confidence};
-  check(o.personal.competence===f.aptitudes[o.characterId]&&outlookCandidates(o.context,{c,grievance:o.personal.grievance,helpful:o.personal.helpful},o.personal.competence)[0].key===o.templateId,'eligible selection');
+  const c={...n.characters[o.characterId],traits:o.personal.traits,confidence:o.personal.confidence,mood:o.personal.mood};
+  if(o.version===2){check(o.selectionPolicy==='09b-polish-1'&&typeof o.personal.mood==='string','selection policy');check(!o.personal.recentMemoryId||o.memoryIds.includes(o.personal.recentMemoryId)&&n.memories[o.personal.recentMemoryId]?.category===o.personal.recentCategory,'recent owned experience');}
+  const select=o.version===1?legacyOutlookCandidates:outlookCandidates;
+  check(o.personal.competence===f.aptitudes[o.characterId]&&select(o.context,{c,grievance:o.personal.grievance,helpful:o.personal.helpful,recentCategory:o.personal.recentCategory},o.personal.competence)[0].key===o.templateId,'eligible selection');
  }
 }
