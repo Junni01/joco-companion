@@ -89,6 +89,17 @@ UI guidance: plus/minus controls, no manual typing or player-family/share invent
 
 Creative possibilities: no dividends triggers dismay, high dividends trigger self-serving praise, emergency loans provoke panic or rationalization, Standing colours confidence. Incidental shareholders can argue and contradict one another. Fictional investment worries are welcome; don't invent a specific player's losses or unreported Company finance facts. No new rule choices or extra acknowledgements.
 
+## Shareholder news chronology — user-approved direction (25 October 2026)
+
+**User clarification:** Revenue takes place **before** the current turn's Events in India. Shareholders at Revenue should be able to comment on the **previous turn's India Phase**, its recorded conquests, rebellions, Army disasters, control losses, commercial turmoil and other meaningful events, alongside the current Revenue financial facts. They cannot foresee the India events that will happen later in the current turn.
+
+- Prioritize events from the immediately preceding India Phase as the latest dispatches; permit rare references to older especially memorable, **actually recorded** events with appropriate temporal language. Do not assert an older event just occurred.
+- Derive eligibility from turn-indexed committed incident history, not merely the current map snapshot; distinguish present state from when an event happened. Never inspect future event faces or hidden event order.
+- First turn/no preceding India Phase: use Revenue-only discussion, general investment expectations or other established past context; do not manufacture previous India dispatches.
+- Shareholders' statements can be partial, biased, self-interested or mistaken interpretations of genuine events; the chronicler's authoritative history remains grounded. Fictional correspondence and incidental life are allowed, but no invented major casualties, shipments, dividends or specific player-family losses.
+- The **Revenue failure epilogue** should use the same chronological discipline: the previous completed India Phase and earlier history may be recalled, but there is no later current-turn India or Parliament scene after immediate bankruptcy Final Scoring.
+- No extra player question about previous events is needed because the companion already records India incidents. Preserve undo/redo, imports and old-save fallback when history is unavailable.
+
 ## Revenue failure as shareholder epilogue — user-approved direction (25 October 2026)
 
 **User decision:** Since Company failure may occur during Revenue, the Revenue flow must support an **end-game branch**. When the Company fails, replace the ordinary shareholder scene with a **dedicated final shareholders' epilogue** in Narrative mode, then guide players directly to published Final Scoring. In Normal mode, provide the actual final scoring instructions with no fictional page. Do not continue into Events in India or Parliament after Revenue failure.
