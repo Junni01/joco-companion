@@ -1,6 +1,6 @@
 # Collection 09C-2 — Persistent adviser identity and planning counsel
 
-**Status:** Design proposal for creative review, 25 October 2026. **No implementation authorization or final dialogue approval yet.** 09C-1 is implemented (reported 292 tests). Read `collection09cd-counsel-dialogues.md`, `narrative-requirements.md`, `writing/style-guide.md`, and existing cast-generation source before implementing.
+**Status:** **Creative wording approved** on 25 October 2026; **focused 09C-2 adviser identity and ephemeral planning counsel implementation authorized**. 09D callbacks, committed utterance follow-through, resolution-dialog relocation and opium-delta event commentary are deferred until separately scoped. 09C-1 is implemented (reported 292 tests). Read `collection09cd-counsel-dialogues.md`, `narrative-requirements.md`, `writing/style-guide.md`, and existing cast-generation source before implementing.
 
 ## Cast ownership and personality
 
@@ -9,6 +9,11 @@ There are five **functional adviser slots**: Bombay Army adjutant, Madras Army a
 **Stable office ≠ stable personality archetype.** Each Army's domain remains fixed (western/southern/eastern interests), while campaign-generated ambition, caution, pride, ruthlessness, loyalty, vindictiveness, competence, confidence, mood and experience determine voice. Do not hardcode 'Bombay = cautious, Madras = aggressive, Bengal = prudent'. Two advisers may disagree without one being always right. The same adviser must not change traits when UI panels are re-opened; recorded events may gradually affect outlook and relationships. Fictional adviser can keep their own identity when player Commander/Director changes. If later fictional career succession is implemented, replacement inherits institutional files, **not** predecessors' private memories or first-person boasts.
 
 A stable identifier for person, distinct identifier for office and an optional office tenure link are preferred. Collection 10A will improve names and historical biographies; no new formula names or real-historical officer impersonation as part of 09C-2.
+
+
+## Approved editorial refinements
+
+The China assistant's institutional concern with opium access is fixed; greed, conscientious hesitation and bureaucratic accountability are **variable** personal positions. The campaign-generated identity must not lock them into the same comic archetype each time. Rare cross-institutional disagreements require a real evidence-based conflict of interests (for example Army versus China when a target's verified printed opium matters), not random paired opposite quotations. Ordinary actions may have no counsel; unchanged previews must not cycle. The creatively approved catalogue contains eight revised lines and additional conditional China voice candidates; gate any line that overstates supported board facts rather than inventing support.
 
 ## Preview and legal knowledge
 
@@ -51,4 +56,4 @@ Create callbacks only after committed results and guard against unsupported spec
 
 ## Creative and technical acceptance gate
 
-Before Codex implementation: human approval of exact lines and guards in `writing/collection09c-adviser-candidates.md`; factual board audit for opium quantities; inspection of existing cast and exact transaction binding. Then split implementation into minimal adviser identity/preview followed by committed advice/09D dialog relocation. Tests: campaigns/scenarios, repeat read, cancel, changed plan after success, Commander office change, old current-schema saved speaker IDs, debug separation, normal narrative-off parity, full 09A hidden-information tests, Undo/Redo. No Site deployment.
+Before Codex implementation: creative approval of the exact lines and guards in `writing/collection09c-adviser-candidates.md` is **complete**. Codex must still inspect existing cast generation and transaction binding; verified opium icon counts are a **prerequisite to enabling icon-dependent preview lines**. Implement **minimal reused adviser identity and ephemeral planning previews** now. Do **not** implement 09D committed-advice history/callbacks or resolution-dialog relocation as part of this pass. Tests: campaigns/scenarios, repeat read, cancel, changed plan after success, Commander office change, old current-schema saved speaker IDs, debug separation, normal narrative-off parity, full 09A hidden-information tests, Undo/Redo. No Site deployment.
