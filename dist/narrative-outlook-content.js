@@ -122,7 +122,7 @@ export const APPROVED_OUTLOOKS=[
   "family": "strong-defender",
   "voice": "dismissive",
   "text": "My court urges preparations. I have granted them permission to be frightened on my behalf.",
-  "blocked": "No recorded court request or grant of permission to prepare."
+  "evidenceReview": true
  },
  {
   "id": "09B-company-border-opportunist",
@@ -147,7 +147,8 @@ export const APPROVED_OUTLOOKS=[
   "family": "company-frontier",
   "voice": "mercantile",
   "text": "An open road into Company territory can carry either merchants or soldiers. I would strongly prefer to choose which.",
-  "blocked": "The unchanged 09A projection has regional opportunity counts, not proof of a particular open cross-border road."
+  "evidenceReview": true,
+  "requires": "open-company-route"
  },
  {
   "id": "09B-company-threat-anxious",
@@ -166,7 +167,7 @@ export const APPROVED_OUTLOOKS=[
   "family": "company-primary",
   "voice": "resentful",
   "text": "The Company's assurances grow firmer whenever its position grows less certain.",
-  "blocked": "No structured evidence establishes that repeated Company assurances grew firmer as its position deteriorated."
+  "evidenceReview": true
  },
  {
   "id": "09B-company-threat-pragmatic",
@@ -203,7 +204,7 @@ export const APPROVED_OUTLOOKS=[
   "family": "occupied-discontent",
   "voice": "wounded",
   "text": "They have soldiers, laws and a governor. Yet they cannot command affection. I take a modest pleasure in that.",
-  "blocked": "Company control does not establish a current garrison or a particular occupied Governor office."
+  "evidenceReview": true
  },
  {
   "id": "09B-occupation-nervous",
@@ -228,7 +229,7 @@ export const APPROVED_OUTLOOKS=[
   "family": "subject",
   "voice": "restless",
   "text": "I have bowed often enough to remember the shape of the floor. I should like to see the view from standing.",
-  "blocked": "Subordination does not establish repeated personal ceremonial bowing."
+  "evidenceReview": true
  },
  {
   "id": "09B-subject-pragmatic",
@@ -253,7 +254,7 @@ export const APPROVED_OUTLOOKS=[
   "family": "capital",
   "voice": "outraged",
   "text": "They have enjoyed the protection of my throne and now question its authority. An unfortunate understanding of gratitude.",
-  "blocked": "Allegiance and possible rebellion do not establish earlier protection or an actual challenge to authority."
+  "evidenceReview": true
  },
  {
   "id": "09B-capital-politic",
@@ -332,7 +333,7 @@ export const APPROVED_OUTLOOKS=[
   "family": "grievance",
   "voice": "ceremonial",
   "text": "I receive their officials with every courtesy. Courtesy, I am pleased to say, requires no affection.",
-  "blocked": "No recorded repeated reception of Company officials with courtesy."
+  "evidenceReview": true
  },
  {
   "id": "09B-conquest-grievance-patient",
@@ -345,7 +346,7 @@ export const APPROVED_OUTLOOKS=[
   "family": "grievance",
   "voice": "scornful",
   "text": "The Company has taken the revenues. It appears to expect gratitude as an additional tax.",
-  "blocked": "Tax demands do not establish receipt of revenues; money remains untracked."
+  "evidenceReview": true
  },
  {
   "id": "09B-qualified-gratitude-conflicted",

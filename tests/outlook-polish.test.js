@@ -17,12 +17,12 @@ export function profile(state,id,traits={},confidence=50,mood='watchful'){
 }
 const select=(context,p,k=70)=>outlookCandidates(context,p,k)[0];
 
-test('all 60 IDs and exact complete authored texts match the approved catalogue, with 48 selectable and 12 blocked',()=>{
+test('all 60 IDs and exact complete authored texts match the approved catalogue, with 56 selectable and four blocked',()=>{
  const source=fs.readFileSync(new URL('../docs/narrative/writing/collection09-outlook-polish.md',import.meta.url),'utf8');
  const rows=source.split(/\r?\n/).map(line=>line.match(/^\| `(09B-[^`]+)` \| `([^`]+)` \| ([^|]+) \| (.+) \|$/)).filter(Boolean);
  assert.equal(rows.length,60);assert.equal(APPROVED_OUTLOOKS.length,60);
  for(const [,id,,voice,text]of rows){assert.equal(entries.get(id).text,text);assert.equal(entries.get(id).voice,voice.trim());assert.equal(OUTLOOK_TEXT[id],text);}
- assert.equal(APPROVED_OUTLOOKS.filter(e=>!e.blocked).length,48);assert.equal(APPROVED_OUTLOOKS.filter(e=>e.blocked).length,12);
+ assert.equal(APPROVED_OUTLOOKS.filter(e=>!e.blocked).length,56);assert.equal(APPROVED_OUTLOOKS.filter(e=>e.blocked).length,4);
 });
 
 test('the 09A projection, forecasting and public batch update code and event-stack mechanics remain byte-for-byte unchanged',()=>{
@@ -33,7 +33,7 @@ test('the 09A projection, forecasting and public batch update code and event-sta
  assert.equal(hash(read('event-stack.js')),'b637369841c6f80c5cb366f48b6c0d7d8549e645cb6e265be3f562103333881e');
 });
 
-test('a factual family is required and blocked past actions, revenues, road and office claims are never selected',()=>{
+test('a factual family is required and the four consequential-history entries remain blocked',()=>{
  const s=outlookFixture().state,p=profile(s,'ruler-delhi'),context=forecastRegion(publicKnowledge(s),'delhi');
  for(const family of new Set(APPROVED_OUTLOOKS.map(e=>e.family))){
   const c={...context,issues:[family]};p.grievance=family==='grievance'||family==='qualified'?'owned-source':null;p.helpful=family==='qualified'?['help-1','help-2']:[];c.local={...c.local,control:p.grievance?'company':'indian'};
@@ -89,12 +89,12 @@ test('earlier saved version-1 thoughts retain exact wording and validation throu
  validate(s);const loaded=decode(encode(s)).state;assert.deepEqual(loaded,s);
  const initial=clone(loaded);rulerSummaryHTML(loaded,'delhi');profileHTML(loaded,'ruler-delhi');assert.deepEqual(loaded,initial);
  const routine=commitNarrative(loaded,resolveAction(loaded,{type:'event',manualTest:true,event:'windfall',topRegion:'delhi'}));assert.deepEqual(routine.narrative.outlooks,loaded.narrative.outlooks);
- const changed=commitNarrative(loaded,resolveAction(loaded,{type:'event',manualTest:true,event:'turmoil',topRegion:'bombay'}));assert.equal(changed.narrative.outlooks.bombay.version,2);
+ const changed=commitNarrative(loaded,resolveAction(loaded,{type:'event',manualTest:true,event:'turmoil',topRegion:'bombay'}));assert.equal(changed.narrative.outlooks.bombay.version,3);
  const u=undoFrame(changed,null,[loaded],[null],[]),saved=decode(encode(u.state,u.undo,u.progress,u.undoProgress,u.redo));assert.deepEqual(redoFrame(saved.state,saved.progress,saved.undo,saved.undoProgress,saved.redo).state,changed);
 });
 
 test('approved selected words, mood and private evidence persist exactly and unsupported wording or IDs reject import',()=>{
- const f=outlookFixture();f.shuffle();const s=f.state;assert(Object.values(s.narrative.outlooks).every(o=>o.version===2));
+ const f=outlookFixture();f.shuffle();const s=f.state;assert(Object.values(s.narrative.outlooks).every(o=>o.version===3));
  assert.deepEqual(decode(encode(s)).state,s);
  for(const mutate of [o=>o.text+=' Another thought.',o=>o.templateId='09B-strong-defender-dismissive',o=>o.personal.recentMemoryId='missing']){const bad=clone(s);mutate(bad.narrative.outlooks.delhi);assert.throws(()=>validate(bad),/Invalid private outlook/);}
  const before=clone(s);for(let i=0;i<5;i++)rulerSummaryHTML(s,'delhi');assert.deepEqual(s,before);
