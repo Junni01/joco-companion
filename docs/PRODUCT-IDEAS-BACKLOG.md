@@ -17,7 +17,7 @@
 - **DEFERRED WRITING** — approved or drafted lines are blocked by factual evidence, selection, or scene infrastructure.
 - **IMPLEMENTED** — only after checking a specific implementation report and tests; move to delivered index.
 
-**Verified documentary baseline as of this entry:** Core game/India resolver and map, event stack, save/Undo/Redo, political-memory/dialogue foundation, Company Operations UI/adviser work, 09A/09B public Shuffle-aware outlook, 09D staged action and event presentation, all 81 exact Collection 09E weather/tension/invasion scenes and automatic presentation, and Character Engine **Milestone 1** (23 existing identities, six fate labels, role/provenance histories) have implementation reports. Latest **reported** automated baseline is **418 tests** after Character M1; this register did not rerun them. **Character Milestone 2A** (family and claim schema) was handed to Codex; delivery has **not yet been confirmed here**. Site deployment is separate and has not been authorized by this inventory.
+**Verified documentary baseline as of this entry:** Core game/India resolver and map, event stack, save/Undo/Redo, political-memory/dialogue foundation, Company Operations UI/adviser work, 09A/09B public Shuffle-aware outlook, 09D staged action and event presentation, all 81 exact Collection 09E weather/tension/invasion scenes and automatic presentation, and Character Engine **Milestone 1** (23 existing identities, six fate labels, role/provenance histories) have implementation reports. Latest **reported** automated baseline is **454 tests** after Character M2A; this register did not rerun them. **Character Milestone 2A** (family and claim schema) has now been implemented and documented: **454 tests reportedly pass**, original 23 character identities preserved, with no live family generation or succession. Site deployment is separate and has not been authorized by this inventory.
 
 References: [project handoff](current-status.md), [character M1 report](narrative/character-engine-m1-implementation.md), [M2 design](narrative/character-engine-m2-design.md), [Collection 09E UX](narrative/collection09e-implementation.md), [long-game vision](narrative/long-term-simulation-vision.md).
 
@@ -25,7 +25,7 @@ References: [project handoff](current-status.md), [character M1 report](narrativ
 
 ## A. Character identities, lineages, succession and life course
 
-**A01 — Extended kinship and dynastic claims** · **IN CODEX / UNVERIFIED (M2A)**. Typed biological/adoptive parenthood, spouses/ex-spouses, guardian/ward, original existing siblings, house affiliation, legitimate claims, claim provenance and read-only family dossier. Preserve all existing 23 IDs and *do not* reinterpret an initial younger sibling as a child/heir. **Dependency:** M1 fields and save compatibility. **Source:** [M2](narrative/character-engine-m2-design.md). **Boundary:** M2A adds structure/test fixtures, **not** live marriage/birth/death generation.
+**A01 — Extended kinship and dynastic claims** · **IMPLEMENTED (M2A FOUNDATION)**. Typed biological/adoptive parenthood, spouses/ex-spouses, guardian/ward, original existing siblings, house affiliation, legitimate claims, claim provenance and read-only family dossier. Preserve all existing 23 IDs and *do not* reinterpret an initial younger sibling as a child/heir. **Dependency:** M1 fields and save compatibility. **Source:** [M2](narrative/character-engine-m2-design.md). **Delivered:** optional typed relationship edges, house affiliation, claims/provenance, read-only dossiers and synthetic fixtures; **not** live marriage/birth/death generation. [M2A implementation](narrative/character-engine-m2a-implementation.md) and [demo](narrative/character-engine-m2a-demo.md).
 
 **A02 — Automatic succession and transfer of a local regional seat** · **AGREED; M2B**. At a compatible committed narrative cause, select a valid existing successor where possible, track predecessor, save historical office transitions, preserve game sovereignty/control and update the incumbent atomically. One seat per region; no player succession minigame. **Dependency:** A01, eligible candidate rules and authored scenes. **Source:** [M2](narrative/character-engine-m2-design.md).
 
@@ -191,7 +191,7 @@ References: [project handoff](current-status.md), [character M1 report](narrativ
 
 ## Recommended dependency order (not a mandatory sprint calendar)
 
-1. Verify Codex **M2A** completion and baseline tests; then **M2B succession/regency foundation**.
+1. **M2A delivered** (454 tests reported); plan and review **M2B succession/regency foundation** before any live mortality or political character replacement.
 2. Complete evidence-based **relationship-driven imperial settlement** and **Peace/Leader** narrative, with tuned rare live triggers.
 3. In parallel, progress independent **five-stage workflow**, Bonuses & Revenue and Parliament scenes.
 4. **Collection 10A** full names and **10B** biographies/historical research, followed by stable portraits when ready.
@@ -207,6 +207,7 @@ References: [project handoff](current-status.md), [character M1 report](narrativ
 - Public known Shuffle outlook and evidence-gated selections — [09A/09B implementation](narrative/collection09-implementation.md), [evidence report](narrative/collection09-evidence-implementation.md).
 - Collection 09E 81 integrated texts and automatic scene presentation — [09E report](narrative/collection09e-implementation.md).
 - Character M1 23 persistent identities and optional six-status/history foundation — [M1 implementation](narrative/character-engine-m1-implementation.md).
+- Character M2A typed family links, dynasties and claims, with validated synthetic examples and version-2 compatibility — [M2A implementation](narrative/character-engine-m2a-implementation.md), [demo](narrative/character-engine-m2a-demo.md).
 - Collection 10 **is unimplemented** by its own documented [identity/historical colour design](narrative/collection10-identity.md); do not confuse it with the separate character lifecycle milestones.
 
 ## Review questions maintained for future design
