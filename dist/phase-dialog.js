@@ -1,6 +1,11 @@
+import {REGIONS} from './model.js';
 import {phaseFor,STORM_FACES,rollStormFace,shipInstructions} from './india-phase.js';
 import {resolveAction} from './actions.js';
 import {showDiceRoll} from './dice-animation.js';
+export function phaseRecapHTML(state,esc){
+ const events=state.history.filter(h=>h.turn===state.turn&&h.incident?.type==='event'&&h.incident.input.stackTile);
+ return events.length?`<details class="phase-recap"><summary>India Phase record</summary><ol>${events.map(h=>`<li>${esc(h.title)}${h.incident.changes.length?` · ${h.incident.changes.map(c=>esc(REGIONS[c.region].name)).join(', ')}`:''}</li>`).join('')}</ol></details>`:'';
+}
 export function openIndiaPhase({state,showDialog,apply,esc,drawEvent,blackmail}){
  const $=id=>document.getElementById(id),phase=phaseFor(state);
  const show=(title,body,actions)=>showDialog(title,body,actions);
@@ -19,7 +24,7 @@ export function openIndiaPhase({state,showDialog,apply,esc,drawEvent,blackmail})
   };
   return;
  }
- const face=STORM_FACES[phase.face],headline=`<div class="notice"><b>${esc(face.label)} · ${phase.total} event${phase.total===1?'':'s'}</b><p>${phase.completed} of ${phase.total} events resolved. The storm result is saved.</p></div>`;
+ const face=STORM_FACES[phase.face],recap=phaseRecapHTML(state,esc),headline=`<div class="notice"><b>${esc(face.label)} · ${phase.total} event${phase.total===1?'':'s'}</b><p>${phase.completed} of ${phase.total} events resolved. The storm result is saved.</p></div>${recap}`;
  if(phase.status==='ships'){
   show('Events in India · resolve storms',`${headline}<ol class="action-instructions">${shipInstructions(phase.face).map(t=>`<li>${esc(t)}</li>`).join('')}</ol><p>Handle ship dice and pieces on the table. The app does not need ship counts or individual results.</p>`, '<button id="ships-resolved" class="primary">All ship rolls resolved</button>');
   $('ships-resolved').onclick=()=>{try{$('ships-resolved').disabled=true;apply(resolveAction(state,{type:'phase-ships'}));$('dialog').close();}catch(e){$('ships-resolved').disabled=false;fail(e);}};

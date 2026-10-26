@@ -1,3 +1,4 @@
+const {finishNarrativePages}=require('./browser-narrative.cjs');
 // Synthetic isolated campaigns and explicit personality setups for technical/creative review.
 const {chromium}=require(process.env.JOCO_PLAYWRIGHT||'playwright');
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),os=require('node:os');
@@ -11,7 +12,7 @@ const base=(process.argv[2]||'http://127.0.0.1:4174/dist/').replace(/\/?$/,'/'),
  for(const [label,width,height]of [['desktop',1440,900],['tablet',1024,768]]){
   const context=await browser.newContext({viewport:{width,height},reducedMotion:'reduce'}),page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));page.setDefaultTimeout(15000);let debug=false;
   const key=()=>debug?'jc-india-debug-campaign-v1':'jc-india-campaign-v1',raw=()=>page.evaluate(k=>localStorage.getItem(k),key()),saved=async()=>JSON.parse(await raw());
-  const click=async id=>{await page.locator('#'+id).click();if(await page.locator('#dialog').isVisible())assert.equal(await page.locator('#form-error').innerText(),'');};
+  const click=async id=>{await page.locator('#'+id).click();await finishNarrativePages(page);if(await page.locator('#dialog').isVisible())assert.equal(await page.locator('#form-error').innerText(),'');};
   const choose=async(group,name)=>page.getByRole('group',{name:group,exact:true}).getByRole('button',{name,exact:true}).click();
   const load=async(state,isDebug=false)=>{debug=isDebug;const s=structuredClone(state);if(debug)s.debugMode=true;await page.goto(base+(debug?'debug.html':''));await page.waitForSelector('#operations-envoy');await page.evaluate(({key,payload})=>localStorage.setItem(key,payload),{key:key(),payload:encode(s)});await page.reload();await page.waitForSelector('#operations-envoy');};
   const setup=()=>{const s=counselState();profile(s,'army-bombay','careful');profile(s,'secretary-general','careful');profile(s,'secretary-bengal','uneasy');profile(s,'secretary-bombay','fiscal');return s;};

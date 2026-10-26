@@ -1,3 +1,4 @@
+const {finishNarrativePages}=require('./browser-narrative.cjs');
 // Optional integration check; npm test and the application remain dependency-free.
 const {chromium}=require(process.env.JOCO_PLAYWRIGHT||'playwright');
 const assert=require('node:assert/strict');
@@ -9,7 +10,7 @@ const out=process.argv[3]||path.join(os.tmpdir(),'joco-m2-browser');fs.mkdirSync
  try{
   const context=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce'}),page=await context.newPage(),errors=[],checks=[];
   page.setDefaultTimeout(15000);page.on('pageerror',e=>errors.push(e.message));
-  const click=async id=>{await page.locator('#'+id).click();if(await page.locator('#dialog').isVisible())assert.equal(await page.locator('#form-error').textContent().catch(()=>''),'');};
+  const click=async id=>{await page.locator('#'+id).click();await finishNarrativePages(page);if(await page.locator('#dialog').isVisible())assert.equal(await page.locator('#form-error').textContent().catch(()=>''),'');};
   const current=async(debug=false)=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)),debug?'jc-india-debug-campaign-v1':'jc-india-campaign-v1');
   const approved=new Map((await import('../dist/narrative-approved-content.js')).APPROVED_DIALOGUE.map(e=>[e.id,e]));
   const mark=text=>{checks.push(text);console.log('PASS',text);};

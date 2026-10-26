@@ -1,3 +1,4 @@
+import {showAnticipation,anticipationLines} from './narrative-resolution.js';
 import {IDS,REGIONS,controlLabel} from './model.js';
 import {exposedRegion} from './event-stack.js';
 import {elephantPlacement} from './map-geometry.js';
@@ -33,6 +34,10 @@ export function stackRegionHTML(state,esc){
  return `<p class="eyebrow">EXPOSED REGION · EVENT RESOLVED</p><h4 class="stack-region-name">${esc(r.name)}</h4><p class="tag">${esc(controlLabel(state,id))}</p>${miniMap([id],null,esc)}<div class="stack-region-facts"><div><span>Tower levels</span><b>${v.strength}</b></div><div><span>Unrest</span><b>${v.unrest}</b></div><div><span>Closed orders</span><b>${Object.values(v.orders).filter(x=>!x).length} / ${r.orders.length}</b></div></div><h4>Orders</h4><ul class="stack-order-list">${r.orders.map(([oid])=>`<li>${esc(orderLabel(oid))}: <b>${v.orders[oid]?'Open':'Closed'}</b></li>`).join('')}</ul><p>This is the region on top of the event stack after resolution. Its back stays visible on the main screen. The next event’s front remains hidden.</p>`;
 }
 export function showStackRegion({state,showDialog,esc}){
- showDialog('Region on top of the event stack',stackRegionHTML(state,esc),'<button id="stack-region-done" class="primary">Return to map</button>');
- document.getElementById('stack-region-done').onclick=()=>document.getElementById('dialog').close();
+ const topRegion=exposedRegion(state.eventStack),done=()=>document.getElementById('dialog').close();
+ const show=()=>{
+  showDialog('Region on top of the event stack',stackRegionHTML(state,esc),`<button id="stack-region-done" class="primary">${anticipationLines(state,topRegion).length?'Continue':'Return to map'}</button>`);
+  document.getElementById('stack-region-done').onclick=()=>showAnticipation({state,topRegion,position:positionLabel(state.elephant),showDialog,onBack:show,onDone:done});
+ };
+ show();
 }

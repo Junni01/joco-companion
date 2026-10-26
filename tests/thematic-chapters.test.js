@@ -107,7 +107,7 @@ test('chapters render and export saved words/evidence without state changes or u
 
 test('08A ordinary scenes and independent narrative RNG remain exactly equal to the committed 08A review baseline',()=>{
  const previous=JSON.parse(fs.readFileSync(new URL('../docs/narrative/review/collection08a/hostile-military.json',import.meta.url),'utf8')).state;
- const events=s=>s.history.filter(h=>!['next-turn','end-game'].includes(h.actionType)).map(h=>h.narrative);
+ const events=s=>s.history.filter(h=>!['next-turn','end-game'].includes(h.actionType)).map(h=>{const scene=structuredClone(h.narrative);if(scene)delete scene.anticipation;return scene;}); // 09D-2 adds private presentation metadata; every existing scene word/selection stays exact.
  assert.deepEqual(events(trade.state),events(previous));assert.equal(trade.state.narrative.rng,previous.narrative.rng);
 });
 

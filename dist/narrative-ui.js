@@ -1,3 +1,4 @@
+import {archivedAnticipationHTML} from './narrative-resolution.js';
 import {adviceRecordsHTML} from './narrative-advice-ui.js';
 import {chapterEvidenceHTML} from './narrative-chapter-ui.js';
 import {politicalProfileHTML,politicalExportHTML,dialogueEvidenceHTML} from './narrative-memory-ui.js';
@@ -15,7 +16,7 @@ export function sceneHTML(scene,{intensity='full',archive=false,statements={}}={
 export function latestSceneHTML(state){
  if(!state.narrative)return '';
  const scene=state.history.findLast(h=>h.narrative)?.narrative;
- return `<article class="paper-card"><div class="card-heading"><h3>Campaign voices</h3><button id="open-roster">Characters & chapters</button></div><p class="small-note">Fiction follows the recorded game. Complete every physical instruction first.</p><div class="choice-buttons" role="group" aria-label="Narrative display">${['quiet','standard','full'].map(mode=>`<button data-narrative-mode="${mode}" aria-pressed="${state.narrative.intensity===mode}">${label(mode)}</button>`).join('')}</div>${scene?sceneHTML(scene,{intensity:state.narrative.intensity,statements:state.narrative.statements}):'<p>Your fictional cast is ready. Recorded events will appear here.</p>'}</article>`;
+ return `<article class="paper-card"><div class="card-heading"><h3>Campaign voices</h3><button id="open-roster">Characters & chapters</button></div><p class="small-note">Fiction follows the recorded game. Complete every physical instruction first.</p><div class="choice-buttons" role="group" aria-label="Narrative display">${['quiet','standard','full'].map(mode=>`<button data-narrative-mode="${mode}" aria-pressed="${state.narrative.intensity===mode}">${label(mode)}</button>`).join('')}</div>${scene?`<details class="last-saved-scene"><summary>Read the last saved scene</summary>${sceneHTML(scene,{intensity:state.narrative.intensity,statements:state.narrative.statements})}${archivedAnticipationHTML(state.history.findLast(h=>h.narrative))}</details>`:'<p>Your fictional cast is ready. Recorded events will appear here.</p>'}</article>`;
 }
 export function rulerSummaryHTML(state,region){
  const n=state.narrative;if(!n)return '';const c=n.characters[n.seats[region]];

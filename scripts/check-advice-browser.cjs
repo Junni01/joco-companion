@@ -1,3 +1,4 @@
+const {finishNarrativePages}=require('./browser-narrative.cjs');
 // Isolated synthetic campaigns; reported physical checks are explicitly test inputs.
 const {chromium}=require(process.env.JOCO_PLAYWRIGHT||'playwright');
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),os=require('node:os');
@@ -8,7 +9,7 @@ const base=(process.argv[2]||'http://127.0.0.1:4174/dist/').replace(/\/?$/,'/'),
  try{for(const [label,width,height]of [['desktop',1440,900],['tablet',1024,768]]){
  const context=await browser.newContext({viewport:{width,height},reducedMotion:'reduce',acceptDownloads:true}),page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));page.setDefaultTimeout(15000);let debug=false;
  const key=()=>debug?'jc-india-debug-campaign-v1':'jc-india-campaign-v1',raw=()=>page.evaluate(k=>localStorage.getItem(k),key()),saved=async()=>JSON.parse(await raw()),rows=s=>Object.values(s.narrative.statements).filter(r=>r.type==='advice');
- const click=async id=>{await page.locator('#'+id).click();if(await page.locator('#dialog').isVisible())assert.equal(await page.locator('#form-error').innerText(),'');};
+ const click=async id=>{await page.locator('#'+id).click();await finishNarrativePages(page);if(await page.locator('#dialog').isVisible())assert.equal(await page.locator('#form-error').innerText(),'');};
  const observe=async()=>{for(const q of await page.locator('[data-counsel-speaker]').all()){await q.scrollIntoViewIfNeeded();await page.waitForTimeout(60);}assert.equal(await page.locator('#ack-planning-advice').count(),0);};
  const choose=async(group,name)=>page.getByRole('group',{name:group,exact:true}).getByRole('button',{name,exact:true}).click();
  const load=async(s,d=false)=>{debug=d;s=structuredClone(s);if(d)s.debugMode=true;await page.goto(base+(d?'debug.html':''));await page.waitForSelector('#operations-envoy');await page.evaluate(({key,payload})=>localStorage.setItem(key,payload),{key:key(),payload:encode(s)});await page.reload();await page.waitForSelector('#operations-envoy');};
@@ -29,7 +30,7 @@ const base=(process.argv[2]||'http://127.0.0.1:4174/dist/').replace(/\/?$/,'/'),
  await page.reload();await page.waitForSelector('#operations-envoy');assert.deepEqual((await saved()).state,after);
  if(outcome==='Success'){
  await click('save-menu');await click('snapshot');const downloadPromise=page.waitForEvent('download');await click('export');const file=path.join(out,`synthetic-advice-${label}.json`);await (await downloadPromise).saveAs(file);const chroniclePromise=page.waitForEvent('download');await click('menu-export-chronicle');const html=path.join(out,`synthetic-advice-${label}.html`);await (await chroniclePromise).saveAs(html);assert(fs.readFileSync(html,'utf8').includes(r.templateId));await click('close-dialog');await load(setup());await click('save-menu');await page.locator('#file').setInputFiles(file);await click('confirm-choice');assert.deepEqual((await saved()).state,after);await load(setup());await click('save-menu');await page.locator('[data-load="0"]').click();await click('confirm-choice');assert.deepEqual((await saved()).state,after);
- await page.locator('.committed-advice > details > summary').first().click();await page.locator('.committed-advice').first().screenshot({path:path.join(out,`committed-advice-${label}.png`)});
+ await page.locator('.last-saved-scene > summary').click();await page.locator('.committed-advice > details > summary').first().click();await page.locator('.committed-advice').first().screenshot({path:path.join(out,`committed-advice-${label}.png`)});
  }await fit();}
  mark('Envoy original Indian advice survives post-check China revision, JSON import/export, snapshot restore and readable chronicle; failure establishes no ignored choice or fictional commerce');
  for(const failure of [false,true]){await load(setup());await page.locator('[data-tab="register"]').click();await page.locator('[data-select="bombay"]').click();await click('region-governor-action');await click('governor-plan');await observe();await click('governor-return');await click(failure?'governor-administer':'governor-tax');await click('review-action');while(await page.locator('#continue-resolution-step').count())await click('continue-resolution-step');await click('confirm-action');const r=rows((await saved()).state)[0];assert.equal(r.followedStatus,failure?'no-choice-on-failure':'followed');assert(r.responseLineId);await fit();}

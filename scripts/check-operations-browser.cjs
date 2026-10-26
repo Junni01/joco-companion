@@ -1,3 +1,4 @@
+const {finishNarrativePages}=require('./browser-narrative.cjs');
 // Isolated synthetic UI checks. No user campaign or hosted Site is touched.
 const {chromium}=require(process.env.JOCO_PLAYWRIGHT||'playwright');
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),os=require('node:os');
@@ -15,7 +16,7 @@ const base=(process.argv[2]||'http://127.0.0.1:4174/dist/').replace(/\/?$/,'/'),
   const key=()=>debug?'jc-india-debug-campaign-v1':'jc-india-campaign-v1';
   const raw=()=>page.evaluate(k=>localStorage.getItem(k),key());
   const saved=async()=>JSON.parse(await raw());
-  const click=async id=>{await page.locator('#'+id).click();if(await page.locator('#dialog').isVisible())assert.equal(await page.locator('#form-error').innerText(),'');};
+  const click=async id=>{await page.locator('#'+id).click();await finishNarrativePages(page);if(await page.locator('#dialog').isVisible())assert.equal(await page.locator('#form-error').innerText(),'');};
   const choose=async(group,name)=>page.getByRole('group',{name:group,exact:true}).getByRole('button',{name,exact:true}).click();
   const fixture=(narrative=false)=>{const s=initialState();s.eventStack=createEventStack(a=>{a[0]=0;return a;});if(narrative)s.narrative=createNarrative(s);return s;};
   const load=async(s,isDebug=false)=>{debug=isDebug;if(isDebug)s.debugMode=true;await page.goto(base+(debug?'debug.html':''));await page.waitForSelector('#operations-envoy');await page.evaluate(({k,v})=>localStorage.setItem(k,v),{k:key(),v:encode(s)});await page.reload();await page.waitForSelector('#operations-envoy');};

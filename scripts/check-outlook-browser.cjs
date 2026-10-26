@@ -1,3 +1,4 @@
+const {finishNarrativePages}=require('./browser-narrative.cjs');
 const {chromium}=require(process.env.JOCO_PLAYWRIGHT||'playwright');
 const fs=require('node:fs'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict');
 const base=process.argv[2]||'http://127.0.0.1:4174/dist/',out=process.argv[3]||path.join(os.tmpdir(),'outlook-browser');fs.mkdirSync(out,{recursive:true});
@@ -7,7 +8,7 @@ const base=process.argv[2]||'http://127.0.0.1:4174/dist/',out=process.argv[3]||p
  const browser=await chromium.launch({headless:true,executablePath:process.env.JOCO_BROWSER_EXECUTABLE});
  try{
   const ctx=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce'}),page=await ctx.newPage(),errors=[],checks=[];page.on('pageerror',e=>errors.push(e.message));page.setDefaultTimeout(15000);
-  const click=async id=>{await page.locator('#'+id).click();if(await page.locator('#dialog').isVisible())assert.equal(await page.locator('#form-error').innerText(),'');};
+  const click=async id=>{await page.locator('#'+id).click();await finishNarrativePages(page);if(await page.locator('#dialog').isVisible())assert.equal(await page.locator('#form-error').innerText(),'');};
   const saved=()=>page.evaluate(()=>JSON.parse(localStorage.getItem('jc-india-campaign-v1')));
   const mark=s=>{checks.push(s);console.log('PASS',s);};
   await page.goto(base);await page.locator('#save-status').filter({hasText:'Saved in this browser'}).waitFor();await click('save-menu');await page.locator('#file').setInputFiles(file);await click('confirm-choice');

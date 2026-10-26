@@ -1,3 +1,4 @@
+const {finishNarrativePages}=require('./browser-narrative.cjs');
 // Optional isolated browser check; the application has no Playwright dependency.
 const {chromium}=require(process.env.JOCO_PLAYWRIGHT||'playwright');
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
@@ -7,7 +8,7 @@ const review=path.resolve(__dirname,'../docs/narrative/review/collection08a');
  const browser=await chromium.launch({headless:true,...(process.env.JOCO_BROWSER_EXECUTABLE?{executablePath:process.env.JOCO_BROWSER_EXECUTABLE}:{})});
  try{
   const context=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce'}),page=await context.newPage(),errors=[],checks=[];page.setDefaultTimeout(15000);page.on('pageerror',e=>errors.push(e.message));
-  const click=async id=>{await page.locator('#'+id).click();if(await page.locator('#dialog').isVisible())assert.equal(await page.locator('#form-error').textContent(),'');};
+  const click=async id=>{await page.locator('#'+id).click();await finishNarrativePages(page);if(await page.locator('#dialog').isVisible())assert.equal(await page.locator('#form-error').textContent(),'');};
   const saved=()=>page.evaluate(()=>JSON.parse(localStorage.getItem('jc-india-campaign-v1')));
   const load=async name=>{await click('save-menu');await page.locator('#file').setInputFiles(path.join(review,name));await click('confirm-choice');await page.locator('#dialog').waitFor({state:'hidden'});};
   const select=async()=>{await page.locator('[data-tab="register"]').click();await page.locator('[data-select="bombay"]').click();};
