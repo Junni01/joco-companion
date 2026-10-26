@@ -1,3 +1,4 @@
+import {familyOrigins} from './narrative-family.js';
 export function evidenceIndex(state){
  const incidents=new Map(),facts=new Map(),lines=new Map();
  state.history.forEach((h,order)=>{
@@ -8,7 +9,7 @@ export function evidenceIndex(state){
 export function factRef(entry,index){return {incidentId:entry.incident.id,factKey:`fact-${index}`};}
 export function resolveFact(index,ref){return index.facts.get(`${ref.incidentId}/${ref.factKey}`);}
 export function incidentReferences(state,id){
- const n=state.narrative;if(!n)return [];const found=[];
+ const n=state.narrative;if(!n)return [];const found=[];for(const ref of familyOrigins(state))if(ref.origin.source.incidentId===id)found.push(ref.label);
  for(const c of Object.values(n.characters))for(const rows of [c.conditionHistory||[],c.politicalHistory||[]])for(const t of rows)if(t.source.incidentId===id)found.push(`Character status/role history (${c.name})`);
  if(n.weather?.sourceIncidentId===id)found.push('Current weather presentation');
  for(const m of Object.values(n.memories||{}))if(m.evidence.some(r=>r.incidentId===id))found.push(`Memory ${m.id} (${n.characters[m.ownerId]?.name||m.ownerId})`);
