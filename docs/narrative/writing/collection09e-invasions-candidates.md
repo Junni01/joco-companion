@@ -1,6 +1,6 @@
 # Collection 09E — Invasion announcements and force-scale dialogue
 
-**26 October 2026 · 36 candidate scenes · Creative review only; not production-approved or integrated**
+**26 October 2026 · 36 candidate scenes · Creative writing approved by user on 26 October 2026; not yet integrated**
 
 ## Contract and selection boundary
 
@@ -252,4 +252,4 @@ Only one announcement scene per attack set and one appraisal per target, with va
 5. **Knowability & timing:** Announce only actual target regions after the target determination; never all future per-region rolls. Do not show a scale line on the announcement page before that target's saved roll. Do not assert defeat, conquest, settlement, peace or survival until the respective report commits.
 6. **Long-term history:** A French foothold and recurring commander only become plausible **after an actual compatible successful outcome and the explicit later VIP design**. These threat-stage lines do not create French occupation, a garrison, new control, a rebel ruler or another future guarantee.
 7. **Pacing:** Announcements and assessments may be adjacent and must feel distinct; choose a single short scale reaction per target and use different speaker rhythms for multiple-target attacks. No additional mandatory click solely to read prose: place a separate read-only scene within the existing protected narrative dialog architecture.
-8. **Review status:** These entries are **candidates**. User may approve the style and text independently from implementation authorization. Do not silently turn them into production speech or rewrite previously accepted quotations.
+8. **Review status:** These entries are **creatively approved**, but integration and code changes need a separate authorized Codex task. Do not silently turn them into production speech or rewrite previously accepted quotations.
