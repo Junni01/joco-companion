@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-26",
+  "baseline": "16538d6",
+  "implementationCommits": [
+    "2732214",
+    "450a8a2"
+  ],
+  "automated": {
+    "command": "npm test",
+    "baselineTests": 339,
+    "tests": 350,
+    "passed": 350,
+    "failed": 0
+  },
+  "dedicatedBrowserSuite": {
+    "checks": [
+      "desktop: regular/debug Normal/Narrative Deploy success, failure, catastrophe; exact full saved scenes; pure Back navigation; persisted Undo/Redo",
+      "desktop: Envoy changed post-success effect/failure and supported Governor Tax/failure, original 09D-1 records and immediate exact reactions",
+      "desktop: consecutive real Peace and Windfall draws; separate Elephant instructions/top-stack/private anticipation; protected reload, recap, export/import and collapsed map archive",
+      "desktop: debug event scene/anticipation and Normal event mechanics parity without an empty story step",
+      "tablet: regular/debug Normal/Narrative Deploy success, failure, catastrophe; exact full saved scenes; pure Back navigation; persisted Undo/Redo",
+      "tablet: Envoy changed post-success effect/failure and supported Governor Tax/failure, original 09D-1 records and immediate exact reactions",
+      "tablet: consecutive real Peace and Windfall draws; separate Elephant instructions/top-stack/private anticipation; protected reload, recap, export/import and collapsed map archive",
+      "tablet: debug event scene/anticipation and Normal event mechanics parity without an empty story step"
+    ],
+    "errors": [],
+    "browser": "156.0.8078.47",
+    "viewports": [
+      "1440x900",
+      "1024x768"
+    ]
+  },
+  "existingBrowserSuitesPassed": [
+    "check-advice-browser.cjs",
+    "check-counsel-browser.cjs",
+    "check-operations-browser.cjs",
+    "check-m2-browser.cjs",
+    "check-outlook-browser.cjs",
+    "check-trade-browser.cjs"
+  ],
+  "additionalExistingViewports": [
+    "1440x1000",
+    "390x844"
+  ],
+  "hostedSiteDeployed": false,
+  "creativeAcceptance": "Pending user/ChatGPT review",
+  "futurePhaseChangesImplemented": false
+}

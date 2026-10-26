@@ -65,7 +65,7 @@ End-of-turn chapters now select one or two evidence-backed threads instead of en
 
 ## Collection 09A/09B political outlooks
 
-The selected region now shows a saved private ruler assessment grounded in public circumstances and personal experience. Known Shuffle batches inform outlooks without exposing hidden fronts or order. See [implementation and limits](docs/narrative/collection09-implementation.md) and the [small creative-review demonstration](docs/narrative/collection09-demo.md). The [approved writing polish](docs/narrative/collection09-polish-implementation.md) provides personality variants; the [final evidence review](docs/narrative/collection09-evidence-implementation.md) enables 56 of 60 entries, including one specific-road condition, with four consequential-fact deferrals; see the [small integration review](docs/narrative/collection09-polish-demo.md). Company planning counsel and committed outcome integration are described below; resolution-dialog relocation remains deferred.
+The selected region now shows a saved private ruler assessment grounded in public circumstances and personal experience. Known Shuffle batches inform outlooks without exposing hidden fronts or order. See [implementation and limits](docs/narrative/collection09-implementation.md) and the [small creative-review demonstration](docs/narrative/collection09-demo.md). The [approved writing polish](docs/narrative/collection09-polish-implementation.md) provides personality variants; the [final evidence review](docs/narrative/collection09-evidence-implementation.md) enables 56 of 60 entries, including one specific-road condition, with four consequential-fact deferrals; see the [small integration review](docs/narrative/collection09-polish-demo.md). Company planning counsel and committed outcome integration are described below; 09D-2 dialog delivery is described below.
 
 ## Saves and hosting
 
@@ -93,4 +93,11 @@ See the [implementation report](docs/narrative/collection09c2-implementation.md)
 
 Exact displayed planning words and compatible immediate reactions now save with the actual committed action. Actual pre-result rendering records when the adviser offered counsel without adding a reading acknowledgement; cancellation leaves no history. Envoy success remains legally revisable, while failure creates no ignored-choice claim. Standard scenes stay brief, with expandable original advice and dossier/chronicle evidence.
 
-See the [implementation and withheld-effect limits](docs/narrative/collection09d1-implementation.md), [small creative-review demonstration](docs/narrative/collection09d1-demo.md) and [verification](docs/narrative/collection09d1-verification.json). 09D-2 relocation and 09D-3 recurring callbacks/rivalries remain deferred. No hosted Site deployment.
+See the [implementation and withheld-effect limits](docs/narrative/collection09d1-implementation.md), [small creative-review demonstration](docs/narrative/collection09d1-demo.md) and [verification](docs/narrative/collection09d1-verification.json). 09D-2 delivery is described below; 09D-3 recurring callbacks/rivalries remain deferred. No hosted Site deployment.
+
+
+## Collection 09D-2 narrative action dialogs
+
+Physical instructions retain their existing commit/report sequence. Narrative mode then shows one complete saved scene in the action dialog, with read-only navigation back to instructions. Normal/quiet mode adds no story step. India events retain separate Elephant/public-stack stages and private outlook anticipation; the complete record remains accessible without replaying the last scene on the map.
+
+See the [implementation and writing gaps](docs/narrative/collection09d2-implementation.md), [small application demonstration](docs/narrative/collection09d2-demo.md) and [future-phase engineering assessment only](docs/narrative/collection09d2-phase-assessment.md). No new Revenue/shareholder/Parliament workflow, 09D-3, portraits or hosted Site deployment.
