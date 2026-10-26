@@ -49,6 +49,7 @@ export function anticipationLines(state,topRegion){
  });
 }
 export function showAnticipation({state,topRegion,position,showDialog,onBack,onDone}){
+ if(!active(state)){onDone();return;}
  const lines=state.history.at(-1)?.narrative?.anticipation?.thoughts||anticipationLines(state,topRegion);if(!lines.length){onDone();return;}
  showDialog('Across India',`<p class="anticipation-context">Elephant: ${esc(position)}<br>Visible stack region: ${esc(topRegion?REGIONS[topRegion].name:'None')}</p>${actionSceneHTML(lines)}`,'<button id="anticipation-instructions">View exposed region</button><button id="anticipation-done" class="primary">Return to map</button>');
  document.getElementById('anticipation-instructions').onclick=onBack;document.getElementById('anticipation-done').onclick=onDone;

@@ -7,7 +7,7 @@ import {openDeployment} from '../dist/deploy.js';
 import {openGameActions} from '../dist/action-dialogs.js';
 import {EVENT_TILES,drawRequest,pendingEvent} from '../dist/event-stack.js';
 import {loadActionProgress} from '../dist/action-progress.js';
-import {showActionStory,actionSceneLines,actionSceneHTML,anticipationLines,actionResultTitle} from '../dist/narrative-resolution.js';
+import {showActionStory,showAnticipation,actionSceneLines,actionSceneHTML,anticipationLines,actionResultTitle} from '../dist/narrative-resolution.js';
 import {readableChronicle} from '../dist/chronicle.js';
 import {phaseRecapHTML} from '../dist/phase-dialog.js';
 function harness(initial){
@@ -33,7 +33,7 @@ for(const event of ['turmoil','windfall','peace','leader','shuffle'])test(`actua
  const hidden=clone(h.state);hidden.eventStack.draw=[hidden.eventStack.draw[0],...hidden.eventStack.draw.slice(1).reverse()];assert.deepEqual(anticipationLines(hidden,h.state.eventStack.draw[0].split('-')[0]),anticipationLines(h.state,h.state.eventStack.draw[0].split('-')[0]));
 });
 test('quiet mode, old current-schema save and unavailable scenes add no empty narrative page',()=>{
- const s=campaign();s.narrative.intensity='quiet';let r=resolveDeployment(s,{army:'bombay',target:'delhi',regiments:6,officers:0,alliances:[],outcome:'success',losses:0});r.state=commitNarrative(s,r);assert.deepEqual(actionSceneLines(r),[]);const h=harness(s);let done=0;showActionStory({result:r,showDialog:h.showDialog,onDone:()=>done++});assert.equal(done,1);assert.equal(h.pages.length,0);
+ const s=campaign();s.narrative.intensity='quiet';let r=resolveDeployment(s,{army:'bombay',target:'delhi',regiments:6,officers:0,alliances:[],outcome:'success',losses:0});r.state=commitNarrative(s,r);assert.deepEqual(actionSceneLines(r),[]);const h=harness(s);let done=0;showActionStory({result:r,showDialog:h.showDialog,onDone:()=>done++});assert.equal(done,1);assert.equal(h.pages.length,0);showAnticipation({state:s,topRegion:'delhi',position:'Delhi',showDialog:h.showDialog,onBack:()=>assert.fail('quiet back'),onDone:()=>done++});assert.equal(done,2);assert.equal(h.pages.length,0);
  const no=campaign(false);r=resolveDeployment(no,{army:'bombay',target:'delhi',regiments:6,officers:0,alliances:[],outcome:'success',losses:0});assert.equal(decode(encode(r.state)).state.narrative,undefined);assert.deepEqual(actionSceneLines(r),[]);
 });
 test('full scene has stable identity hooks, escaping and no per-line controls or fact-coverage requirements',()=>{
