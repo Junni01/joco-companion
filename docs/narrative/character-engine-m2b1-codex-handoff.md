@@ -56,3 +56,8 @@ Given a deliberate **test fixture authorization** and a real or explicit synthet
 No live natural death or mortality probabilities; no automatic death on New Turn; no marriage or child generation; no creation of unknown replacement NPCs in production; no implicit elder sibling inheritance; no relationship-driven Indian conquest depose/execute/puppet outcomes yet; no Company appointments yet; no emperor veto changing vassal status; no foreign invasion/French VIP logic; no exiled or presumed-dead returns; no impostors; no new historical prose; no runtime game-affecting choice of successors.
 
 **After this delivery:** Review M2B-1 tests and sample candidate rankings/edge cases, then separately specify and approve M2B-2 real triggers, frequencies, fallback-new-ruler policy and exact narrative writing. The absence of an eligible heir is *not* license to invent a production ruler in this milestone.
+
+
+## Delivery status — 26 October 2026
+
+Controlled M2B-1 foundation is implemented: [contract and compatibility](character-engine-m2b1-implementation.md), [synthetic demonstrations](character-engine-m2b1-demo.md), [verification](character-engine-m2b1-verification.json). No live trigger or M2B-2 implementation is authorized by this status note.

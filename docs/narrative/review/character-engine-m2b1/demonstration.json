@@ -1,0 +1,324 @@
+{
+  "label": "SYNTHETIC TEST OUTPUT ONLY — not approved literary prose or live gameplay",
+  "defaultDecision": "ambiguous",
+  "assessments": [
+    {
+      "characterId": "demo-adopted",
+      "claimId": "adopted-claim",
+      "eligible": false,
+      "reasons": [
+        "no-eligible-regent"
+      ],
+      "regents": []
+    },
+    {
+      "characterId": "demo-child",
+      "claimId": "child-claim",
+      "eligible": true,
+      "reasons": [],
+      "regents": [
+        "demo-widow"
+      ]
+    },
+    {
+      "characterId": "demo-daughter",
+      "claimId": "daughter-claim",
+      "eligible": true,
+      "reasons": [],
+      "regents": []
+    },
+    {
+      "characterId": "demo-founder",
+      "claimId": "founder-claim",
+      "eligible": false,
+      "reasons": [
+        "unavailable-dead"
+      ],
+      "regents": []
+    },
+    {
+      "characterId": "demo-rival",
+      "claimId": "rival-claim",
+      "eligible": true,
+      "reasons": [],
+      "regents": []
+    },
+    {
+      "characterId": "demo-son",
+      "claimId": "son-claim",
+      "eligible": true,
+      "reasons": [],
+      "regents": []
+    },
+    {
+      "characterId": "demo-widow",
+      "claimId": "widow-claim",
+      "eligible": true,
+      "reasons": [],
+      "regents": []
+    },
+    {
+      "characterId": "ruler-delhi",
+      "claimId": "incumbent-claim",
+      "eligible": false,
+      "reasons": [
+        "current-incumbent",
+        "claim-not-active"
+      ],
+      "regents": []
+    }
+  ],
+  "adult": {
+    "region": "delhi",
+    "before": "ruler-delhi",
+    "after": "demo-son",
+    "exit": "abdication",
+    "claimId": "son-claim",
+    "regentId": null,
+    "policy": {
+      "adultAge": 18,
+      "allowMinors": true,
+      "allowDormant": false,
+      "standings": [
+        "recognised"
+      ],
+      "bases": [
+        "designation",
+        "parentage",
+        "adoption",
+        "marriage-derived",
+        "previous-rulership",
+        "witnessed-authority"
+      ],
+      "basisPriority": [
+        "designation"
+      ],
+      "regentBases": [
+        "guardian"
+      ],
+      "appointments": []
+    },
+    "evidence": [
+      {
+        "kind": "claim",
+        "id": "son-claim",
+        "origin": {
+          "turn": 1,
+          "source": {
+            "incidentId": "incident-2",
+            "actionType": "event"
+          },
+          "reason": "Explicit synthetic fixture record; not caused by Windfall."
+        }
+      },
+      {
+        "kind": "regional-state",
+        "region": "delhi",
+        "politicalKind": "sovereign-ruler",
+        "control": "indian",
+        "overlord": null
+      }
+    ],
+    "source": {
+      "turn": 1,
+      "source": {
+        "incidentId": "incident-3",
+        "actionType": "test-succession"
+      },
+      "reason": "Synthetic test: Controlled M2B-1 fixture, not a production event"
+    },
+    "boardUnchanged": true,
+    "peopleUnchanged": true
+  },
+  "disputed": {
+    "region": "delhi",
+    "before": "ruler-delhi",
+    "after": "demo-daughter",
+    "exit": "abdication",
+    "claimId": "daughter-claim",
+    "regentId": null,
+    "policy": {
+      "adultAge": 18,
+      "allowMinors": true,
+      "allowDormant": true,
+      "standings": [
+        "recognised",
+        "contested"
+      ],
+      "bases": [
+        "designation",
+        "parentage",
+        "adoption",
+        "marriage-derived",
+        "previous-rulership",
+        "witnessed-authority"
+      ],
+      "basisPriority": [],
+      "regentBases": [
+        "guardian"
+      ],
+      "appointments": []
+    },
+    "evidence": [
+      {
+        "kind": "claim",
+        "id": "daughter-claim",
+        "origin": {
+          "turn": 1,
+          "source": {
+            "incidentId": "incident-2",
+            "actionType": "event"
+          },
+          "reason": "Explicit synthetic fixture record; not caused by Windfall."
+        }
+      },
+      {
+        "kind": "family-link",
+        "id": "father-daughter",
+        "origin": {
+          "turn": 1,
+          "source": {
+            "setup": true
+          },
+          "reason": "Explicit synthetic fixture record; not caused by Windfall."
+        }
+      },
+      {
+        "kind": "regional-state",
+        "region": "delhi",
+        "politicalKind": "sovereign-ruler",
+        "control": "indian",
+        "overlord": null
+      }
+    ],
+    "source": {
+      "turn": 1,
+      "source": {
+        "incidentId": "incident-3",
+        "actionType": "test-succession"
+      },
+      "reason": "Synthetic test: Controlled M2B-1 fixture, not a production event"
+    },
+    "boardUnchanged": true,
+    "peopleUnchanged": true
+  },
+  "child": {
+    "region": "delhi",
+    "before": "ruler-delhi",
+    "after": "demo-child",
+    "exit": "confirmed-death",
+    "claimId": "child-claim",
+    "regentId": "demo-widow",
+    "policy": {
+      "adultAge": 18,
+      "allowMinors": true,
+      "allowDormant": false,
+      "standings": [
+        "recognised"
+      ],
+      "bases": [
+        "designation",
+        "parentage",
+        "adoption",
+        "marriage-derived",
+        "previous-rulership",
+        "witnessed-authority"
+      ],
+      "basisPriority": [
+        "designation"
+      ],
+      "regentBases": [
+        "guardian"
+      ],
+      "appointments": []
+    },
+    "evidence": [
+      {
+        "kind": "claim",
+        "id": "child-claim",
+        "origin": {
+          "turn": 1,
+          "source": {
+            "incidentId": "incident-2",
+            "actionType": "event"
+          },
+          "reason": "Explicit synthetic fixture record; not caused by Windfall."
+        }
+      },
+      {
+        "kind": "family-link",
+        "id": "father-child",
+        "origin": {
+          "turn": 1,
+          "source": {
+            "setup": true
+          },
+          "reason": "Explicit synthetic fixture record; not caused by Windfall."
+        }
+      },
+      {
+        "kind": "regional-state",
+        "region": "delhi",
+        "politicalKind": "sovereign-ruler",
+        "control": "indian",
+        "overlord": null
+      },
+      {
+        "kind": "family-link",
+        "id": "guardian",
+        "origin": {
+          "turn": 1,
+          "source": {
+            "incidentId": "incident-2",
+            "actionType": "event"
+          },
+          "reason": "Explicit synthetic fixture record; not caused by Windfall."
+        }
+      }
+    ],
+    "source": {
+      "turn": 1,
+      "source": {
+        "incidentId": "incident-3",
+        "actionType": "test-succession"
+      },
+      "reason": "Synthetic test: Controlled M2B-1 fixture, not a production event"
+    },
+    "boardUnchanged": true,
+    "peopleUnchanged": true
+  },
+  "regencyEnd": {
+    "ageAtStart": 12,
+    "ageWhenReady": 18,
+    "stillActiveAfterNewTurn": true,
+    "end": {
+      "turn": 3,
+      "source": {
+        "incidentId": "incident-6",
+        "actionType": "test-regency-end"
+      },
+      "reason": "Synthetic test: Controlled M2B-1 fixture, not a production event"
+    }
+  },
+  "variants": [
+    {
+      "kind": "vassal-ruler",
+      "region": "bombay",
+      "politicalKind": "vassal-ruler",
+      "overlord": "delhi",
+      "control": "indian"
+    },
+    {
+      "kind": "company-dependent-ruler",
+      "region": "bombay",
+      "politicalKind": "company-dependent-ruler",
+      "overlord": null,
+      "control": "company"
+    }
+  ],
+  "noCandidate": {
+    "rejected": "Controlled succession rejected: no-qualified-candidate",
+    "stateUnchanged": true,
+    "people": 23
+  }
+}

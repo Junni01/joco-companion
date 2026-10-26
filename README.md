@@ -123,3 +123,8 @@ The original 23 identities now support six public life statuses and separate opt
 ## Character Engine Milestone 2A — Families and Claims
 
 Optional typed family links, house affiliations and structured claims extend the existing engine. Dossiers show known relationships and claim provenance; existing sibling identities and saved games remain unchanged. No family generation or automatic succession. See the [implementation/compatibility report](docs/narrative/character-engine-m2a-implementation.md) and [small existing/synthetic family demonstration](docs/narrative/character-engine-m2a-demo.md). No hosted Site deployment.
+
+
+## Character Engine M2B-1 — controlled test succession
+
+Deterministic evidence-based selection and atomic test-only succession now support separate child titular rulers/adult regents, with saved policy and provenance. Normal play generates no succession or fates; 23 original actors and version-2 saves remain unchanged. See the [contract/limits](docs/narrative/character-engine-m2b1-implementation.md), [small demonstrations](docs/narrative/character-engine-m2b1-demo.md) and `node scripts/demo-succession.mjs`. No hosted Site deployment.

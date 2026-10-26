@@ -1,0 +1,26 @@
+{
+  "checks": [
+    "desktop: regular/debug standard/quiet adult/child/ended/company/vassal synthetic succession; exact real-frame Undo/Redo, reload/JSON/snapshot, separate regent, former private archive, protected invasion resume; ordinary actual conquest creates no succession; Normal unchanged",
+    "tablet: regular/debug standard/quiet adult/child/ended/company/vassal synthetic succession; exact real-frame Undo/Redo, reload/JSON/snapshot, separate regent, former private archive, protected invasion resume; ordinary actual conquest creates no succession; Normal unchanged"
+  ],
+  "errors": [],
+  "browser": "156.0.8078.47",
+  "viewports": [
+    "1440x900",
+    "1024x768"
+  ],
+  "automated": {
+    "passed": 488,
+    "failed": 0,
+    "newSuccessionTests": 34
+  },
+  "baseline": "1ff281c",
+  "regressions": [
+    "check-09e-browser.cjs",
+    "check-family-browser.cjs",
+    "check-counsel-browser.cjs",
+    "check-resolution-browser.cjs"
+  ],
+  "migration": "None: optional version-2 successionRecords/regencies; original legacy character categories retained; no backfill.",
+  "productionTriggers": false
+}
