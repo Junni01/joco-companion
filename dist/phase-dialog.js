@@ -1,3 +1,4 @@
+import {narrativeWeather,weatherConcealed,countPending} from './weather-presentation.js';
 import {REGIONS} from './model.js';
 import {phaseFor,STORM_FACES,rollStormFace,shipInstructions} from './india-phase.js';
 import {resolveAction} from './actions.js';
@@ -6,15 +7,22 @@ export function phaseRecapHTML(state,esc){
  const events=state.history.filter(h=>h.turn===state.turn&&h.incident?.type==='event'&&h.incident.input.stackTile);
  return events.length?`<details class="phase-recap"><summary>India Phase record</summary><ol>${events.map(h=>`<li>${esc(h.title)}${h.incident.changes.length?` · ${h.incident.changes.map(c=>esc(REGIONS[c.region].name)).join(', ')}`:''}</li>`).join('')}</ol></details>`:'';
 }
-export function openIndiaPhase({state,showDialog,apply,esc,drawEvent,blackmail}){
+export function openIndiaPhase({state,showDialog,apply,esc,drawEvent,blackmail,onPresentation}){
  const $=id=>document.getElementById(id),phase=phaseFor(state);
  const show=(title,body,actions)=>showDialog(title,body,actions);
+ const present=patch=>{state={...state,narrative:{...state.narrative,weather:{...state.narrative.weather,...patch}}};if(onPresentation)onPresentation(state);else apply({state,presentationOnly:true});};
+ const reopen=()=>openIndiaPhase({state,showDialog,apply,esc,drawEvent,blackmail,onPresentation});
  const fail=e=>{$('form-error').textContent=e.message||e;};
+ if(!phase&&narrativeWeather(state)){
+  show('Start Events in India','<p>Resolve any Envoy to the Mughals before beginning.</p>','<button id="before-phase-blackmail">Blackmail cards</button><button id="start-india-phase" class="primary">Begin Events in India</button>');
+  $('before-phase-blackmail').onclick=blackmail;let started=false;
+  $('start-india-phase').onclick=()=>{if(started)return;try{started=true;const result=resolveAction(state,{type:'phase-start',face:rollStormFace()});apply(result);openIndiaPhase({state:result.state,showDialog,apply,esc,drawEvent,blackmail,onPresentation});}catch(e){started=false;fail(e);}};return;
+ }
  if(!phase){
   show('Start Events in India',`<p>Choose whether to roll the storm die in the app or on the table. Its result determines the affected seas and how many events to resolve.</p><p><b>Last chance for Envoy to the Mughals:</b> that card must be played before this phase begins. Resolve it on the table and in Blackmail cards first.</p><p>After storms, draw and resolve each digital tile separately. You can inspect the map between events.</p>`, '<button id="before-phase-blackmail">Blackmail cards</button><button id="manual-phase-storm">Roll physical die</button><button id="start-india-phase" class="primary">Start phase & roll in app</button>');
   $('before-phase-blackmail').onclick=blackmail;
   let started=false;
-  const begin=(face,animated)=>{if(started)return;try{started=true;const result=resolveAction(state,{type:'phase-start',face});apply(result);const next=()=>openIndiaPhase({state:result.state,showDialog,apply,esc,drawEvent,blackmail});if(animated)showDiceRoll({showDialog,kind:'storm',value:face,summary:`${STORM_FACES[face].label} · ${STORM_FACES[face].events} India event${STORM_FACES[face].events===1?'':'s'}`,onContinue:next});else next();}catch(e){started=false;fail(e);}};
+  const begin=(face,animated)=>{if(started)return;try{started=true;const result=resolveAction(state,{type:'phase-start',face});apply(result);const next=()=>openIndiaPhase({state:result.state,showDialog,apply,esc,drawEvent,blackmail,onPresentation});if(animated)showDiceRoll({showDialog,kind:'storm',value:face,summary:`${STORM_FACES[face].label} · ${STORM_FACES[face].events} India event${STORM_FACES[face].events===1?'':'s'}`,onContinue:next});else next();}catch(e){started=false;fail(e);}};
   $('start-india-phase').onclick=()=>{if(!started)begin(rollStormFace(),true);};
   $('manual-phase-storm').onclick=()=>{
    let selected=null;
@@ -23,6 +31,17 @@ export function openIndiaPhase({state,showDialog,apply,esc,drawEvent,blackmail})
    $('confirm-phase-storm').onclick=()=>{if(selected!==null)begin(selected,false);};
   };
   return;
+ }
+ if(weatherConcealed(state)){
+  const face=STORM_FACES[phase.face],calm=!face.seas.length;
+  show(calm?'Calm seas':'Storms at sea',`${calm?'<p>The seas are calm. No ship checks are required.</p>':`<p>Storms affect <b>${esc(face.seas.join(', '))}</b>.</p><h4>Physical ship instructions</h4><ol class="action-instructions">${shipInstructions(phase.face).map(t=>`<li>${esc(t)}</li>`).join('')}</ol>`}`,calm?'<button id="calm-continue" class="primary">Continue</button>':'<button id="ships-resolved" class="primary">All ship rolls resolved</button>');
+  if(calm)$('calm-continue').onclick=()=>{present({weatherPresented:true});reopen();};
+  else $('ships-resolved').onclick=()=>{try{$('ships-resolved').disabled=true;const r=resolveAction(state,{type:'phase-ships'});apply(r);openIndiaPhase({state:r.state,showDialog,apply,esc,drawEvent,blackmail,onPresentation});}catch(e){fail(e);}};
+  return;
+ }
+ if(countPending(state)){
+  present({countPresented:true});
+  show('Events ahead',`<p class="eyebrow">EVENTS IN INDIA</p><h4>${phase.total} India event${phase.total===1?'':'s'}</h4>`, '<button id="events-revealed" class="primary">Continue</button>');$('events-revealed').onclick=reopen;return;
  }
  const face=STORM_FACES[phase.face],recap=phaseRecapHTML(state,esc),headline=`<div class="notice"><b>${esc(face.label)} · ${phase.total} event${phase.total===1?'':'s'}</b><p>${phase.completed} of ${phase.total} events resolved. The storm result is saved.</p></div>${recap}`;
  if(phase.status==='ships'){

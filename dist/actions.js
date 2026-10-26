@@ -168,7 +168,7 @@ export function resolveAction(s,d){
   move(victoriousCapital||d.topRegion);
  }
  function foreign(){
-  const targets=d.storm==='all'?['bombay','madras','bengal']:d.storm==='west'?['bombay']:d.storm==='south'?['madras']:d.storm==='east'?['bengal']:d.type==='france'?[]:[d.topRegion];
+  const targets=foreignTargets(d);
   assert(['all','west','south','east','none'].includes(d.storm),'Report the storm die result.');
   const order=d.targetsOrder||targets;
   assert(order.length===targets.length&&new Set(order).size===targets.length&&order.every(id=>targets.includes(id)),'Invalid invasion target order.');
@@ -293,3 +293,5 @@ export function scandalOffices(s,card){
  const london=[{id:'chairman',name:'Chairman',assistant:'Nathaniel Pike'},{id:'shipping',name:'Manager of Shipping',assistant:'William Hales'},{id:'military',name:'Military Affairs',assistant:'George Wilton'},...(!s.laws.governorGeneral?[{id:'trade',name:'Director of Trade',assistant:'Arthur Pembroke'}]:[]),...(s.chinaOffice?[{id:'china',name:'Superintendent of Trade in China',assistant:'James Porter'}]:[]),...PRESIDENCIES.map(id=>({id:'commander:'+id,name:`Commander of ${REGIONS[id].name}`,assistant:({bombay:'Charles Ward',madras:'Robert Ellis',bengal:'Francis Cole'})[id]}))];
  return card==='india'?india:card==='london'?london:[];
 }
+
+export function foreignTargets(d){return d.storm==='all'?['bombay','madras','bengal']:d.storm==='west'?['bombay']:d.storm==='south'?['madras']:d.storm==='east'?['bengal']:d.type==='france'?[]:[d.topRegion];}

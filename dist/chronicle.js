@@ -1,3 +1,4 @@
+import {weatherSafeState} from './weather-presentation.js';
 import {archivedAnticipationHTML} from './narrative-resolution.js';
 import {sceneHTML,narrativeExportHTML} from './narrative-ui.js';
 import {scenarioCaption} from './scenarios.js';
@@ -20,10 +21,12 @@ export function chroniclePage(state,{turn='all',kind='all',page=0}={}){
 }
 function recordHTML(h,state){return `<div class="history-entry"><small>TURN ${h.turn} · ${esc(h.kind.toUpperCase())}</small><p>${esc(h.title)}</p>${h.report?`<details><summary>Physical instructions</summary><p class="record-report">${esc(h.report)}</p>${(h.scenes||[]).map(s=>`<blockquote><b>${esc(s.speaker)}</b> · ${esc(s.role)}<p>${esc(s.text)}</p></blockquote>`).join('')}</details>`:''}${sceneHTML(h.narrative,{archive:true,statements:state.narrative?.statements})}${archivedAnticipationHTML(h)}</div>`;}
 export function chroniclePanelHTML(state,filter={}){
+ state=weatherSafeState(state);
  const p=chroniclePage(state,filter),turn=String(filter.turn||'all'),kind=filter.kind||'all';
  return `<p class="eyebrow">CAMPAIGN CHRONICLE</p><h3>Changes to the record</h3><p class="small-note">Browse every retained entry. Newest entries appear first. Export includes the whole chronicle, regardless of these filters.</p><div class="chronicle-filters" role="group" aria-label="Filter chronicle by turn">${['all',...Array.from({length:state.turn},(_,i)=>String(i+1))].map(t=>`<button data-log-turn="${t}" aria-pressed="${turn===t}">${t==='all'?'All turns':'Turn '+t}</button>`).join('')}</div><div class="chronicle-filters" role="group" aria-label="Filter chronicle by action">${Object.entries(LOG_KINDS).map(([k,label])=>`<button data-log-kind="${k}" aria-pressed="${kind===k}">${label}</button>`).join('')}</div><p class="small-note" role="status">${p.count?`Entries ${p.page*25+1}–${Math.min((p.page+1)*25,p.count)} of ${p.count}`:'No entries match these filters.'}</p>${p.entries.map(h=>recordHTML(h,state)).join('')}<div class="chronicle-navigation"><button id="log-previous" ${p.page===0?'disabled':''}>← Newer entries</button><span>Page ${p.page+1} of ${p.pages}</span><button id="log-next" ${p.page===p.pages-1?'disabled':''}>Older entries →</button></div><button id="export-chronicle" class="wide">Export readable chronicle</button>`;
 }
 export function readableChronicle(state,progress=null){
+ state=weatherSafeState(state);
  const top=exposedRegion(state.eventStack),status=state.gameEnd?END_REASONS[state.gameEnd.reason]:'In progress';
  const rows=IDS.map(id=>{const r=state.regions[id];return `<tr><th>${esc(REGIONS[id].name)}</th><td>${esc(controlLabel(state,id))}</td><td>${r.strength}</td><td>${r.unrest}</td><td>${Object.values(r.orders).filter(v=>!v).length}/${REGIONS[id].orders.length}</td><td>${r.lootAvailable?'Available':'Claimed'}</td></tr>`;}).join('');
  const turns=[...new Set(state.history.map(h=>h.turn))].sort((a,b)=>a-b);

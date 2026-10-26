@@ -1,3 +1,4 @@
+import {initializeWeather,validateWeather} from './weather-presentation.js';
 import {saveAnticipation,validateAnticipation} from './narrative-resolution.js';
 import {commitAdvice} from './narrative-advice.js';
 import {initializeOutlooks,updateOutlooks} from './narrative-outlooks.js';
@@ -55,7 +56,7 @@ export function validateNarrative(state){
  ensure(Array.isArray(n.chapters)&&n.chapters.every(c=>Number.isInteger(c.turn)&&typeof c.title==='string'&&typeof c.text==='string'&&Array.isArray(c.incidents)),'chapters');
  ensure(Number.isInteger(n.lastAgedTurn)&&n.lastAgedTurn<=state.turn,'ageing boundary');
  const ids=new Set();
- validatePoliticalMemory(state);
+ validatePoliticalMemory(state);validateWeather(state);
  for(const h of state.history){if(!h.narrative)continue;validateAnticipation(state,h);const scene=h.narrative;
   ensure(typeof scene.id==='string'&&!ids.has(scene.id)&&Array.isArray(scene.lines)&&scene.lines.length<=40,'scene identity');ids.add(scene.id);
   for(const l of scene.lines)ensure(l.incidentId===scene.id&&(l.speakerId==='chronicler'||n.characters[l.speakerId])&&typeof l.templateId==='string'&&typeof l.text==='string'&&l.text.length<=5000&&typeof l.emotion==='string','saved scene');
@@ -88,6 +89,7 @@ export function commitNarrative(before,result){
   return state;
  }
  // Stack reservation and phase bookkeeping are retained facts but need no duplicate scene.
+ initializeWeather(state,entry);
  if(['stack-draw','phase-ships','phase-finish','parliament-finish'].includes(entry.actionType)){updateOutlooks(before,state,entry);return state;}
  const incident=entry.incident||{type:entry.actionType||entry.kind,input:{},facts:[],changes:[]};
  const id=incident.id||'incident-'+n.nextIncident,lines=[],affected=new Set(incident.changes.map(c=>c.region));

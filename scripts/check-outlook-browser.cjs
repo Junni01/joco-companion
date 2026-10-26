@@ -1,4 +1,4 @@
-const {finishNarrativePages}=require('./browser-narrative.cjs');
+const {finishNarrativePages,beginCalmNarrative}=require('./browser-narrative.cjs');
 const {chromium}=require(process.env.JOCO_PLAYWRIGHT||'playwright');
 const fs=require('node:fs'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict');
 const base=process.argv[2]||'http://127.0.0.1:4174/dist/',out=process.argv[3]||path.join(os.tmpdir(),'outlook-browser');fs.mkdirSync(out,{recursive:true});
@@ -14,7 +14,7 @@ const base=process.argv[2]||'http://127.0.0.1:4174/dist/',out=process.argv[3]||p
   await page.goto(base);await page.locator('#save-status').filter({hasText:'Saved in this browser'}).waitFor();await click('save-menu');await page.locator('#file').setInputFiles(file);await click('confirm-choice');
   const initial=await saved();
   await click('operations-deploy-bombay');await click('close-dialog');assert.deepEqual(await saved(),initial);mark('cancelled Deploy leaves private thoughts, knowledge and RNG unchanged');
-  await click('events-phase-action');await click('manual-phase-storm');await page.locator('[data-phase-face="4"]').click();await click('confirm-phase-storm');await click('phase-map');await click('phase-next');
+  await click('events-phase-action');await beginCalmNarrative(page,click);await click('phase-map');await click('phase-next');
   assert.equal((await saved()).state.eventStack.pending.tileId,'madras-shuffle');assert.equal((await saved()).state.narrative.foresight.batch,null);
   await click('review-action');
   for(let i=0;i<8&&await page.locator('#continue-resolution-step').isVisible();i++)await click('continue-resolution-step');

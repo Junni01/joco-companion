@@ -1,4 +1,4 @@
-const {finishNarrativePages}=require('./browser-narrative.cjs');
+const {finishNarrativePages,beginCalmNarrative}=require('./browser-narrative.cjs');
 // Optional integration check; npm test and the application remain dependency-free.
 const {chromium}=require(process.env.JOCO_PLAYWRIGHT||'playwright');
 const assert=require('node:assert/strict');
@@ -52,7 +52,7 @@ const out=process.argv[3]||path.join(os.tmpdir(),'joco-m2-browser');fs.mkdirSync
   assert(await page.locator('#dialog-content').evaluate(el=>el.scrollWidth<=el.clientWidth+1));await page.locator('#dialog').screenshot({path:path.join(out,'dialogue-evidence-mobile.png')});await page.locator('#dialog-content').evaluate(el=>el.scrollTop=0);await page.locator('#dialog').screenshot({path:path.join(out,'dossier-mobile.png')});await click('close-dialog');
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await page.screenshot({path:path.join(out,'story-mobile.png'),fullPage:true});
   mark('dossier evidence, quiet/full, snapshot/export and 390px mobile layout');await page.setViewportSize({width:1024,height:768});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await selectBombay();await click('ruler-profile');assert(await page.locator('#dialog-content').evaluate(el=>el.scrollWidth<=el.clientWidth+1));await page.locator('#dialog').screenshot({path:path.join(out,'dossier-tablet.png')});await click('close-dialog');mark('1024x768 tablet dossier and map layout');await page.setViewportSize({width:1440,height:1000});
-  await click('events-phase-action');await click('manual-phase-storm');await page.locator('[data-phase-face="4"]').click();await click('confirm-phase-storm');await click('phase-map');await click('phase-next');
+  await click('events-phase-action');await beginCalmNarrative(page,click);await click('phase-map');await click('phase-next');
   const pending=await current();assert(pending.progress&&pending.state.eventStack.pending);await click('close-dialog');await page.reload();await page.locator('#save-status').filter({hasText:'Saved in this browser'}).waitFor();assert.deepEqual(await current(),pending);
   await click('save-menu');await page.locator('#campaign-name').fill('M2 pending narrative campaign');await click('rename');assert.deepEqual((await current()).progress.input,pending.progress.input);await click('undo');assert.deepEqual((await current()).state,pending.state);await click('redo');
   mark('revealed tile/roll progress survives reload and metadata rename/Undo/Redo');

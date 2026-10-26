@@ -30,7 +30,7 @@ test('old stored bytes stay untouched; current M2 memories and protected progres
  click('game-actions');assert.equal(storage.get(progressKey),oldProgress);click('save-menu');assert(nodes.get('rename').disabled&&nodes.get('snapshot').disabled);click('export');assert.equal(await downloads.at(-1).text(),oldBytes);
  click('new-campaign');click('narrative-on');click('close-dialog');assert.equal(storage.get(key),oldBytes);assert.equal(storage.get(progressKey),oldProgress);
  click('save-menu');const raw=encode(currentStory);await nodes.get('file').onchange({target:{files:[{size:raw.length,text:async()=>raw}]}});click('confirm-choice');assert.deepEqual(current().state,currentStory);
- click('events-phase-action');click('manual-phase-storm');data('phase-face','4');click('confirm-phase-storm');click('phase-map');click('phase-next');
+ click('events-phase-action');const oldCrypto=Object.getOwnPropertyDescriptor(globalThis,'crypto');Object.defineProperty(globalThis,'crypto',{configurable:true,value:{getRandomValues(a){a[0]=4;return a;}}});click('start-india-phase');Object.defineProperty(globalThis,'crypto',oldCrypto);click('calm-continue');click('events-revealed');click('phase-map');click('phase-next');
  const pending=current();assert(pending.progress&&pending.state.eventStack.pending);assert.deepEqual(pending.state.narrative.memories,currentStory.narrative.memories);
  const protectedInput=clone(pending.progress.input),cursor=pending.progress.ui.instructionCursor;
  click('close-dialog');click('save-menu');click('snapshot');

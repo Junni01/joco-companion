@@ -42,7 +42,7 @@ test('narrative new-game activation, deployment, quiet display, dossier, reload 
  data('tab','map');click('undo');click('undo');assert.equal(current().state.regions.bombay.control,'indian');
  // A new committed branch clears Redo, including after a reload.
  click('save-menu');nodes.get('campaign-name').value='A new branch';click('rename');assert.equal(current().redo.length,0);assert(nodes.get('redo').disabled);
- click('events-phase-action');click('manual-phase-storm');data('phase-face','4');click('confirm-phase-storm');click('phase-map');
+ click('events-phase-action');const oldCrypto=Object.getOwnPropertyDescriptor(globalThis,'crypto');Object.defineProperty(globalThis,'crypto',{configurable:true,value:{getRandomValues(a){a[0]=4;return a;}}});click('start-india-phase');Object.defineProperty(globalThis,'crypto',oldCrypto);click('calm-continue');click('events-revealed');click('phase-map');
  const phase=current().state;assert.equal(current().progress,null);
  data('narrative-mode','quiet');click('undo');assert.equal(current().progress,null);assert.deepEqual(current().state,phase);
  click('undo');assert.equal(current().progress.input.face,4);assert.equal(current().state.indiaPhase,null);
