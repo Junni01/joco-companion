@@ -1,3 +1,5 @@
+import {foreignTargets} from './invasion-targets.js';
+export {foreignTargets} from './invasion-targets.js';
 import {incidentRecorder} from './incidents.js';
 import {scenarioFor,finalTurn} from './scenarios.js';
 import {TILES,reserveTile,pendingEvent,finishTile,exposedRegion} from './event-stack.js';
@@ -293,5 +295,3 @@ export function scandalOffices(s,card){
  const london=[{id:'chairman',name:'Chairman',assistant:'Nathaniel Pike'},{id:'shipping',name:'Manager of Shipping',assistant:'William Hales'},{id:'military',name:'Military Affairs',assistant:'George Wilton'},...(!s.laws.governorGeneral?[{id:'trade',name:'Director of Trade',assistant:'Arthur Pembroke'}]:[]),...(s.chinaOffice?[{id:'china',name:'Superintendent of Trade in China',assistant:'James Porter'}]:[]),...PRESIDENCIES.map(id=>({id:'commander:'+id,name:`Commander of ${REGIONS[id].name}`,assistant:({bombay:'Charles Ward',madras:'Robert Ellis',bengal:'Francis Cole'})[id]}))];
  return card==='india'?india:card==='london'?london:[];
 }
-
-export function foreignTargets(d){return d.storm==='all'?['bombay','madras','bengal']:d.storm==='west'?['bombay']:d.storm==='south'?['madras']:d.storm==='east'?['bengal']:d.type==='france'?[]:[d.topRegion];}

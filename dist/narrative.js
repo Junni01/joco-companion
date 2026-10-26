@@ -1,3 +1,4 @@
+import {commitStaged,validateStagedHistory} from './narrative-staged.js';
 import {initializeWeather,validateWeather} from './weather-presentation.js';
 import {saveAnticipation,validateAnticipation} from './narrative-resolution.js';
 import {commitAdvice} from './narrative-advice.js';
@@ -56,7 +57,7 @@ export function validateNarrative(state){
  ensure(Array.isArray(n.chapters)&&n.chapters.every(c=>Number.isInteger(c.turn)&&typeof c.title==='string'&&typeof c.text==='string'&&Array.isArray(c.incidents)),'chapters');
  ensure(Number.isInteger(n.lastAgedTurn)&&n.lastAgedTurn<=state.turn,'ageing boundary');
  const ids=new Set();
- validatePoliticalMemory(state);validateWeather(state);
+ validatePoliticalMemory(state);validateStagedHistory(state);validateWeather(state);
  for(const h of state.history){if(!h.narrative)continue;validateAnticipation(state,h);const scene=h.narrative;
   ensure(typeof scene.id==='string'&&!ids.has(scene.id)&&Array.isArray(scene.lines)&&scene.lines.length<=40,'scene identity');ids.add(scene.id);
   for(const l of scene.lines)ensure(l.incidentId===scene.id&&(l.speakerId==='chronicler'||n.characters[l.speakerId])&&typeof l.templateId==='string'&&typeof l.text==='string'&&l.text.length<=5000&&typeof l.emotion==='string','saved scene');
@@ -133,6 +134,6 @@ export function commitNarrative(before,result){
  renderPoliticalDialogue(before,state,entry,scene,politicalContexts.filter(ctx=>ctx.category!=='intervention'||!commerce.some(c=>c.region===ctx.region&&c.category==='trade-military')),add);
  for(const region of affected){const c=n.characters[n.seats[region]];if(!c.incidents.includes(id))c.incidents.push(id);}
  for(const line of lines){if(line.speakerId!=='chronicler'){const c=n.characters[line.speakerId];if(!c.incidents.includes(id))c.incidents.push(id);}}
- entry.narrative=scene;if(entry.incident)entry.incident.id=id;n.lastIncident=id;updateOutlooks(before,state,entry);commitAdvice(before,state,entry,scene,result);saveAnticipation(state,entry);return state;
+ entry.narrative=scene;if(entry.incident)entry.incident.id=id;n.lastIncident=id;updateOutlooks(before,state,entry);commitAdvice(before,state,entry,scene,result);saveAnticipation(state,entry);commitStaged(before,state,entry,result);return state;
 }
 export function dominantTraits(person){return Object.entries(person.traits).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([key])=>TRAIT_LABELS[key]).join(', ');}

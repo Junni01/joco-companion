@@ -1,3 +1,5 @@
+import {selectStaged,invasionContext,stagedEnabled} from './narrative-staged.js';
+import {showStagedPage} from './narrative-staged-ui.js';
 import {narrativeWeather} from './weather-presentation.js';
 import {showActionStory,actionResultTitle} from './narrative-resolution.js';
 import {createAdviceAttempt} from './narrative-advice-session.js';
@@ -16,7 +18,7 @@ export const ACTION_DRAFT=ACTION_PROGRESS;
 const symbols={circle:'● Circle',triangle:'▲ Triangle',square:'■ Square'};
 export function openGameActions({state,showDialog,apply,esc,start,onPhase,onProgressSaved}){
  const $=id=>document.getElementById(id);
- let d={},stage='form',instructionCursor=0;
+ let d={},stage='form',instructionCursor=0,stagedScenes=[];const defenceDrafts={};
  const counselSession=createCounselSession(state),adviceAttempt=createAdviceAttempt(state);
  const error=e=>{$('form-error').textContent=e.message||e;};
  const pick=(id,label,items,value='')=>`<label>${esc(label)}<select id="${id}"><option value="">Choose…</option>${items.map(([v,l])=>`<option value="${esc(v)}" ${v===value?'selected':''}>${esc(l)}</option>`).join('')}</select></label>`;
@@ -24,7 +26,7 @@ export function openGameActions({state,showDialog,apply,esc,start,onPhase,onProg
  const number=(id,label,value=0,min=0,max=100)=>`<label>${label}<input type="number" id="${id}" min="${min}" max="${max}" value="${value}"></label>`;
  const outcome=()=>pick('outcome','Final check outcome',[['success','Success'],['failure','Failure'],['catastrophe','Catastrophic failure']],d.outcome);
  const result=()=>pick('outcome','Parliament result',[['passed','Passed'],['failed','Failed']],d.outcome);
- function save(){saveActionProgress(state,d,stage,localStorage,{instructionCursor});onProgressSaved?.();}
+ function save(){saveActionProgress(state,d,stage,localStorage,{instructionCursor,...(stagedScenes.length?{stagedScenes}:{})});onProgressSaved?.();}
  function theatre(){if(!narrativeWeather(state)||!(d.type==='france'&&d.outcome==='failed'||d.type==='event'&&(d.stackTile?TILES[d.stackTile]?.event:d.event)==='foreign')||d.storm===undefined)return '';const targets=d.targetsOrder||foreignTargets(d);return `<section class="invasion-theatre"><h4>${d.type==='france'?'War Against France':'Foreign military threat'}</h4><p>${targets.length?'Threatened regions: '+targets.map(id=>esc(REGIONS[id]?.name||id)).join(' → '):'No invasion targets.'}</p>${targets.some(id=>d.rolls?.[id])?`<h4>Physical invasion base strengths</h4><ul>${targets.filter(id=>d.rolls?.[id]).map(id=>`<li>${esc(REGIONS[id].name)}: <b>${d.rolls[id]}</b></li>`).join('')}</ul>`:''}</section>`;}
  function show(title,body,actions){showDialog(title,theatre()+(hasCommittedProgress(state,d)?narrativeWeather(state)?'<p class="small-note">Unfinished resolution is saved.</p>':'<p class="small-note">The revealed event or saved roll is already part of this game. Closing this window keeps its resolution available to resume.</p>':'')+body,actions);}
  function form(title,body,read,sync=()=>{}){
@@ -135,6 +137,11 @@ export function openGameActions({state,showDialog,apply,esc,start,onPhase,onProg
   if(narrativeWeather(state)){advance();return;}
   showDiceRoll({showDialog:show,kind:'storm',value:d.stormFace,summary:`War Against France · ${STORM_FACES[d.stormFace].label}${d.storm==='none'?' · no invasion':' · resolve the indicated invasions'}`,onContinue:advance});
  }
+ function rememberScene(kind,region=null){
+  const key=kind==='force'?'force:'+region:'announcement';if(stagedScenes.some(s=>s.key===key))return;
+  if(kind==='announcement'&&Object.keys(d.rolls||{}).length)return;
+  const scene=selectStaged(state,kind,invasionContext(state,d,region),key,stagedScenes);if(scene){stagedScenes.push(scene);save();}
+ }
  function advance(){
   const foreignEvent=d.type==='event'&&(d.stackTile?TILES[d.stackTile]?.event:d.event)==='foreign';
   if(foreignEvent&&d.storm===undefined&&d.stormFace===undefined){
@@ -143,10 +150,10 @@ export function openGameActions({state,showDialog,apply,esc,start,onPhase,onProg
    if(narrativeWeather(state)){advance();return;}
    showDiceRoll({showDialog:show,kind:'storm',value:d.stormFace,summary:`Foreign Invasion · ${STORM_FACES[d.stormFace].label}${d.storm==='none'?' · invade the exposed region':' · resolve the indicated invasions'}`,onContinue:advance});return;
   }
-  stage='resolve';save();let r;
+  stage='resolve';save();if(narrativeWeather(state)&&(foreignEvent||d.type==='france'&&d.outcome==='failed')&&(d.storm!==undefined||d.stormFace!==undefined))rememberScene('announcement');let r;
   try{r=resolveAction(state,d);}catch(e){
    if(!(e instanceof NeedsInput))throw e;
-   const q=e.request;present(q,()=>requestInput(q));return;
+   const q=e.request;if(q.type==='defense'&&q.key==='foreign:'+q.region&&d.rolls?.[q.region])rememberScene('force',q.region);present(q,()=>requestInput(q));return;
   }
   present(r,()=>review(r));
  }
@@ -160,7 +167,7 @@ export function openGameActions({state,showDialog,apply,esc,start,onPhase,onProg
    }else if(q.type==='invasion-roll'){
     if(narrativeWeather(state)){
      if(!d.rolls?.[q.region]){let a=new Uint32Array(1);do{crypto.getRandomValues(a);}while(a[0]>=4294967292);d.rolls={...d.rolls,[q.region]:a[0]%6+1};}
-     save();advance();return;
+     save();rememberScene('force',q.region);advance();return;
     }
     show(`Foreign invasion · ${REGIONS[q.region].name}`,`${progress(q)}<p>Roll this target’s invasion strength once. The app saves the result immediately and reuses it when this action resumes.</p>`,'<button id="roll-invasion" class="primary">Roll invasion strength</button>');
     let rolling=false;
@@ -172,16 +179,18 @@ export function openGameActions({state,showDialog,apply,esc,start,onPhase,onProg
     show(`Additional rebellions · Army of ${REGIONS[q.presidency].name}`,`${progress(q)}${pick('next-rebellion','Choose the next region to defend',regions(q.regions))}`,'<button id="resolve-order" class="primary">Continue</button>');
     $('resolve-order').onclick=()=>{try{const id=$('next-rebellion').value;if(!id)throw Error('Choose a region.');d.attackOrder={...d.attackOrder,[q.key]:id};instructionCursor=Math.max(instructionCursor,q.instructions.length);save();advance();}catch(e){error(e);}};
    }else{
-    show(`Defend ${REGIONS[q.region].name}`,`${progress(q)}<div class="notice"><b>${q.strength} attack strength</b><p>${q.base} base + ${q.unrest} unrest × ${q.multiplier}${!narrativeWeather(state)&&d.rolls?.[q.region]?` · saved invasion die ${d.rolls[q.region]}`:''}</p></div><p>Use the Army of ${REGIONS[q.presidency].name}. Exhaust pieces equal to the attack strength, or as much strength as remains available. Forces do not refresh between attacks.</p>${number('defense','Total available strength exhausted',0,0,q.strength)}<p class="small-note">If an office is vacant, Military Affairs acts; if also vacant, the Chairman chooses. Resolve any officer rout and office removals in the physical consequences before the next attack.</p>`,'<button id="report-defense" class="primary">Report defence</button>');
+    show(`Defend ${REGIONS[q.region].name}`,`${progress(q)}<div class="notice"><b>${q.strength} attack strength</b><p>${q.base} base + ${q.unrest} unrest × ${q.multiplier}${!narrativeWeather(state)&&d.rolls?.[q.region]?` · saved invasion die ${d.rolls[q.region]}`:''}</p></div><p>Use the Army of ${REGIONS[q.presidency].name}. Exhaust pieces equal to the attack strength, or as much strength as remains available. Forces do not refresh between attacks.</p>${number('defense','Total available strength exhausted',defenceDrafts[q.key]||0,0,q.strength)}<p class="small-note">If an office is vacant, Military Affairs acts; if also vacant, the Chairman chooses. Resolve any officer rout and office removals in the physical consequences before the next attack.</p>`,`${stagedEnabled(state)&&stagedScenes.length&&q.key==='foreign:'+q.region?'<button id="read-invasion-scene">Read scene</button>':''}<button id="report-defense" class="primary">Report defence</button>`);
+    if($('read-invasion-scene'))$('read-invasion-scene').onclick=()=>{defenceDrafts[q.key]=$('defense').value;const scenes=stagedScenes.filter(s=>s.kind==='announcement'&&s.context.targets[0]===q.region||s.kind==='force'&&s.context.region===q.region);showStagedPage({scenes,title:'Threat to '+REGIONS[q.region].name,showDialog,onBack:()=>requestInput(q)});};
     $('report-defense').onclick=()=>{try{d.defenses={...d.defenses,[q.key]:Number($('defense').value)};instructionCursor=Math.max(instructionCursor,q.instructions.length);save();advance();}catch(e){error(e);}};
    }
  }
  function review(r){
   const remaining=r.instructions.slice(instructionCursor);
-  show('Review · '+actionResultTitle(r),`<p>Complete the physical instructions below, then confirm to save all map changes together. If you close without confirming, reverse any unconfirmed physical changes yourself.</p>${remaining.length?`<ol class="action-instructions">${remaining.map(t=>`<li>${esc(t)}</li>`).join('')}</ol>`:'<p>All listed board changes and Elephant movements have been reviewed. Confirm to record the result.</p>'}}`,`${d.type==='envoy'?'<button id="revise-envoy">Change intended effect / target</button>':''}<button id="confirm-action" class="primary">Confirm & apply</button>`);
+  show('Review · '+actionResultTitle(r),`<p>Complete the physical instructions below, then confirm to save all map changes together. If you close without confirming, reverse any unconfirmed physical changes yourself.</p>${remaining.length?`<ol class="action-instructions">${remaining.map(t=>`<li>${esc(t)}</li>`).join('')}</ol>`:'<p>All listed board changes and Elephant movements have been reviewed. Confirm to record the result.</p>'}}`,`${stagedEnabled(state)&&stagedScenes.length?'<button id="read-attack-scenes">Read invasion scenes</button>':''}${d.type==='envoy'?'<button id="revise-envoy">Change intended effect / target</button>':''}<button id="confirm-action" class="primary">Confirm & apply</button>`);
+  if($('read-attack-scenes'))$('read-attack-scenes').onclick=()=>showStagedPage({scenes:stagedScenes,title:actionResultTitle(r),showDialog,onBack:()=>review(r)});
   if(d.type==='envoy')$('revise-envoy').onclick=()=>startForm('envoy',d);
   let confirmed=false;
-  $('confirm-action').onclick=()=>{if(confirmed)return;try{confirmed=true;$('confirm-action').disabled=true;apply(adviceAttempt.attach(r,d.type==='envoy'?{kind:'envoy',purpose:d.purpose,order:d.order}:['tax','unrest'].includes(d.type)?{kind:'governor',region:d.region||d.regionContext}:{kind:'unsupported'}));localStorage.removeItem(ACTION_DRAFT);showActionStory({result:r,showDialog,replayInstructions:showElephantSteps,doneLabel:d.type==='event'&&d.stackTile?'Continue':d.type==='france'&&d.parliamentSelection?'Return to Parliament':'Return to map',onDone:()=>{if(d.type==='event'&&d.stackTile)showStackRegion({state:r.state,showDialog,esc});else if(d.type==='france'&&d.parliamentSelection){state=r.state;d={};parliamentChoices(null,r);}else $('dialog').close();}});}catch(e){confirmed=false;if($('confirm-action'))$('confirm-action').disabled=false;error(e);}};
+  $('confirm-action').onclick=()=>{if(confirmed)return;try{confirmed=true;$('confirm-action').disabled=true;if(stagedScenes.length)r.stagedScenes=stagedScenes;apply(adviceAttempt.attach(r,d.type==='envoy'?{kind:'envoy',purpose:d.purpose,order:d.order}:['tax','unrest'].includes(d.type)?{kind:'governor',region:d.region||d.regionContext}:{kind:'unsupported'}));localStorage.removeItem(ACTION_DRAFT);showActionStory({result:r,showDialog,replayInstructions:showElephantSteps,doneLabel:d.type==='event'&&d.stackTile?'Continue':d.type==='france'&&d.parliamentSelection?'Return to Parliament':'Return to map',onDone:()=>{if(d.type==='event'&&d.stackTile)showStackRegion({state:r.state,showDialog,esc});else if(d.type==='france'&&d.parliamentSelection){state=r.state;d={};parliamentChoices(null,r);}else $('dialog').close();}});}catch(e){confirmed=false;if($('confirm-action'))$('confirm-action').disabled=false;error(e);}};
  }
  function menu(){
   if(state.gameEnd){show('Game ended',`<p>This chronicle is closed: <b>${esc(END_REASONS[state.gameEnd.reason])}</b>, turn ${state.gameEnd.turn}.</p><p>Inspect the map and Campaign record, export a backup from Saved games, or use Undo to reopen the game.</p>`);return;}
@@ -226,7 +235,7 @@ export function openGameActions({state,showDialog,apply,esc,start,onPhase,onProg
 
  const savedProgress=loadActionProgress(state);
  if(state.gameEnd)menu();
- else if(savedProgress){d=savedProgress.input;instructionCursor=Number.isInteger(savedProgress.ui?.instructionCursor)&&savedProgress.ui.instructionCursor>=0?savedProgress.ui.instructionCursor:0;try{savedProgress.stage==='form'?startForm(d.type,d):advance();}catch(e){error(e);}}
+ else if(savedProgress){d=savedProgress.input;stagedScenes=savedProgress.ui?.stagedScenes||[];instructionCursor=Number.isInteger(savedProgress.ui?.instructionCursor)&&savedProgress.ui.instructionCursor>=0?savedProgress.ui.instructionCursor:0;try{savedProgress.stage==='form'?startForm(d.type,d):advance();}catch(e){error(e);}}
  else if(start){if(start==='blackmail-menu')blackmail();else if(start==='parliament-menu')parliament();else if(typeof start==='string')startForm(start);else startForm(start.type,start);}
  else menu();
 }
