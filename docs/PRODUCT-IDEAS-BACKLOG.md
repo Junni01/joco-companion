@@ -1,0 +1,223 @@
+# John Company Companion — Unimplemented ideas and long-term feature register
+
+**Living design inventory · started 26 October 2026**  
+**Purpose:** preserve **all significant discussed ideas that have not yet been fully delivered**, including deliberately rare story arcs, so they can be reviewed and implemented incrementally without losing the vision. This is **not** a Codex authorization, technical specification, release promise, or claim that any item is ready for implementation.
+
+> **Update rule:** Whenever a feature is discussed, add or revise its entry here with its original intent, factual constraints, prerequisite, source document and lifecycle status. When shipped, link the implementation/test report and move it to the delivered index, rather than deleting the idea. Distinguish *concept approved* from *wording approved* and from *code shipped*. A later verification may discover that a subfeature was already completed; mark it as such rather than reimplementing it.
+
+## Status legend and current baseline
+
+- **AGREED** — user has endorsed the idea/direction; algorithms, exact prose or implementation may remain unapproved.
+- **PROPOSED** — brainstorm/design exists; specific details or timing still need editorial approval.
+- **OPEN** — specific decision or reliable source validation remains unresolved.
+- **PARTIAL** — some mechanism exists, but the described richer behavior has not been delivered.
+- **FOUNDATION SHIPPED** — a schema/UI prerequisite already exists; this entry concerns its future use.
+- **IN CODEX / UNVERIFIED** — separately assigned implementation is underway or reported pending review; do not duplicate the task.
+- **RARE / LONG GAME** — idea should stay recorded even if scarcely encountered in a John Company scenario; important in potential longer standalone game.
+- **DEFERRED WRITING** — approved or drafted lines are blocked by factual evidence, selection, or scene infrastructure.
+- **IMPLEMENTED** — only after checking a specific implementation report and tests; move to delivered index.
+
+**Verified documentary baseline as of this entry:** Core game/India resolver and map, event stack, save/Undo/Redo, political-memory/dialogue foundation, Company Operations UI/adviser work, 09A/09B public Shuffle-aware outlook, 09D staged action and event presentation, all 81 exact Collection 09E weather/tension/invasion scenes and automatic presentation, and Character Engine **Milestone 1** (23 existing identities, six fate labels, role/provenance histories) have implementation reports. Latest **reported** automated baseline is **418 tests** after Character M1; this register did not rerun them. **Character Milestone 2A** (family and claim schema) was handed to Codex; delivery has **not yet been confirmed here**. Site deployment is separate and has not been authorized by this inventory.
+
+References: [project handoff](current-status.md), [character M1 report](narrative/character-engine-m1-implementation.md), [M2 design](narrative/character-engine-m2-design.md), [Collection 09E UX](narrative/collection09e-implementation.md), [long-game vision](narrative/long-term-simulation-vision.md).
+
+---
+
+## A. Character identities, lineages, succession and life course
+
+**A01 — Extended kinship and dynastic claims** · **IN CODEX / UNVERIFIED (M2A)**. Typed biological/adoptive parenthood, spouses/ex-spouses, guardian/ward, original existing siblings, house affiliation, legitimate claims, claim provenance and read-only family dossier. Preserve all existing 23 IDs and *do not* reinterpret an initial younger sibling as a child/heir. **Dependency:** M1 fields and save compatibility. **Source:** [M2](narrative/character-engine-m2-design.md). **Boundary:** M2A adds structure/test fixtures, **not** live marriage/birth/death generation.
+
+**A02 — Automatic succession and transfer of a local regional seat** · **AGREED; M2B**. At a compatible committed narrative cause, select a valid existing successor where possible, track predecessor, save historical office transitions, preserve game sovereignty/control and update the incumbent atomically. One seat per region; no player succession minigame. **Dependency:** A01, eligible candidate rules and authored scenes. **Source:** [M2](narrative/character-engine-m2-design.md).
+
+**A03 — Child ruler and adult regency** · **AGREED; M2B**. Titular child may inherit with adult widow/mother/relative/court regent exercising authority. Keep IDs/roles separate; end regency at a justified later committed milestone, potentially with friction. **OPEN:** practical age threshold, regent authority/eligibility and regional conventions. **Source:** [M2](narrative/character-engine-m2-design.md).
+
+**A04 — Contested succession and claimants** · **AGREED; M2B**. Multiple eligible relatives, designated heirs, siblings, adopted children, daughters/widows and established rivals may compete; loser remains a documented claimant and may form a grudge. A succession dispute **does not** itself move the board or create a rebellion. **OPEN:** specific courts' succession conventions and candidate weights. **Source:** [M2](narrative/character-engine-m2-design.md).
+
+**A05 — Plausible births, children, spouses, widowhood and family size** · **PROPOSED**. New characters only when a concrete witnessed incident introduces them; avoid an inexhaustible fabricated family tree or retroactive genealogy. Children's eventual adulthood creates longer-game arcs. **OPEN:** live trigger cadence, caps, naming/ages, chronology, provenance. **Dependency:** A01, historical naming work C01. **Source:** [lifecycle](narrative/character-lifecycle-design.md), [M2](narrative/character-engine-m2-design.md).
+
+**A06 — Natural ageing, health, illness and rare mortality** · **AGREED direction; OPEN tuning**. Current +3 years per New Turn exists, including uncertain fates; future illness/old-age mortality must be rare and compatible with actual scenario time gaps. Confirmed death irreversible. Do not interpret ageing as proof a presumed-dead person survives. **OPEN:** historical-turn convention, health bands, death frequency and long-run simulation tests. **Source:** [lifecycle](narrative/character-lifecycle-design.md), [M2](narrative/character-engine-m2-design.md).
+
+**A07 — Major transitions: abdication, disappearance, imprisonment, exile, pardon** · **AGREED concept**. Distinct persistent outcomes triggered by supported incidents, not inferred from officer routs, battle failure, unrest cubes or generic fatigue. Fate change and replacement must be atomic. **Dependency:** A02. **Source:** [lifecycle](narrative/character-lifecycle-design.md).
+
+**A08 — Restoration of exiled previous rulers/heirs** · **AGREED; RARE / LONG GAME**. Relatively *more likely* than a presumed-dead return **when a real compatible event occurs**; exile never supplies an independent game-rule rebellion. Reuse existing ID, claims, grievances and previous defeats. Return can be as sovereign, subject ruler or nonruling courtier according to actual map result. **Source:** [restoration](narrative/character-restoration-design.md).
+
+**A09 — Genuine return of someone presumed dead** · **AGREED; very RARE / LONG GAME**. No pre-stored secret alive flag, rare reveal at justified committed event; character may reveal themselves and **still lose** the rebellion. Confirmed dead never returns. **Source:** [restoration](narrative/character-restoration-design.md).
+
+**A10 — Recurring impostor claimants** · **AGREED; RARE / LONG GAME**. New permanent identity falsely claims to be an absent/dead person; may lose and reappear; original character ID/fate never overwritten. Potential ambiguous public identity versus consistent private canonical ID. **OPEN:** exposure/reputation progression and frequency. **Source:** [restoration](narrative/character-restoration-design.md).
+
+**A11 — Multi-generation inherited grudges, disputed legitimacy, heirs avenging earlier events** · **AGREED; RARE / LONG GAME**. Explicit lineage and provenance let survivors remember parental executions, humiliating marriages, rebel defeats, restorations and promises; never invent a literal parent from earlier title holder. **Dependency:** A01/A02/A07, memory and dialogue. **Source:** [lifecycle](narrative/character-lifecycle-design.md), [long-game vision](narrative/long-term-simulation-vision.md).
+
+**A12 — Titles, honours, epithets, aliases and awards acquired over careers** · **PROPOSED**. Historically flavoured fictional appellations earned by repeated, documented achievements or scandals; distinguish a title from immutable personal name and political office. No invented game-rule reward. **Dependency:** C01, event provenance. **Source:** prior narrative design discussions; [Collection 10](narrative/collection10-identity.md).
+
+**A13 — Career/office succession for continuing Company NPCs** · **PARTIAL foundation**. Secretary/adviser belongs to an institution but keeps personal name, memories and opinions; after removal or replacement, institutional files endure without gifting successor the predecessor's private memories. App currently does not track player family officeholders. **Source:** [adviser design](narrative/collection09c2-adviser-design.md).
+
+## B. Imperial politics, vassals, conquest and court diplomacy
+
+**B01 — Two-level political model for Indian empires** · **AGREED; PARTIAL foundation**. Each region retains a local ruler and house while `overlord` is the *actual* capital from the board. Emperor/capital and regional vassal rulers are distinct characters. Existing allegiance records and M1 `politicalRole` are foundation; richer interpersonal imperial bonds remain future work. Speak locally for ordinary events, include capital on major legitimacy/rebellion/conquest/collapse episodes. **Source:** [lifecycle](narrative/character-lifecycle-design.md), [M2 refinement](narrative/character-engine-m2-design.md), 26 Oct design discussion.
+
+**B02 — Personal loyalty, regard and grudges between capital and vassal ruler** · **AGREED; PARTIAL foundation**. Separate mechanically enforced vassalage from person-to-person loyalty, ambition, trust, gratitude and resentments. Loyal vassals can genuinely admire overlords; do not force every subject to be a rebel. Imperial ruler succession can alter loyalty without changing formal allegiance. **Dependency:** stable actor identity, relationship causes. **Source:** [lifecycle](narrative/character-lifecycle-design.md).
+
+**B03 — Relationship-driven conquest settlement** · **AGREED; IMPORTANT**. On **actual** establishment/transfer of Indian imperial vassalage, choose whether prior local ruler stays, abdicates, is deposed, imprisoned, exiled or in an extreme documented feud executed. A new vassal ruler might be an eligible sibling, heir, rival or imperial nominee. Bitter blood feuds can credibly lead to bloodshed; mercy/temperament may still temper hatred. **Never** change conquest's game outcome or manufacture officer deaths. Persist responsible participants, victims and relationship causes. **Dependency:** A01/A02/A07. **Source:** [M2 approved conquest refinement](narrative/character-engine-m2-design.md).
+
+**B04 — Failed rebellion and successful liberation with both courts speaking** · **AGREED; PARTIAL**. Local vassal and capital can address actual rebellion result; failed rising leaves overlord intact but grievance/history lives on; no automatic ruler death. Successful rising establishes actual sovereignty before restoration claims can be fulfilled. Narrate repeated campaigns and defeated pretenders. **Dependency:** A02, B02, scene catalogue. **Source:** [restoration](narrative/character-restoration-design.md).
+
+**B05 — Imperial breakup and former subjects' diverging reactions** · **AGREED; PARTIAL**. Actual capital fall/empire dissolution releases vassals; pre-existing local character normally becomes sovereign, but personalities may respond with joy, dread, opportunism or mourning. Preserve mutual ties after formal allegiance ends; future reconquest calls them back. **Source:** [lifecycle](narrative/character-lifecycle-design.md).
+
+**B06 — Vassal succession and imperial legitimacy dialogue** · **AGREED**. Local house has its own heirs and regents; capital ruler can comment on/approve/dislike succession without vetoing a mechanically unchanged subject status. No emperor becomes all subjects' biological ruler. **Dependency:** A02/A03, B01/B02.
+
+**B07 — Rare negotiated submission and diplomatic joining in non-capital regions** · **PROPOSED narrative variant**. Where actual board conquest/transfer allows, fiction may sometimes frame it as a negotiated accommodation or willing submission; use genuine game results and source facts. Do **not** convert a military loss into an unreported diplomatic event or adjust territorial rules. **Source:** [lifecycle](narrative/character-lifecycle-design.md).
+
+**B08 — Local personalities react to Indian invasion, defence and repeated imperial military success** · **PARTIAL**. Powerful/emerging capitals gain pride and subjects notice expansion; retain separate local ruler voice, rival history and capital-wide reaction. Cross-regional dialogue should be selective rather than one speech per subject per trivial event. **Source:** [lifecycle](narrative/character-lifecycle-design.md), [dialogue guide](narrative/collection09cd-counsel-dialogues.md).
+
+## C. Collection 10 — personal names, historical colour and portraits
+
+**C01 — Collection 10A: distinctive region/period-plausible fictional full names** · **AGREED; NOT IMPLEMENTED**. Replace `X of Region` **for newly generated characters** with culturally/chronologically appropriate naming forms; title, rank, dynasty, region and name are separate. Avoid automatic renames of current saved people or rewriting saved quotations. Research naming traditions and collision rules before integration. **Source:** [Collection 10](narrative/collection10-identity.md).
+
+**C02 — Collection 10B: historically grounded biographies and anecdotal speech** · **AGREED direction; OPEN research**. Fictional Company veteran may refer to real events (e.g. Plassey) only if date and personal life history permit; distinguish actual history, alternate-history game facts, and knowingly boastful/unreliable speech. No real historical quotations passed off as authentic. **Source:** [Collection 10](narrative/collection10-identity.md).
+
+**C03 — Stable character portraits and evolving appearance** · **PROPOSED**. Identity-keyed portraits consistent across dialogs, dossiers, scenes, exile/restoration; later age/health or status changes may alter appearance without changing the person. Support female regents, Indian regional traditions, British NPCs and rare VIP art; no requirement to finish imagery before dialogue. **OPEN:** portrait sourcing/generation, culturally responsible references, caching, save size and versioning. **Source:** [09D scene design](narrative/collection09cd-counsel-dialogues.md), prior user discussions.
+
+**C04 — Dossiers, family tree, lineage and full life chronicle presentation** · **PARTIAL**. M1 roster/dossier/status history exists; future kinship/tree diagrams, titles, former roles, claims, known nemesis and notable personal statements should be accessible without a family-management minigame. **Dependency:** A01/A02/C01.
+
+**C05 — Historically grounded local alliances as memorable independent interlocutors** · **PROPOSED / PARTIAL**. Rajput Prince, Sikhs, Nizam, Arcot, Awadh, Jagat Seths and Orissa are independent alliances, **not synonyms for regional ruler**. When actual participation is reported, persistent representatives (if introduced) may speak; careful historical research required. Don't invent alliance deployment, payments or a player relationship. **Source:** [dialogue guidance](narrative/collection09cd-counsel-dialogues.md) and earlier alliance design.
+
+## D. Events in India, atmosphere and long-term character dialogue
+
+**D01 — Full relationship-aware Peace narrative** · **AGREED; NOT FULLY IMPLEMENTED**. Border Peace affects regard, trust and old grievances between two actual neighbouring houses; ordinary calm common, rare sincere reconciliation, rare eligible dynastic marriage. Internal Peace is primarily stability and can change Company-dependent ruler confidence without asserting a cash payment. Marriage cannot change board vassalage. **Dependency:** A01, dialogue writing and episode guards. **Source:** [09C/09D Peace](narrative/collection09cd-counsel-dialogues.md).
+
+**D02 — Leader events as court development or actual rebellion** · **AGREED; NOT FULLY IMPLEMENTED**. Sovereign Leader mechanically strengthens tower; narrative usually consolidates incumbent, sometimes elevates minister/recognises heir, rarely causes consistent narrative-only succession. Nonsovereign Leader invokes **actual rebellion** outcome, using an established claimant before inventing one; no fake independent state after failure. **Dependency:** A02/B04. **Source:** [lifecycle](narrative/character-lifecycle-design.md).
+
+**D03 — Turmoil and trade cascades with individual regional consequences** · **PARTIAL**. Region ruler, traders, nearby leaders and Company voices can react to actual Order closures and cross-border cascades; avoid calling a closed Order a shuttered shop, and do not imply lost completed trade or particular suffering from an abstract counter. Recall earlier closures/openings in later events. **Source:** [09C/09D](narrative/collection09cd-counsel-dialogues.md), [component glossary](narrative/component-to-fiction-glossary.md).
+
+**D04 — Resolve Crisis / Elephant marching dramatic consequences and anticipation** · **PARTIAL**. Preserve distinct scene after committed actual conflict and **another beat** following public Elephant movement/reveal; build character-specific fear, ambitions, nemesis rivalry and remembered threats without knowing hidden next tile. Elephant is a political marker, **never a literal elephant in dialogue**. **Source:** [09D contracts](narrative/collection09cd-counsel-dialogues.md).
+
+**D05 — Shuffle contextual stories and persistent public-risk counsel** · **PARTIAL foundation**. 09A/09B already tracks public returned type counts and forecasts; richer scene should recall actual publicly witnessed prior crises/discards and influence following turn's military/mercantile advisers selectively. Turmoil ≠ automatic military attack. No inspection of hidden reordered stack or certain target/time predictions. **Source:** [09C/09D Shuffle](narrative/collection09cd-counsel-dialogues.md).
+
+**D06 — More full multi-speaker scene writing outside 09E** · **PARTIAL**. Approved atmospheric 09E's 81 scenes already ship automatically; develop stronger guarded full exchanges for Peace, Leader, Crisis, conquest, loyal vassals, interpersonal callbacks, domestic unrest, cascading trade, opium, Company actions, parliamentary and revenue stages. Remember a dialog should be **automatic and complete**, not a `Read scene` button. **Source:** [09C/09D](narrative/collection09cd-counsel-dialogues.md), [09E report](narrative/collection09e-implementation.md).
+
+**D07 — Reuse previously stated boasts, promises, wrong predictions, nemeses** · **PARTIAL / DEFERRED WRITING**. An earlier public saved utterance may be quoted later when correct audience/knowledge/history proves it; many old templates remain withheld because these links don't yet exist. No retcon or invented first-person past quote. A character's nemesis may affect personal reactions; an optional Elephant-direction variant was floated historically but default game rules **must** remain unchanged. **Source:** [deferred dialogue](narrative/approved-dialogue-deferred.md), [09C/09D](narrative/collection09cd-counsel-dialogues.md).
+
+**D08 — Recover fact-blocked written dialogue and longer complete exchanges** · **DEFERRED WRITING**. Four 09B variants remain withheld for lack of proven personal preservation, cooperation or **completed commerce**; older collections also contain evidence-guarded lines and whole conversation exchanges. Re-enable only with actual sourced events or rewrite after independent creative approval. Do not invent commerce just to unlock prose. **Source:** [09B evidence report](narrative/collection09-evidence-implementation.md), [approved dialogue deferrals](narrative/approved-dialogue-deferred.md).
+
+**D09 — More nuanced weather/war scene pacing and expanded authored alternatives** · **PARTIAL**. 09E automatic flow and 81 verbatim texts are implemented; remaining editorial task is multi-turn real-play selection/pacing, repetitions (notably sole no-invasion France scene N-01), and potential future variety with eligible speakers and personalities. Never reintroduce optional read buttons. **Source:** [09E report](narrative/collection09e-implementation.md).
+
+**D10 — Chronicle as living multigenerational history** · **PARTIAL; LONG GAME**. Multi-turn reports and chapters exist; improve prioritized threads, ruler biographies, court/capital-linked narratives, actual timelines, recurring quotes and great family arcs without generating irrelevant constant prose. Human review of synthetic multi-turn histories remains a recurring task. **Source:** [lifecycle](narrative/character-lifecycle-design.md), [long-game vision](narrative/long-term-simulation-vision.md).
+
+## E. Company advisers, opium, local politics and institutional rivalries
+
+**E01 — Adviser-to-adviser rivalry and reluctant admiration (09D-3)** · **AGREED; DEFERRED**. Only after repeated actually voiced, jointly known, committed differences and real outcomes; no initial arbitrary rivalry between institutions. Cross-speaker callbacks require evidence that both knew earlier lines. **Source:** [09C/09D adviser rivalries](narrative/collection09cd-counsel-dialogues.md).
+
+**E02 — More personalised military deployment/defence counsel** · **PARTIAL**. Local Army advisers consider supported regional history, control, unrest, known public Shuffle risk, alliances used, actual military outcomes, officer losses (not confirmed deaths), repeated catastrophes and later recalled warnings. Current operational previews and committed advice foundation exist; richer character continuity and conflicting advice need writing/eligibility review. **Source:** [09C-2 advisers](narrative/collection09c2-adviser-design.md), [09C/09D](narrative/collection09cd-counsel-dialogues.md).
+
+**E03 — Director's secretary and Governor administrative advisers** · **PARTIAL**. Retain recurring institutional voices across player officeholders. Special Envoy and Governor Administer are **check-first** with freely chosen legal effect after success; a provisional recommendation must not be treated as ignored on a failed check. Track actual displayed advice and finalized option only; Governor General replaces Director/Governors. Add contextual written reactions after proper verification. **Source:** [09C-2](narrative/collection09c2-adviser-design.md).
+
+**E04 — China assistant: opium access changes and viewpoints** · **PARTIAL / OPEN verification**. React to actual printed per-region opium icon access gained/lost on **control change**, using independently audited icon totals; opportunity is not a completed shipment/trade. Assistant can be greedy, conscientious, competent or obsessive in varying degree; may disagree with military. **OPEN:** verify map symbol counts/locations from source art before relying on them, and define suitable prose. **Source:** [09C/09D opium](narrative/collection09cd-counsel-dialogues.md).
+
+**E05 — Separate Superintendent Trade in China physical check and possible reporting** · **OPEN scope**. Office creation by Envoy/law is not an actual Trade in China check; real separate action runs after Bengal and depends on ships and Company opium access. Current app intentionally doesn't track ship inventories/China trade result. A future optional outcome report, if truly worthwhile, must be designed separately and cannot be inferred from the office toggle. **Source:** [09C Operations UI](narrative/collection09c-operations-ui.md).
+
+**E06 — Local alliances as political participants in long-run narrative** · **PROPOSED**. Track actual involvement in earlier Deploy and let relevant actor/representative remember support, disappointment, changing public allegiance and personal rapport without a new mechanical alliance rule. Some costs/strengths are already modelled physically; avoid inventing a named representative where none has been introduced. **Dependency:** C05/E02.
+
+**E07 — Government tax/unrest reason and local ruler response** · **PARTIAL**. App tracks authorised reasons for Company unrest; deeper ruler/opposition/governor-assistant dialogues, repeated taxing grievances, crises and later reparations should follow true recorded cause; no guess at population size or cash sums. **Source:** [lifecycle](narrative/character-lifecycle-design.md), [09C/09D](narrative/collection09cd-counsel-dialogues.md).
+
+## F. Five-stage companion workflow and London narratives
+
+**F01 — Guided five-stage app workflow** · **AGREED; NOT FULLY IMPLEMENTED**. Skip physical London Season, Family and Hiring entirely; app guides **Company Operations → Bonuses & Revenue (combined) → Events in India → Parliament Meets → Upkeep & Refresh / New Turn**, keeping printed phases and exceptions valid. This is a compact companion for people who know the rules, not a tutorial. **Source:** [09C/09D workflow](narrative/collection09cd-counsel-dialogues.md).
+
+**F02 — Bonuses & Revenue physical instructions and minimal Narrative reporting** · **AGREED**. Normal mode: physical instructions only. Narrative: after real sequence, report **number of dividends, number of emergency loans and actual Company Standing** through touch ± controls; no balance ledger, shares, individual family finance or imagined payouts. **Source:** [09C/09D Revenue](narrative/collection09cd-counsel-dialogues.md).
+
+**F03 — East India House fictional shareholder scenes** · **PROPOSED direction**. Fictional proprietors argue about dividends, loan embarrassment, recent military decisions and Company performance in one automatic complete scene. They do not represent actual player shareholdings or make another player vote. Correct chronology: current-turn completed Company Operations plus *previous* turn's India Events; no knowledge of current upcoming India phase. **Source:** [09C/09D Revenue chronology](narrative/collection09cd-counsel-dialogues.md).
+
+**F04 — Bankruptcy at Revenue and final shareholder epilogue** · **AGREED**. If Standing causes Company failure mid-Revenue, immediately branch to Final Scoring; Narrative gives a distinctive shareholder ending instead of ordinary Revenue scene, and must not demand reports of Revenue steps never reached. Other Company failures have their own exact published timing. **Source:** [09C/09D Revenue failure](narrative/collection09cd-counsel-dialogues.md).
+
+**F05 — Westminster Parliament opening/actual pre-vote fictional MPs** · **PROPOSED**. Fictional incidental MPs criticize the Company, including known current-turn India events; a scene tied to a selected real law must wait until the physical law/policy is known. No fabricated votes, bribes or speeches attributed to real MPs. One scrollable scene, not a new procedure. **OPEN:** exact scene placement and approved prose. **Source:** [09C/09D Parliament](narrative/collection09cd-counsel-dialogues.md).
+
+**F06 — Selective Parliament reporting and consequence reactions** · **AGREED**. Only report passed laws that matter to tracked state and a few relevant dilemmas: Famine, War Against France, possibly Impeachment after verifying rules. Other cards may stay physical; no full parliamentary simulation. Successful law or dilemma can prompt meaningful response, without claiming extra unreported vote. **Source:** [09C/09D Parliament scope](narrative/collection09cd-counsel-dialogues.md).
+
+**F07 — Upkeep & Refresh instruction stage and narrative New Turn chapter** · **AGREED / PARTIAL**. Show concise appropriate physical upkeep then advance campaign. Chronicle and New Turn already exist, but workflow staging, personal lifecycle beats, historical summaries and correct final-turn exceptions require future work. **Source:** [09C/09D workflow](narrative/collection09cd-counsel-dialogues.md), [lifecycle](narrative/character-lifecycle-design.md).
+
+**F08 — London/India chronology-sensitive callbacks** · **AGREED**. Shareholders at Revenue know current completed Operations and earlier India events; Parliament after current India knows those fresh outcomes. Recurring French fiascoes, empire collapses, wars, tax controversies and old quotations must respect turn/phase and recorded public knowledge. **Dependency:** F01–F06, historical statement system.
+
+## G. Handcrafted VIPs and deliberately exceptional events
+
+**G01 — Rogue British Company-appointed regional ruler (Kurtz-inspired)** · **AGREED concept; RARE / LONG GAME**. Handcrafted fictional colonial officer with stable identity, growing disillusionment, strange ambitions, potential independence after a **real successful rebellion**, or continued local vassalage after a **real Indian empire conquest**. No scripted inevitable betrayal or invented rebel result. Could be displaced, executed, exiled or restored if later real events permit. **Source:** [09C/09D VIP](narrative/collection09cd-counsel-dialogues.md).
+
+**G02 — Named recurring French and other foreign commanders/diplomats** · **AGREED concept; RARE**. Small authored roster rather than disposable randomized names; commanders remember actual invasions, defeats and humiliation. Generic foreign invasions must **not** all become French. A successful invasion makes the target sovereign per rules; a French-backed local settlement is a *recorded narrative interpretation*, not literal French map vassalage. **Source:** [09C/09D VIP](narrative/collection09cd-counsel-dialogues.md).
+
+**G03 — Persistent French-backed foothold, parliamentary scandal and shareholder ridicule** · **AGREED concept; RARE / LONG GAME**. Following an actual France-linked success, a supported continuing influence narrative can embarrass Company and ministers over several turns. Change or end it only if later board outcomes support that; callback chronology must be accurate and jokes not repeated automatically. **Source:** [09C/09D French footholds](narrative/collection09cd-counsel-dialogues.md).
+
+**G04 — Exceptional British monarch audience** · **PROPOSED; VERY RARE / LONG GAME**. After documented persistent French-backed embarrassment, maybe George II/III (only when historical date is safe), private audience or formal correspondence with ministers, not a spurious House of Commons speech. Persistent rebuke can yield future callbacks; no extra mechanical law or vote. **OPEN:** eligibility, chronology, biographies, exact writing. **Source:** [09C/09D royal VIP](narrative/collection09cd-counsel-dialogues.md).
+
+**G05 — Conquest blood feud / execution / puppet relative** · **AGREED; RARE / LONG GAME**. Distinct from generic conquest: explicit remembered hatred can motivate exceptional execution or deposition and installation of another dynastic claimant, with reciprocal family resentment across generations. **Dependency:** A01/A02/A07, B03. **Source:** [M2 approved refinement](narrative/character-engine-m2-design.md).
+
+**G06 — Rare spectacular dynastic coincidences** · **PROPOSED; LONG GAME**. For example an unrecognised pretender returns after several generations of exile, or former enemies' heirs reconcile through an actual Peace-triggered dynastic marriage. Must emerge from lawful committed interactions and persistent IDs, not a random free-standing story card. **Dependency:** A01–A11, D01.
+
+## H. Story presentation, visual design, historical props and optional variants
+
+**H01 — Collection 10 identity-keyed portraits** · **PROPOSED; depends on C01/C03**. Portraits by each line of speaker, age/style evolution, context-aware adviser/regent/VIP identity. Already designed complete-scrollable conversation presentation can accept portraits later; portraits must not block dialogue. **Source:** [09D](narrative/collection09cd-counsel-dialogues.md).
+
+**H02 — India map and physical play UX future polish** · **PARTIAL / OPEN**. Maintain fitted glanceable vector map without unnecessary scroll, hidden rarely-used navigation, no redundant legend, selected-region outline in front, trade-route visibility and touch-first +/- controls. Specific corrections only after inspecting current browser; not blanket authorization to modify existing geometry/UI. **Source:** previous map UX review and existing `dist/` UI.
+
+**H03 — Historical loot objects and descriptions** · **PROPOSED / OPEN source research**. Previously requested *three historically plausible unique treasure descriptions per region* plus generic fallbacks, each linked to the region's **one-time** Company conquest loot token; no repeated treasure when Indian empires conquer/reconquer. Maratha loot amount was user-corrected to £3. Verify available treasure research against scenario and avoid implying treasure impacts rules beyond the reported loot amount. **Source:** project loot requirements; game rulebook.
+
+**H04 — Optional nemesis-driven Elephant influence** · **PROPOSED VARIANT ONLY**. A ruler's nemesis might eventually flavour or affect Elephant movement in a separate hypothetical full-game ruleset. For the John Company companion, **default printed movement rules are mandatory**; no narrative alteration. **Source:** original narrative design discussion.
+
+**H05 — Broader historical roles, rare women regents/sovereigns and cultural specificity** · **AGREED direction; OPEN research**. Historical possibility without stereotypes or artificially uniform role distribution; claims, court titles, religious/linguistic naming forms, historical plausible ages and practices need region/era-aware writing. **Source:** [M2](narrative/character-engine-m2-design.md), [Collection 10](narrative/collection10-identity.md), [09C/09D](narrative/collection09cd-counsel-dialogues.md).
+
+**H06 — Narrative labels vs game components guardrail** · **PERMANENT REVIEW ITEM**. Elephant is not a literal beast, tower not literal wall, unrest cube not a known uprising, closed Order not a physical shutter, discarded tile not something characters see, fatigue not loss of a ship. Check existing fallbacks and future scripts; preserve all already approved exact 09E text until a separate wording review. **Source:** [component-to-fiction glossary](narrative/component-to-fiction-glossary.md).
+
+## I. Future standalone extended game
+
+**I01 — Full game with longer campaigns** · **AGREED long-range vision; RARE / LONG GAME**. Shared character/history engine, but a new authoritative simulation could create more turns and deeper dynastic change without needing the physical John Company board. Details of rules, scope, time scales and product remain undecided; no implementation authorization. **Source:** [long-game vision](narrative/long-term-simulation-vision.md).
+
+**I02 — Independent political, military and economic resolvers** · **PROPOSED architecture**. Future game may supply authoritative events instead of John Company printed action/tile resolver. Narrative engine should consume stable provenanced incident categories and not assume a specific tile or office exists everywhere. Never relax existing companion rules. **Source:** [long-game vision](narrative/long-term-simulation-vision.md).
+
+**I03 — Long-term balance, event frequency and cumulative narrative coherence** · **AGREED principle**. Rare arcs can stay ~one in 100 short board-game campaigns if warranted. Do **not** artificially increase rarity to showcase a scene. Simulate many longer histories to tune death, marriage, rebellion personalities, loyalty, revenge, rumours and status changes. **Source:** [long-game vision](narrative/long-term-simulation-vision.md).
+
+**I04 — Scalable historical memory and campaign chronicle** · **PROPOSED**. Provenance-rich event history, bounded storage/callback relevance, recurring identity, quote selection, relationship memory and temporal consistency across generations. Narrative renderer should not decide what historically happened by merely being opened. **Source:** [long-game vision](narrative/long-term-simulation-vision.md).
+
+---
+
+## Cross-cutting backlog and acceptance gates
+
+1. **Creative review before implementation:** All new dialogue templates, historical anecdotes, monarch speeches, complex death scenes, portrait directions and rare VIP dialogue need explicit editorial approval; a conceptual green light is not approval of exact text.
+2. **Provenance and causality:** Only commit a consequential story episode at a real source event. Before resolution, it may predict or fear; after resolution, it may assert only actual outcomes plus explicitly chosen and saved narrative-only consequences.
+3. **Rule isolation:** No character trait, marriage, claim, grudge, restoration, impostor, VIP or joke can alter John Company combat, control, printed Orders, dice, flags, legal actions or phase timing.
+4. **Save integrity:** Same IDs, same exact recorded utterances and known state after reload/import/export, Undo/Redo, snapshots and scene revisit; current-schema saves without future optional fields still open.
+5. **Knowledge boundary:** Private thoughts ≠ public speeches; a commenter must know earlier statement to quote it. Public discard composition ≠ hidden draw order. Narrative weather/France stages must not leak future information.
+6. **Narrative mode presentation:** Automatic full scrollable scenes without `Read scene` or redundant confirmations; physical game action/report remains primary. Normal/quiet preserve their contracts.
+7. **Tuning:** No hard-coded probabilities for rare claims, death, marriage or violent feud resolution until synthetic multi-turn and longer-campaign distributions plus editorial examples are reviewed.
+8. **Scope discipline:** Clearly state when Codex is working only on one milestone. A new discussion may update this register without silently widening active coding tasks.
+9. **Release discipline:** A GitHub commit is not a hosted Site deployment. Site deployment requires separate authorization.
+
+## Recommended dependency order (not a mandatory sprint calendar)
+
+1. Verify Codex **M2A** completion and baseline tests; then **M2B succession/regency foundation**.
+2. Complete evidence-based **relationship-driven imperial settlement** and **Peace/Leader** narrative, with tuned rare live triggers.
+3. In parallel, progress independent **five-stage workflow**, Bonuses & Revenue and Parliament scenes.
+4. **Collection 10A** full names and **10B** biographies/historical research, followed by stable portraits when ready.
+5. Expand **Shuffle follow-through**, adviser rivalries and deferred fully guarded dialogue families.
+6. Add **exile/return/impostor**, handcrafted rogue and foreign VIP arcs once identity/succession/chronicle infrastructure supports them.
+7. Test true longer campaigns; retain all rare arcs as future standalone possibilities rather than stuffing them into short John Company scenarios.
+
+## Delivered-baseline index (do not confuse with backlog)
+
+- Core companion resolver/map/scenarios/saves — [current status](current-status.md).
+- Initial persistent narrative people and political memory — [current status](current-status.md).
+- Company Operations UI/adviser foundations — [09C-1](narrative/collection09c1-implementation.md), [09C-2 design](narrative/collection09c2-adviser-design.md), [09D counsel](narrative/collection09cd-counsel-dialogues.md).
+- Public known Shuffle outlook and evidence-gated selections — [09A/09B implementation](narrative/collection09-implementation.md), [evidence report](narrative/collection09-evidence-implementation.md).
+- Collection 09E 81 integrated texts and automatic scene presentation — [09E report](narrative/collection09e-implementation.md).
+- Character M1 23 persistent identities and optional six-status/history foundation — [M1 implementation](narrative/character-engine-m1-implementation.md).
+- Collection 10 **is unimplemented** by its own documented [identity/historical colour design](narrative/collection10-identity.md); do not confuse it with the separate character lifecycle milestones.
+
+## Review questions maintained for future design
+
+- Historical per-scenario time/age and date-specific real-history reference policy.
+- Tuned rarity of death, ordinary marriage, regency, blood-feud execution, exile, impostor and presumed-dead return; maximum new cast size.
+- Identity and cultural naming policy, including new vs existing save display and historical sources.
+- Exactly how a claimant is chosen/proven before/after an uncertain rebellion result.
+- Which local ruler survives after Company/Indian/foreign conquest, and how live narrative death or exile is justified without inferring a printed-rule casualty.
+- No hidden knowledge or untracked finance/ship inventories silently used for adviser, shareholders or France narratives.
+- Review whether existing event/Shuffle and Army advisers already satisfy specific subfeatures before implementing duplicative logic.
+- Which future standalone simulation mechanics, if any, should make kinship and diplomacy alter gameplay; **none** may do so in the current companion.
+
+**Maintainer note:** Prefer adding a brief linked item over relying on chat history alone. New ideas should be recorded even if their probability is vanishingly small, but new additions must be labelled *proposed* until explicitly endorsed.
