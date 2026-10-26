@@ -6,6 +6,26 @@
 
 The narrative remembers actual people; it does not simply regenerate regional speaker names. A character has a persistent ID, family and personal history independent of the region's game control, plus a current fictional political role. All territorial outcomes, allegiance and tower strength remain solely determined by the John Company 2E resolver. Players do not administer the family simulation.
 
+## User decision — automatic succession and three distinct fates (26 October 2026)
+
+**Approved:** Succession is automatic narrative processing, not a player-choice interface. Preserve the mechanically authoritative region status and appoint/reconcile narrative characters only at committed, eligible events.
+
+Distinguish **confirmed dead**, **exiled**, and **presumed dead**:
+
+- **Confirmed dead:** final and irreversible for that character; no bodily return, hidden-survival reveal or retroactive reversal. Family, enemies, claims and memory remain eligible for callbacks and inherited disputes.
+- **Exiled:** alive and displaced; comparatively **high relative eligibility** for later reappearances or restorations when an actual compatible rebellion, conquest, Leader event or other authority-changing incident occurs. Exile is not restoration by itself. Character identity, relationships and grievance provenance persist. Exact chance not yet set.
+- **Presumed dead:** no verified death; disappearance under plausible circumstances with uncertain whereabouts. **Low relative eligibility** for a dramatic later return, but not impossible. Treat it as genuine uncertainty from player and character viewpoints; do **not** secretly predetermine survival and leak this through roster labels, incident summaries, tooltips or adviser certainty. At a later compatible event, the narrative may resolve the uncertainty as survival, retain the mystery, or establish confirmed death if warranted. No return is mechanically guaranteed and no character can take the throne absent compatible authoritative map outcome or succession-only holder change.
+- **Missing (optional distinction):** unknown location but insufficient reason to presume death; consider retaining it separately if useful, rather than conflating it with presumed dead.
+- **Imprisoned:** known alive but incapacitated; remains separate from exile and presumed dead.
+
+**Public roster:** Display 'Presumed dead' and last known circumstances, not a hidden alive/dead boolean or preselected plot twist. Exile displays known status, allowing meaningful warnings; confirmed death is definitively recorded. Any uncertain fate must be resolved only on committed incident and remain consistent through Undo/Redo, reload, exports and archive playback.
+
+**Entry eligibility:** A plausible battle, political flight, usurpation or disappearance can create a presumed-dead status only when that *narrative fate itself* is explicitly committed; do not infer actual deaths, imprisonment or disappearances from generic failure/exhaustion alone. Future returns choose eligible existing IDs with relative bias exiled ≫ presumed dead, constrained by scenario, age/timeline, actual political context and cooldowns. A claim by an impostor may be fictional only if it does not overwrite the original identity or pretend the original survived.
+
+**Editorial examples:** An exiled former ruler can be a recurring expected troublemaker; a presumed-dead prince can be the subject of conflicting rumours and, exceptionally, reappear during an eligible Leader/rebellion story. Confirmed dead remain a source of lineage and grievance, not a surprise return.
+
+**Implementation status:** Design approved; precise probabilities and algorithms require separate review and Codex authorization.
+
 ## Two independent axes
 
 - **Life status:** alive, dead, missing, imprisoned, exiled (the last three are narrative whereabouts/fate categories, not automatic disqualification from claims). Do not conflate being deposed with death.
