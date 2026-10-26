@@ -17,6 +17,7 @@ export function validateActionProgress(state,saved){
  if(d.officerRouts&&(typeof d.officerRouts!=='object'||Array.isArray(d.officerRouts)||Object.entries(d.officerRouts).some(([id,n])=>!Object.hasOwn(state.regions,id)||!Number.isInteger(n)||n<0||n>1000)))fail('invalid officer rout counts.');
  if(!hasCommittedProgress(state,d))fail('no committed event or die result.');
  if(saved.ui?.instructionCursor!==undefined&&(!Number.isInteger(saved.ui.instructionCursor)||saved.ui.instructionCursor<0||saved.ui.instructionCursor>10000))fail('invalid instruction position.');
+ if(saved.ui?.stagedPresented!==undefined&&(!Array.isArray(saved.ui.stagedPresented)||saved.ui.stagedPresented.some(key=>!saved.ui.stagedScenes?.some(s=>s.key===key))||new Set(saved.ui.stagedPresented).size!==saved.ui.stagedPresented.length))fail('invalid scene viewing position.');
  if(saved.ui?.stagedScenes)validatePendingScenes(state,d,saved.ui.stagedScenes);
  return saved;
 }

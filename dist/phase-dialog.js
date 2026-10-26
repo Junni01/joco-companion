@@ -1,5 +1,6 @@
 import {ensurePhaseScene,phaseScene} from './narrative-staged.js';
-import {stagedScenesHTML,showStagedPage} from './narrative-staged-ui.js';
+import {takeStageViews} from './narrative-stage-views.js';
+import {stagedScenesHTML} from './narrative-staged-ui.js';
 import {narrativeWeather,weatherConcealed,countPending} from './weather-presentation.js';
 import {REGIONS} from './model.js';
 import {phaseFor,STORM_FACES,rollStormFace,shipInstructions} from './india-phase.js';
@@ -38,15 +39,17 @@ export function openIndiaPhase({state,showDialog,apply,esc,drawEvent,blackmail,o
  }
  if(weatherConcealed(state)){
   const face=STORM_FACES[phase.face],calm=!face.seas.length,scene=remember('weather');
-  show(calm?'Calm seas':'Storms at sea',`${calm?'<p>The seas are calm. No ship checks are required.</p>':`<p>Storms affect <b>${esc(face.seas.join(', '))}</b>.</p><h4>Physical ship instructions</h4><ol class="action-instructions">${shipInstructions(phase.face).map(t=>`<li>${esc(t)}</li>`).join('')}</ol>`}`,(scene?'<button id="read-weather-scene">Read scene</button>':'')+(calm?'<button id="calm-continue" class="primary">Continue</button>':'<button id="ships-resolved" class="primary">All ship rolls resolved</button>'));
-  if(scene)$('read-weather-scene').onclick=()=>showStagedPage({scenes:[scene],title:calm?'Calm seas':'Storms at sea',showDialog,onBack:reopen});
+  const scenes=scene?takeStageViews(state,state.narrative.weather?.sourceIncidentId,[scene],state.narrative.weather?.scenePresented?['weather']:[]):[];
+  if(scene&&!state.narrative.weather.scenePresented)present({scenePresented:true});
+  show(calm?'Calm seas':'Storms at sea',`${stagedScenesHTML(scenes)}${calm?'<p>The seas are calm. No ship checks are required.</p>':`<p>Storms affect <b>${esc(face.seas.join(', '))}</b>.</p><h4>Physical ship instructions</h4><ol class="action-instructions">${shipInstructions(phase.face).map(t=>`<li>${esc(t)}</li>`).join('')}</ol>`}`,(calm?'<button id="calm-continue" class="primary">Continue</button>':'<button id="ships-resolved" class="primary">All ship rolls resolved</button>'));
+  if(scenes.length)$('dialog').scrollTop=0;
   if(calm)$('calm-continue').onclick=()=>{present({weatherPresented:true});reopen();};
   else $('ships-resolved').onclick=()=>{try{$('ships-resolved').disabled=true;const r=resolveAction(state,{type:'phase-ships'});apply(r);openIndiaPhase({state:r.state,showDialog,apply,esc,drawEvent,blackmail,onPresentation});}catch(e){fail(e);}};
   return;
  }
  if(countPending(state)){
   const scene=remember('tension');present({countPresented:true});
-  show('Events ahead',`<p class="eyebrow">EVENTS IN INDIA</p><h4>${phase.total} India event${phase.total===1?'':'s'}</h4>${scene?stagedScenesHTML([scene]):''}`, '<button id="events-revealed" class="primary">Continue</button>');$('events-revealed').onclick=reopen;return;
+  show('Events ahead',`<p class="eyebrow">EVENTS IN INDIA</p><h4>${phase.total} India event${phase.total===1?'':'s'}</h4>${scene?stagedScenesHTML([scene]):''}`, '<button id="events-revealed" class="primary">Continue</button>');$('events-revealed').onclick=reopen;if(scene)$('dialog').scrollTop=0;return;
  }
  const face=STORM_FACES[phase.face],recap=phaseRecapHTML(state,esc),headline=`<div class="notice"><b>${esc(face.label)} · ${phase.total} event${phase.total===1?'':'s'}</b><p>${phase.completed} of ${phase.total} events resolved. The storm result is saved.</p></div>${recap}`;
  if(phase.status==='ships'){

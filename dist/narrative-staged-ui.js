@@ -1,4 +1,3 @@
 import {actionSceneHTML} from './narrative-resolution.js';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function stagedScenesHTML(scenes=[]){return scenes.map(s=>`<section class="staged-dialogue" data-staged-template="${esc(s.templateId)}"><h4>${s.kind==='force'?esc(s.context.region[0].toUpperCase()+s.context.region.slice(1)):s.kind==='weather'?'At sea':s.kind==='tension'?'Across India':s.context.type==='france'?'War Against France':'Foreign military threat'}</h4>${actionSceneHTML(s.lines)}</section>`).join('');}
-export function showStagedPage({scenes,title,showDialog,onBack}){showDialog(title,stagedScenesHTML(scenes),'<button id="staged-back" class="primary">Return to physical instructions</button>');document.getElementById('staged-back').onclick=onBack;}
