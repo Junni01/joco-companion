@@ -118,3 +118,8 @@ All 81 approved weather, tension and invasion scenes now use actual saved facts 
 ## Persistent character foundations — Milestone 1
 
 The original 23 identities now support six public life statuses and separate optional political-role/history records. Existing committed role changes retain provenance; no new fates or succession are generated. Current-version saves load without migration/backfill. See the [implementation](docs/narrative/character-engine-m1-implementation.md) and [small demonstration](docs/narrative/character-engine-m1-demo.md). No hosted Site deployment.
+
+
+## Character Engine Milestone 2A — Families and Claims
+
+Optional typed family links, house affiliations and structured claims extend the existing engine. Dossiers show known relationships and claim provenance; existing sibling identities and saved games remain unchanged. No family generation or automatic succession. See the [implementation/compatibility report](docs/narrative/character-engine-m2a-implementation.md) and [small existing/synthetic family demonstration](docs/narrative/character-engine-m2a-demo.md). No hosted Site deployment.

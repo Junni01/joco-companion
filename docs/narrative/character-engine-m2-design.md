@@ -118,3 +118,8 @@ Major succession receives a serious or dryly humorous complete scene, highlighti
 - **Implementation scheduling:** M2A currently concerns family links and claims only. Keep this decision in the M2B / future conquest-settlement design; do not expand Codex M2A mid-task, rewrite existing prose, or deploy the hosted Site.
 
 **Illustrative situation:** Delhi and Punjab's rulers have a documented familial blood feud. Delhi conquers Punjab; the narrative might record the Punjabi ruler's execution and the appointment of his younger brother as Delhi's vassal. Subsequent episodes can remember the specific victim, the appointing emperor, and the new ruler's mixed indebtedness and resentment. No province changes hands beyond the game's recorded conquest.
+
+
+## M2A implementation status — 26 October 2026
+
+M2A foundations are implemented: [schema and compatibility report](character-engine-m2a-implementation.md), [existing/synthetic family demonstration](character-engine-m2a-demo.md), [verification](character-engine-m2a-verification.json). This does not authorize or implement M2B succession/regency, live family/fate generation or conquest settlements.

@@ -1,0 +1,24 @@
+{
+  "checks": [
+    "desktop: regular/debug original 23-person family unchanged; synthetic 31-person dynasty parentage/adoption/widow/guardian/competing claims, quiet/read-only dossiers with basis evidence, reload/import/export/snapshots, actual conquest and Undo/Redo; no successor selected or Normal cast",
+    "tablet: regular/debug original 23-person family unchanged; synthetic 31-person dynasty parentage/adoption/widow/guardian/competing claims, quiet/read-only dossiers with basis evidence, reload/import/export/snapshots, actual conquest and Undo/Redo; no successor selected or Normal cast"
+  ],
+  "errors": [],
+  "browser": "156.0.8078.47",
+  "viewports": [
+    "1440x900",
+    "1024x768"
+  ],
+  "automated": {
+    "passed": 454,
+    "failed": 0,
+    "newFamilyTests": 36
+  },
+  "baseline": "a842724",
+  "migration": "None. Version 2, optional typed collections, no backfill or interpretation of dynasty strings as ancestry.",
+  "regressions": [
+    "check-09e-browser.cjs",
+    "check-character-engine-browser.cjs",
+    "check-m2-browser.cjs"
+  ]
+}
