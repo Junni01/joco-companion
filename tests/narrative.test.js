@@ -159,6 +159,9 @@ test('first ordinary Tax differs from repeated Tax, while first Governor General
 
 test('dead rulers remain archived and never speak new lines',()=>{
  const s=enabled();s.narrative.characters['ruler-bombay'].condition='dead';
+ assert.throws(()=>validate(s),/active ruler/);
+ // Test-only replacement by the existing sibling; production does not succeed anyone.
+ const dead=s.narrative.characters['ruler-bombay'],replacement=s.narrative.characters['heir-bombay'];dead.politicalRole={kind:'former-ruler',region:'bombay'};replacement.role='ruler';replacement.position=dead.position;replacement.politicalRole={kind:'sovereign-ruler',region:'bombay'};s.narrative.seats.bombay=replacement.id;delete s.narrative.outlooks.bombay;
  const next=commitNarrative(s,resolveDeployment(s,deploy()));validate(next);
  assert(!next.history.at(-1).narrative.lines.some(l=>l.speakerId==='ruler-bombay'));
  assert.equal(next.narrative.characters['ruler-bombay'].condition,'dead');
@@ -166,10 +169,10 @@ test('dead rulers remain archived and never speak new lines',()=>{
 
 test('imprisoned living characters age while dead characters do not',()=>{
  const s=enabled(inParliament(initialState()));s.parliamentFinishedTurn=s.turn;
- s.narrative.characters['ruler-bombay'].condition='imprisoned';s.narrative.characters['ruler-delhi'].condition='dead';
+ s.narrative.characters['heir-bombay'].condition='imprisoned';s.narrative.characters['heir-delhi'].condition='dead';
  const next=apply(s,{type:'next-turn'});
- assert.equal(next.narrative.characters['ruler-bombay'].age,s.narrative.characters['ruler-bombay'].age+3);
- assert.equal(next.narrative.characters['ruler-delhi'].age,s.narrative.characters['ruler-delhi'].age);
+ assert.equal(next.narrative.characters['heir-bombay'].age,s.narrative.characters['heir-bombay'].age+3);
+ assert.equal(next.narrative.characters['heir-delhi'].age,s.narrative.characters['heir-delhi'].age);
 });
 
 test('debug turn staging rebases the narrative clock without changing ages or inventing witnessed history',()=>{

@@ -9,6 +9,7 @@ export function factRef(entry,index){return {incidentId:entry.incident.id,factKe
 export function resolveFact(index,ref){return index.facts.get(`${ref.incidentId}/${ref.factKey}`);}
 export function incidentReferences(state,id){
  const n=state.narrative;if(!n)return [];const found=[];
+ for(const c of Object.values(n.characters))for(const rows of [c.conditionHistory||[],c.politicalHistory||[]])for(const t of rows)if(t.source.incidentId===id)found.push(`Character status/role history (${c.name})`);
  if(n.weather?.sourceIncidentId===id)found.push('Current weather presentation');
  for(const m of Object.values(n.memories||{}))if(m.evidence.some(r=>r.incidentId===id))found.push(`Memory ${m.id} (${n.characters[m.ownerId]?.name||m.ownerId})`);
  for(const s of Object.values(n.statements||{}))if(s.incidentId===id)found.push(`Statement ${s.id}`);

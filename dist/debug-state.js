@@ -57,7 +57,7 @@ export function debugMoveTile(s,id,destination,index){
  const draw=s.eventStack.draw.filter(t=>t!==id),discard=s.eventStack.discard.filter(t=>t!==id),pile=destination==='draw'?draw:discard;
  check(Number.isInteger(index)&&index>=0&&index<=pile.length,'Choose a position inside the pile.');pile.splice(index,0,id);return debugDeck(s,draw,discard);
 }
-export function debugResult(s,next,title){if(next.narrative){const kept=new Set(next.history.map(h=>h.incident?.id));assertHistoryDeletionAllowed(s,s.history.filter(h=>h.incident&&!kept.has(h.incident.id)).map(h=>h.incident.id));}validateDebugState(next);return {state:record(next,next,'Debug setup · '+title)};}
+export function debugResult(s,next,title){if(next.narrative){for(const c of Object.values(next.narrative.characters))for(const t of [...(c.conditionHistory||[]),...(c.politicalHistory||[])])if(t.source.historyIndex!==undefined&&JSON.stringify(s.history[t.source.historyIndex])!==JSON.stringify(next.history[t.source.historyIndex]))throw Error('Recorded character status/role history supports this Debug setup entry. Use Undo/Redo or restore the whole checkpoint.');const kept=new Set(next.history.map(h=>h.incident?.id));assertHistoryDeletionAllowed(s,s.history.filter(h=>h.incident&&!kept.has(h.incident.id)).map(h=>h.incident.id));}validateDebugState(next);return {state:record(next,next,'Debug setup · '+title)};}
 export function debugStageEvent(s,tileId,topRegion){
  check(Object.hasOwn(TILES,tileId)&&IDS.includes(topRegion),'Choose an event tile and exposed region.');
  const tiles=[...s.eventStack.draw,...s.eventStack.discard].filter(id=>id!==tileId);

@@ -1,3 +1,4 @@
+import {CONDITION_LABELS,legacyPoliticalRole,recordPoliticalRole,validateCharacters,validateCharacterContinuity} from './narrative-characters.js';
 import {commitStaged,validateStagedHistory} from './narrative-staged.js';
 import {initializeWeather,validateWeather} from './weather-presentation.js';
 import {saveAnticipation,validateAnticipation} from './narrative-resolution.js';
@@ -36,6 +37,7 @@ export function createNarrative(state,seed=seedValue()){
   n.characters[id]={id,name:fullName,aliases:[],region,age:30+random(n,21),dynasty:'Company institution',role,condition:'alive',position:label+' of '+name(region),mood:'watchful',traits:Object.fromEntries(TRAITS.map(t=>[t,20+random(n,61)])),family:[],claims:[],relations:{},incidents:[],background:'A fictional institutional adviser, distinct from every player officeholder.',provenance:'Fictional pre-campaign background'};
  }
  n.characters['secretary-general']={...copy(n.characters['secretary-bengal']),id:'secretary-general',name:'Arthur Pembroke',region:'bengal',position:'Governor General secretary'};
+ const view={...state,narrative:n};for(const c of Object.values(n.characters)){c.politicalRole=legacyPoliticalRole(view,c);c.politicalHistory=[];c.conditionHistory=[];}
  return initializeOutlooks(state,initializePoliticalMemory(n));
 }
 export function validateNarrative(state){
@@ -45,11 +47,11 @@ export function validateNarrative(state){
  ensure(n.characters&&typeof n.characters==='object'&&!Array.isArray(n.characters)&&Object.keys(n.characters).length<=2000,'character catalogue');
  for(const [id,c] of Object.entries(n.characters)){
   ensure(c&&c.id===id&&typeof c.name==='string'&&c.name.length<=160&&regions.includes(c.region),'character identity');
-  ensure(Number.isInteger(c.age)&&c.age>=0&&c.age<=200&&['alive','dead','missing','imprisoned'].includes(c.condition),'age or condition');
+  ensure(Number.isInteger(c.age)&&c.age>=0&&c.age<=200&&Object.hasOwn(CONDITION_LABELS,c.condition),'age or condition');
   ensure(['ruler','heir','secretary','army'].includes(c.role)&&typeof c.position==='string'&&typeof c.mood==='string'&&typeof c.background==='string','character role');
   ensure(TRAITS.every(t=>Number.isInteger(c.traits?.[t])&&c.traits[t]>=0&&c.traits[t]<=100),'traits');
   ensure(Array.isArray(c.family)&&c.family.every(f=>n.characters[f.id]&&typeof f.tie==='string'),'family reference');
-  ensure(Array.isArray(c.claims)&&c.claims.every(r=>regions.includes(r))&&Array.isArray(c.incidents)&&c.incidents.every(i=>typeof i==='string'),'character records');
+  ensure(Array.isArray(c.claims)&&c.claims.every(r=>regions.includes(r))&&Array.isArray(c.incidents)&&c.incidents.length<=10000&&new Set(c.incidents).size===c.incidents.length&&c.incidents.every(i=>typeof i==='string'),'character records');
   ensure(c.relations&&typeof c.relations==='object'&&Object.values(c.relations).every(r=>r&&Array.isArray(r.origins)&&r.origins.every(i=>typeof i==='string')&&['hostility','gratitude','respect','mistrust','loyalty','familiarity'].every(k=>Number.isInteger(r[k])&&r[k]>=0&&r[k]<=100)),'relationships');
  }
  ensure(regions.every(r=>n.characters[n.seats?.[r]]?.region===r&&n.characters[n.seats[r]].role==='ruler'),'regional seats');
@@ -57,7 +59,7 @@ export function validateNarrative(state){
  ensure(Array.isArray(n.chapters)&&n.chapters.every(c=>Number.isInteger(c.turn)&&typeof c.title==='string'&&typeof c.text==='string'&&Array.isArray(c.incidents)),'chapters');
  ensure(Number.isInteger(n.lastAgedTurn)&&n.lastAgedTurn<=state.turn,'ageing boundary');
  const ids=new Set();
- validatePoliticalMemory(state);validateStagedHistory(state);validateWeather(state);
+ validateCharacters(state);validatePoliticalMemory(state);validateStagedHistory(state);validateWeather(state);
  for(const h of state.history){if(!h.narrative)continue;validateAnticipation(state,h);const scene=h.narrative;
   ensure(typeof scene.id==='string'&&!ids.has(scene.id)&&Array.isArray(scene.lines)&&scene.lines.length<=40,'scene identity');ids.add(scene.id);
   for(const l of scene.lines)ensure(l.incidentId===scene.id&&(l.speakerId==='chronicler'||n.characters[l.speakerId])&&typeof l.templateId==='string'&&typeof l.text==='string'&&l.text.length<=5000&&typeof l.emotion==='string','saved scene');
@@ -77,12 +79,13 @@ function chapter(state,n,turn,ending=false){
 // Called exactly at the application commit boundary; previews remain pure gameplay.
 export function commitNarrative(before,result){
  if(!before.narrative||!result.state.narrative)return result.state;
+ validateCharacterContinuity(before,result.state);
  if(result.state.history.at(-1)?.narrative)return result.state; // already processed result
  const state=copy(result.state),n=state.narrative,entry=state.history.at(-1);
  if(!entry||entry.kind==='correction'||entry.actionType==='rename'){
   // Debug edits are setup provenance, never invented conquest, grievances or promises.
   if(entry?.kind==='correction'){
-   for(const region of regions){n.characters[n.seats[region]].position=position(state.regions[region]);const a=n.allegiances.find(a=>a.subject===region&&!a.end);if(a&&a.capital!==state.regions[region].overlord)a.end={turn:state.turn,reason:'debug-setup'};
+   for(const region of regions){n.characters[n.seats[region]].position=position(state.regions[region]);recordPoliticalRole(before,state,entry,region);const a=n.allegiances.find(a=>a.subject===region&&!a.end);if(a&&a.capital!==state.regions[region].overlord)a.end={turn:state.turn,reason:'debug-setup'};
     if(state.regions[region].overlord&&!n.allegiances.some(a=>a.subject===region&&!a.end))n.allegiances.push({id:'debug-'+n.nextIncident+++'-'+region,subject:region,capital:state.regions[region].overlord,subjectRuler:n.seats[region],capitalRuler:n.seats[state.regions[region].overlord],start:state.turn,origin:'unknown',promises:[],end:null,provenance:'Debug setup'});
    }
   }
@@ -112,7 +115,7 @@ export function commitNarrative(before,result){
   if(f.type==='deployment'&&f.outcome!=='success'){summary.push(`The Company deployment in ${name(f.region)} ended in ${f.outcome==='catastrophe'?'catastrophic failure':'failure'}; ${f.losses} officer ${f.losses===1?'loss was':'losses were'} reported.`);reactions.push(['deployment-failed',f.region,{failedDeployment:true},f.army]);}
   if(f.type==='intervention'){const change=incident.changes.find(c=>c.region===f.region),effects=[];if(change?.before.unrest>0&&change.after.unrest===0)effects.push('cleared its unrest');if(change&&Object.keys(change.before.orders).some(o=>!change.before.orders[o]&&change.after.orders[o]))effects.push('restored commercial access');summary.push(`The Company intervention in ${name(f.region)} ${effects.join(' and ')}.`);reactions.push(['intervention',f.region,{intervention:true},f.army]);}
  }
- for(const change of incident.changes){const c=n.characters[n.seats[change.region]];c.position=position(change.after);}
+ for(const change of incident.changes){const c=n.characters[n.seats[change.region]];c.position=position(change.after);recordPoliticalRole(before,state,entry,change.region);}
  if(['tax','unrest','govern'].includes(entry.actionType)){
   const input=incident.input,targets=input.region?[input.region]:regions.filter(r=>state.regions[r].control==='company');
   for(const region of targets){affected.add(region);const change=incident.changes.find(c=>c.region===region),amount=(change?.after.unrest||0)-(change?.before.unrest||0),tax=entry.actionType==='tax'||input.reason==='tax';
