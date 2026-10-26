@@ -49,6 +49,9 @@ This clarifies product intent; do not refactor a Codex task already in progress 
 
 ## Narrative diegesis — board state is not the fictional world (26 October 2026)
 
+**Permanent reference:** [Component-to-fiction narrative glossary and preliminary audit](component-to-fiction-glossary.md). Consult for all new authored dialogue, anticipatory narration, minor-event comedy and editorial review. It supplements—not replaces—exact physical game instructions.
+
+
 **User correction, explicitly agreed:** The Elephant is a physical marker representing looming political/military developments. There is **no literal elephant marching through India as an omen**. Characters and the chronicler must never describe an Elephant game-piece moving, or suggest that anyone inside the fictional world perceives the visible event-stack region as a stack/card. The engine may use marker position and public stack context as inputs to an *anticipatory* scene; fictional speech must translate the inputs into historically plausible rumours, apprehension, diplomatic attention, ominous reports, unrest, warnings or institutional complacency. **Do not use “the Elephant approaches Bengal” as in-universe narration.**
 
 Apply the same separation everywhere: dice pools, tower levels, unrest tokens, Order spaces, action names, card faces and UI state are board-game abstractions. Characters speak about power, troops, displeasure, disrupted markets, expeditions and political consequences rather than mechanical labels or numeric counters. The narrator is also in-universe in style, though it can interpret developments more broadly than individual NPCs. Factual result titles and physical instructions **may** use precise board-game terminology; this prohibition applies to *narrative prose and characters*, not to gameplay instructions.
