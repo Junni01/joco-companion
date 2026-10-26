@@ -1,6 +1,6 @@
 # Character restoration and disputed identity — design proposal
 
-**26 October 2026. Proposal for review; not implementation authorization.** Builds on approved automatic succession, confirmed-dead/exiled/presumed-dead distinctions in `character-lifecycle-design.md`. Resolvers in `dist/actions.js` are authoritative.
+**26 October 2026. Core creative approach approved by user; implementation not yet authorized.** Builds on approved automatic succession, confirmed-dead/exiled/presumed-dead distinctions in `character-lifecycle-design.md`. Resolvers in `dist/actions.js` are authoritative.
 
 ## Central rule
 
@@ -56,9 +56,9 @@ Characters can acquire a nemesis based on repeated personal conflict. A dynastic
 
 ## Open editorial choices
 
-1. Should an exposed *impostor* remain a recurring pretender after a failed claim, or usually vanish from the foreground?
-2. Return weights for exile vs presumed death; avoid per-turn automatic return lottery.
-3. Whether a rare unexpected survivor should be revealed only upon a successful restoration, or sometimes before a failed attempt (both are story-valid if reveal is committed before outcome).
+1. **Approved:** An impostor may remain a recurring pretender after a failed claim, with their own persistent ID; no forced disappearance or automatic restoration.
+2. **Approved relative weighting:** exile returns are much more common when an eligible event occurs; genuine presumed-dead returns are exceptionally rare. Numeric weights and cooldowns still require testing; avoid per-turn automatic return lottery.
+3. **Approved:** A genuine unexpected survivor may be revealed during a successful restoration OR before an unsuccessful attempt; the reveal does not predetermine the rebellion result.
 4. Narrow supported triggers for peaceful rehabilitation without adding extra player reporting.
 
-This document is deliberately proposal-stage; integrate only after a separate user-approved technical handoff.
+These creative choices are approved. Detailed probability tuning, data schema, prose and code integration remain separate work and require a user-approved technical handoff.
