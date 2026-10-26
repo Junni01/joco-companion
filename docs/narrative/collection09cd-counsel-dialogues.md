@@ -47,6 +47,21 @@ This clarifies product intent; do not refactor a Codex task already in progress 
 - Keep the user-approved dedicated **single scrollable narrative page** within existing action dialogs for scenes, with future optional portraits. Do not add per-line clicks, read acknowledgements, duplicate map toasts or extra invented gameplay decisions; preserve physical instructions and already-necessary transition acknowledgements.
 - Scope control: this approves dramaturgical direction, **not** new anticipation prose nor 09D-2 implementation. Review actual current event-stack and Elephant state-machine ordering before a Codex handoff.
 
+## Narrative diegesis — board state is not the fictional world (26 October 2026)
+
+**User correction, explicitly agreed:** The Elephant is a physical marker representing looming political/military developments. There is **no literal elephant marching through India as an omen**. Characters and the chronicler must never describe an Elephant game-piece moving, or suggest that anyone inside the fictional world perceives the visible event-stack region as a stack/card. The engine may use marker position and public stack context as inputs to an *anticipatory* scene; fictional speech must translate the inputs into historically plausible rumours, apprehension, diplomatic attention, ominous reports, unrest, warnings or institutional complacency. **Do not use “the Elephant approaches Bengal” as in-universe narration.**
+
+Apply the same separation everywhere: dice pools, tower levels, unrest tokens, Order spaces, action names, card faces and UI state are board-game abstractions. Characters speak about power, troops, displeasure, disrupted markets, expeditions and political consequences rather than mechanical labels or numeric counters. The narrator is also in-universe in style, though it can interpret developments more broadly than individual NPCs. Factual result titles and physical instructions **may** use precise board-game terminology; this prohibition applies to *narrative prose and characters*, not to gameplay instructions.
+
+Examples of mapping public board information into fiction:
+- Elephant marker near Company Bengal, high unrest → troubling dispatches, unrest in Bengal, mounting anxiety at Company offices; never a migrating omen-elephant or certain forthcoming revolt.
+- Visible stack region Madras → growing attention, concerns or rumours regarding Madras; never a visible stack/card in the fiction.
+- High regional tower → formidable local power, robust court and armed influence; never a literal tower strength.
+- Closed Order → obstructed trade, merchant complaints and commercial restrictions; never movement of an Order marker.
+- Exhausted Army after rule-confirmed failed defence → forces already committed and currently unable to respond; never exhausted game tokens.
+
+A one-off joke may be self-aware about institutions and bureaucracy, **not about board-game mechanisms or anachronistic player UI**. Preserve hidden-event secrecy and uncertainty; don't turn marker-based concern into a claim of known future events. This is an editorial constraint for future 09D-2 anticipation prose and other dialogue, not authorization to change mechanics or implement new writing.
+
 ## 09D-2 India event narration policy — Option A accepted (25 October 2026)
 
 **User approved Option A:** Every resolved India event type—including routine Turmoil, Windfall, Peace, Leader and Shuffle—gets an **opportunity** for its own narrative scene, even when the mechanical effect is small. A single chronicler remark can be sufficient; a major event can support a longer exchange. Do not gate scenes solely on the magnitude of mechanical change or arbitrarily silence a fixed percentage of routine events.
