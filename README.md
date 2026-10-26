@@ -101,3 +101,10 @@ See the [implementation and withheld-effect limits](docs/narrative/collection09d
 Physical instructions retain their existing commit/report sequence. Narrative mode then shows one complete saved scene in the action dialog, with read-only navigation back to instructions. Normal/quiet mode adds no story step. India events retain separate Elephant/public-stack stages and private outlook anticipation; the complete record remains accessible without replaying the last scene on the map.
 
 See the [implementation and writing gaps](docs/narrative/collection09d2-implementation.md), [small application demonstration](docs/narrative/collection09d2-demo.md) and [future-phase engineering assessment only](docs/narrative/collection09d2-phase-assessment.md). No new Revenue/shareholder/Parliament workflow, 09D-3, portraits or hosted Site deployment.
+
+
+## Narrative weather and invasion presentation
+
+Narrative mode now shows ocean conditions before the separately revealed India-event count and silently preserves invasion target/strength results. Normal mode keeps its dice graphics and initial manual storm option. Exact physical procedures, protected results and current saves remain unchanged. New atmospheric writing remains for creative approval; the staged pages currently use factual UI.
+
+See the [implementation and writing gaps](docs/narrative/collection09d2-weather-implementation.md), [small demonstration](docs/narrative/collection09d2-weather-demo.md) and [verification](docs/narrative/collection09d2-weather-verification.json). No hosted Site deployment.

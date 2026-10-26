@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-26",
+  "baseline": "91c9acb",
+  "implementationCommit": "e177f80f9766ec54be8d9a767496bc6ea8d5d262",
+  "automated": {
+    "command": "npm test",
+    "baseline": 350,
+    "tests": 367,
+    "pass": 367,
+    "fail": 0
+  },
+  "dedicatedBrowserChecks": {
+    "checks": [
+      "desktop: all six Narrative faces in regular/debug: one roll, hidden count in workspace/archive, calm/ship separation, delayed reveal, reload and protected Undo/Redo",
+      "desktop: unchanged Normal graphical storm and manual physical storm option, regular/debug",
+      "desktop: Foreign/France multi-target silent rolls at each defence boundary, numeric large-force UI, saved progress and exact restore in regular/debug",
+      "tablet: all six Narrative faces in regular/debug: one roll, hidden count in workspace/archive, calm/ship separation, delayed reveal, reload and protected Undo/Redo",
+      "tablet: unchanged Normal graphical storm and manual physical storm option, regular/debug",
+      "tablet: Foreign/France multi-target silent rolls at each defence boundary, numeric large-force UI, saved progress and exact restore in regular/debug"
+    ],
+    "errors": [],
+    "browser": "156.0.8078.47",
+    "viewports": [
+      "1440x900",
+      "1024x768"
+    ]
+  },
+  "otherPassingBrowserSuites": [
+    "check-resolution-browser.cjs",
+    "check-advice-browser.cjs",
+    "check-counsel-browser.cjs",
+    "check-operations-browser.cjs",
+    "check-m2-browser.cjs",
+    "check-outlook-browser.cjs",
+    "check-trade-browser.cjs"
+  ],
+  "additionalViewports": [
+    "1440x1000",
+    "390x844"
+  ],
+  "newProductionDialogue": 0,
+  "creativeWritingGaps": [
+    "storm/calm weather",
+    "post-weather tension",
+    "invasion theatre",
+    "per-target apparent force scale"
+  ],
+  "siteDeployed": false
+}
