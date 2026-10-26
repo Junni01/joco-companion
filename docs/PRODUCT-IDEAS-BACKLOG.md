@@ -234,6 +234,10 @@ References: [project handoff](current-status.md), [character M1 report](narrativ
 
 **Maintainer note:** Prefer adding a brief linked item over relying on chat history alone. New ideas should be recorded even if their probability is vanishingly small, but new additions must be labelled *proposed* until explicitly endorsed.
 
+## Historical humour research reference
+
+[Historical humour and absurdity — EIC / India inspiration catalogue](narrative/historical-humour-inspiration-catalogue.md) now records ten sourced historical kernels, source reliability, comic mechanisms and suggested **fictional** triggers. This is inspiration only: no approved verbatim dialogue, automatic real-history inserts or implementation authorization. Relevant features include C02, D06, E08, F03/F05, G02 and H03.
+
 ## Reconciliation record — 26 October 2026
 
 These **twelve design-coverage refinements** were checked against an earlier narrative conversation and added here without changing implementation scopes: (1) B01/B05 allegiance episodes and origins; (2) B09 Company regional takeover; (3–4) G07 and G02/G03 foreign-backed rivals, expedition leaders and clients; (5) D06 chronicler/ruler/adviser voices; (6) E08 supporting cast; (7) A13/E09 removal humour; (8) D11 Blackmail scenes; (9) H03 treasure selection and acquisition lifecycle; (10) A14 persistent temperament versus changing confidence/resentment; (11) authored dialogue template/selection contract; (12) D10/F04/F07 unresolved terminal chronicle and G04 possible general-catastrophe royal intervention. **Status corrections:** C05 Local Alliances' independence was already agreed; E05 reporting actual China-trade outcomes remains out of companion scope unless separately reopened.
