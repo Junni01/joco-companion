@@ -113,3 +113,8 @@ See the [implementation and writing gaps](docs/narrative/collection09d2-weather-
 ## Collection 09E dialogue
 
 All 81 approved weather, tension and invasion scenes now use actual saved facts and stable saved wording. Weather/invasion scenes appear automatically before the existing physical instructions and report controls; tensions appear only at count reveal. Already presented scenes do not replay on resume. No new NPCs or gameplay changes. See the [implementation](docs/narrative/collection09e-implementation.md), [small demonstration](docs/narrative/collection09e-demo.md) and [verification](docs/narrative/collection09e-verification.json). No hosted Site deployment.
+
+
+## Persistent character foundations — Milestone 1
+
+The original 23 identities now support six public life statuses and separate optional political-role/history records. Existing committed role changes retain provenance; no new fates or succession are generated. Current-version saves load without migration/backfill. See the [implementation](docs/narrative/character-engine-m1-implementation.md) and [small demonstration](docs/narrative/character-engine-m1-demo.md). No hosted Site deployment.

@@ -68,3 +68,7 @@ Reuse established exiled claimants most often when an actual compatible politica
 ## Editorial invariants
 
 Historical-world glossary applies. 'Presumed dead' is a public uncertainty, not confirmed death. A character may be absent from power while still significant to the story. All major consequential incidents must be tied to real committed events; no player decisions about successors, false reports about deaths, or undisclosed family claims.
+
+## Milestone 1 implementation status — 26 October 2026
+
+Milestone 1 is implemented: see [implementation and compatibility decisions](character-engine-m1-implementation.md), [small demonstration](character-engine-m1-demo.md), and [verification](character-engine-m1-verification.json). No new fates or succession are generated. Milestones 2–4 remain deferred and require separate authorization.

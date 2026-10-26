@@ -1,0 +1,26 @@
+{
+  "checks": [
+    "desktop: regular/debug legacy 23-person roster is unchanged; six explicit test-only statuses, role/fate provenance, quiet/read-only reads, reload, JSON import/export, snapshots, real conquest and exact Undo/Redo; Normal has no cast",
+    "tablet: regular/debug legacy 23-person roster is unchanged; six explicit test-only statuses, role/fate provenance, quiet/read-only reads, reload, JSON import/export, snapshots, real conquest and exact Undo/Redo; Normal has no cast"
+  ],
+  "errors": [],
+  "browser": "156.0.8078.47",
+  "viewports": [
+    "1440x900",
+    "1024x768"
+  ],
+  "automated": {
+    "passed": 418,
+    "failed": 0,
+    "newTests": 18,
+    "existingFateFixturesAdjusted": 2
+  },
+  "baseline": "60870bb",
+  "regressions": [
+    "check-09e-browser.cjs",
+    "check-m2-browser.cjs",
+    "check-counsel-browser.cjs",
+    "check-resolution-browser.cjs"
+  ],
+  "migration": "None: narrative version 2, optional fields, pure absent-field interpretation; no retrospective fate or role episodes."
+}
