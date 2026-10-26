@@ -1,6 +1,6 @@
 # Narrative mode — hidden dice, staged storms and foreign invasions
 
-**Status:** User-directed design, 26 October 2026. Reviewable technical/creative specification; **not yet authorization to modify code or add production dialogue**. Current baseline: accepted 09D-2 technical delivery (350 Codex-reported passing tests). Applies to Narrative mode only; Normal mode retains existing dice animation and physical-manual storm option.
+**Status:** **User authorized focused implementation on 26 October 2026.** Technical/UI changes below are in scope; new literary production dialogue still requires separate user creative review. Current baseline: accepted 09D-2 technical delivery (350 Codex-reported passing tests). Applies to Narrative mode only; Normal mode retains existing dice animation and physical-manual storm option.
 
 ## Editorial principle
 
@@ -64,4 +64,4 @@ Current `dist/action-dialogs.js` uses `rollStormFace()` for Foreign Invasion and
 - `dist/action-dialogs.js`: Foreign/France hidden face rolls and per-target `invasion-roll` animation; preserve stored `d.stormFace`, `d.storm`, `d.rolls`, protected instruction cursor.
 - `docs/narrative/component-to-fiction-glossary.md`: translation from mechanical components to fictional-world meaning.
 
-**Implementation status:** Proposed design, not implemented. Integrate with approved 09D-2 mode-aware single scrollable story pages after creative lines are reviewed. Avoid scope creep into phase workflow, financial reporting, new portraits or 09D-3 relationships.
+**Implementation authorization:** Implement the mode-aware staging, visibility, silent rolls, target/strength resolution and read-only navigation now, preserving baseline mechanics and normal-mode dice. Add only minimal factual labels/instructions when no approved atmospheric line is available; identify precisely which storm, tension and invasion-scale prose needs editorial approval. Do not invent unreviewed production speech. Avoid scope creep into phase workflow, financial reporting, new portraits or 09D-3 relationships. Do not deploy the hosted Site.
