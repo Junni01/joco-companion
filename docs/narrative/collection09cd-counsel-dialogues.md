@@ -56,9 +56,12 @@ Apply the same separation everywhere: dice pools, tower levels, unrest tokens, O
 Examples of mapping public board information into fiction:
 - Elephant marker near Company Bengal, high unrest → troubling dispatches, unrest in Bengal, mounting anxiety at Company offices; never a migrating omen-elephant or certain forthcoming revolt.
 - Visible stack region Madras → growing attention, concerns or rumours regarding Madras; never a visible stack/card in the fiction.
-- High regional tower → formidable local power, robust court and armed influence; never a literal tower strength.
+- High regional tower / a tower-level increase → growing or formidable regional military strength, political authority, influence, resources, military organization or a ruler's rising power; **never a literal tower, building, fortress or tower being constructed or growing** unless an actual separate, verified event concerns real fortifications. Avoid even casual fictional phrases such as 'Delhi's tower grows taller' or 'the towers of Punjab are strengthening'.
 - Closed Order → obstructed trade, merchant complaints and commercial restrictions; never movement of an Order marker.
 - Exhausted Army after rule-confirmed failed defence → forces already committed and currently unable to respond; never exhausted game tokens.
+
+
+**Specific authoring review:** Audit future Leader, Peace, Crisis, regional-strength and ruler-arrogance dialogue for tower-as-building metaphors. A rise in tower level can inspire a ruler's swelling confidence or a neighbour's alarm, but does not prove new forts were built, soldiers recruited or battles fought. Saved historical quotations from accepted previous collections are not silently rewritten by this guidance; flag any discovered violations separately for creative review.
 
 A one-off joke may be self-aware about institutions and bureaucracy, **not about board-game mechanisms or anachronistic player UI**. Preserve hidden-event secrecy and uncertainty; don't turn marker-based concern into a claim of known future events. This is an editorial constraint for future 09D-2 anticipation prose and other dialogue, not authorization to change mechanics or implement new writing.
 
