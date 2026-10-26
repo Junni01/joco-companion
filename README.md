@@ -112,4 +112,4 @@ See the [implementation and writing gaps](docs/narrative/collection09d2-weather-
 
 ## Collection 09E dialogue
 
-All 81 approved weather, tension and invasion scenes now use actual saved facts and stable saved wording. Weather/invasion have optional full-scene reading alongside physical instructions; tensions appear only at count reveal. No new NPCs or gameplay changes. See the [implementation](docs/narrative/collection09e-implementation.md), [small demonstration](docs/narrative/collection09e-demo.md) and [verification](docs/narrative/collection09e-verification.json). No hosted Site deployment.
+All 81 approved weather, tension and invasion scenes now use actual saved facts and stable saved wording. Weather/invasion scenes appear automatically before the existing physical instructions and report controls; tensions appear only at count reveal. Already presented scenes do not replay on resume. No new NPCs or gameplay changes. See the [implementation](docs/narrative/collection09e-implementation.md), [small demonstration](docs/narrative/collection09e-demo.md) and [verification](docs/narrative/collection09e-verification.json). No hosted Site deployment.

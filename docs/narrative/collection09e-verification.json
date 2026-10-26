@@ -1,13 +1,19 @@
 {
   "checks": [
-    "desktop: all six Narrative faces in regular/debug: one roll, hidden count in workspace/archive, calm/ship separation, delayed reveal, reload and protected Undo/Redo",
+    "desktop: automatic weather above physical instructions, no optional narration buttons or additional report clicks; all six Narrative faces in regular/debug: one roll, hidden count in workspace/archive, calm/ship separation, delayed reveal, reload and protected Undo/Redo",
     "desktop: unchanged Normal graphical storm and manual physical storm option, regular/debug",
-    "desktop: Foreign/France multi-target silent rolls at each defence boundary, numeric large-force UI, saved progress and exact restore in regular/debug",
+    "desktop: automatic Foreign/France multi-target silent rolls at each defence boundary, numeric large-force UI, saved progress and exact restore in regular/debug",
     "desktop: France no-invasion uses only exact N-01, with no force appraisal or additional random roll",
-    "tablet: all six Narrative faces in regular/debug: one roll, hidden count in workspace/archive, calm/ship separation, delayed reveal, reload and protected Undo/Redo",
+    "desktop: single-target Foreign/France announcement and saved appraisal automatic with one existing defence report; reload does not replay",
+    "desktop: Indian targets without player defence: every saved scene appears on the next existing physical page, no narration-only steps",
+    "desktop: quiet weather and invasions preserve required controls and suppress fiction without new clicks",
+    "tablet: automatic weather above physical instructions, no optional narration buttons or additional report clicks; all six Narrative faces in regular/debug: one roll, hidden count in workspace/archive, calm/ship separation, delayed reveal, reload and protected Undo/Redo",
     "tablet: unchanged Normal graphical storm and manual physical storm option, regular/debug",
-    "tablet: Foreign/France multi-target silent rolls at each defence boundary, numeric large-force UI, saved progress and exact restore in regular/debug",
-    "tablet: France no-invasion uses only exact N-01, with no force appraisal or additional random roll"
+    "tablet: automatic Foreign/France multi-target silent rolls at each defence boundary, numeric large-force UI, saved progress and exact restore in regular/debug",
+    "tablet: France no-invasion uses only exact N-01, with no force appraisal or additional random roll",
+    "tablet: single-target Foreign/France announcement and saved appraisal automatic with one existing defence report; reload does not replay",
+    "tablet: Indian targets without player defence: every saved scene appears on the next existing physical page, no narration-only steps",
+    "tablet: quiet weather and invasions preserve required controls and suppress fiction without new clicks"
   ],
   "errors": [],
   "browser": "156.0.8078.47",
@@ -16,22 +22,17 @@
     "1024x768"
   ],
   "automated": {
-    "passed": 391,
+    "passed": 400,
     "failed": 0,
-    "new": 24
+    "newPresentationTests": 9
   },
-  "baseline": "5cf165c",
+  "baseline": "06e903a",
   "regressionScripts": [
-    "check-resolution-browser.cjs",
-    "check-m2-browser.cjs",
-    "check-outlook-browser.cjs",
-    "check-advice-browser.cjs",
-    "check-counsel-browser.cjs",
-    "check-operations-browser.cjs",
-    "check-trade-browser.cjs"
+    "check-weather-browser.cjs",
+    "check-resolution-browser.cjs"
   ],
   "notes": [
-    "One combined-run counsel timeout waiting for operations-envoy; independent full desktop/tablet rerun passed.",
-    "All campaigns synthetic and isolated; no hosted Site or user campaign data accessed."
+    "Automatic scene-first existing physical pages; no optional Read scene or new narration-only confirmation.",
+    "Synthetic isolated campaigns; no hosted Site deployment."
   ]
 }
