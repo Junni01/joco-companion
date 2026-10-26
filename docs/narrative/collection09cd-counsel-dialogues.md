@@ -47,6 +47,10 @@ This clarifies product intent; do not refactor a Codex task already in progress 
 - Keep the user-approved dedicated **single scrollable narrative page** within existing action dialogs for scenes, with future optional portraits. Do not add per-line clicks, read acknowledgements, duplicate map toasts or extra invented gameplay decisions; preserve physical instructions and already-necessary transition acknowledgements.
 - Scope control: this approves dramaturgical direction, **not** new anticipation prose nor 09D-2 implementation. Review actual current event-stack and Elephant state-machine ordering before a Codex handoff.
 
+## Hidden dice and dramatic reveals in Narrative mode (26 October 2026)
+
+**User-directed design:** Keep the existing game RNG, roll probabilities and saved outcomes, but **no storm or invasion die artwork/animation in Narrative mode**. Start-of-India storm seas/ship effects and the derived event count appear as **separate reveals** from one saved roll, with event count hidden until storms are resolved. Foreign Invasion and failed War Against France announce actual invasion target(s) based on their own hidden storm roll, then present each target's automatically rolled invasion strength as in-world narrative scale alongside exact numeric physical instructions. Normal mode keeps existing dice visuals and the physical/manual initial storm-die option; invasion rolls remain automatic. Preserve protected progress, hidden-event information and no added pointless confirmations. Full specifications and acceptance tests: [hidden dice and staged weather/invasion presentation](collection09d2-random-outcome-presentation.md). New literary lines require review before production. This is design direction, not yet code authorization.
+
 ## Narrative diegesis — board state is not the fictional world (26 October 2026)
 
 **Permanent reference:** [Component-to-fiction narrative glossary and preliminary audit](component-to-fiction-glossary.md). Consult for all new authored dialogue, anticipatory narration, minor-event comedy and editorial review. It supplements—not replaces—exact physical game instructions.
