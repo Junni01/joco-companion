@@ -1,3 +1,4 @@
+import {activeRegency} from './narrative-succession-state.js';
 // Character identity/fate foundations only. No fate or succession generator.
 export const CONDITION_LABELS=Object.freeze({alive:'Alive',exiled:'Exiled','presumed-dead':'Presumed dead',dead:'Confirmed dead',missing:'Missing',imprisoned:'Imprisoned'});
 export const POLITICAL_ROLES=Object.freeze({'sovereign-ruler':'Sovereign ruler','vassal-ruler':'Vassal ruler','company-dependent-ruler':'Company-dependent ruler',regent:'Regent',claimant:'Claimant','former-ruler':'Former ruler','family-member':'Family member',heir:'Recognised heir',minister:'Minister','court-member':'Court member',secretary:'Institutional secretary','army-adviser':'Army adviser'});
@@ -8,7 +9,7 @@ const boardRole=b=>b.control==='company'?'company-dependent-ruler':b.overlord?'v
 const copy=v=>JSON.parse(JSON.stringify(v));
 export function legacyPoliticalRole(state,c){
  const seated=state.narrative.seats[c.region]===c.id;
- const kind=c.role==='ruler'?(seated?(c.position==='retained local ruler'?'company-dependent-ruler':c.position==='subordinate ruler'?'vassal-ruler':'sovereign-ruler'):'former-ruler'):c.role==='heir'?'family-member':c.role==='army'?'army-adviser':'secretary';
+ const kind=seated?(c.position==='retained local ruler'?'company-dependent-ruler':c.position==='subordinate ruler'?'vassal-ruler':'sovereign-ruler'):c.role==='ruler'?'former-ruler':c.role==='heir'?'family-member':c.role==='army'?'army-adviser':'secretary';
  return {kind,region:c.region};
 }
 export const politicalRoleOf=(state,c)=>c.politicalRole||legacyPoliticalRole(state,c);
@@ -61,6 +62,6 @@ export function validateCharacters(state){
   }
   const seat=n.seats[c.region]===c.id;
   if(seat&&(c.condition!=='alive'||c.politicalRole&&!ruling.has(c.politicalRole.kind)))fail('active ruler must be alive and hold a ruling role');
-  if(c.politicalRole&&ruling.has(c.politicalRole.kind)&&(!seat||c.politicalRole.region!==c.region||c.condition!=='alive'))fail('political office contradicts seat');
+  if(c.politicalRole&&ruling.has(c.politicalRole.kind)&&!(c.politicalRole.kind==='regent'&&activeRegency(state,c.politicalRole.region)?.regentId===c.id)&&(!seat||c.politicalRole.region!==c.region||c.condition!=='alive'))fail('political office contradicts seat');
  }
 }

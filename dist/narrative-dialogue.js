@@ -1,3 +1,4 @@
+import {activeRegency} from './narrative-succession-state.js';
 import {selectApprovedDialogue} from './narrative-approved.js';
 import {selectTradeDialogue} from './narrative-trade.js';
 import {TEMPLATES} from './narrative-content.js';
@@ -86,6 +87,7 @@ export function renderPoliticalDialogue(before,state,entry,scene,contexts,add){
  const priority=x=>x.priority-(x.c.pacing.relevant-x.c.pacing.lastAppearance<=POLICY.speakerCooldown?POLICY.appearancePenalty:0);
  candidates.sort((a,b)=>priority(b)-priority(a));let callbackCount=0;
  for(const {c,role,ctx} of candidates){
+  if(role==='ruler'&&activeRegency(state,ctx.region)&&c.age<activeRegency(state,ctx.region).adultAge)continue;
   if(c.condition!=='alive'||used.has(c.id)||!ctx.evidence.length)continue;
   const quotation=!ctx.commerce&&ctx.perspective!=='sovereign'&&(callbackCount===0||ctx.major)?quoteCallback(before,state,c,ctx):null;
   const authored=quotation?null:ctx.commerce?selectTradeDialogue(state,entry,c,ctx,role):selectApprovedDialogue(state,entry,c,ctx,role);

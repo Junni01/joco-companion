@@ -1,0 +1,4 @@
+// Reconstruct only recorded changes; never infer an unknown earlier holder/fate.
+const at=(s,source)=>source.incidentId?s.history.findIndex(h=>h.incident?.id===source.incidentId):source.historyIndex??-1;
+export function seatAt(s,region,entry){let id=s.narrative.seats[region];const order=entry?.incident?.id?s.history.findIndex(h=>h.incident?.id===entry.incident.id):s.history.indexOf(entry);for(const r of [...(s.narrative.successionRecords||[])].reverse())if(r.region===region&&at(s,r.origin.source)>order)id=r.incumbentId;return id;}
+export function conditionAt(s,id,entry){let condition=s.narrative.characters[id].condition;const order=entry?.incident?.id?s.history.findIndex(h=>h.incident?.id===entry.incident.id):s.history.indexOf(entry);for(const t of [...(s.narrative.characters[id].conditionHistory||[])].reverse())if(at(s,t.source)>order)condition=t.from;return condition;}

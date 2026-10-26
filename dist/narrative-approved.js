@@ -1,3 +1,4 @@
+import {seatAt,speakerRoleAt} from './narrative-succession-state.js';
 import {POLISH_DIALOGUE} from './narrative-polish-content.js';
 import {politicalPosture} from './narrative-posture.js';
 import {POLISH_POLICY as PP} from './narrative-policy.js';
@@ -138,7 +139,7 @@ function factualEligibility(state,entry,c,role,f,e,r,memoryId=null,historical=fa
  }
  if(role!=='chronicler'){
   if(!historical&&c.condition!=='alive')return null;
-  if(role==='ruler'&&state.narrative.seats[f.region]!==c.id)return null;
+  if(role==='ruler'&&(historical?seatAt(state,f.region,entry):state.narrative.seats[f.region])!==c.id)return null;
   if(['army','secretary'].includes(role)){
    const facts=entry.incident.facts.filter(x=>x.region===f.region);
    const supported=facts.some(x=>(role==='army'&&(x.army===c.region||x.presidency===c.region))||(role==='secretary'&&(c.id==='secretary-general'?entry.incident.laws.before.governorGeneral:boardAt(state,entry,f.region).presidency===c.region)));
@@ -174,7 +175,7 @@ export function selectApprovedDialogue(state,entry,c,ctx,role){
 // Validate selected words and factual support on import. Do not reselect using later traits.
 export function validateApprovedLine(state,entry,line){
  const e=approvedById.get(line.templateId);if(!e)return;
- const role=line.speakerId==='chronicler'?'chronicler':state.narrative.characters[line.speakerId]?.role;
+ const role=line.speakerId==='chronicler'?'chronicler':speakerRoleAt(state,state.narrative.characters[line.speakerId],entry);
  const regions=[...new Set(line.evidence.map(r=>entry.incident.facts[Number(r.factKey.slice(5))]?.region).filter(Boolean))];
  if(line.text!==e.text||line.emotion!==e.emotion||regions.length!==1)throw Error('Invalid narrative: approved dialogue wording or scope');
  const c=state.narrative.characters[line.speakerId],f=approvedContext(state,entry,regions[0]);

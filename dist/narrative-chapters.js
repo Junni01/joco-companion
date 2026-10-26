@@ -1,3 +1,4 @@
+import {conditionAt} from './narrative-succession-state.js';
 import {CHAPTER_TEMPLATES,fillChapter} from './narrative-chapter-content.js';
 import {tradeContexts} from './narrative-trade.js';
 import {politicalPosture} from './narrative-posture.js';
@@ -143,7 +144,7 @@ function finalGrievance(ctx,region,rejections){
  for(const conquest of conquests.toReversed()){
   const memory=ctx.memories.find(m=>m.category==='company-conquest'&&m.region===region&&m.createdIncident===conquest.h.incident.id&&m.origin==='direct'&&m.perspective==='local'&&m.evidence.some(ref=>equal(ref,conquest.ref)));
   const owner=memory&&state.narrative.characters[memory.ownerId];
-  const identity=owner&&owner.role==='ruler'&&owner.region===region&&owner.condition==='alive'&&owner.memoryIds.includes(memory.id)&&ctx.lines.find(l=>l.h===conquest.h&&l.line.speakerId===owner.id);
+  const identity=owner&&owner.role==='ruler'&&owner.region===region&&conditionAt(state,owner.id,boundary)==='alive'&&owner.memoryIds.includes(memory.id)&&ctx.lines.find(l=>l.h===conquest.h&&l.line.speakerId===owner.id);
   if(!identity)continue; // The seat's own direct local memory and saved words establish identity at the loss.
   const causes=ctx.causes(owner.id),origin=causes.find(c=>c.incidentId===conquest.h.incident.id&&c.memoryIds.includes(memory.id)&&c.deltas.hostility>0);
   const posture=politicalPosture(state,owner,region,boundary.incident.id);

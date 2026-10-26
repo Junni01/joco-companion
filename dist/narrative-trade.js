@@ -1,3 +1,4 @@
+import {seatAt,speakerRoleAt} from './narrative-succession-state.js';
 import {TRADE_DIALOGUE} from './narrative-trade-content.js';
 import {POLICY,TRADE_POLICY as P,narrativeRandom} from './narrative-policy.js';
 import {politicalPosture} from './narrative-posture.js';
@@ -70,7 +71,7 @@ function eligible(state,entry,c,ctx,role,e,{historical=false,line=null}={}){
  const r=rules[e.id];if(r.role!==role||!r.event(ctx))return null;
  if(role!=='chronicler'){
   if(!c||(!historical&&c.condition!=='alive'))return null;
-  if(role==='ruler'&&state.narrative.seats[ctx.region]!==c.id)return null;
+  if(role==='ruler'&&(historical?seatAt(state,ctx.region,entry):state.narrative.seats[ctx.region])!==c.id)return null;
   if(role==='secretary'&&c.region!==(ctx.presidency||ctx.region))return null;
   if(role==='army'&&c.region!==ctx.army)return null;
  }
@@ -105,7 +106,7 @@ export function validateTradeLine(state,entry,line){
  const e=byId.get(line.templateId);if(!e){if(line.templateId.startsWith('TR08-'))throw Error('Invalid narrative: unsupported trade template');return;}
  const ctx=tradeContexts(state,entry).find(c=>c.region===line.tradeRegion&&c.category===line.tradeKind);
  if(!ctx)throw Error('Invalid narrative: trade dialogue event');
- const role=line.speakerId==='chronicler'?'chronicler':state.narrative.characters[line.speakerId]?.role,c=state.narrative.characters[line.speakerId];
+ const role=line.speakerId==='chronicler'?'chronicler':speakerRoleAt(state,state.narrative.characters[line.speakerId],entry),c=state.narrative.characters[line.speakerId];
  const chosen=eligible(state,entry,c,ctx,role,e,{historical:true,line});
  const equal=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
  if(!chosen||line.text!==e.text.replaceAll('{region}',label(ctx.region))||line.emotion!==(chosen.r.emotion||'dry')||!equal(line.evidence,ctx.tradeEvidence)||!equal(line.selectionEvidence||[],chosen.selectionEvidence)||!equal(line.callbackMemoryIds,chosen.recall?[chosen.recall.id]:[])||!equal(line.callbackStatementIds,[])||!equal(line.experienceLineIds||[],chosen.experienceLineIds))throw Error('Invalid narrative: trade dialogue wording or experience');

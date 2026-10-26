@@ -1,3 +1,4 @@
+import {recordedRuler,activeRegency} from './narrative-succession-state.js';
 import {EVENT_TILES,TILES,exposedRegion} from './event-stack.js';
 import {OUTLOOK_TEXT,APPROVED_OUTLOOKS} from './narrative-outlook-content.js';
 import {openCompanyRoutes,routesAtOutlook,routeSetup} from './narrative-outlook-routes.js';
@@ -113,7 +114,7 @@ function refresh(state,entryId=null){
  const n=state.narrative,p=publicKnowledge(state);
  for(const [region,id] of Object.entries(n.seats)){
   const person=personal(state,id),old=n.outlooks[region];
-  if(person.c.condition!=='alive'){delete n.outlooks[region];continue;}
+  if(person.c.condition!=='alive'||activeRegency(state,region)&&person.c.age<activeRegency(state,region).adultAge){delete n.outlooks[region];continue;}
   n.foresight.aptitudes[id]??=hash(id+':'+n.rng)%101;
   const situation=forecastRegion(p,region);
   person.routeEvidence=openCompanyRoutes(state.regions,state.elephant,region);
@@ -154,7 +155,7 @@ export function validateOutlooks(state){
  check(source(f.observedIncidentId),'observation source');
  function batch(b){if(!b)return;const h=state.history.find(h=>h.incident?.id===b.sourceIncidentId);check(Object.keys(b).sort().join(',')==='counts,remaining,sourceIncidentId'&&h?.actionType==='event'&&h.incident.input.stackTile==='madras-shuffle'&&!h.incident.input.manualTest,'batch source');check(Number.isInteger(b.remaining)&&b.remaining>0&&b.remaining<=19&&sum(b.counts)===b.remaining,'batch count');for(const [t,v]of Object.entries(b.counts))check(Object.hasOwn(counts(EVENT_TILES.map(t=>t.id)),t)&&Number.isInteger(v)&&v>=0&&v<=EVENT_TILES.filter(x=>x.event===t).length,'batch composition');}
  batch(f.batch);
- for(const [id,value] of Object.entries(f.aptitudes))check(n.characters[id]?.role==='ruler'&&Number.isInteger(value)&&value>=0&&value<=100,'independent aptitude');
+ for(const [id,value] of Object.entries(f.aptitudes))check((n.characters[id]?.role==='ruler'||recordedRuler(state,id))&&Number.isInteger(value)&&value>=0&&value<=100,'independent aptitude');
  for(const [region,o] of Object.entries(n.outlooks)){
   check(record(o)&&record(o.context)&&record(o.personal)&&record(o.personal.traits)&&Array.isArray(o.memoryIds)&&Array.isArray(o.personal.helpful)&&Array.isArray(o.personal.reasonIds),'saved private assessment');
   check(state.regions[region]&&[1,2,3].includes(o.version)&&o.visibility==='private'&&n.characters[o.characterId]?.region===region&&o.text===OUTLOOK_TEXT[o.templateId]&&source(o.sourceIncidentId),'identity/text/source');

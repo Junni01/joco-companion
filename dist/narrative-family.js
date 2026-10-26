@@ -1,3 +1,4 @@
+import {seatAt} from './narrative-character-history.js';
 // Optional typed kinship/claims. No generation, succession choice or gameplay effects.
 import {NAME_POOLS} from './narrative-content.js';
 import {SCENARIOS} from './scenarios.js';
@@ -78,7 +79,7 @@ export function validateFamilyState(state){
   if(['parentage','adoption','marriage-derived'].includes(c.basis)){
    const type={parentage:'parent',adoption:'adoptive-parent','marriage-derived':'spouse'}[c.basis];if(!family.some(l=>l.type===type&&(type==='spouse'?[l.fromId,l.toId].includes(c.claimantId):l.toId===c.claimantId)&&prior.some(p=>p.claimantId===(l.fromId===c.claimantId?l.toId:l.fromId))))fail('claim lacks its actual family and prior-claim basis');
   }
-  if(c.basis==='previous-rulership'&&n.seats[c.region]!==c.claimantId&&!(people[c.claimantId].politicalHistory||[]).some(t=>[t.from,t.to].some(p=>p.region===c.region&&['sovereign-ruler','vassal-ruler','company-dependent-ruler','regent'].includes(p.kind))&&originOrder(state,{turn:t.turn,source:t.source,reason:t.reason})<=order))fail('unverified previous rulership');
+  if(c.basis==='previous-rulership'&&seatAt(state,c.region,state.history[order])!==c.claimantId&&!(people[c.claimantId].politicalHistory||[]).some(t=>[t.from,t.to].some(p=>p.region===c.region&&['sovereign-ruler','vassal-ruler','company-dependent-ruler','regent'].includes(p.kind))&&originOrder(state,{turn:t.turn,source:t.source,reason:t.reason})<=order))fail('unverified previous rulership');
   if(c.status==='realised'&&(n.seats[c.region]!==c.claimantId||people[c.claimantId].condition!=='alive'))fail('realised claim is not the actual seat');
   const history=c.statusHistory||[];if(!bounded(history,1000))fail('claim history bounds');let last,previousOrder=order;for(const h of history){const at=originOrder(state,h.origin);if(at<=previousOrder||!CLAIM_STATUSES.includes(h.from)||!CLAIM_STATUSES.includes(h.to)||h.from===h.to||last&&last!==h.from)fail('claim status history');last=h.to;previousOrder=at;}if(last&&last!==c.status)fail('claim status mismatch');
  }

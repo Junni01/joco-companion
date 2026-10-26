@@ -1,3 +1,4 @@
+import {validateSuccessionState,recordedRuler} from './narrative-succession-state.js';
 import {validateFamilyState} from './narrative-family.js';
 import {CONDITION_LABELS,legacyPoliticalRole,recordPoliticalRole,validateCharacters,validateCharacterContinuity} from './narrative-characters.js';
 import {commitStaged,validateStagedHistory} from './narrative-staged.js';
@@ -55,12 +56,12 @@ export function validateNarrative(state){
   ensure(Array.isArray(c.claims)&&c.claims.every(r=>regions.includes(r))&&Array.isArray(c.incidents)&&c.incidents.length<=10000&&new Set(c.incidents).size===c.incidents.length&&c.incidents.every(i=>typeof i==='string'),'character records');
   ensure(c.relations&&typeof c.relations==='object'&&Object.values(c.relations).every(r=>r&&Array.isArray(r.origins)&&r.origins.every(i=>typeof i==='string')&&['hostility','gratitude','respect','mistrust','loyalty','familiarity'].every(k=>Number.isInteger(r[k])&&r[k]>=0&&r[k]<=100)),'relationships');
  }
- ensure(regions.every(r=>n.characters[n.seats?.[r]]?.region===r&&n.characters[n.seats[r]].role==='ruler'),'regional seats');
+ ensure(regions.every(r=>n.characters[n.seats?.[r]]?.region===r&&(n.characters[n.seats[r]].role==='ruler'||recordedRuler(state,n.seats[r]))),'regional seats');
  ensure(Array.isArray(n.allegiances)&&n.allegiances.every(a=>regions.includes(a.subject)&&regions.includes(a.capital)&&a.subject!==a.capital&&['unknown','battle','negotiated'].includes(a.origin)&&n.characters[a.subjectRuler]&&n.characters[a.capitalRuler]&&Array.isArray(a.promises)),'allegiance records');
  ensure(Array.isArray(n.chapters)&&n.chapters.every(c=>Number.isInteger(c.turn)&&typeof c.title==='string'&&typeof c.text==='string'&&Array.isArray(c.incidents)),'chapters');
  ensure(Number.isInteger(n.lastAgedTurn)&&n.lastAgedTurn<=state.turn,'ageing boundary');
  const ids=new Set();
- validateCharacters(state);validateFamilyState(state);validatePoliticalMemory(state);validateStagedHistory(state);validateWeather(state);
+ validateCharacters(state);validateFamilyState(state);validateSuccessionState(state);validatePoliticalMemory(state);validateStagedHistory(state);validateWeather(state);
  for(const h of state.history){if(!h.narrative)continue;validateAnticipation(state,h);const scene=h.narrative;
   ensure(typeof scene.id==='string'&&!ids.has(scene.id)&&Array.isArray(scene.lines)&&scene.lines.length<=40,'scene identity');ids.add(scene.id);
   for(const l of scene.lines)ensure(l.incidentId===scene.id&&(l.speakerId==='chronicler'||n.characters[l.speakerId])&&typeof l.templateId==='string'&&typeof l.text==='string'&&l.text.length<=5000&&typeof l.emotion==='string','saved scene');

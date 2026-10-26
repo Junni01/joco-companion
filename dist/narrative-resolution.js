@@ -1,3 +1,4 @@
+import {seatAt} from './narrative-succession-state.js';
 import {exposedRegion} from './event-stack.js';
 import {OUTLOOK_TEXT} from './narrative-outlook-content.js';
 import {REGIONS} from './model.js';
@@ -66,7 +67,7 @@ export function validateAnticipation(state,entry){
  const fail=()=>{throw Error('Invalid saved anticipation scene.');};
  if(a.version!==1||a.visibility!=='private'||entry.incident?.type!=='event'||!entry.incident.input.stackTile||JSON.stringify(a.elephant)!==JSON.stringify(entry.incident.elephant.after)||!REGIONS[a.topRegion]||!Array.isArray(a.thoughts)||!a.thoughts.length||a.thoughts.length>3)fail();
  const regions=[a.elephant.from,a.elephant.to,a.topRegion],seen=new Set();
- for(const line of a.thoughts){const c=state.narrative.characters[line.speakerId];if(!c||!regions.includes(c.region)||state.narrative.seats[c.region]!==c.id||seen.has(c.id)||line.speaker!==c.name||line.role!==`Private outlook · ${REGIONS[c.region].name}`||line.text!==OUTLOOK_TEXT[line.templateId])fail();seen.add(c.id);}
+ for(const line of a.thoughts){const c=state.narrative.characters[line.speakerId];if(!c||!regions.includes(c.region)||seatAt(state,c.region,entry)!==c.id||seen.has(c.id)||line.speaker!==c.name||line.role!==`Private outlook · ${REGIONS[c.region].name}`||line.text!==OUTLOOK_TEXT[line.templateId])fail();seen.add(c.id);}
 }
 export function archivedAnticipationHTML(entry){
  const a=entry.narrative?.anticipation;return a?`<details class="saved-anticipation" open><summary>Private outlooks after this event</summary>${actionSceneHTML(a.thoughts)}</details>`:'';
