@@ -1,6 +1,6 @@
 # Collection 09E — Weather and Rising Tensions: 45 Candidate Scenes
 
-**26 October 2026 · Creative review draft, not authorized production text**
+**26 October 2026 · Creative writing approved by user on 26 October 2026; production integration awaits a separate Codex task**
 
 ## Contract
 
@@ -8,7 +8,7 @@ Five alternative scenes for each of the five actual saved weather results (25), 
 
 Storm scenes know which seas experience storms, **not what happened to any particular ship, cargo, port, person, or journey**. Characters may worry, joke, speculate or recount ordinary fictional social behaviour, but must not assert a specific verified casualty, loss, shipwreck, cargo destruction, insurer payout, actual delay or successful voyage. The same caution applies to calm weather: it isn't proof that every ship made port. Count scenes convey a general atmosphere; **the count is known to the UI, not prophetically to any character**. The weather does not canonically cause the political developments. Mix dry comedy, serious anxiety, conflicted opinions and brief incidental voices. Ordinary clerks, mariners and merchants are **nonpersistent**, unnamed fictional voices unless separately approved.
 
-Selection should be deterministic and persisted when integrated; never consume gameplay RNG or pick again on dialog revisit. Use variation/cooldowns to avoid repeats. For early implementation these entries require an editorial approval step.
+Selection should be deterministic and persisted when integrated; never consume gameplay RNG or pick again on dialog revisit. Use variation/cooldowns to avoid repeats. Editorial style and candidate content approved; implementation remains separate.
 
 ---
 
