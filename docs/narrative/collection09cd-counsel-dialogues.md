@@ -217,3 +217,14 @@ Author and approve separate exact, guarded dialogue collections for: three Army 
 ## Integration and tests (future, not UI task)
 
 Narrative-off gameplay equivalence; unchanged public forecasts/hidden information; adviser identity stable when Commander office changes; no memory from abandoned previews; history and exact texts survive import/export, reload, snapshots, Undo/Redo; event-dialog narrative visible alongside rules and no duplicates; deterministic outcomes/read stability; control/opium updates no impossible gains; China outcome not fabricated. Do not add 09C adviser speech or 09D callback system during 09C-1.
+
+## Historically grounded women in Company and dynastic narrative (26 October 2026)
+
+**User-approved creative direction (design only):** Keep the historical setting's largely male formal Company office hierarchy and male-preferred, court-specific regional successions. Female sovereigns are possible but unusual; avoid forcing modern gender parity into formal historical posts. Women may nevertheless have influential roles in the Company's surrounding world and Indian politics: female shareholders/proprietors (particularly in private conversations and correspondence rather than casually portraying them as speakers in formal Court debates), merchants, investors, wives/widows and their household networks, Indian partners and relatives of Company employees, petitioners, dowager queens, regents and occasional female rulers.
+
+**Recurring London shareholder idea:** A wealthy female proprietor could develop a consistent personality and opinions about dividends, loans, Directors and territorial expansion, tied to actual committed Company history and reported Revenue finances. Her views may evolve over turns; she holds no invented official Company post. Other women may be one-off or recurring according to their story function, never an artificial quota.
+
+**Dynasty integration:** Peace may improve relations and occasionally enable a dynastic marriage; a spouse, daughter, widow, regent or adopted heir can make plausible claims, varying by local political custom and actual court support. Marriage does **not** automatically confer sovereignty upon a son-in-law. Rare female rulers and succession disputes should feel contingent and meaningful. The narrative may track claims, lineage, exiles and political motivations, but **actual region ownership/sovereignty only changes following real game results**, never from fiction alone.
+
+**Creative safeguards:** Avoid invented player-family holdings, recorded shareholder votes, administrative offices, historic quotations, actual marriage to an untracked person, verified deaths, paid dividends or trade transactions. Keep women's motivations varied and their agency independent; don't reduce them to translators or sources of gossip. These are future collection and 09D-3/character-system concepts, not current Codex authorization.
+
