@@ -1,0 +1,276 @@
+[
+  {
+    "weather": {
+      "version": 1,
+      "key": "weather",
+      "kind": "weather",
+      "templateId": "09E-A-01",
+      "context": {
+        "face": 3
+      },
+      "theme": "bureaucracy",
+      "lines": [
+        {
+          "speaker": "Chronicler",
+          "text": "Storms troubled the western, southern and eastern seas alike. The Company's correspondence filled with anxious inquiries and competing claims of urgency."
+        },
+        {
+          "speaker": "Senior clerk",
+          "text": "\"We have three offices demanding immediate attention.\""
+        },
+        {
+          "speaker": "Junior clerk",
+          "text": "\"Which should we answer first?\""
+        },
+        {
+          "speaker": "Senior clerk",
+          "text": "\"The one whose correspondent knows the most Directors.\""
+        }
+      ]
+    },
+    "tension": {
+      "version": 1,
+      "key": "tension",
+      "kind": "tension",
+      "templateId": "09E-T1-03",
+      "context": {
+        "count": 1
+      },
+      "theme": "sober",
+      "lines": [
+        {
+          "speaker": "Chronicler",
+          "text": "The season opened with fewer outward signs of disorder than some had feared. Experienced observers knew that a quiet court might still conceal an argument of considerable consequence."
+        }
+      ]
+    }
+  },
+  {
+    "invasion": [
+      {
+        "version": 1,
+        "key": "announcement",
+        "kind": "announcement",
+        "templateId": "09E-F-08",
+        "context": {
+          "type": "foreign",
+          "targets": [
+            "bombay",
+            "madras",
+            "bengal"
+          ],
+          "companyTargets": [
+            "bombay",
+            "madras",
+            "bengal"
+          ],
+          "governorGeneral": false,
+          "courts": {
+            "bombay": "ruler-bombay",
+            "madras": "ruler-madras",
+            "bengal": "ruler-bengal"
+          }
+        },
+        "theme": "sober",
+        "lines": [
+          {
+            "speaker": "Chronicler",
+            "text": "The threat was no longer confined to one province. Bombay, Madras and Bengal faced foreign incursions, placing difficult demands on those responsible for their defence."
+          }
+        ]
+      },
+      {
+        "version": 1,
+        "key": "force:bombay",
+        "kind": "force",
+        "templateId": "09E-H-05",
+        "context": {
+          "type": "foreign",
+          "targets": [
+            "bombay",
+            "madras",
+            "bengal"
+          ],
+          "companyTargets": [
+            "bombay",
+            "madras",
+            "bengal"
+          ],
+          "governorGeneral": false,
+          "courts": {
+            "bombay": "ruler-bombay",
+            "madras": "ruler-madras",
+            "bengal": "ruler-bengal"
+          },
+          "region": "bombay",
+          "raw": 6
+        },
+        "theme": "bureaucracy",
+        "lines": [
+          {
+            "speaker": "Company adviser",
+            "text": "\"We must inform the Directors that a formidable force threatens Bombay.\""
+          },
+          {
+            "speaker": "Junior clerk",
+            "text": "\"Shall I describe our prospects as uncertain?\""
+          },
+          {
+            "speaker": "Company adviser",
+            "text": "\"Yes. For once, a cautious word may prove entirely accurate.\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "committedInvasion": [
+      {
+        "version": 1,
+        "key": "announcement",
+        "kind": "announcement",
+        "templateId": "09E-F-08",
+        "context": {
+          "type": "foreign",
+          "targets": [
+            "bombay",
+            "madras",
+            "bengal"
+          ],
+          "companyTargets": [
+            "bombay",
+            "madras",
+            "bengal"
+          ],
+          "governorGeneral": false,
+          "courts": {
+            "bombay": "ruler-bombay",
+            "madras": "ruler-madras",
+            "bengal": "ruler-bengal"
+          }
+        },
+        "theme": "sober",
+        "lines": [
+          {
+            "speaker": "Chronicler",
+            "text": "The threat was no longer confined to one province. Bombay, Madras and Bengal faced foreign incursions, placing difficult demands on those responsible for their defence."
+          }
+        ]
+      },
+      {
+        "version": 1,
+        "key": "force:bombay",
+        "kind": "force",
+        "templateId": "09E-H-05",
+        "context": {
+          "type": "foreign",
+          "targets": [
+            "bombay",
+            "madras",
+            "bengal"
+          ],
+          "companyTargets": [
+            "bombay",
+            "madras",
+            "bengal"
+          ],
+          "governorGeneral": false,
+          "courts": {
+            "bombay": "ruler-bombay",
+            "madras": "ruler-madras",
+            "bengal": "ruler-bengal"
+          },
+          "region": "bombay",
+          "raw": 6
+        },
+        "theme": "bureaucracy",
+        "lines": [
+          {
+            "speaker": "Company adviser",
+            "text": "\"We must inform the Directors that a formidable force threatens Bombay.\""
+          },
+          {
+            "speaker": "Junior clerk",
+            "text": "\"Shall I describe our prospects as uncertain?\""
+          },
+          {
+            "speaker": "Company adviser",
+            "text": "\"Yes. For once, a cautious word may prove entirely accurate.\""
+          }
+        ]
+      },
+      {
+        "version": 1,
+        "key": "force:madras",
+        "kind": "force",
+        "templateId": "09E-M-05",
+        "context": {
+          "type": "foreign",
+          "targets": [
+            "bombay",
+            "madras",
+            "bengal"
+          ],
+          "companyTargets": [
+            "bombay",
+            "madras",
+            "bengal"
+          ],
+          "governorGeneral": false,
+          "courts": {
+            "bombay": "ruler-bombay",
+            "madras": "ruler-madras",
+            "bengal": "ruler-bengal"
+          },
+          "region": "madras",
+          "raw": 3
+        },
+        "theme": "sober",
+        "lines": [
+          {
+            "speaker": "Chronicler",
+            "text": "The foreign expedition assembled against Madras was not one to be brushed aside. Its eventual success remained uncertain, as did the wisdom of several confident pronouncements made in advance."
+          }
+        ]
+      },
+      {
+        "version": 1,
+        "key": "force:bengal",
+        "kind": "force",
+        "templateId": "09E-H-03",
+        "context": {
+          "type": "foreign",
+          "targets": [
+            "bombay",
+            "madras",
+            "bengal"
+          ],
+          "companyTargets": [
+            "bombay",
+            "madras",
+            "bengal"
+          ],
+          "governorGeneral": false,
+          "courts": {
+            "bombay": "ruler-bombay",
+            "madras": "ruler-madras",
+            "bengal": "ruler-bengal"
+          },
+          "region": "bengal",
+          "raw": 5
+        },
+        "theme": "court",
+        "lines": [
+          {
+            "speaker": "Local courtier",
+            "text": "\"The invaders have brought great strength against us.\""
+          },
+          {
+            "speaker": "Experienced counsellor",
+            "text": "\"Then His Highness will need courage, prudence and fewer courtiers telling him only what he wishes to hear.\""
+          }
+        ]
+      }
+    ]
+  }
+]

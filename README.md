@@ -105,6 +105,11 @@ See the [implementation and writing gaps](docs/narrative/collection09d2-implemen
 
 ## Narrative weather and invasion presentation
 
-Narrative mode now shows ocean conditions before the separately revealed India-event count and silently preserves invasion target/strength results. Normal mode keeps its dice graphics and initial manual storm option. Exact physical procedures, protected results and current saves remain unchanged. New atmospheric writing remains for creative approval; the staged pages currently use factual UI.
+Narrative mode now shows ocean conditions before the separately revealed India-event count and silently preserves invasion target/strength results. Normal mode keeps its dice graphics and initial manual storm option. Exact physical procedures, protected results and current saves remain unchanged. Collection 09E now integrates the 81 approved atmospheric scenes; integrated selection and pacing remain for review.
 
 See the [implementation and writing gaps](docs/narrative/collection09d2-weather-implementation.md), [small demonstration](docs/narrative/collection09d2-weather-demo.md) and [verification](docs/narrative/collection09d2-weather-verification.json). No hosted Site deployment.
+
+
+## Collection 09E dialogue
+
+All 81 approved weather, tension and invasion scenes now use actual saved facts and stable saved wording. Weather/invasion have optional full-scene reading alongside physical instructions; tensions appear only at count reveal. No new NPCs or gameplay changes. See the [implementation](docs/narrative/collection09e-implementation.md), [small demonstration](docs/narrative/collection09e-demo.md) and [verification](docs/narrative/collection09e-verification.json). No hosted Site deployment.
