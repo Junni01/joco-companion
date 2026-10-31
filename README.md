@@ -128,3 +128,8 @@ Optional typed family links, house affiliations and structured claims extend the
 ## Character Engine M2B-1 — controlled test succession
 
 Deterministic evidence-based selection and atomic test-only succession now support separate child titular rulers/adult regents, with saved policy and provenance. Normal play generates no succession or fates; 23 original actors and version-2 saves remain unchanged. See the [contract/limits](docs/narrative/character-engine-m2b1-implementation.md), [small demonstrations](docs/narrative/character-engine-m2b1-demo.md) and `node scripts/demo-succession.mjs`. No hosted Site deployment.
+
+
+## Character Engine M2B-2a — offline modelling
+
+`node scripts/simulate-dynasties.mjs results.json 1000 90210` runs reproducible **simulation-only** comparisons; `node scripts/report-dynasties.mjs results.json docs/narrative` regenerates the analysis and labelled histories. See the [numerical analysis/candidate recommendations](docs/narrative/character-engine-m2b2a-analysis.md) and [verification](docs/narrative/character-engine-m2b2a-verification.json). All rates and growth strategies are unapproved proposals. No live fates, family generation, succession, UI or Site deployment.

@@ -267,3 +267,13 @@ Implemented pure deterministic, evidence-based assessments/selection and explici
 
 **488 tests pass, 0 fail** (34 new). Regular/Debug standard/quiet/Normal browser checks pass at **1440×900** and **1024×768**, Chrome **156.0.8078.47**: adult/disputed/child/ended/Company/vassal cases, actual-frame Undo/Redo, snapshots/JSON/reload and pending invasion with no reroll. Existing 09E, M2A family, counsel and resolution browser suites pass. Version **2**, no migration/backfill; normal starts still have 23 actors/eight original seats and no new registries/triggers. [Contract/limits](narrative/character-engine-m2b1-implementation.md), [small executable demonstrations](narrative/character-engine-m2b1-demo.md), [verification](narrative/character-engine-m2b1-verification.json). M2B-2 live triggers, mortality, replacement NPCs, conquest settlements and new dialogue remain deferred. No hosted Site deployment.
 M2B-1 implementation: `3cb8d03904d4bf1fb57c3f7816ff1a87f59e8b07`.
+
+
+## Character Engine M2B-2a — offline modelling — 31 October 2026
+
+Delivered **simulation/readiness analysis only**, not live dynasties. `scripts/simulate-dynasties.mjs` compares three illustrative per-New-Turn mortality curves, pre/post +3 tick, ruler-only/small-family exposure, no growth/prospective adoption/prospective birth/court-appointment hypotheses across four real scenario horizons and a hypothetical 30-tick horizon. **240 cells × 1,000 seeded runs**, reproduced byte-for-byte. Actual M2B-1 evaluator is reused; controlled fixtures cover adult/daughter/adopted/child/no-regent/tied/no-claim/elderly/active-regency cases. Blocked exits, right-censored tenure, cast growth and all modelling assumptions remain explicit. Original cast has no typed succession claims; this is a measured readiness gap, never an invented heir.
+
+**502 tests pass, 0 fail** (14 new). Existing succession browser suite passes regular/Debug, standard/quiet/Normal at **1440×900** and **1024×768**, Chrome **156.0.8078.74**, including protected progress, import/export, snapshots and exact Undo/Redo. No `dist/` source, production dialogue, UI, board rules, save schema or RNG changed. No live mortality/birth/succession/new-character generation or Site deployment. M2B-2b/c require separate approval; **no probabilities or growth settings are approved** by this delivery.
+
+[Numerical analysis and candidate recommendations](narrative/character-engine-m2b2a-analysis.md), [all configuration results](narrative/character-engine-m2b2a-results.json), [synthetic histories/readiness evidence](narrative/character-engine-m2b2a-samples.json), [verification](narrative/character-engine-m2b2a-verification.json).
+Implementation: `1c3724e9be4f7c127309af4877e2209e93c16253`.

@@ -1,0 +1,1587 @@
+{
+  "label": "UNAPPROVED ILLUSTRATIVE PROPOSALS — offline model, not live policy or historical mortality",
+  "readiness": [
+    {
+      "name": "legacy",
+      "evaluatorStatus": "none",
+      "transactionReady": false,
+      "block": "no-qualified-candidate",
+      "chosen": null,
+      "assessments": []
+    },
+    {
+      "name": "adult",
+      "evaluatorStatus": "selected",
+      "transactionReady": true,
+      "block": null,
+      "chosen": {
+        "characterId": "demo-son",
+        "claimId": "son-claim",
+        "regentId": null
+      },
+      "assessments": [
+        {
+          "id": "demo-son",
+          "eligible": true,
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "name": "daughter",
+      "evaluatorStatus": "selected",
+      "transactionReady": true,
+      "block": null,
+      "chosen": {
+        "characterId": "demo-daughter",
+        "claimId": "daughter-claim",
+        "regentId": null
+      },
+      "assessments": [
+        {
+          "id": "demo-daughter",
+          "eligible": true,
+          "reasons": []
+        },
+        {
+          "id": "demo-founder",
+          "eligible": false,
+          "reasons": [
+            "unavailable-dead",
+            "claim-not-active"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "adopted",
+      "evaluatorStatus": "selected",
+      "transactionReady": true,
+      "block": null,
+      "chosen": {
+        "characterId": "demo-adopted",
+        "claimId": "adopted-claim",
+        "regentId": null
+      },
+      "assessments": [
+        {
+          "id": "demo-adopted",
+          "eligible": true,
+          "reasons": []
+        },
+        {
+          "id": "demo-founder",
+          "eligible": false,
+          "reasons": [
+            "unavailable-dead",
+            "claim-not-active"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "minor",
+      "evaluatorStatus": "selected",
+      "transactionReady": true,
+      "block": null,
+      "chosen": {
+        "characterId": "demo-child",
+        "claimId": "child-claim",
+        "regentId": "demo-widow"
+      },
+      "assessments": [
+        {
+          "id": "demo-child",
+          "eligible": true,
+          "reasons": []
+        },
+        {
+          "id": "demo-founder",
+          "eligible": false,
+          "reasons": [
+            "unavailable-dead",
+            "claim-not-active"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "minor-no-regent",
+      "evaluatorStatus": "none",
+      "transactionReady": false,
+      "block": "no-qualified-candidate",
+      "chosen": null,
+      "assessments": [
+        {
+          "id": "demo-child",
+          "eligible": false,
+          "reasons": [
+            "no-eligible-regent"
+          ]
+        },
+        {
+          "id": "demo-founder",
+          "eligible": false,
+          "reasons": [
+            "unavailable-dead",
+            "claim-not-active"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tied",
+      "evaluatorStatus": "ambiguous",
+      "transactionReady": false,
+      "block": "controlled-candidate-choice-required",
+      "chosen": null,
+      "assessments": [
+        {
+          "id": "demo-adopted",
+          "eligible": false,
+          "reasons": [
+            "standing-not-accepted",
+            "no-eligible-regent"
+          ]
+        },
+        {
+          "id": "demo-child",
+          "eligible": true,
+          "reasons": []
+        },
+        {
+          "id": "demo-daughter",
+          "eligible": true,
+          "reasons": []
+        },
+        {
+          "id": "demo-founder",
+          "eligible": false,
+          "reasons": [
+            "unavailable-dead",
+            "claim-not-active"
+          ]
+        },
+        {
+          "id": "demo-rival",
+          "eligible": false,
+          "reasons": [
+            "standing-not-accepted",
+            "claim-not-active"
+          ]
+        },
+        {
+          "id": "demo-son",
+          "eligible": true,
+          "reasons": []
+        },
+        {
+          "id": "demo-widow",
+          "eligible": false,
+          "reasons": [
+            "standing-not-accepted"
+          ]
+        },
+        {
+          "id": "ruler-delhi",
+          "eligible": false,
+          "reasons": [
+            "current-incumbent",
+            "claim-not-active"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "elderly-sole",
+      "evaluatorStatus": "none",
+      "transactionReady": false,
+      "block": "no-qualified-candidate",
+      "chosen": null,
+      "assessments": []
+    },
+    {
+      "name": "active-regency",
+      "evaluatorStatus": "ambiguous",
+      "transactionReady": false,
+      "block": "M2B-1 active-regency transaction guard",
+      "chosen": null,
+      "assessments": [
+        {
+          "id": "demo-adopted",
+          "eligible": false,
+          "reasons": [
+            "standing-not-accepted",
+            "no-eligible-regent"
+          ]
+        },
+        {
+          "id": "demo-child",
+          "eligible": false,
+          "reasons": [
+            "current-incumbent",
+            "claim-not-active",
+            "no-eligible-regent"
+          ]
+        },
+        {
+          "id": "demo-daughter",
+          "eligible": true,
+          "reasons": []
+        },
+        {
+          "id": "demo-founder",
+          "eligible": false,
+          "reasons": [
+            "unavailable-dead",
+            "claim-not-active"
+          ]
+        },
+        {
+          "id": "demo-rival",
+          "eligible": false,
+          "reasons": [
+            "standing-not-accepted",
+            "claim-not-active"
+          ]
+        },
+        {
+          "id": "demo-son",
+          "eligible": true,
+          "reasons": []
+        },
+        {
+          "id": "demo-widow",
+          "eligible": false,
+          "reasons": [
+            "already-holds-office",
+            "standing-not-accepted"
+          ]
+        },
+        {
+          "id": "ruler-delhi",
+          "eligible": false,
+          "reasons": [
+            "claim-not-active"
+          ]
+        }
+      ]
+    }
+  ],
+  "samples": [
+    {
+      "strategy": "adoption",
+      "seed": 90211,
+      "config": {
+        "scenario": "1710",
+        "ticks": 30,
+        "curve": "middle",
+        "population": "families",
+        "timing": "after"
+      },
+      "counters": {
+        "drawnRulerExits": 21,
+        "committedRulerDeaths": 7,
+        "relativeDeaths": 8,
+        "blockedExits": 14,
+        "noHeir": 14,
+        "ties": 0,
+        "activeRegencyBlocked": 0,
+        "regentLostBlocked": 0,
+        "regencies": 2,
+        "regencyEnds": 2,
+        "widowOpportunities": 0,
+        "introductions": 7,
+        "births": 0,
+        "adoptions": 7,
+        "appointments": 0,
+        "validSeatTicks": 240,
+        "seatTicks": 240
+      },
+      "cast": 30,
+      "timeline": [
+        {
+          "step": 1,
+          "type": "blocked-none",
+          "region": "delhi",
+          "id": "ruler-delhi",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 3,
+          "type": "hypothetical-introduction",
+          "id": "model-madras-1",
+          "region": "madras",
+          "age": 16,
+          "kind": "prospective-adoption"
+        },
+        {
+          "step": 3,
+          "type": "hypothetical-adoption",
+          "id": "model-madras-1",
+          "region": "madras",
+          "parent": "ruler-madras"
+        },
+        {
+          "step": 4,
+          "type": "hypothetical-introduction",
+          "id": "model-bombay-2",
+          "region": "bombay",
+          "age": 16,
+          "kind": "prospective-adoption"
+        },
+        {
+          "step": 4,
+          "type": "hypothetical-adoption",
+          "id": "model-bombay-2",
+          "region": "bombay",
+          "parent": "ruler-bombay"
+        },
+        {
+          "step": 5,
+          "type": "hypothetical-relative-death",
+          "id": "heir-madras",
+          "age": 57
+        },
+        {
+          "step": 6,
+          "type": "hypothetical-introduction",
+          "id": "model-delhi-3",
+          "region": "delhi",
+          "age": 16,
+          "kind": "prospective-adoption"
+        },
+        {
+          "step": 6,
+          "type": "hypothetical-adoption",
+          "id": "model-delhi-3",
+          "region": "delhi",
+          "parent": "ruler-delhi"
+        },
+        {
+          "step": 7,
+          "type": "hypothetical-introduction",
+          "id": "model-mysore-4",
+          "region": "mysore",
+          "age": 16,
+          "kind": "prospective-adoption"
+        },
+        {
+          "step": 7,
+          "type": "hypothetical-adoption",
+          "id": "model-mysore-4",
+          "region": "mysore",
+          "parent": "ruler-mysore"
+        },
+        {
+          "step": 7,
+          "type": "hypothetical-succession",
+          "region": "delhi",
+          "from": "ruler-delhi",
+          "to": "model-delhi-3",
+          "age": 71,
+          "successorAge": 19,
+          "regent": null,
+          "claim": "claim-model-delhi-3"
+        },
+        {
+          "step": 9,
+          "type": "hypothetical-relative-death",
+          "id": "heir-maratha",
+          "age": 59
+        },
+        {
+          "step": 9,
+          "type": "blocked-none",
+          "region": "punjab",
+          "id": "ruler-punjab",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 9,
+          "type": "hypothetical-succession",
+          "region": "mysore",
+          "from": "ruler-mysore",
+          "to": "model-mysore-4",
+          "age": 66,
+          "successorAge": 22,
+          "regent": null,
+          "claim": "claim-model-mysore-4"
+        },
+        {
+          "step": 12,
+          "type": "blocked-none",
+          "region": "bengal",
+          "id": "ruler-bengal",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 13,
+          "type": "hypothetical-introduction",
+          "id": "model-bengal-5",
+          "region": "bengal",
+          "age": 16,
+          "kind": "prospective-adoption"
+        },
+        {
+          "step": 13,
+          "type": "hypothetical-adoption",
+          "id": "model-bengal-5",
+          "region": "bengal",
+          "parent": "ruler-bengal"
+        },
+        {
+          "step": 13,
+          "type": "hypothetical-introduction",
+          "id": "model-hyderabad-6",
+          "region": "hyderabad",
+          "age": 16,
+          "kind": "prospective-adoption"
+        },
+        {
+          "step": 13,
+          "type": "hypothetical-adoption",
+          "id": "model-hyderabad-6",
+          "region": "hyderabad",
+          "parent": "ruler-hyderabad"
+        },
+        {
+          "step": 13,
+          "type": "hypothetical-relative-death",
+          "id": "heir-bengal",
+          "age": 81
+        },
+        {
+          "step": 13,
+          "type": "hypothetical-succession",
+          "region": "hyderabad",
+          "from": "ruler-hyderabad",
+          "to": "model-hyderabad-6",
+          "age": 90,
+          "successorAge": 16,
+          "regent": "heir-hyderabad",
+          "claim": "claim-model-hyderabad-6"
+        },
+        {
+          "step": 13,
+          "type": "hypothetical-succession",
+          "region": "madras",
+          "from": "ruler-madras",
+          "to": "model-madras-1",
+          "age": 89,
+          "successorAge": 46,
+          "regent": null,
+          "claim": "claim-model-madras-1"
+        },
+        {
+          "step": 14,
+          "type": "hypothetical-regency-end",
+          "ruler": "model-hyderabad-6",
+          "regent": "heir-hyderabad"
+        },
+        {
+          "step": 14,
+          "type": "hypothetical-introduction",
+          "id": "model-punjab-7",
+          "region": "punjab",
+          "age": 16,
+          "kind": "prospective-adoption"
+        },
+        {
+          "step": 14,
+          "type": "hypothetical-adoption",
+          "id": "model-punjab-7",
+          "region": "punjab",
+          "parent": "ruler-punjab"
+        },
+        {
+          "step": 14,
+          "type": "hypothetical-succession",
+          "region": "punjab",
+          "from": "ruler-punjab",
+          "to": "model-punjab-7",
+          "age": 92,
+          "successorAge": 16,
+          "regent": "heir-punjab",
+          "claim": "claim-model-punjab-7"
+        },
+        {
+          "step": 14,
+          "type": "hypothetical-succession",
+          "region": "bombay",
+          "from": "ruler-bombay",
+          "to": "model-bombay-2",
+          "age": 79,
+          "successorAge": 46,
+          "regent": null,
+          "claim": "claim-model-bombay-2"
+        },
+        {
+          "step": 14,
+          "type": "blocked-none",
+          "region": "maratha",
+          "id": "ruler-maratha",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 15,
+          "type": "hypothetical-regency-end",
+          "ruler": "model-punjab-7",
+          "regent": "heir-punjab"
+        },
+        {
+          "step": 15,
+          "type": "hypothetical-relative-death",
+          "id": "heir-hyderabad",
+          "age": 88
+        },
+        {
+          "step": 15,
+          "type": "hypothetical-succession",
+          "region": "bengal",
+          "from": "ruler-bengal",
+          "to": "model-bengal-5",
+          "age": 95,
+          "successorAge": 22,
+          "regent": null,
+          "claim": "claim-model-bengal-5"
+        },
+        {
+          "step": 16,
+          "type": "hypothetical-relative-death",
+          "id": "heir-bombay",
+          "age": 77
+        },
+        {
+          "step": 19,
+          "type": "hypothetical-relative-death",
+          "id": "heir-delhi",
+          "age": 99
+        },
+        {
+          "step": 19,
+          "type": "blocked-none",
+          "region": "maratha",
+          "id": "ruler-maratha",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 21,
+          "type": "hypothetical-relative-death",
+          "id": "heir-punjab",
+          "age": 105
+        },
+        {
+          "step": 22,
+          "type": "blocked-none",
+          "region": "maratha",
+          "id": "ruler-maratha",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 23,
+          "type": "hypothetical-relative-death",
+          "id": "heir-mysore",
+          "age": 100
+        },
+        {
+          "step": 24,
+          "type": "blocked-none",
+          "region": "bengal",
+          "id": "model-bengal-5",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 25,
+          "type": "blocked-none",
+          "region": "madras",
+          "id": "model-madras-1",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 26,
+          "type": "blocked-none",
+          "region": "maratha",
+          "id": "ruler-maratha",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 26,
+          "type": "blocked-none",
+          "region": "madras",
+          "id": "model-madras-1",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 27,
+          "type": "blocked-none",
+          "region": "maratha",
+          "id": "ruler-maratha",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 27,
+          "type": "blocked-none",
+          "region": "madras",
+          "id": "model-madras-1",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 28,
+          "type": "blocked-none",
+          "region": "delhi",
+          "id": "model-delhi-3",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 29,
+          "type": "blocked-none",
+          "region": "mysore",
+          "id": "model-mysore-4",
+          "reason": "no-qualified-candidate"
+        }
+      ]
+    },
+    {
+      "strategy": "births",
+      "seed": 90210,
+      "config": {
+        "scenario": "1710",
+        "ticks": 30,
+        "curve": "middle",
+        "population": "families",
+        "timing": "after"
+      },
+      "counters": {
+        "drawnRulerExits": 49,
+        "committedRulerDeaths": 3,
+        "relativeDeaths": 17,
+        "blockedExits": 46,
+        "noHeir": 43,
+        "ties": 3,
+        "activeRegencyBlocked": 0,
+        "regentLostBlocked": 0,
+        "regencies": 1,
+        "regencyEnds": 1,
+        "widowOpportunities": 8,
+        "introductions": 12,
+        "births": 4,
+        "adoptions": 0,
+        "appointments": 0,
+        "validSeatTicks": 240,
+        "seatTicks": 240
+      },
+      "cast": 35,
+      "timeline": [
+        {
+          "step": 0,
+          "type": "hypothetical-introduction",
+          "id": "model-punjab-1",
+          "region": "punjab",
+          "age": 30,
+          "kind": "synthetic-spouse"
+        },
+        {
+          "step": 0,
+          "type": "hypothetical-introduction",
+          "id": "model-delhi-2",
+          "region": "delhi",
+          "age": 30,
+          "kind": "synthetic-spouse"
+        },
+        {
+          "step": 0,
+          "type": "hypothetical-introduction",
+          "id": "model-bengal-3",
+          "region": "bengal",
+          "age": 30,
+          "kind": "synthetic-spouse"
+        },
+        {
+          "step": 0,
+          "type": "hypothetical-introduction",
+          "id": "model-bombay-4",
+          "region": "bombay",
+          "age": 30,
+          "kind": "synthetic-spouse"
+        },
+        {
+          "step": 0,
+          "type": "hypothetical-introduction",
+          "id": "model-maratha-5",
+          "region": "maratha",
+          "age": 30,
+          "kind": "synthetic-spouse"
+        },
+        {
+          "step": 0,
+          "type": "hypothetical-introduction",
+          "id": "model-hyderabad-6",
+          "region": "hyderabad",
+          "age": 30,
+          "kind": "synthetic-spouse"
+        },
+        {
+          "step": 0,
+          "type": "hypothetical-introduction",
+          "id": "model-mysore-7",
+          "region": "mysore",
+          "age": 30,
+          "kind": "synthetic-spouse"
+        },
+        {
+          "step": 0,
+          "type": "hypothetical-introduction",
+          "id": "model-madras-8",
+          "region": "madras",
+          "age": 30,
+          "kind": "synthetic-spouse"
+        },
+        {
+          "step": 1,
+          "type": "hypothetical-introduction",
+          "id": "model-mysore-9",
+          "region": "mysore",
+          "age": 0,
+          "kind": "prospective-birth"
+        },
+        {
+          "step": 1,
+          "type": "hypothetical-birth-and-recognition",
+          "id": "model-mysore-9",
+          "region": "mysore",
+          "parents": [
+            "ruler-mysore",
+            "model-mysore-7"
+          ]
+        },
+        {
+          "step": 2,
+          "type": "hypothetical-introduction",
+          "id": "model-delhi-10",
+          "region": "delhi",
+          "age": 0,
+          "kind": "prospective-birth"
+        },
+        {
+          "step": 2,
+          "type": "hypothetical-birth-and-recognition",
+          "id": "model-delhi-10",
+          "region": "delhi",
+          "parents": [
+            "ruler-delhi",
+            "model-delhi-2"
+          ]
+        },
+        {
+          "step": 3,
+          "type": "hypothetical-introduction",
+          "id": "model-delhi-11",
+          "region": "delhi",
+          "age": 0,
+          "kind": "prospective-birth"
+        },
+        {
+          "step": 3,
+          "type": "hypothetical-birth-and-recognition",
+          "id": "model-delhi-11",
+          "region": "delhi",
+          "parents": [
+            "ruler-delhi",
+            "model-delhi-2"
+          ]
+        },
+        {
+          "step": 5,
+          "type": "blocked-none",
+          "region": "madras",
+          "id": "ruler-madras",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 6,
+          "type": "hypothetical-introduction",
+          "id": "model-maratha-12",
+          "region": "maratha",
+          "age": 0,
+          "kind": "prospective-birth"
+        },
+        {
+          "step": 6,
+          "type": "hypothetical-birth-and-recognition",
+          "id": "model-maratha-12",
+          "region": "maratha",
+          "parents": [
+            "ruler-maratha",
+            "model-maratha-5"
+          ]
+        },
+        {
+          "step": 8,
+          "type": "blocked-none",
+          "region": "madras",
+          "id": "ruler-madras",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 9,
+          "type": "hypothetical-relative-death",
+          "id": "heir-punjab",
+          "age": 70
+        },
+        {
+          "step": 9,
+          "type": "hypothetical-relative-death",
+          "id": "heir-bengal",
+          "age": 73
+        },
+        {
+          "step": 9,
+          "type": "blocked-none",
+          "region": "punjab",
+          "id": "ruler-punjab",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 11,
+          "type": "blocked-none",
+          "region": "punjab",
+          "id": "ruler-punjab",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 11,
+          "type": "hypothetical-succession",
+          "region": "maratha",
+          "from": "ruler-maratha",
+          "to": "model-maratha-12",
+          "age": 68,
+          "successorAge": 15,
+          "regent": "model-maratha-5",
+          "claim": "claim-model-maratha-12"
+        },
+        {
+          "step": 11,
+          "type": "blocked-none",
+          "region": "madras",
+          "id": "ruler-madras",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 12,
+          "type": "hypothetical-regency-end",
+          "ruler": "model-maratha-12",
+          "regent": "model-maratha-5"
+        },
+        {
+          "step": 12,
+          "type": "blocked-none",
+          "region": "madras",
+          "id": "ruler-madras",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 13,
+          "type": "hypothetical-relative-death",
+          "id": "heir-bombay",
+          "age": 66
+        },
+        {
+          "step": 13,
+          "type": "blocked-none",
+          "region": "punjab",
+          "id": "ruler-punjab",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 13,
+          "type": "blocked-none",
+          "region": "hyderabad",
+          "id": "ruler-hyderabad",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 14,
+          "type": "blocked-ambiguous",
+          "region": "delhi",
+          "id": "ruler-delhi",
+          "reason": "controlled-candidate-choice-required"
+        },
+        {
+          "step": 14,
+          "type": "blocked-none",
+          "region": "bombay",
+          "id": "ruler-bombay",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 14,
+          "type": "blocked-none",
+          "region": "madras",
+          "id": "ruler-madras",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 15,
+          "type": "hypothetical-relative-death",
+          "id": "heir-madras",
+          "age": 87
+        },
+        {
+          "step": 15,
+          "type": "blocked-none",
+          "region": "bengal",
+          "id": "ruler-bengal",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 15,
+          "type": "blocked-none",
+          "region": "hyderabad",
+          "id": "ruler-hyderabad",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 15,
+          "type": "hypothetical-succession",
+          "region": "mysore",
+          "from": "ruler-mysore",
+          "to": "model-mysore-9",
+          "age": 93,
+          "successorAge": 42,
+          "regent": null,
+          "claim": "claim-model-mysore-9"
+        },
+        {
+          "step": 15,
+          "type": "blocked-none",
+          "region": "madras",
+          "id": "ruler-madras",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 16,
+          "type": "hypothetical-relative-death",
+          "id": "heir-mysore",
+          "age": 88
+        },
+        {
+          "step": 16,
+          "type": "hypothetical-relative-death",
+          "id": "model-punjab-1",
+          "age": 78
+        },
+        {
+          "step": 16,
+          "type": "hypothetical-relative-death",
+          "id": "model-bengal-3",
+          "age": 78
+        },
+        {
+          "step": 17,
+          "type": "hypothetical-relative-death",
+          "id": "heir-delhi",
+          "age": 79
+        },
+        {
+          "step": 17,
+          "type": "hypothetical-relative-death",
+          "id": "heir-hyderabad",
+          "age": 91
+        },
+        {
+          "step": 18,
+          "type": "blocked-none",
+          "region": "punjab",
+          "id": "ruler-punjab",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 18,
+          "type": "blocked-none",
+          "region": "bombay",
+          "id": "ruler-bombay",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 19,
+          "type": "blocked-none",
+          "region": "punjab",
+          "id": "ruler-punjab",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 19,
+          "type": "blocked-none",
+          "region": "bombay",
+          "id": "ruler-bombay",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 19,
+          "type": "blocked-none",
+          "region": "hyderabad",
+          "id": "ruler-hyderabad",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 19,
+          "type": "blocked-none",
+          "region": "madras",
+          "id": "ruler-madras",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 20,
+          "type": "hypothetical-relative-death",
+          "id": "model-delhi-2",
+          "age": 90
+        },
+        {
+          "step": 20,
+          "type": "hypothetical-relative-death",
+          "id": "model-mysore-7",
+          "age": 90
+        },
+        {
+          "step": 20,
+          "type": "hypothetical-relative-death",
+          "id": "model-madras-8",
+          "age": 90
+        },
+        {
+          "step": 20,
+          "type": "blocked-ambiguous",
+          "region": "delhi",
+          "id": "ruler-delhi",
+          "reason": "controlled-candidate-choice-required"
+        },
+        {
+          "step": 20,
+          "type": "blocked-none",
+          "region": "bengal",
+          "id": "ruler-bengal",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 20,
+          "type": "blocked-none",
+          "region": "bombay",
+          "id": "ruler-bombay",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 20,
+          "type": "blocked-none",
+          "region": "madras",
+          "id": "ruler-madras",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 21,
+          "type": "blocked-none",
+          "region": "hyderabad",
+          "id": "ruler-hyderabad",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 22,
+          "type": "hypothetical-relative-death",
+          "id": "heir-maratha",
+          "age": 93
+        },
+        {
+          "step": 22,
+          "type": "blocked-none",
+          "region": "madras",
+          "id": "ruler-madras",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 23,
+          "type": "hypothetical-relative-death",
+          "id": "model-bombay-4",
+          "age": 99
+        },
+        {
+          "step": 23,
+          "type": "blocked-none",
+          "region": "bombay",
+          "id": "ruler-bombay",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 24,
+          "type": "hypothetical-relative-death",
+          "id": "model-maratha-5",
+          "age": 102
+        },
+        {
+          "step": 24,
+          "type": "blocked-none",
+          "region": "punjab",
+          "id": "ruler-punjab",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 24,
+          "type": "blocked-none",
+          "region": "bengal",
+          "id": "ruler-bengal",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 25,
+          "type": "blocked-none",
+          "region": "punjab",
+          "id": "ruler-punjab",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 25,
+          "type": "blocked-none",
+          "region": "bengal",
+          "id": "ruler-bengal",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 25,
+          "type": "blocked-none",
+          "region": "bombay",
+          "id": "ruler-bombay",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 25,
+          "type": "blocked-none",
+          "region": "hyderabad",
+          "id": "ruler-hyderabad",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 26,
+          "type": "hypothetical-relative-death",
+          "id": "model-hyderabad-6",
+          "age": 108
+        },
+        {
+          "step": 26,
+          "type": "blocked-none",
+          "region": "bombay",
+          "id": "ruler-bombay",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 26,
+          "type": "blocked-none",
+          "region": "madras",
+          "id": "ruler-madras",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 27,
+          "type": "blocked-none",
+          "region": "punjab",
+          "id": "ruler-punjab",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 27,
+          "type": "blocked-none",
+          "region": "hyderabad",
+          "id": "ruler-hyderabad",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 28,
+          "type": "blocked-none",
+          "region": "punjab",
+          "id": "ruler-punjab",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 28,
+          "type": "blocked-ambiguous",
+          "region": "delhi",
+          "id": "ruler-delhi",
+          "reason": "controlled-candidate-choice-required"
+        },
+        {
+          "step": 28,
+          "type": "blocked-none",
+          "region": "maratha",
+          "id": "model-maratha-12",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 28,
+          "type": "blocked-none",
+          "region": "hyderabad",
+          "id": "ruler-hyderabad",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 28,
+          "type": "blocked-none",
+          "region": "madras",
+          "id": "ruler-madras",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 29,
+          "type": "blocked-none",
+          "region": "madras",
+          "id": "ruler-madras",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 30,
+          "type": "hypothetical-relative-death",
+          "id": "model-delhi-11",
+          "age": 81
+        },
+        {
+          "step": 30,
+          "type": "hypothetical-succession",
+          "region": "delhi",
+          "from": "ruler-delhi",
+          "to": "model-delhi-10",
+          "age": 126,
+          "successorAge": 84,
+          "regent": null,
+          "claim": "claim-model-delhi-10"
+        },
+        {
+          "step": 30,
+          "type": "blocked-none",
+          "region": "bombay",
+          "id": "ruler-bombay",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 30,
+          "type": "blocked-none",
+          "region": "maratha",
+          "id": "model-maratha-12",
+          "reason": "no-qualified-candidate"
+        },
+        {
+          "step": 30,
+          "type": "blocked-none",
+          "region": "mysore",
+          "id": "model-mysore-9",
+          "reason": "no-qualified-candidate"
+        }
+      ]
+    },
+    {
+      "strategy": "appointment",
+      "seed": 90210,
+      "config": {
+        "scenario": "1710",
+        "ticks": 30,
+        "curve": "middle",
+        "population": "families",
+        "timing": "after"
+      },
+      "counters": {
+        "drawnRulerExits": 12,
+        "committedRulerDeaths": 12,
+        "relativeDeaths": 8,
+        "blockedExits": 0,
+        "noHeir": 0,
+        "ties": 0,
+        "activeRegencyBlocked": 0,
+        "regentLostBlocked": 0,
+        "regencies": 0,
+        "regencyEnds": 0,
+        "widowOpportunities": 0,
+        "introductions": 12,
+        "births": 0,
+        "adoptions": 0,
+        "appointments": 12,
+        "validSeatTicks": 240,
+        "seatTicks": 240
+      },
+      "cast": 35,
+      "timeline": [
+        {
+          "step": 5,
+          "type": "hypothetical-introduction",
+          "id": "model-madras-1",
+          "region": "madras",
+          "age": 28,
+          "kind": "unrelated-court-appointee"
+        },
+        {
+          "step": 5,
+          "type": "hypothetical-succession",
+          "region": "madras",
+          "from": "ruler-madras",
+          "to": "model-madras-1",
+          "age": 65,
+          "successorAge": 28,
+          "regent": null,
+          "claim": "claim-model-madras-1"
+        },
+        {
+          "step": 9,
+          "type": "hypothetical-relative-death",
+          "id": "heir-punjab",
+          "age": 70
+        },
+        {
+          "step": 9,
+          "type": "hypothetical-relative-death",
+          "id": "heir-bengal",
+          "age": 73
+        },
+        {
+          "step": 9,
+          "type": "hypothetical-introduction",
+          "id": "model-punjab-2",
+          "region": "punjab",
+          "age": 28,
+          "kind": "unrelated-court-appointee"
+        },
+        {
+          "step": 9,
+          "type": "hypothetical-succession",
+          "region": "punjab",
+          "from": "ruler-punjab",
+          "to": "model-punjab-2",
+          "age": 78,
+          "successorAge": 28,
+          "regent": null,
+          "claim": "claim-model-punjab-2"
+        },
+        {
+          "step": 11,
+          "type": "hypothetical-introduction",
+          "id": "model-maratha-3",
+          "region": "maratha",
+          "age": 28,
+          "kind": "unrelated-court-appointee"
+        },
+        {
+          "step": 11,
+          "type": "hypothetical-succession",
+          "region": "maratha",
+          "from": "ruler-maratha",
+          "to": "model-maratha-3",
+          "age": 68,
+          "successorAge": 28,
+          "regent": null,
+          "claim": "claim-model-maratha-3"
+        },
+        {
+          "step": 13,
+          "type": "hypothetical-relative-death",
+          "id": "heir-bombay",
+          "age": 66
+        },
+        {
+          "step": 13,
+          "type": "hypothetical-introduction",
+          "id": "model-hyderabad-4",
+          "region": "hyderabad",
+          "age": 28,
+          "kind": "unrelated-court-appointee"
+        },
+        {
+          "step": 13,
+          "type": "hypothetical-succession",
+          "region": "hyderabad",
+          "from": "ruler-hyderabad",
+          "to": "model-hyderabad-4",
+          "age": 87,
+          "successorAge": 28,
+          "regent": null,
+          "claim": "claim-model-hyderabad-4"
+        },
+        {
+          "step": 14,
+          "type": "hypothetical-introduction",
+          "id": "model-delhi-5",
+          "region": "delhi",
+          "age": 28,
+          "kind": "unrelated-court-appointee"
+        },
+        {
+          "step": 14,
+          "type": "hypothetical-succession",
+          "region": "delhi",
+          "from": "ruler-delhi",
+          "to": "model-delhi-5",
+          "age": 78,
+          "successorAge": 28,
+          "regent": null,
+          "claim": "claim-model-delhi-5"
+        },
+        {
+          "step": 14,
+          "type": "hypothetical-introduction",
+          "id": "model-bombay-6",
+          "region": "bombay",
+          "age": 28,
+          "kind": "unrelated-court-appointee"
+        },
+        {
+          "step": 14,
+          "type": "hypothetical-succession",
+          "region": "bombay",
+          "from": "ruler-bombay",
+          "to": "model-bombay-6",
+          "age": 77,
+          "successorAge": 28,
+          "regent": null,
+          "claim": "claim-model-bombay-6"
+        },
+        {
+          "step": 15,
+          "type": "hypothetical-relative-death",
+          "id": "heir-madras",
+          "age": 87
+        },
+        {
+          "step": 15,
+          "type": "hypothetical-introduction",
+          "id": "model-bengal-7",
+          "region": "bengal",
+          "age": 28,
+          "kind": "unrelated-court-appointee"
+        },
+        {
+          "step": 15,
+          "type": "hypothetical-succession",
+          "region": "bengal",
+          "from": "ruler-bengal",
+          "to": "model-bengal-7",
+          "age": 99,
+          "successorAge": 28,
+          "regent": null,
+          "claim": "claim-model-bengal-7"
+        },
+        {
+          "step": 15,
+          "type": "hypothetical-introduction",
+          "id": "model-mysore-8",
+          "region": "mysore",
+          "age": 28,
+          "kind": "unrelated-court-appointee"
+        },
+        {
+          "step": 15,
+          "type": "hypothetical-succession",
+          "region": "mysore",
+          "from": "ruler-mysore",
+          "to": "model-mysore-8",
+          "age": 93,
+          "successorAge": 28,
+          "regent": null,
+          "claim": "claim-model-mysore-8"
+        },
+        {
+          "step": 16,
+          "type": "hypothetical-relative-death",
+          "id": "heir-mysore",
+          "age": 88
+        },
+        {
+          "step": 17,
+          "type": "hypothetical-relative-death",
+          "id": "heir-delhi",
+          "age": 79
+        },
+        {
+          "step": 17,
+          "type": "hypothetical-relative-death",
+          "id": "heir-hyderabad",
+          "age": 91
+        },
+        {
+          "step": 21,
+          "type": "hypothetical-introduction",
+          "id": "model-madras-9",
+          "region": "madras",
+          "age": 28,
+          "kind": "unrelated-court-appointee"
+        },
+        {
+          "step": 21,
+          "type": "hypothetical-succession",
+          "region": "madras",
+          "from": "model-madras-1",
+          "to": "model-madras-9",
+          "age": 76,
+          "successorAge": 28,
+          "regent": null,
+          "claim": "claim-model-madras-9"
+        },
+        {
+          "step": 22,
+          "type": "hypothetical-relative-death",
+          "id": "heir-maratha",
+          "age": 93
+        },
+        {
+          "step": 26,
+          "type": "hypothetical-introduction",
+          "id": "model-bengal-10",
+          "region": "bengal",
+          "age": 28,
+          "kind": "unrelated-court-appointee"
+        },
+        {
+          "step": 26,
+          "type": "hypothetical-succession",
+          "region": "bengal",
+          "from": "model-bengal-7",
+          "to": "model-bengal-10",
+          "age": 61,
+          "successorAge": 28,
+          "regent": null,
+          "claim": "claim-model-bengal-10"
+        },
+        {
+          "step": 26,
+          "type": "hypothetical-introduction",
+          "id": "model-mysore-11",
+          "region": "mysore",
+          "age": 28,
+          "kind": "unrelated-court-appointee"
+        },
+        {
+          "step": 26,
+          "type": "hypothetical-succession",
+          "region": "mysore",
+          "from": "model-mysore-8",
+          "to": "model-mysore-11",
+          "age": 61,
+          "successorAge": 28,
+          "regent": null,
+          "claim": "claim-model-mysore-11"
+        },
+        {
+          "step": 29,
+          "type": "hypothetical-introduction",
+          "id": "model-punjab-12",
+          "region": "punjab",
+          "age": 28,
+          "kind": "unrelated-court-appointee"
+        },
+        {
+          "step": 29,
+          "type": "hypothetical-succession",
+          "region": "punjab",
+          "from": "model-punjab-2",
+          "to": "model-punjab-12",
+          "age": 88,
+          "successorAge": 28,
+          "regent": null,
+          "claim": "claim-model-punjab-12"
+        }
+      ]
+    }
+  ]
+}

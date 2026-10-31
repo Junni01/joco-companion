@@ -1,0 +1,37 @@
+{
+  "task": "M2B-2a simulation only; all numerical policies unapproved",
+  "date": "2026-10-31",
+  "baseline": "a40b4bb",
+  "implementationCommit": "1c3724e9be4f7c127309af4877e2209e93c16253",
+  "automated": {
+    "passed": 502,
+    "failed": 0,
+    "newTests": 14
+  },
+  "browser": {
+    "checks": [
+      "desktop: regular/debug standard/quiet adult/child/ended/company/vassal synthetic succession; exact real-frame Undo/Redo, reload/JSON/snapshot, separate regent, former private archive, protected invasion resume; ordinary actual conquest creates no succession; Normal unchanged",
+      "tablet: regular/debug standard/quiet adult/child/ended/company/vassal synthetic succession; exact real-frame Undo/Redo, reload/JSON/snapshot, separate regent, former private archive, protected invasion resume; ordinary actual conquest creates no succession; Normal unchanged"
+    ],
+    "errors": [],
+    "browser": "156.0.8078.74",
+    "viewports": [
+      "1440x900",
+      "1024x768"
+    ]
+  },
+  "simulation": {
+    "masterSeed": 90210,
+    "runsPerCell": 1000,
+    "cells": 240,
+    "campaignsPerCompleteRun": 240000,
+    "fullRuns": 2,
+    "identicalBytes": true,
+    "sha256": "910775dd7661596e5989b36812a84207b757150d9eb2f59e09fdbc1a8b35ada6",
+    "allCellCounterBalanceAndSeatAndCastInvariants": true
+  },
+  "productionChanges": [],
+  "compatibility": "No production source/save schema/version/RNG/flow changes; no migrations.",
+  "deployment": "Not deployed",
+  "remoteVerification": "Implementation and documentation commit SHAs plus verified final remote main HEAD reported in delivery; documentation commit cannot embed its own SHA."
+}
