@@ -1,3 +1,4 @@
+import {validateCourtState} from './narrative-court-state.js';
 import {validateSuccessionState,recordedRuler} from './narrative-succession-state.js';
 import {validateFamilyState} from './narrative-family.js';
 import {CONDITION_LABELS,legacyPoliticalRole,recordPoliticalRole,validateCharacters,validateCharacterContinuity} from './narrative-characters.js';
@@ -61,7 +62,7 @@ export function validateNarrative(state){
  ensure(Array.isArray(n.chapters)&&n.chapters.every(c=>Number.isInteger(c.turn)&&typeof c.title==='string'&&typeof c.text==='string'&&Array.isArray(c.incidents)),'chapters');
  ensure(Number.isInteger(n.lastAgedTurn)&&n.lastAgedTurn<=state.turn,'ageing boundary');
  const ids=new Set();
- validateCharacters(state);validateFamilyState(state);validateSuccessionState(state);validatePoliticalMemory(state);validateStagedHistory(state);validateWeather(state);
+ validateCharacters(state);validateFamilyState(state);validateCourtState(state);validateSuccessionState(state);validatePoliticalMemory(state);validateStagedHistory(state);validateWeather(state);
  for(const h of state.history){if(!h.narrative)continue;validateAnticipation(state,h);const scene=h.narrative;
   ensure(typeof scene.id==='string'&&!ids.has(scene.id)&&Array.isArray(scene.lines)&&scene.lines.length<=40,'scene identity');ids.add(scene.id);
   for(const l of scene.lines)ensure(l.incidentId===scene.id&&(l.speakerId==='chronicler'||n.characters[l.speakerId])&&typeof l.templateId==='string'&&typeof l.text==='string'&&l.text.length<=5000&&typeof l.emotion==='string','saved scene');

@@ -1,0 +1,7 @@
+// Controlled synthetic evidence demonstration; not an ordinary game flow.
+import fs from 'node:fs';
+import {courtDemos} from '../tests/readiness-fixtures.js';
+import {regionalReadiness,exceptionalSuccessionContract} from '../dist/narrative-readiness.js';
+const d=courtDemos();
+const out={label:'SYNTHETIC TEST ONLY — no approved literary prose or production identity generation',original:regionalReadiness(d.original),recognized:{record:d.recognized.narrative.courtRecords[0],readiness:d.diagnostics.recognized},minister:{record:d.minister.narrative.courtRecords[0],readiness:d.diagnostics.minister,seatsUnchanged:JSON.stringify(d.minister.narrative.seats)===JSON.stringify(d.gap.narrative.seats)},emergency:{court:d.emergency.narrative.courtRecords[0],succession:d.emergency.narrative.successionRecords[0],history:d.emergency.history.slice(-2).map(h=>({action:h.actionType,source:h.incident.id,title:h.title,report:h.report})),boardUnchanged:JSON.stringify(d.emergency.regions)===JSON.stringify(d.gap.regions)},minor:{titular:d.minor.narrative.seats.delhi,tenure:d.minor.narrative.regencies[0]},exceptional:{activeRegency:exceptionalSuccessionContract(d.minor,'delhi'),crossRegion:exceptionalSuccessionContract(d.cross,'delhi'),contested:exceptionalSuccessionContract(d.contested,'delhi')}};
+const text=JSON.stringify(out,null,2)+'\n';if(process.argv[2])fs.writeFileSync(process.argv[2],text);else process.stdout.write(text);

@@ -4,12 +4,22 @@ import {pathToFileURL} from 'node:url';
 import {initialState, IDS} from '../dist/model.js';
 import {createNarrative} from '../dist/narrative.js';
 import {SCENARIOS} from '../dist/scenarios.js';
+import {documentationOptions} from '../dist/narrative-readiness.js';
 import {selectSuccessor} from '../dist/narrative-succession.js';
 
 export const CURVES = {
   restrained: [0.002, 0.004, 0.012, 0.035, 0.09, 0.18],
   middle: [0.004, 0.008, 0.025, 0.07, 0.16, 0.30],
   elevated: [0.008, 0.016, 0.05, 0.13, 0.27, 0.45]
+};
+// Additional hypotheses, never production trigger probabilities.
+export const READINESS_STRATEGIES = ['recognition','court','recognition-court','recognition-adoption','recognition-births','recognition-emergency','court-emergency','recognition-court-emergency'];
+export const STRATEGY_FLAGS = {
+ none:[],adoption:['adoption'],births:['births'],appointment:['emergency'],
+ recognition:['recognition'],court:['court'],'recognition-court':['recognition','court'],
+ 'recognition-adoption':['recognition','adoption'],'recognition-births':['recognition','births'],
+ 'recognition-emergency':['recognition','emergency'],'court-emergency':['court','emergency'],
+ 'recognition-court-emergency':['recognition','court','emergency']
 };
 export const BANDS = [0, 40, 55, 65, 75, 85];
 export function mortality(age, curve) {
@@ -45,12 +55,14 @@ const claim = (id, person, region, step, basis='designation', support={}) => ({i
 // Compact modelling projection; deliberately NOT validated/exported as an application save.
 // Production candidate eligibility is reused, but proposed exits/growth are ledger operations.
 export function simulate(input, config) {
-  const {seed=1,ticks=4,curve='middle',population='rulers',strategy='none',timing='after',trace=false}=config;
-  if(!Number.isSafeInteger(seed)||!Number.isInteger(ticks)||ticks<1||ticks>100||!CURVES[curve]||!['rulers','families'].includes(population)||!['none','adoption','births','appointment'].includes(strategy)||!['before','after'].includes(timing)) throw Error('Invalid simulation configuration');
+  const {seed=1,ticks=4,curve='middle',population='rulers',strategy='none',timing='after',trace=false,trackReadiness=false}=config;
+  if(!Number.isSafeInteger(seed)||!Number.isInteger(ticks)||ticks<1||ticks>100||!CURVES[curve]||!['rulers','families'].includes(population)||!Object.hasOwn(STRATEGY_FLAGS,strategy)||!['before','after'].includes(timing)) throw Error('Invalid simulation configuration');
+  const flags=STRATEGY_FLAGS[strategy],has=flag=>flags.includes(flag);
   const s=structuredClone(input), n=s.narrative;
   n.familyLinks ??=[]; n.claimsV2 ??=[]; n.regencies ??=[];
   const initialIds=new Set(Object.keys(n.characters)), originalSeats={...n.seats}, timeline=[], events=[];
   const counters={drawnRulerExits:0,committedRulerDeaths:0,relativeDeaths:0,blockedExits:0,noHeir:0,ties:0,activeRegencyBlocked:0,regentLostBlocked:0,regencies:0,regencyEnds:0,widowOpportunities:0,introductions:0,births:0,adoptions:0,appointments:0,validSeatTicks:0,seatTicks:0};
+  if(trackReadiness||READINESS_STRATEGIES.includes(strategy))Object.assign(counters,{recognitions:0,courtIntroductions:0,recognitionAmbiguities:0,availableSeatTicks:0});
   const deathAges=[],tenures=[], starts=Object.fromEntries(IDS.map(r=>[r,0]));
   let serial=0;
   const log=(step,type,data)=>{events.push({step,type,...data});if(trace)timeline.push({step,type,...data});};
@@ -62,7 +74,7 @@ export function simulate(input, config) {
   };
   // Birth comparison starts with an explicit hypothetical adult spouse per court.
   // These eight extra identities count towards growth; no original biography is changed.
-  if(strategy==='births')for(const r of IDS){const id=add(r,30,0,'synthetic-spouse');n.familyLinks.push({id:`marriage-${r}`,type:'spouse',fromId:n.seats[r],toId:id,origin:origin(0)});}
+  if(has('births'))for(const r of IDS){const id=add(r,30,0,'synthetic-spouse');n.familyLinks.push({id:`marriage-${r}`,type:'spouse',fromId:n.seats[r],toId:id,origin:origin(0)});}
   for(let step=1;step<=ticks;step++) {
     // Starting-alive cohort only: a new identity is neither aged nor sampled twice.
     const present=Object.values(n.characters).filter(p=>p.condition!=='dead');
@@ -73,7 +85,20 @@ export function simulate(input, config) {
     // and only while the court has no eligible documented candidate.
     for(const r of IDS){
       const ruler=n.characters[n.seats[r]];
-      if(strategy==='adoption'&&ruler.age>=30&&!events.some(e=>e.type==='hypothetical-adoption'&&e.region===r)&&selectSuccessor(s,r).status==='none'&&draw(seed,step,r,'adopt')<.12){
+      if(READINESS_STRATEGIES.includes(strategy)&&s.regions[r].control!=='company'){
+        // A hypothetical witnessed court event, not an inferred Leader effect.
+        const decision=selectSuccessor(s,r),known=documentationOptions(s,r);
+        if(has('recognition')&&decision.status==='none'&&draw(seed,step,r,'court-recognition-event')<.08){
+          if(known.length===1){const id=known[0].characterId;n.claimsV2.push(claim(`recognition-${r}-${step}`,id,r,step));counters.recognitions++;log(step,'hypothetical-witnessed-recognition',{region:r,id,authority:ruler.id,evidence:known[0].evidence});}
+          else if(known.length>1)counters.recognitionAmbiguities++;
+        }
+        // Separate rare nonfatal introduction; reuse existing supported people first.
+        if(has('court')&&selectSuccessor(s,r).status==='none'&&!n.claimsV2.some(c=>c.region===r&&c.claimantId!==ruler.id&&n.characters[c.claimantId].condition!=='dead')&&!known.length&&!n.regencies.some(t=>!t.end&&t.region===r)&&draw(seed,step,r,'court-introduction-event')<.03){
+          const id=add(r,28,step,'witnessed-adult-court-figure');if(id){n.characters[id].politicalRole={kind:'minister',region:r};n.claimsV2.push(claim(`claim-${id}`,id,r,step,'witnessed-authority'));counters.courtIntroductions++;log(step,'hypothetical-witnessed-court-event',{region:r,id,authority:ruler.id});}
+        }
+      }
+
+      if(has('adoption')&&ruler.age>=30&&!events.some(e=>e.type==='hypothetical-adoption'&&e.region===r)&&selectSuccessor(s,r).status==='none'&&draw(seed,step,r,'adopt')<.12){
         const id=add(r,16,step,'prospective-adoption');if(id){
           const prior=`incumbent-${r}-${step}`;n.claimsV2.push({...claim(prior,ruler.id,r,step,'previous-rulership'),status:'realised'});
           const link=`adopt-${id}`;n.familyLinks.push({id:link,type:'adoptive-parent',fromId:ruler.id,toId:id,origin:origin(step)});
@@ -84,7 +109,7 @@ export function simulate(input, config) {
           counters.adoptions++;log(step,'hypothetical-adoption',{id,region:r,parent:ruler.id});
         }
       }
-      if(strategy==='births')for(const m of n.familyLinks.filter(l=>l.type==='spouse'&&!l.end&&[l.fromId,l.toId].includes(ruler.id))){
+      if(has('births'))for(const m of n.familyLinks.filter(l=>l.type==='spouse'&&!l.end&&[l.fromId,l.toId].includes(ruler.id))){
         const a=n.characters[m.fromId],b=n.characters[m.toId];
         if(a.condition==='alive'&&b.condition==='alive'&&a.age>=18&&b.age>=18&&a.age<=55&&b.age<=55&&draw(seed,step,r,'birth')<.10){
           const id=add(r,0,step,'prospective-birth');if(id){
@@ -115,7 +140,11 @@ export function simulate(input, config) {
         if(n.regencies.some(t=>!t.end&&t.region===r)){counters.blockedExits++;counters.activeRegencyBlocked++;log(step,'blocked-active-regency',{region:r,id});}
         else {
           let decision=selectSuccessor(s,r);
-          if(decision.status==='none'&&strategy==='appointment'&&s.regions[r].control!=='company'){
+          if(decision.status==='none'&&has('emergency')&&READINESS_STRATEGIES.includes(strategy)&&s.regions[r].control!=='company'){
+            const known=documentationOptions(s,r);
+            if(known.length===1){n.claimsV2.push(claim(`emergency-recognition-${r}-${step}`,known[0].characterId,r,step));counters.recognitions++;log(step,'hypothetical-emergency-recognition',{region:r,id:known[0].characterId,authority:ruler.id});decision=selectSuccessor(s,r);}
+          }
+          if(decision.status==='none'&&has('emergency')&&s.regions[r].control!=='company'&&(!READINESS_STRATEGIES.includes(strategy)||!documentationOptions(s,r).length&&!n.claimsV2.some(c=>c.region===r&&c.claimantId!==ruler.id&&n.characters[c.claimantId].condition!=='dead'))){
             const appointee=add(r,28,step,'unrelated-court-appointee');if(appointee){n.claimsV2.push(claim(`claim-${appointee}`,appointee,r,step,'witnessed-authority'));counters.appointments++;decision=selectSuccessor(s,r);}
           }
           if(decision.status!=='selected'){
@@ -135,6 +164,7 @@ export function simulate(input, config) {
           }
         }
       }
+      if((trackReadiness||READINESS_STRATEGIES.includes(strategy))&&selectSuccessor(s,r).status==='selected'&&!n.regencies.some(t=>!t.end&&t.region===r))counters.availableSeatTicks++;
       counters.seatTicks++;if(n.characters[n.seats[r]]?.condition==='alive'&&(!n.regencies.some(t=>!t.end&&t.region===r)||n.regencies.filter(t=>!t.end&&t.region===r).every(t=>n.characters[t.regentId].condition==='alive'&&n.characters[t.regentId].age>=18)))counters.validSeatTicks++;
     }
   }
