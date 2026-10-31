@@ -249,6 +249,10 @@ These **twelve design-coverage refinements** were checked against an earlier nar
 
 **Implementation boundary:** This is backlog documentation only. It does not change the M2A delivered schema, authorize M2B, add new cast members or prose, alter any physical board-game rule or deploy the Site. Details explicitly marked PROPOSED still require review.
 
+## Next approved engineering scope — M2B-2b-1 (31 October 2026)
+
+[Succession readiness and credible court appointments — Codex handoff](narrative/character-engine-m2b2b1-succession-readiness-handoff.md) is the **approved next controlled implementation task**, covering read-only readiness, source-linked heir recognition of a documented person, synthetic adult court figure introduction and emergency succession planning, plus reproducible model comparisons and explicit blocker tests. **Not approved yet:** enabling automatic live heir creation/recognition, natural mortality, production court appointments, company settlements, marriages, deaths or edited production prose. Later nonfatal real-event triggers and live mortality each require separate review.
+
 ## M2B-2a simulation review — 31 October 2026
 
 **DELIVERED: simulation/readiness only.** [Analysis](narrative/character-engine-m2b2a-analysis.md), [synthetic histories](narrative/character-engine-m2b2a-samples.json), [verification](narrative/character-engine-m2b2a-verification.json). Codex reports **502 passing tests**, 240,000 simulated campaigns in 240 configurations, and a byte-identical repeat. The report is accepted as *analysis*, not approval of a probability or live trigger. Normal game source, UI, saves and dialogue remain unchanged.
