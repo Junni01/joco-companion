@@ -1,0 +1,40 @@
+{
+  "task": "M2B-2b-1 only; controlled APIs and offline proposals",
+  "date": "2026-10-31",
+  "implementationCommit": "98b9a3fc6cb456d318603849b0850e491c8ee5b1",
+  "automated": {
+    "passed": 525,
+    "failed": 0,
+    "newTests": 23
+  },
+  "browser": {
+    "checks": [
+      "desktop: regular/Debug, standard/quiet, synthetic recognition/minister/emergency; pure diagnostic; read-only claims; reload/real Undo/Redo/JSON/snapshot; protected invasion progress without reroll; Normal unchanged",
+      "tablet: regular/Debug, standard/quiet, synthetic recognition/minister/emergency; pure diagnostic; read-only claims; reload/real Undo/Redo/JSON/snapshot; protected invasion progress without reroll; Normal unchanged"
+    ],
+    "errors": [],
+    "browser": "156.0.8078.74",
+    "viewports": [
+      "1440x900",
+      "1024x768"
+    ]
+  },
+  "existingBrowserSuites": [
+    "check-succession-browser.cjs",
+    "check-09e-browser.cjs"
+  ],
+  "simulation": {
+    "seed": 90210,
+    "runsPerCell": 1000,
+    "cells": 240,
+    "fullRuns": 2,
+    "byteIdentical": true,
+    "sha256": "a50a667a04481d6c34b1c33d86af0b30570721420df0d66666950107615ff4a0",
+    "oldBaselineCellsMatchedExactly": 80,
+    "counterSeatAndCastInvariants": true
+  },
+  "compatibility": "Optional v2 courtRecords; no migration/backfill/UI/rules/dialogue changes",
+  "liveTriggers": false,
+  "deployment": "Not deployed",
+  "delivery": "Implementation/documentation commits and final verified remote main HEAD are reported in delivery; a documentation commit cannot contain its own hash."
+}

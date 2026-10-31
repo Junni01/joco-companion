@@ -133,3 +133,8 @@ Deterministic evidence-based selection and atomic test-only succession now suppo
 ## Character Engine M2B-2a — offline modelling
 
 `node scripts/simulate-dynasties.mjs results.json 1000 90210` runs reproducible **simulation-only** comparisons; `node scripts/report-dynasties.mjs results.json docs/narrative` regenerates the analysis and labelled histories. See the [numerical analysis/candidate recommendations](docs/narrative/character-engine-m2b2a-analysis.md) and [verification](docs/narrative/character-engine-m2b2a-verification.json). All rates and growth strategies are unapproved proposals. No live fates, family generation, succession, UI or Site deployment.
+
+
+## Character Engine M2B-2b-1 — readiness
+
+Pure diagnostics and controlled recognition/court/emergency fixtures build on the existing engine; no live triggers or UI changes. See the [implementation and explicit blocking contracts](docs/narrative/character-engine-m2b2b1-implementation.md), [demo](docs/narrative/character-engine-m2b2b1-demo.md) and [extended offline analysis](docs/narrative/character-engine-m2b2b1-analysis.md). `node scripts/demo-readiness.mjs` and `node scripts/simulate-readiness.mjs results.json 1000 90210` reproduce the evidence. All numerical and cultural policies need later approval; no Site deployment.

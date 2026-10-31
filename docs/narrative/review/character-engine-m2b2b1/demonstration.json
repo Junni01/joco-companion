@@ -1,0 +1,3054 @@
+{
+  "label": "SYNTHETIC TEST ONLY — no approved literary prose or production identity generation",
+  "original": {
+    "punjab": {
+      "region": "punjab",
+      "incumbentId": "ruler-punjab",
+      "status": "needs-documentation",
+      "transactionReady": false,
+      "blockers": [],
+      "candidateBlockers": [],
+      "decision": {
+        "status": "none",
+        "assessments": [],
+        "reason": "no-qualified-candidate"
+      },
+      "documentationOptions": [
+        {
+          "characterId": "heir-punjab",
+          "age": 37,
+          "requiresRecognition": true,
+          "evidence": [
+            {
+              "kind": "existing-legacy-family",
+              "characterId": "heir-punjab",
+              "relativeId": "ruler-punjab",
+              "tie": "older sibling",
+              "provenance": "Fictional pre-campaign background"
+            }
+          ]
+        }
+      ],
+      "courtDevelopmentAllowed": true,
+      "courtPolicyReason": null
+    },
+    "delhi": {
+      "region": "delhi",
+      "incumbentId": "ruler-delhi",
+      "status": "needs-documentation",
+      "transactionReady": false,
+      "blockers": [],
+      "candidateBlockers": [],
+      "decision": {
+        "status": "none",
+        "assessments": [],
+        "reason": "no-qualified-candidate"
+      },
+      "documentationOptions": [
+        {
+          "characterId": "heir-delhi",
+          "age": 47,
+          "requiresRecognition": true,
+          "evidence": [
+            {
+              "kind": "existing-legacy-family",
+              "characterId": "heir-delhi",
+              "relativeId": "ruler-delhi",
+              "tie": "older sibling",
+              "provenance": "Fictional pre-campaign background"
+            }
+          ]
+        }
+      ],
+      "courtDevelopmentAllowed": true,
+      "courtPolicyReason": null
+    },
+    "bengal": {
+      "region": "bengal",
+      "incumbentId": "ruler-bengal",
+      "status": "needs-documentation",
+      "transactionReady": false,
+      "blockers": [],
+      "candidateBlockers": [],
+      "decision": {
+        "status": "none",
+        "assessments": [],
+        "reason": "no-qualified-candidate"
+      },
+      "documentationOptions": [
+        {
+          "characterId": "heir-bengal",
+          "age": 38,
+          "requiresRecognition": true,
+          "evidence": [
+            {
+              "kind": "existing-legacy-family",
+              "characterId": "heir-bengal",
+              "relativeId": "ruler-bengal",
+              "tie": "older sibling",
+              "provenance": "Fictional pre-campaign background"
+            }
+          ]
+        }
+      ],
+      "courtDevelopmentAllowed": true,
+      "courtPolicyReason": null
+    },
+    "bombay": {
+      "region": "bombay",
+      "incumbentId": "ruler-bombay",
+      "status": "needs-documentation",
+      "transactionReady": false,
+      "blockers": [],
+      "candidateBlockers": [],
+      "decision": {
+        "status": "none",
+        "assessments": [],
+        "reason": "no-qualified-candidate"
+      },
+      "documentationOptions": [
+        {
+          "characterId": "heir-bombay",
+          "age": 28,
+          "requiresRecognition": true,
+          "evidence": [
+            {
+              "kind": "existing-legacy-family",
+              "characterId": "heir-bombay",
+              "relativeId": "ruler-bombay",
+              "tie": "older sibling",
+              "provenance": "Fictional pre-campaign background"
+            }
+          ]
+        }
+      ],
+      "courtDevelopmentAllowed": true,
+      "courtPolicyReason": null
+    },
+    "maratha": {
+      "region": "maratha",
+      "incumbentId": "ruler-maratha",
+      "status": "needs-documentation",
+      "transactionReady": false,
+      "blockers": [],
+      "candidateBlockers": [],
+      "decision": {
+        "status": "none",
+        "assessments": [],
+        "reason": "no-qualified-candidate"
+      },
+      "documentationOptions": [
+        {
+          "characterId": "heir-maratha",
+          "age": 31,
+          "requiresRecognition": true,
+          "evidence": [
+            {
+              "kind": "existing-legacy-family",
+              "characterId": "heir-maratha",
+              "relativeId": "ruler-maratha",
+              "tie": "older sibling",
+              "provenance": "Fictional pre-campaign background"
+            }
+          ]
+        }
+      ],
+      "courtDevelopmentAllowed": true,
+      "courtPolicyReason": null
+    },
+    "hyderabad": {
+      "region": "hyderabad",
+      "incumbentId": "ruler-hyderabad",
+      "status": "needs-documentation",
+      "transactionReady": false,
+      "blockers": [],
+      "candidateBlockers": [],
+      "decision": {
+        "status": "none",
+        "assessments": [],
+        "reason": "no-qualified-candidate"
+      },
+      "documentationOptions": [
+        {
+          "characterId": "heir-hyderabad",
+          "age": 39,
+          "requiresRecognition": true,
+          "evidence": [
+            {
+              "kind": "existing-legacy-family",
+              "characterId": "heir-hyderabad",
+              "relativeId": "ruler-hyderabad",
+              "tie": "older sibling",
+              "provenance": "Fictional pre-campaign background"
+            }
+          ]
+        }
+      ],
+      "courtDevelopmentAllowed": true,
+      "courtPolicyReason": null
+    },
+    "mysore": {
+      "region": "mysore",
+      "incumbentId": "ruler-mysore",
+      "status": "needs-documentation",
+      "transactionReady": false,
+      "blockers": [],
+      "candidateBlockers": [],
+      "decision": {
+        "status": "none",
+        "assessments": [],
+        "reason": "no-qualified-candidate"
+      },
+      "documentationOptions": [
+        {
+          "characterId": "heir-mysore",
+          "age": 42,
+          "requiresRecognition": true,
+          "evidence": [
+            {
+              "kind": "existing-legacy-family",
+              "characterId": "heir-mysore",
+              "relativeId": "ruler-mysore",
+              "tie": "older sibling",
+              "provenance": "Fictional pre-campaign background"
+            }
+          ]
+        }
+      ],
+      "courtDevelopmentAllowed": true,
+      "courtPolicyReason": null
+    },
+    "madras": {
+      "region": "madras",
+      "incumbentId": "ruler-madras",
+      "status": "needs-documentation",
+      "transactionReady": false,
+      "blockers": [],
+      "candidateBlockers": [],
+      "decision": {
+        "status": "none",
+        "assessments": [],
+        "reason": "no-qualified-candidate"
+      },
+      "documentationOptions": [
+        {
+          "characterId": "heir-madras",
+          "age": 43,
+          "requiresRecognition": true,
+          "evidence": [
+            {
+              "kind": "existing-legacy-family",
+              "characterId": "heir-madras",
+              "relativeId": "ruler-madras",
+              "tie": "older sibling",
+              "provenance": "Fictional pre-campaign background"
+            }
+          ]
+        }
+      ],
+      "courtDevelopmentAllowed": true,
+      "courtPolicyReason": null
+    }
+  },
+  "recognized": {
+    "record": {
+      "id": "recognize-delhi",
+      "testOnly": true,
+      "kind": "recognition",
+      "request": {
+        "id": "recognize-delhi",
+        "region": "delhi",
+        "authorityId": "ruler-delhi",
+        "characterId": "heir-delhi",
+        "purpose": "Explicit witnessed synthetic sibling designation"
+      },
+      "region": "delhi",
+      "authorityId": "ruler-delhi",
+      "characterId": "heir-delhi",
+      "ageAtRecord": 47,
+      "roleAtRecord": {
+        "kind": "family-member",
+        "region": "delhi"
+      },
+      "claimId": "court-claim-recognize-delhi",
+      "priorClaim": null,
+      "boardBefore": {
+        "control": "indian",
+        "presidency": null,
+        "overlord": null,
+        "empireCapital": true,
+        "strength": 1,
+        "unrest": 0,
+        "lootAvailable": true,
+        "orders": {
+          "d5n": true,
+          "d3": false,
+          "d5e": false
+        }
+      },
+      "origin": {
+        "turn": 1,
+        "source": {
+          "incidentId": "incident-1",
+          "actionType": "test-court"
+        },
+        "reason": "Synthetic witnessed court: Explicit witnessed synthetic sibling designation"
+      },
+      "claimAfter": {
+        "id": "court-claim-recognize-delhi",
+        "claimantId": "heir-delhi",
+        "region": "delhi",
+        "basis": "designation",
+        "standing": "recognised",
+        "status": "asserted",
+        "origin": {
+          "turn": 1,
+          "source": {
+            "incidentId": "incident-1",
+            "actionType": "test-court"
+          },
+          "reason": "Synthetic witnessed court: Explicit witnessed synthetic sibling designation"
+        },
+        "support": {},
+        "statusHistory": []
+      }
+    },
+    "readiness": {
+      "region": "delhi",
+      "incumbentId": "ruler-delhi",
+      "status": "ready-adult",
+      "transactionReady": true,
+      "blockers": [],
+      "candidateBlockers": [],
+      "decision": {
+        "status": "selected",
+        "assessments": [
+          {
+            "characterId": "heir-delhi",
+            "claimId": "court-claim-recognize-delhi",
+            "appointmentId": null,
+            "basis": "designation",
+            "eligible": true,
+            "reasons": [],
+            "evidence": [
+              {
+                "kind": "claim",
+                "id": "court-claim-recognize-delhi",
+                "origin": {
+                  "turn": 1,
+                  "source": {
+                    "incidentId": "incident-1",
+                    "actionType": "test-court"
+                  },
+                  "reason": "Synthetic witnessed court: Explicit witnessed synthetic sibling designation"
+                }
+              },
+              {
+                "kind": "regional-state",
+                "region": "delhi",
+                "politicalKind": "sovereign-ruler",
+                "control": "indian",
+                "overlord": null
+              }
+            ],
+            "minor": false,
+            "regents": []
+          }
+        ],
+        "chosen": {
+          "characterId": "heir-delhi",
+          "claimId": "court-claim-recognize-delhi",
+          "regentId": null
+        },
+        "evidence": [
+          {
+            "kind": "claim",
+            "id": "court-claim-recognize-delhi",
+            "origin": {
+              "turn": 1,
+              "source": {
+                "incidentId": "incident-1",
+                "actionType": "test-court"
+              },
+              "reason": "Synthetic witnessed court: Explicit witnessed synthetic sibling designation"
+            }
+          },
+          {
+            "kind": "regional-state",
+            "region": "delhi",
+            "politicalKind": "sovereign-ruler",
+            "control": "indian",
+            "overlord": null
+          }
+        ],
+        "candidate": {
+          "characterId": "heir-delhi",
+          "claimId": "court-claim-recognize-delhi",
+          "appointmentId": null,
+          "basis": "designation",
+          "eligible": true,
+          "reasons": [],
+          "evidence": [
+            {
+              "kind": "claim",
+              "id": "court-claim-recognize-delhi",
+              "origin": {
+                "turn": 1,
+                "source": {
+                  "incidentId": "incident-1",
+                  "actionType": "test-court"
+                },
+                "reason": "Synthetic witnessed court: Explicit witnessed synthetic sibling designation"
+              }
+            },
+            {
+              "kind": "regional-state",
+              "region": "delhi",
+              "politicalKind": "sovereign-ruler",
+              "control": "indian",
+              "overlord": null
+            }
+          ],
+          "minor": false,
+          "regents": []
+        }
+      },
+      "documentationOptions": [
+        {
+          "characterId": "heir-delhi",
+          "age": 47,
+          "requiresRecognition": true,
+          "evidence": [
+            {
+              "kind": "existing-legacy-family",
+              "characterId": "heir-delhi",
+              "relativeId": "ruler-delhi",
+              "tie": "older sibling",
+              "provenance": "Fictional pre-campaign background"
+            }
+          ]
+        }
+      ],
+      "courtDevelopmentAllowed": true,
+      "courtPolicyReason": null
+    }
+  },
+  "minister": {
+    "record": {
+      "id": "court-delhi",
+      "testOnly": true,
+      "kind": "introduction",
+      "request": {
+        "id": "court-delhi",
+        "region": "delhi",
+        "authorityId": "ruler-delhi",
+        "purpose": "Explicit synthetic minister to address a documented candidate gap",
+        "candidate": {
+          "id": "synthetic-court-delhi",
+          "name": "Synthetic Court Candidate Alpha",
+          "age": 28
+        }
+      },
+      "region": "delhi",
+      "authorityId": "ruler-delhi",
+      "characterId": "synthetic-court-delhi",
+      "ageAtRecord": 28,
+      "roleAtRecord": {
+        "kind": "minister",
+        "region": "delhi"
+      },
+      "claimId": "court-claim-court-delhi",
+      "priorClaim": null,
+      "boardBefore": {
+        "control": "indian",
+        "presidency": null,
+        "overlord": null,
+        "empireCapital": true,
+        "strength": 1,
+        "unrest": 0,
+        "lootAvailable": true,
+        "orders": {
+          "d5n": true,
+          "d3": false,
+          "d5e": false
+        }
+      },
+      "origin": {
+        "turn": 1,
+        "source": {
+          "incidentId": "incident-2",
+          "actionType": "test-court"
+        },
+        "reason": "Synthetic witnessed court: Explicit synthetic minister to address a documented candidate gap"
+      },
+      "claimAfter": {
+        "id": "court-claim-court-delhi",
+        "claimantId": "synthetic-court-delhi",
+        "region": "delhi",
+        "basis": "witnessed-authority",
+        "standing": "recognised",
+        "status": "asserted",
+        "origin": {
+          "turn": 1,
+          "source": {
+            "incidentId": "incident-2",
+            "actionType": "test-court"
+          },
+          "reason": "Synthetic witnessed court: Explicit synthetic minister to address a documented candidate gap"
+        },
+        "support": {},
+        "statusHistory": []
+      },
+      "introduced": {
+        "id": "synthetic-court-delhi",
+        "name": "Synthetic Court Candidate Alpha",
+        "aliases": [],
+        "region": "delhi",
+        "age": 28,
+        "dynasty": "Synthetic court; no recorded dynasty",
+        "role": "heir",
+        "condition": "alive",
+        "position": "court minister",
+        "politicalRole": {
+          "kind": "minister",
+          "region": "delhi"
+        },
+        "politicalHistory": [],
+        "conditionHistory": [],
+        "mood": "watchful",
+        "traits": {
+          "ambition": 50,
+          "pride": 50,
+          "caution": 50,
+          "ruthlessness": 50,
+          "loyalty": 50,
+          "vindictiveness": 50
+        },
+        "family": [],
+        "claims": [],
+        "relations": {},
+        "incidents": [
+          "incident-2"
+        ],
+        "memoryIds": [],
+        "background": "Synthetic fictional court candidate introduced for a controlled test; no earlier biography is asserted.",
+        "provenance": "Synthetic test introduction; no cultural naming claim",
+        "confidence": 50,
+        "voice": {
+          "formality": 1,
+          "directness": 1,
+          "restraint": 1,
+          "humour": 0
+        },
+        "pacing": {
+          "relevant": 0,
+          "lastAppearance": -10,
+          "lastCallbackAt": -10,
+          "templates": [],
+          "phrases": [],
+          "callbacks": {}
+        },
+        "development": {
+          "strongExperiences": [],
+          "changes": [],
+          "lastChangedTurn": null
+        },
+        "introduction": {
+          "kind": "introduced",
+          "age": 28,
+          "origin": {
+            "turn": 1,
+            "source": {
+              "incidentId": "incident-2",
+              "actionType": "test-court"
+            },
+            "reason": "Synthetic witnessed court: Explicit synthetic minister to address a documented candidate gap"
+          }
+        }
+      }
+    },
+    "readiness": {
+      "region": "delhi",
+      "incumbentId": "ruler-delhi",
+      "status": "ready-adult",
+      "transactionReady": true,
+      "blockers": [],
+      "candidateBlockers": [],
+      "decision": {
+        "status": "selected",
+        "assessments": [
+          {
+            "characterId": "synthetic-court-delhi",
+            "claimId": "court-claim-court-delhi",
+            "appointmentId": null,
+            "basis": "witnessed-authority",
+            "eligible": true,
+            "reasons": [],
+            "evidence": [
+              {
+                "kind": "claim",
+                "id": "court-claim-court-delhi",
+                "origin": {
+                  "turn": 1,
+                  "source": {
+                    "incidentId": "incident-2",
+                    "actionType": "test-court"
+                  },
+                  "reason": "Synthetic witnessed court: Explicit synthetic minister to address a documented candidate gap"
+                }
+              },
+              {
+                "kind": "regional-state",
+                "region": "delhi",
+                "politicalKind": "sovereign-ruler",
+                "control": "indian",
+                "overlord": null
+              }
+            ],
+            "minor": false,
+            "regents": []
+          }
+        ],
+        "chosen": {
+          "characterId": "synthetic-court-delhi",
+          "claimId": "court-claim-court-delhi",
+          "regentId": null
+        },
+        "evidence": [
+          {
+            "kind": "claim",
+            "id": "court-claim-court-delhi",
+            "origin": {
+              "turn": 1,
+              "source": {
+                "incidentId": "incident-2",
+                "actionType": "test-court"
+              },
+              "reason": "Synthetic witnessed court: Explicit synthetic minister to address a documented candidate gap"
+            }
+          },
+          {
+            "kind": "regional-state",
+            "region": "delhi",
+            "politicalKind": "sovereign-ruler",
+            "control": "indian",
+            "overlord": null
+          }
+        ],
+        "candidate": {
+          "characterId": "synthetic-court-delhi",
+          "claimId": "court-claim-court-delhi",
+          "appointmentId": null,
+          "basis": "witnessed-authority",
+          "eligible": true,
+          "reasons": [],
+          "evidence": [
+            {
+              "kind": "claim",
+              "id": "court-claim-court-delhi",
+              "origin": {
+                "turn": 1,
+                "source": {
+                  "incidentId": "incident-2",
+                  "actionType": "test-court"
+                },
+                "reason": "Synthetic witnessed court: Explicit synthetic minister to address a documented candidate gap"
+              }
+            },
+            {
+              "kind": "regional-state",
+              "region": "delhi",
+              "politicalKind": "sovereign-ruler",
+              "control": "indian",
+              "overlord": null
+            }
+          ],
+          "minor": false,
+          "regents": []
+        }
+      },
+      "documentationOptions": [
+        {
+          "characterId": "synthetic-court-delhi",
+          "age": 28,
+          "requiresRecognition": true,
+          "evidence": [
+            {
+              "kind": "recorded-court-role",
+              "characterId": "synthetic-court-delhi",
+              "role": {
+                "kind": "minister",
+                "region": "delhi"
+              },
+              "origin": {
+                "turn": 1,
+                "source": {
+                  "incidentId": "incident-2",
+                  "actionType": "test-court"
+                },
+                "reason": "Synthetic witnessed court: Explicit synthetic minister to address a documented candidate gap"
+              }
+            }
+          ]
+        }
+      ],
+      "courtDevelopmentAllowed": true,
+      "courtPolicyReason": null
+    },
+    "seatsUnchanged": true
+  },
+  "emergency": {
+    "court": {
+      "id": "emergency-delhi-court",
+      "testOnly": true,
+      "kind": "introduction",
+      "request": {
+        "id": "emergency-delhi-court",
+        "region": "delhi",
+        "authorityId": "ruler-delhi",
+        "purpose": "Controlled future emergency; not a gameplay death",
+        "candidate": {
+          "id": "synthetic-emergency-delhi",
+          "name": "Synthetic Emergency Candidate Beta",
+          "age": 32
+        }
+      },
+      "region": "delhi",
+      "authorityId": "ruler-delhi",
+      "characterId": "synthetic-emergency-delhi",
+      "ageAtRecord": 32,
+      "roleAtRecord": {
+        "kind": "minister",
+        "region": "delhi"
+      },
+      "claimId": "court-claim-emergency-delhi-court",
+      "priorClaim": null,
+      "boardBefore": {
+        "control": "indian",
+        "presidency": null,
+        "overlord": null,
+        "empireCapital": true,
+        "strength": 1,
+        "unrest": 0,
+        "lootAvailable": true,
+        "orders": {
+          "d5n": true,
+          "d3": false,
+          "d5e": false
+        }
+      },
+      "origin": {
+        "turn": 1,
+        "source": {
+          "incidentId": "incident-2",
+          "actionType": "test-court"
+        },
+        "reason": "Synthetic witnessed court: Controlled future emergency; not a gameplay death"
+      },
+      "claimAfter": {
+        "id": "court-claim-emergency-delhi-court",
+        "claimantId": "synthetic-emergency-delhi",
+        "region": "delhi",
+        "basis": "witnessed-authority",
+        "standing": "recognised",
+        "status": "asserted",
+        "origin": {
+          "turn": 1,
+          "source": {
+            "incidentId": "incident-2",
+            "actionType": "test-court"
+          },
+          "reason": "Synthetic witnessed court: Controlled future emergency; not a gameplay death"
+        },
+        "support": {},
+        "statusHistory": []
+      },
+      "introduced": {
+        "id": "synthetic-emergency-delhi",
+        "name": "Synthetic Emergency Candidate Beta",
+        "aliases": [],
+        "region": "delhi",
+        "age": 32,
+        "dynasty": "Synthetic court; no recorded dynasty",
+        "role": "heir",
+        "condition": "alive",
+        "position": "court minister",
+        "politicalRole": {
+          "kind": "minister",
+          "region": "delhi"
+        },
+        "politicalHistory": [],
+        "conditionHistory": [],
+        "mood": "watchful",
+        "traits": {
+          "ambition": 50,
+          "pride": 50,
+          "caution": 50,
+          "ruthlessness": 50,
+          "loyalty": 50,
+          "vindictiveness": 50
+        },
+        "family": [],
+        "claims": [],
+        "relations": {},
+        "incidents": [
+          "incident-2"
+        ],
+        "memoryIds": [],
+        "background": "Synthetic fictional court candidate introduced for a controlled test; no earlier biography is asserted.",
+        "provenance": "Synthetic test introduction; no cultural naming claim",
+        "confidence": 50,
+        "voice": {
+          "formality": 1,
+          "directness": 1,
+          "restraint": 1,
+          "humour": 0
+        },
+        "pacing": {
+          "relevant": 0,
+          "lastAppearance": -10,
+          "lastCallbackAt": -10,
+          "templates": [],
+          "phrases": [],
+          "callbacks": {}
+        },
+        "development": {
+          "strongExperiences": [],
+          "changes": [],
+          "lastChangedTurn": null
+        },
+        "introduction": {
+          "kind": "introduced",
+          "age": 32,
+          "origin": {
+            "turn": 1,
+            "source": {
+              "incidentId": "incident-2",
+              "actionType": "test-court"
+            },
+            "reason": "Synthetic witnessed court: Controlled future emergency; not a gameplay death"
+          }
+        }
+      }
+    },
+    "succession": {
+      "id": "emergency-delhi",
+      "testOnly": true,
+      "request": {
+        "id": "emergency-delhi",
+        "region": "delhi",
+        "incumbentId": "ruler-delhi",
+        "exit": "confirmed-death",
+        "courtRecordId": "emergency-delhi-court",
+        "emergencyRequest": {
+          "id": "emergency-delhi",
+          "region": "delhi",
+          "authorityId": "ruler-delhi",
+          "purpose": "Controlled future emergency; not a gameplay death",
+          "candidate": {
+            "id": "synthetic-emergency-delhi",
+            "name": "Synthetic Emergency Candidate Beta",
+            "age": 32
+          },
+          "exit": "confirmed-death",
+          "warrant": {
+            "kind": "synthetic-fixture",
+            "reason": "Independently supplied explicit test death; no board event implies this fate"
+          }
+        }
+      },
+      "region": "delhi",
+      "incumbentId": "ruler-delhi",
+      "successorId": "synthetic-emergency-delhi",
+      "exit": "confirmed-death",
+      "claimId": "court-claim-emergency-delhi-court",
+      "regentId": null,
+      "politicalKind": "sovereign-ruler",
+      "successorAgeAtStart": 32,
+      "regentAgeAtStart": null,
+      "boardBefore": {
+        "control": "indian",
+        "presidency": null,
+        "overlord": null,
+        "empireCapital": true,
+        "strength": 1,
+        "unrest": 0,
+        "lootAvailable": true,
+        "orders": {
+          "d5n": true,
+          "d3": false,
+          "d5e": false
+        }
+      },
+      "policy": {
+        "adultAge": 18,
+        "allowMinors": true,
+        "allowDormant": false,
+        "standings": [
+          "recognised"
+        ],
+        "bases": [
+          "designation",
+          "parentage",
+          "adoption",
+          "marriage-derived",
+          "previous-rulership",
+          "witnessed-authority"
+        ],
+        "basisPriority": [],
+        "regentBases": [
+          "guardian"
+        ],
+        "appointments": []
+      },
+      "evidence": [
+        {
+          "kind": "claim",
+          "id": "court-claim-emergency-delhi-court",
+          "origin": {
+            "turn": 1,
+            "source": {
+              "incidentId": "incident-2",
+              "actionType": "test-court"
+            },
+            "reason": "Synthetic witnessed court: Controlled future emergency; not a gameplay death"
+          }
+        },
+        {
+          "kind": "regional-state",
+          "region": "delhi",
+          "politicalKind": "sovereign-ruler",
+          "control": "indian",
+          "overlord": null
+        }
+      ],
+      "successorPriorRole": {
+        "kind": "minister",
+        "region": "delhi"
+      },
+      "successorPriorPosition": "court minister",
+      "incumbentPriorPosition": "sovereign ruler",
+      "privateOutlookBefore": {
+        "version": 3,
+        "selectionPolicy": "09b-evidence-1",
+        "visibility": "private",
+        "characterId": "ruler-delhi",
+        "templateId": "09B-capital-politic",
+        "text": "A subject who whispers of independence is asking a question. The art lies in deciding how loudly to answer.",
+        "sourceIncidentId": null,
+        "context": {
+          "region": "delhi",
+          "issues": [
+            "capital",
+            "commercial-disruption",
+            "commercial-access"
+          ],
+          "climate": "uncertain",
+          "elephant": {
+            "from": "maratha",
+            "to": "delhi"
+          },
+          "visibleBackRegion": "madras",
+          "revealed": null,
+          "local": {
+            "control": "indian",
+            "overlord": null,
+            "empireCapital": true,
+            "strength": 1,
+            "unrest": 0,
+            "commercialOpen": 1,
+            "commercialTotal": 3
+          },
+          "attackerStrength": 2,
+          "defenderStrength": 1,
+          "subjectStrength": 2,
+          "companyUnrestStrength": 0,
+          "batch": null,
+          "allegiance": null,
+          "ended": false
+        },
+        "personal": {
+          "traits": {
+            "ambition": 51,
+            "pride": 32,
+            "caution": 48,
+            "ruthlessness": 48,
+            "loyalty": 22,
+            "vindictiveness": 25
+          },
+          "confidence": 50,
+          "mood": "watchful",
+          "competence": 84,
+          "grievance": null,
+          "helpful": [],
+          "reasonIds": [],
+          "recentMemoryId": null,
+          "recentCategory": null,
+          "routeEvidence": [],
+          "routeSetup": null
+        },
+        "memoryIds": []
+      },
+      "origin": {
+        "turn": 1,
+        "source": {
+          "incidentId": "incident-3",
+          "actionType": "test-succession"
+        },
+        "reason": "Synthetic test: Controlled M2B-1 fixture, not a production event"
+      }
+    },
+    "history": [
+      {
+        "action": "test-court",
+        "source": "incident-2",
+        "title": "SYNTHETIC TEST · witnessed introduction",
+        "report": "SYNTHETIC TEST · introduction · Synthetic Emergency Candidate Beta · delhi · no board change"
+      },
+      {
+        "action": "test-succession",
+        "source": "incident-3",
+        "title": "SYNTHETIC TEST · Controlled M2B-1 fixture, not a production event",
+        "report": "SYNTHETIC TEST · Rashid of Delhi → Synthetic Emergency Candidate Beta · delhi · confirmed-death"
+      }
+    ],
+    "boardUnchanged": true
+  },
+  "minor": {
+    "titular": "demo-child",
+    "tenure": {
+      "id": "regency:demo-child",
+      "successionId": "demo-child",
+      "region": "delhi",
+      "rulerId": "demo-child",
+      "regentId": "demo-widow",
+      "start": {
+        "turn": 1,
+        "source": {
+          "incidentId": "incident-3",
+          "actionType": "test-succession"
+        },
+        "reason": "Synthetic test: Controlled M2B-1 fixture, not a production event"
+      },
+      "priorRole": {
+        "kind": "family-member",
+        "region": "delhi"
+      },
+      "priorPosition": "family member",
+      "ageAtStart": 12,
+      "regentAgeAtStart": 46,
+      "adultAge": 18
+    }
+  },
+  "exceptional": {
+    "activeRegency": {
+      "region": "delhi",
+      "readiness": {
+        "region": "delhi",
+        "incumbentId": "demo-child",
+        "status": "blocked-regency",
+        "transactionReady": false,
+        "blockers": [
+          "blocked-regency",
+          "no-eligible-regent",
+          "already-holds-office"
+        ],
+        "candidateBlockers": [
+          {
+            "characterId": "demo-adopted",
+            "claimId": "adopted-claim",
+            "reason": "standing-not-accepted"
+          },
+          {
+            "characterId": "demo-adopted",
+            "claimId": "adopted-claim",
+            "reason": "no-eligible-regent"
+          },
+          {
+            "characterId": "demo-child",
+            "claimId": "child-claim",
+            "reason": "current-incumbent"
+          },
+          {
+            "characterId": "demo-child",
+            "claimId": "child-claim",
+            "reason": "claim-not-active"
+          },
+          {
+            "characterId": "demo-child",
+            "claimId": "child-claim",
+            "reason": "no-eligible-regent"
+          },
+          {
+            "characterId": "demo-founder",
+            "claimId": "founder-claim",
+            "reason": "unavailable-dead"
+          },
+          {
+            "characterId": "demo-founder",
+            "claimId": "founder-claim",
+            "reason": "claim-not-active"
+          },
+          {
+            "characterId": "demo-rival",
+            "claimId": "rival-claim",
+            "reason": "standing-not-accepted"
+          },
+          {
+            "characterId": "demo-rival",
+            "claimId": "rival-claim",
+            "reason": "claim-not-active"
+          },
+          {
+            "characterId": "demo-widow",
+            "claimId": "widow-claim",
+            "reason": "already-holds-office"
+          },
+          {
+            "characterId": "demo-widow",
+            "claimId": "widow-claim",
+            "reason": "standing-not-accepted"
+          },
+          {
+            "characterId": "ruler-delhi",
+            "claimId": "incumbent-claim",
+            "reason": "unavailable-dead"
+          },
+          {
+            "characterId": "ruler-delhi",
+            "claimId": "incumbent-claim",
+            "reason": "claim-not-active"
+          }
+        ],
+        "decision": {
+          "status": "ambiguous",
+          "assessments": [
+            {
+              "characterId": "demo-adopted",
+              "claimId": "adopted-claim",
+              "appointmentId": null,
+              "basis": "adoption",
+              "eligible": false,
+              "reasons": [
+                "standing-not-accepted",
+                "no-eligible-regent"
+              ],
+              "evidence": [
+                {
+                  "kind": "claim",
+                  "id": "adopted-claim",
+                  "origin": {
+                    "turn": 1,
+                    "source": {
+                      "incidentId": "incident-2",
+                      "actionType": "event"
+                    },
+                    "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                  }
+                },
+                {
+                  "kind": "family-link",
+                  "id": "adoption",
+                  "origin": {
+                    "turn": 1,
+                    "source": {
+                      "setup": true
+                    },
+                    "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                  }
+                },
+                {
+                  "kind": "regional-state",
+                  "region": "delhi",
+                  "politicalKind": "sovereign-ruler",
+                  "control": "indian",
+                  "overlord": null
+                }
+              ],
+              "minor": true,
+              "regents": [
+                {
+                  "characterId": "ruler-punjab",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-punjab",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-delhi",
+                  "eligible": false,
+                  "reasons": [
+                    "unavailable-dead",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-delhi",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-bengal",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-bengal",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-bombay",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-bombay",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-maratha",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-maratha",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-hyderabad",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-hyderabad",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-mysore",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-mysore",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-madras",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-madras",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "secretary-bombay",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "secretary-madras",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "secretary-bengal",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "army-bombay",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "army-madras",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "army-bengal",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "secretary-general",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-founder",
+                  "eligible": false,
+                  "reasons": [
+                    "unavailable-dead",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-widow",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-son",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-daughter",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-child",
+                  "eligible": false,
+                  "reasons": [
+                    "not-adult",
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-adopted",
+                  "eligible": false,
+                  "reasons": [
+                    "same-as-titular",
+                    "not-adult",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-rival",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-former-spouse",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                }
+              ]
+            },
+            {
+              "characterId": "demo-child",
+              "claimId": "child-claim",
+              "appointmentId": null,
+              "basis": "parentage",
+              "eligible": false,
+              "reasons": [
+                "current-incumbent",
+                "claim-not-active",
+                "no-eligible-regent"
+              ],
+              "evidence": [
+                {
+                  "kind": "claim",
+                  "id": "child-claim",
+                  "origin": {
+                    "turn": 1,
+                    "source": {
+                      "incidentId": "incident-2",
+                      "actionType": "event"
+                    },
+                    "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                  }
+                },
+                {
+                  "kind": "family-link",
+                  "id": "father-child",
+                  "origin": {
+                    "turn": 1,
+                    "source": {
+                      "setup": true
+                    },
+                    "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                  }
+                },
+                {
+                  "kind": "regional-state",
+                  "region": "delhi",
+                  "politicalKind": "sovereign-ruler",
+                  "control": "indian",
+                  "overlord": null
+                }
+              ],
+              "minor": true,
+              "regents": [
+                {
+                  "characterId": "ruler-punjab",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-punjab",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-delhi",
+                  "eligible": false,
+                  "reasons": [
+                    "unavailable-dead",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-delhi",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-bengal",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-bengal",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-bombay",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-bombay",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-maratha",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-maratha",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-hyderabad",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-hyderabad",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-mysore",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-mysore",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-madras",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-madras",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "secretary-bombay",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "secretary-madras",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "secretary-bengal",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "army-bombay",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "army-madras",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "army-bengal",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "secretary-general",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-founder",
+                  "eligible": false,
+                  "reasons": [
+                    "unavailable-dead",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-widow",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office"
+                  ],
+                  "evidence": [
+                    {
+                      "kind": "family-link",
+                      "id": "guardian",
+                      "origin": {
+                        "turn": 1,
+                        "source": {
+                          "incidentId": "incident-2",
+                          "actionType": "event"
+                        },
+                        "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "characterId": "demo-son",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-daughter",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-child",
+                  "eligible": false,
+                  "reasons": [
+                    "same-as-titular",
+                    "not-adult",
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-adopted",
+                  "eligible": false,
+                  "reasons": [
+                    "not-adult",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-rival",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-former-spouse",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                }
+              ]
+            },
+            {
+              "characterId": "demo-daughter",
+              "claimId": "daughter-claim",
+              "appointmentId": null,
+              "basis": "parentage",
+              "eligible": true,
+              "reasons": [],
+              "evidence": [
+                {
+                  "kind": "claim",
+                  "id": "daughter-claim",
+                  "origin": {
+                    "turn": 1,
+                    "source": {
+                      "incidentId": "incident-2",
+                      "actionType": "event"
+                    },
+                    "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                  }
+                },
+                {
+                  "kind": "family-link",
+                  "id": "father-daughter",
+                  "origin": {
+                    "turn": 1,
+                    "source": {
+                      "setup": true
+                    },
+                    "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                  }
+                },
+                {
+                  "kind": "regional-state",
+                  "region": "delhi",
+                  "politicalKind": "sovereign-ruler",
+                  "control": "indian",
+                  "overlord": null
+                }
+              ],
+              "minor": false,
+              "regents": []
+            },
+            {
+              "characterId": "demo-founder",
+              "claimId": "founder-claim",
+              "appointmentId": null,
+              "basis": "previous-rulership",
+              "eligible": false,
+              "reasons": [
+                "unavailable-dead",
+                "claim-not-active"
+              ],
+              "evidence": [
+                {
+                  "kind": "claim",
+                  "id": "founder-claim",
+                  "origin": {
+                    "turn": 1,
+                    "source": {
+                      "incidentId": "incident-1",
+                      "actionType": "event"
+                    },
+                    "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                  }
+                },
+                {
+                  "kind": "regional-state",
+                  "region": "delhi",
+                  "politicalKind": "sovereign-ruler",
+                  "control": "indian",
+                  "overlord": null
+                }
+              ],
+              "minor": false,
+              "regents": []
+            },
+            {
+              "characterId": "demo-rival",
+              "claimId": "rival-claim",
+              "appointmentId": null,
+              "basis": "witnessed-authority",
+              "eligible": false,
+              "reasons": [
+                "standing-not-accepted",
+                "claim-not-active"
+              ],
+              "evidence": [
+                {
+                  "kind": "claim",
+                  "id": "rival-claim",
+                  "origin": {
+                    "turn": 1,
+                    "source": {
+                      "incidentId": "incident-1",
+                      "actionType": "event"
+                    },
+                    "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                  }
+                },
+                {
+                  "kind": "regional-state",
+                  "region": "delhi",
+                  "politicalKind": "sovereign-ruler",
+                  "control": "indian",
+                  "overlord": null
+                }
+              ],
+              "minor": false,
+              "regents": []
+            },
+            {
+              "characterId": "demo-son",
+              "claimId": "son-claim",
+              "appointmentId": null,
+              "basis": "designation",
+              "eligible": true,
+              "reasons": [],
+              "evidence": [
+                {
+                  "kind": "claim",
+                  "id": "son-claim",
+                  "origin": {
+                    "turn": 1,
+                    "source": {
+                      "incidentId": "incident-2",
+                      "actionType": "event"
+                    },
+                    "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                  }
+                },
+                {
+                  "kind": "regional-state",
+                  "region": "delhi",
+                  "politicalKind": "sovereign-ruler",
+                  "control": "indian",
+                  "overlord": null
+                }
+              ],
+              "minor": false,
+              "regents": []
+            },
+            {
+              "characterId": "demo-widow",
+              "claimId": "widow-claim",
+              "appointmentId": null,
+              "basis": "marriage-derived",
+              "eligible": false,
+              "reasons": [
+                "already-holds-office",
+                "standing-not-accepted"
+              ],
+              "evidence": [
+                {
+                  "kind": "claim",
+                  "id": "widow-claim",
+                  "origin": {
+                    "turn": 1,
+                    "source": {
+                      "incidentId": "incident-2",
+                      "actionType": "event"
+                    },
+                    "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                  }
+                },
+                {
+                  "kind": "family-link",
+                  "id": "marriage",
+                  "origin": {
+                    "turn": 1,
+                    "source": {
+                      "setup": true
+                    },
+                    "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                  }
+                },
+                {
+                  "kind": "regional-state",
+                  "region": "delhi",
+                  "politicalKind": "sovereign-ruler",
+                  "control": "indian",
+                  "overlord": null
+                }
+              ],
+              "minor": false,
+              "regents": []
+            },
+            {
+              "characterId": "ruler-delhi",
+              "claimId": "incumbent-claim",
+              "appointmentId": null,
+              "basis": "previous-rulership",
+              "eligible": false,
+              "reasons": [
+                "unavailable-dead",
+                "claim-not-active"
+              ],
+              "evidence": [
+                {
+                  "kind": "claim",
+                  "id": "incumbent-claim",
+                  "origin": {
+                    "turn": 1,
+                    "source": {
+                      "incidentId": "incident-1",
+                      "actionType": "event"
+                    },
+                    "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                  }
+                },
+                {
+                  "kind": "regional-state",
+                  "region": "delhi",
+                  "politicalKind": "sovereign-ruler",
+                  "control": "indian",
+                  "overlord": null
+                }
+              ],
+              "minor": false,
+              "regents": []
+            }
+          ],
+          "reason": "controlled-candidate-choice-required"
+        },
+        "documentationOptions": [],
+        "courtDevelopmentAllowed": true,
+        "courtPolicyReason": null
+      },
+      "activeRegency": {
+        "supported": false,
+        "reason": "requires-atomic-old-tenure-closure-new-seat-and-regency",
+        "regentReplacement": {
+          "supported": false,
+          "reason": "requires-sourced-unavailability-and-new-tenure-link",
+          "documentedAlternatives": []
+        }
+      },
+      "crossRegion": null,
+      "tiePolicy": {
+        "supported": false,
+        "reason": "controlled-candidate-choice-required",
+        "options": [
+          "approved-local-court-priority",
+          "explicit-controlled-fixture-choice"
+        ],
+        "never": [
+          "name-order",
+          "gender-default",
+          "invented-custom"
+        ]
+      }
+    },
+    "crossRegion": {
+      "region": "delhi",
+      "readiness": {
+        "region": "delhi",
+        "incumbentId": "ruler-delhi",
+        "status": "needs-documentation",
+        "transactionReady": false,
+        "blockers": [
+          "blocked-cross-region"
+        ],
+        "candidateBlockers": [
+          {
+            "characterId": "demo-son",
+            "claimId": "son-claim",
+            "reason": "incompatible-regional-assignment"
+          }
+        ],
+        "decision": {
+          "status": "none",
+          "assessments": [
+            {
+              "characterId": "demo-son",
+              "claimId": "son-claim",
+              "appointmentId": null,
+              "basis": "designation",
+              "eligible": false,
+              "reasons": [
+                "incompatible-regional-assignment"
+              ],
+              "evidence": [
+                {
+                  "kind": "claim",
+                  "id": "son-claim",
+                  "origin": {
+                    "turn": 1,
+                    "source": {
+                      "incidentId": "incident-2",
+                      "actionType": "event"
+                    },
+                    "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                  }
+                },
+                {
+                  "kind": "regional-state",
+                  "region": "delhi",
+                  "politicalKind": "sovereign-ruler",
+                  "control": "indian",
+                  "overlord": null
+                }
+              ],
+              "minor": false,
+              "regents": []
+            }
+          ],
+          "reason": "no-qualified-candidate"
+        },
+        "documentationOptions": [
+          {
+            "characterId": "heir-delhi",
+            "age": 47,
+            "requiresRecognition": true,
+            "evidence": [
+              {
+                "kind": "existing-legacy-family",
+                "characterId": "heir-delhi",
+                "relativeId": "ruler-delhi",
+                "tie": "older sibling",
+                "provenance": "Fictional pre-campaign background"
+              }
+            ]
+          }
+        ],
+        "courtDevelopmentAllowed": true,
+        "courtPolicyReason": null
+      },
+      "activeRegency": null,
+      "crossRegion": {
+        "supported": false,
+        "reason": "requires-sourced-regional-reassignment-and-office-conflict-policy"
+      },
+      "tiePolicy": null
+    },
+    "contested": {
+      "region": "delhi",
+      "readiness": {
+        "region": "delhi",
+        "incumbentId": "ruler-delhi",
+        "status": "contested",
+        "transactionReady": false,
+        "blockers": [
+          "no-eligible-regent"
+        ],
+        "candidateBlockers": [
+          {
+            "characterId": "demo-adopted",
+            "claimId": "adopted-claim",
+            "reason": "standing-not-accepted"
+          },
+          {
+            "characterId": "demo-adopted",
+            "claimId": "adopted-claim",
+            "reason": "no-eligible-regent"
+          },
+          {
+            "characterId": "demo-founder",
+            "claimId": "founder-claim",
+            "reason": "unavailable-dead"
+          },
+          {
+            "characterId": "demo-founder",
+            "claimId": "founder-claim",
+            "reason": "claim-not-active"
+          },
+          {
+            "characterId": "demo-rival",
+            "claimId": "rival-claim",
+            "reason": "standing-not-accepted"
+          },
+          {
+            "characterId": "demo-rival",
+            "claimId": "rival-claim",
+            "reason": "claim-not-active"
+          },
+          {
+            "characterId": "demo-widow",
+            "claimId": "widow-claim",
+            "reason": "standing-not-accepted"
+          },
+          {
+            "characterId": "ruler-delhi",
+            "claimId": "incumbent-claim",
+            "reason": "current-incumbent"
+          },
+          {
+            "characterId": "ruler-delhi",
+            "claimId": "incumbent-claim",
+            "reason": "claim-not-active"
+          }
+        ],
+        "decision": {
+          "status": "ambiguous",
+          "assessments": [
+            {
+              "characterId": "demo-adopted",
+              "claimId": "adopted-claim",
+              "appointmentId": null,
+              "basis": "adoption",
+              "eligible": false,
+              "reasons": [
+                "standing-not-accepted",
+                "no-eligible-regent"
+              ],
+              "evidence": [
+                {
+                  "kind": "claim",
+                  "id": "adopted-claim",
+                  "origin": {
+                    "turn": 1,
+                    "source": {
+                      "incidentId": "incident-2",
+                      "actionType": "event"
+                    },
+                    "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                  }
+                },
+                {
+                  "kind": "family-link",
+                  "id": "adoption",
+                  "origin": {
+                    "turn": 1,
+                    "source": {
+                      "setup": true
+                    },
+                    "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                  }
+                },
+                {
+                  "kind": "regional-state",
+                  "region": "delhi",
+                  "politicalKind": "sovereign-ruler",
+                  "control": "indian",
+                  "overlord": null
+                }
+              ],
+              "minor": true,
+              "regents": [
+                {
+                  "characterId": "ruler-punjab",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-punjab",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-delhi",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-delhi",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-bengal",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-bengal",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-bombay",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-bombay",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-maratha",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-maratha",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-hyderabad",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-hyderabad",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-mysore",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-mysore",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-madras",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-madras",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "secretary-bombay",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "secretary-madras",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "secretary-bengal",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "army-bombay",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "army-madras",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "army-bengal",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "secretary-general",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-founder",
+                  "eligible": false,
+                  "reasons": [
+                    "unavailable-dead",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-widow",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-son",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-daughter",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-child",
+                  "eligible": false,
+                  "reasons": [
+                    "not-adult",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-adopted",
+                  "eligible": false,
+                  "reasons": [
+                    "same-as-titular",
+                    "not-adult",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-rival",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-former-spouse",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                }
+              ]
+            },
+            {
+              "characterId": "demo-child",
+              "claimId": "child-claim",
+              "appointmentId": null,
+              "basis": "parentage",
+              "eligible": true,
+              "reasons": [],
+              "evidence": [
+                {
+                  "kind": "claim",
+                  "id": "child-claim",
+                  "origin": {
+                    "turn": 1,
+                    "source": {
+                      "incidentId": "incident-2",
+                      "actionType": "event"
+                    },
+                    "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                  }
+                },
+                {
+                  "kind": "family-link",
+                  "id": "father-child",
+                  "origin": {
+                    "turn": 1,
+                    "source": {
+                      "setup": true
+                    },
+                    "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                  }
+                },
+                {
+                  "kind": "regional-state",
+                  "region": "delhi",
+                  "politicalKind": "sovereign-ruler",
+                  "control": "indian",
+                  "overlord": null
+                }
+              ],
+              "minor": true,
+              "regents": [
+                {
+                  "characterId": "ruler-punjab",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-punjab",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-delhi",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-delhi",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-bengal",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-bengal",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-bombay",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-bombay",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-maratha",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-maratha",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-hyderabad",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-hyderabad",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-mysore",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-mysore",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "ruler-madras",
+                  "eligible": false,
+                  "reasons": [
+                    "already-holds-office",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "heir-madras",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "secretary-bombay",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "secretary-madras",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "secretary-bengal",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "army-bombay",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "army-madras",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "army-bengal",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "secretary-general",
+                  "eligible": false,
+                  "reasons": [
+                    "institutional-adviser",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-founder",
+                  "eligible": false,
+                  "reasons": [
+                    "unavailable-dead",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-widow",
+                  "eligible": true,
+                  "reasons": [],
+                  "evidence": [
+                    {
+                      "kind": "family-link",
+                      "id": "guardian",
+                      "origin": {
+                        "turn": 1,
+                        "source": {
+                          "incidentId": "incident-2",
+                          "actionType": "event"
+                        },
+                        "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "characterId": "demo-son",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-daughter",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-child",
+                  "eligible": false,
+                  "reasons": [
+                    "same-as-titular",
+                    "not-adult",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-adopted",
+                  "eligible": false,
+                  "reasons": [
+                    "not-adult",
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-rival",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                },
+                {
+                  "characterId": "demo-former-spouse",
+                  "eligible": false,
+                  "reasons": [
+                    "no-recorded-regency-basis"
+                  ],
+                  "evidence": []
+                }
+              ]
+            },
+            {
+              "characterId": "demo-daughter",
+              "claimId": "daughter-claim",
+              "appointmentId": null,
+              "basis": "parentage",
+              "eligible": true,
+              "reasons": [],
+              "evidence": [
+                {
+                  "kind": "claim",
+                  "id": "daughter-claim",
+                  "origin": {
+                    "turn": 1,
+                    "source": {
+                      "incidentId": "incident-2",
+                      "actionType": "event"
+                    },
+                    "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                  }
+                },
+                {
+                  "kind": "family-link",
+                  "id": "father-daughter",
+                  "origin": {
+                    "turn": 1,
+                    "source": {
+                      "setup": true
+                    },
+                    "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                  }
+                },
+                {
+                  "kind": "regional-state",
+                  "region": "delhi",
+                  "politicalKind": "sovereign-ruler",
+                  "control": "indian",
+                  "overlord": null
+                }
+              ],
+              "minor": false,
+              "regents": []
+            },
+            {
+              "characterId": "demo-founder",
+              "claimId": "founder-claim",
+              "appointmentId": null,
+              "basis": "previous-rulership",
+              "eligible": false,
+              "reasons": [
+                "unavailable-dead",
+                "claim-not-active"
+              ],
+              "evidence": [
+                {
+                  "kind": "claim",
+                  "id": "founder-claim",
+                  "origin": {
+                    "turn": 1,
+                    "source": {
+                      "incidentId": "incident-1",
+                      "actionType": "event"
+                    },
+                    "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                  }
+                },
+                {
+                  "kind": "regional-state",
+                  "region": "delhi",
+                  "politicalKind": "sovereign-ruler",
+                  "control": "indian",
+                  "overlord": null
+                }
+              ],
+              "minor": false,
+              "regents": []
+            },
+            {
+              "characterId": "demo-rival",
+              "claimId": "rival-claim",
+              "appointmentId": null,
+              "basis": "witnessed-authority",
+              "eligible": false,
+              "reasons": [
+                "standing-not-accepted",
+                "claim-not-active"
+              ],
+              "evidence": [
+                {
+                  "kind": "claim",
+                  "id": "rival-claim",
+                  "origin": {
+                    "turn": 1,
+                    "source": {
+                      "incidentId": "incident-1",
+                      "actionType": "event"
+                    },
+                    "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                  }
+                },
+                {
+                  "kind": "regional-state",
+                  "region": "delhi",
+                  "politicalKind": "sovereign-ruler",
+                  "control": "indian",
+                  "overlord": null
+                }
+              ],
+              "minor": false,
+              "regents": []
+            },
+            {
+              "characterId": "demo-son",
+              "claimId": "son-claim",
+              "appointmentId": null,
+              "basis": "designation",
+              "eligible": true,
+              "reasons": [],
+              "evidence": [
+                {
+                  "kind": "claim",
+                  "id": "son-claim",
+                  "origin": {
+                    "turn": 1,
+                    "source": {
+                      "incidentId": "incident-2",
+                      "actionType": "event"
+                    },
+                    "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                  }
+                },
+                {
+                  "kind": "regional-state",
+                  "region": "delhi",
+                  "politicalKind": "sovereign-ruler",
+                  "control": "indian",
+                  "overlord": null
+                }
+              ],
+              "minor": false,
+              "regents": []
+            },
+            {
+              "characterId": "demo-widow",
+              "claimId": "widow-claim",
+              "appointmentId": null,
+              "basis": "marriage-derived",
+              "eligible": false,
+              "reasons": [
+                "standing-not-accepted"
+              ],
+              "evidence": [
+                {
+                  "kind": "claim",
+                  "id": "widow-claim",
+                  "origin": {
+                    "turn": 1,
+                    "source": {
+                      "incidentId": "incident-2",
+                      "actionType": "event"
+                    },
+                    "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                  }
+                },
+                {
+                  "kind": "family-link",
+                  "id": "marriage",
+                  "origin": {
+                    "turn": 1,
+                    "source": {
+                      "setup": true
+                    },
+                    "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                  }
+                },
+                {
+                  "kind": "regional-state",
+                  "region": "delhi",
+                  "politicalKind": "sovereign-ruler",
+                  "control": "indian",
+                  "overlord": null
+                }
+              ],
+              "minor": false,
+              "regents": []
+            },
+            {
+              "characterId": "ruler-delhi",
+              "claimId": "incumbent-claim",
+              "appointmentId": null,
+              "basis": "previous-rulership",
+              "eligible": false,
+              "reasons": [
+                "current-incumbent",
+                "claim-not-active"
+              ],
+              "evidence": [
+                {
+                  "kind": "claim",
+                  "id": "incumbent-claim",
+                  "origin": {
+                    "turn": 1,
+                    "source": {
+                      "incidentId": "incident-1",
+                      "actionType": "event"
+                    },
+                    "reason": "Explicit synthetic fixture record; not caused by Windfall."
+                  }
+                },
+                {
+                  "kind": "regional-state",
+                  "region": "delhi",
+                  "politicalKind": "sovereign-ruler",
+                  "control": "indian",
+                  "overlord": null
+                }
+              ],
+              "minor": false,
+              "regents": []
+            }
+          ],
+          "reason": "controlled-candidate-choice-required"
+        },
+        "documentationOptions": [
+          {
+            "characterId": "heir-delhi",
+            "age": 47,
+            "requiresRecognition": true,
+            "evidence": [
+              {
+                "kind": "existing-legacy-family",
+                "characterId": "heir-delhi",
+                "relativeId": "ruler-delhi",
+                "tie": "older sibling",
+                "provenance": "Fictional pre-campaign background"
+              }
+            ]
+          }
+        ],
+        "courtDevelopmentAllowed": true,
+        "courtPolicyReason": null
+      },
+      "activeRegency": null,
+      "crossRegion": null,
+      "tiePolicy": {
+        "supported": false,
+        "reason": "controlled-candidate-choice-required",
+        "options": [
+          "approved-local-court-priority",
+          "explicit-controlled-fixture-choice"
+        ],
+        "never": [
+          "name-order",
+          "gender-default",
+          "invented-custom"
+        ]
+      }
+    }
+  }
+}

@@ -277,3 +277,13 @@ Delivered **simulation/readiness analysis only**, not live dynasties. `scripts/s
 
 [Numerical analysis and candidate recommendations](narrative/character-engine-m2b2a-analysis.md), [all configuration results](narrative/character-engine-m2b2a-results.json), [synthetic histories/readiness evidence](narrative/character-engine-m2b2a-samples.json), [verification](narrative/character-engine-m2b2a-verification.json).
 Implementation: `1c3724e9be4f7c127309af4877e2209e93c16253`.
+
+
+## Character Engine M2B-2b-1 — controlled succession readiness — 31 October 2026
+
+Implemented pure per-seat readiness with candidate-specific evidence versus transaction blockers; test-authorized witnessed recognition, known-person-first adult minister introduction and one-return-state emergency succession using M2B-1. Optional version-2 courtRecords bind authority/identity/claims/purpose/prior state to canonical synthetic incidents with deletion guards. All eight original seats start needs-documentation, not assigned heirs; all 23 identities and original RNG remain. No UI changes, live triggers, court appointments, births/deaths/marriages, production names/biographies/dialogue or Site deployment.
+
+**525 tests pass, 0 fail** (23 new). Regular/Debug desktop/tablet **1440×900**, **1024×768**, Chrome **156.0.8078.74**: new-record source/dossier, actual Undo/Redo, snapshots/JSON/reload and protected invasion progress pass; existing succession and all-81-scene 09E browser suites pass. Extended **240×1,000** seeded policy matrix repeats byte-for-byte; 80 old overlapping baseline cells retain exact metrics. All numerical policies remain proposals. Active-regency re-succession/regent replacement, cross-region reassignment, tied-claim policy, Company development and live adapters remain explicitly blocked/separately approved.
+
+[Implementation/contracts](narrative/character-engine-m2b2b1-implementation.md), [small synthetic demonstration](narrative/character-engine-m2b2b1-demo.md), [numerical analysis](narrative/character-engine-m2b2b1-analysis.md), [verification](narrative/character-engine-m2b2b1-verification.json).
+Implementation: `98b9a3fc6cb456d318603849b0850e491c8ee5b1`.

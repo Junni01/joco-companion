@@ -214,6 +214,9 @@ References: [project handoff](current-status.md), [character M1 report](narrativ
 
 ## Delivered-baseline index (do not confuse with backlog)
 
+- **M2B-2b-1 readiness/court foundation only:** pure evidence-based readiness, test-controlled recognition/introduction/emergency transaction, explicit exceptional blocking contracts and reproducible policy analysis. [Report](narrative/character-engine-m2b2b1-implementation.md). No automatic live dynasties.
+
+
 - Core companion resolver/map/scenarios/saves — [current status](current-status.md).
 - Initial persistent narrative people and political memory — [current status](current-status.md).
 - Company Operations UI/adviser foundations — [09C-1](narrative/collection09c1-implementation.md), [09C-2 design](narrative/collection09c2-adviser-design.md), [09D counsel](narrative/collection09cd-counsel-dialogues.md).
@@ -249,9 +252,11 @@ These **twelve design-coverage refinements** were checked against an earlier nar
 
 **Implementation boundary:** This is backlog documentation only. It does not change the M2A delivered schema, authorize M2B, add new cast members or prose, alter any physical board-game rule or deploy the Site. Details explicitly marked PROPOSED still require review.
 
-## Next approved engineering scope — M2B-2b-1 (31 October 2026)
+## Controlled readiness scope — M2B-2b-1 delivered (31 October 2026)
 
-[Succession readiness and credible court appointments — Codex handoff](narrative/character-engine-m2b2b1-succession-readiness-handoff.md) is the **approved next controlled implementation task**, covering read-only readiness, source-linked heir recognition of a documented person, synthetic adult court figure introduction and emergency succession planning, plus reproducible model comparisons and explicit blocker tests. **Not approved yet:** enabling automatic live heir creation/recognition, natural mortality, production court appointments, company settlements, marriages, deaths or edited production prose. Later nonfatal real-event triggers and live mortality each require separate review.
+[Succession readiness and credible court appointments — Codex handoff](narrative/character-engine-m2b2b1-succession-readiness-handoff.md) is the **delivered controlled implementation scope**, covering read-only readiness, source-linked heir recognition of a documented person, synthetic adult court figure introduction and emergency succession planning, plus reproducible model comparisons and explicit blocker tests. **Not approved yet:** enabling automatic live heir creation/recognition, natural mortality, production court appointments, company settlements, marriages, deaths or edited production prose. Later nonfatal real-event triggers and live mortality each require separate review.
+
+**Delivered controlled foundation:** [M2B-2b-1 implementation/contracts](narrative/character-engine-m2b2b1-implementation.md), [synthetic demo](narrative/character-engine-m2b2b1-demo.md), [extended numerical comparison](narrative/character-engine-m2b2b1-analysis.md), [verification](narrative/character-engine-m2b2b1-verification.json): 525 tests pass; 240,000 seeded comparisons repeat byte-identically. All live triggers and numerical/cultural policies remain separate approvals; active-regency replacement/re-succession, cross-region reassignment and Company court development have explicit tested blocking contracts.
 
 ## M2B-2a simulation review — 31 October 2026
 
